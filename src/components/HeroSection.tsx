@@ -4,35 +4,35 @@ import { ChevronLeft, ChevronRight, Play, Sparkles } from 'lucide-react';
 
 const featuredItems = [
   {
+    id: 'HERO-VIDEO',
+    name: 'YDNT Collection',
+    price: 'Featured',
+    image: '/Hero_Media.mp4',
+    description: 'Discover our premium tech collection',
+    type: 'video'
+  },
+  {
     id: 'LOT-001',
-    name: 'Surface Studio',
-    price: '$2,999',
-    image: 'https://images.unsplash.com/photo-1547082299-de196ea013d6?w=800&h=600&fit=crop&crop=center',
-    description: 'Professional creative workstation',
+    name: 'Surface Go 3',
+    price: '$799+',
+    image: '/LOT_001_Microsoft_Surface_Go_3_10_5_Touchscreen_Intel_R_CoreTM_i3_8GB_Memory_128GB_SSD/LOT_001_THUMBNAIL.jpg',
+    description: '10.5" Touchscreen with Intel i3',
     type: 'image'
   },
   {
     id: 'LOT-002', 
-    name: 'MacBook Pro M3',
-    price: '$3,499',
-    image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800&h=600&fit=crop&crop=center',
-    description: 'Ultimate mobile workstation',
+    name: 'Surface Studio 2',
+    price: '$3,499+',
+    image: '/LOT_002_Microsoft_Surface_Studio_2_All_in_One_Desktop/LOT_002_THUMBNAIL.jpg',
+    description: 'All-in-One Desktop workstation',
     type: 'image'
   },
   {
     id: 'LOT-003',
-    name: 'Gaming Setup',
-    price: '$4,999',
-    image: 'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=800&h=600&fit=crop&crop=center',
-    description: 'Premium gaming experience',
-    type: 'image'
-  },
-  {
-    id: 'LOT-004',
-    name: 'Studio Monitors',
-    price: '$1,899',
-    image: 'https://images.unsplash.com/photo-1545486332-9e0999c535b2?w=800&h=600&fit=crop&crop=center',
-    description: 'Professional audio monitoring',
+    name: 'EliteMini UM773 SE',
+    price: '$899+',
+    image: '/LOT_003_Minisforum_EliteMini_UM773_SE_Mini_PC_Ryzen_7_7735HS/LOT_003_THUMBNAIL.jpg',
+    description: 'Mini PC with AMD Ryzen 7',
     type: 'image'
   }
 ];
@@ -155,11 +155,22 @@ export default function HeroSection() {
                          onClick={() => goToSlide(index)}>
                       
                       <div className="relative h-3/4 mb-4 overflow-hidden rounded-lg">
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        />
+                        {item.type === 'video' ? (
+                          <video
+                            src={item.image}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            muted
+                            loop
+                            autoPlay
+                            playsInline
+                          />
+                        ) : (
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                          />
+                        )}
                         
                         {item.type === 'video' && (
                           <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors">
