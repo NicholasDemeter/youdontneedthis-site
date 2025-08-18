@@ -5,91 +5,131 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Search, Filter, Star, MessageCircle, ExternalLink } from 'lucide-react';
 import ProductCard from './ProductCard';
 
-// Mock data - will be replaced with Google Sheets integration
-const mockProducts = [
+// Real product data from LOT inventory
+const realProducts = [
   {
     id: 'LOT-001',
-    name: 'Microsoft Surface Studio',
-    price: '$2,999 - $4,199',
-    description: 'All-in-one creative powerhouse with 28" touchscreen',
-    category: 'Workstations',
+    name: 'Microsoft Surface Go 3',
+    price: '$799 - $1,299',
+    description: '10.5" Touchscreen with Intel Core i3, 8GB Memory, 128GB SSD',
+    category: 'Tablets',
     rating: 5,
-    image: 'https://images.unsplash.com/photo-1547082299-de196ea013d6?w=400&h=300&fit=crop&crop=center',
+    image: '/LOT_001_Microsoft_Surface_Go_3_10_5_Touchscreen_Intel_R_CoreTM_i3_8GB_Memory_128GB_SSD/LOT_001_THUMBNAIL.jpg',
     status: 'Available'
   },
   {
     id: 'LOT-002',
-    name: 'MacBook Pro M3 Max',
-    price: '$3,499 - $7,199',
-    description: 'Ultimate mobile workstation for professionals',
-    category: 'Laptops',
+    name: 'Microsoft Surface Studio 2',
+    price: '$3,499 - $4,799',
+    description: 'All-in-One Desktop workstation for creative professionals',
+    category: 'Workstations',
     rating: 5,
-    image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&h=300&fit=crop&crop=center',
+    image: '/LOT_002_Microsoft_Surface_Studio_2_All_in_One_Desktop/LOT_002_THUMBNAIL.jpg',
     status: 'Available'
   },
   {
     id: 'LOT-003',
-    name: 'Custom Gaming Rig',
-    price: '$4,999 - $12,999',
-    description: 'High-end custom built gaming workstation',
-    category: 'Gaming',
+    name: 'Minisforum EliteMini UM773 SE',
+    price: '$899 - $1,299',
+    description: 'Mini PC with AMD Ryzen 7 7735HS processor',
+    category: 'Mini PCs',
     rating: 5,
-    image: 'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=400&h=300&fit=crop&crop=center',
+    image: '/LOT_003_Minisforum_EliteMini_UM773_SE_Mini_PC_Ryzen_7_7735HS/LOT_003_THUMBNAIL.jpg',
     status: 'Available'
   },
   {
     id: 'LOT-004',
-    name: 'Studio Monitor Pair',
-    price: '$1,899 - $3,499',
-    description: 'Professional reference monitors for critical listening',
-    category: 'Audio',
-    rating: 4,
-    image: 'https://images.unsplash.com/photo-1545486332-9e0999c535b2?w=400&h=300&fit=crop&crop=center',
+    name: 'Moment M-Series Professional Mobile Lens Kit',
+    price: '$299 - $499',
+    description: 'Professional mobile photography lens collection',
+    category: 'Photography',
+    rating: 5,
+    image: '/LOT_004_Moment_M_Series_Professional_Mobile_Lens_Kit/LOT_004_THUMBNAIL.jpg',
     status: 'Available'
   },
   {
     id: 'LOT-005',
-    name: 'iPad Pro 12.9" M2',
-    price: '$1,099 - $2,399',
-    description: 'Professional tablet for creative workflows',
-    category: 'Tablets',
-    rating: 5,
-    image: 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&h=300&fit=crop&crop=center',
+    name: 'Motyeowe OLED Monitors 18.5" (Set of 2)',
+    price: '$399 - $599',
+    description: 'Dual portable OLED monitors for enhanced productivity',
+    category: 'Monitors',
+    rating: 4,
+    image: '/LOT_005_Motyeowe_OLED_Monitors_18_5in_X2/LOT_005_THUMBNAIL.jpg',
     status: 'Available'
   },
   {
     id: 'LOT-006',
-    name: 'Sony A7R V Camera',
-    price: '$3,899 - $5,299',
-    description: 'High-resolution mirrorless camera system',
-    category: 'Photography',
+    name: 'Microsoft Surface Pro 7',
+    price: '$1,299 - $1,899',
+    description: '16GB RAM, Black, Intel i7 processor',
+    category: 'Tablets',
     rating: 5,
-    image: 'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=400&h=300&fit=crop&crop=center',
+    image: '/LOT_006_MS_Surface_Pro_7_16gb_ram_black_i7/LOT_006_THUMBNAIL.jpg',
     status: 'Available'
   },
   {
     id: 'LOT-007',
-    name: 'Alienware Aurora R15',
-    price: '$2,499 - $4,999',
-    description: 'Premium gaming desktop with liquid cooling',
-    category: 'Gaming',
+    name: 'Anker Nebula Capsule',
+    price: '$299 - $399',
+    description: 'Portable projector for entertainment anywhere',
+    category: 'Projectors',
     rating: 4,
-    image: 'https://images.unsplash.com/photo-1587831990711-23ca6441447b?w=400&h=300&fit=crop&crop=center',
-    status: 'Sold'
+    image: '/LOT_007_Anker_Nebula_Capsule_Portable_Projector/LOT_007_THUMBNAIL.jpg',
+    status: 'Available'
   },
   {
     id: 'LOT-008',
-    name: 'Wacom Cintiq Pro 32',
-    price: '$3,299 - $3,799',
-    description: 'Professional pen display for digital artists',
-    category: 'Creative',
+    name: 'NEBULA Cosmos Laser 1080P',
+    price: '$999 - $1,399',
+    description: 'High-performance laser projector with 1080P resolution',
+    category: 'Projectors',
     rating: 5,
-    image: 'https://images.unsplash.com/photo-1541462608143-67571c6738dd?w=400&h=300&fit=crop&crop=center',
+    image: '/LOT_008_NEBULA_Cosmos_Laser_1080P_Projector/LOT_008_THUMBNAIL.jpg',
+    status: 'Available'
+  },
+  {
+    id: 'LOT-009',
+    name: 'NuPhy 75 Keyboard',
+    price: '$149 - $199',
+    description: 'Premium mechanical keyboard for professionals',
+    category: 'Accessories',
+    rating: 5,
+    image: '/LOT_009_NuPhy_75_Keyboard/LOT_009_THUMBNAIL.jpg',
+    status: 'Available'
+  },
+  {
+    id: 'LOT-010',
+    name: 'OneWheel V1 Electric Skateboard',
+    price: '$899 - $1,299',
+    description: 'Self-balancing electric skateboard for urban mobility',
+    category: 'Recreation',
+    rating: 4,
+    image: '/LOT_010_OneWheel_V1_Self_Balancing_Electric_Skateboard/LOT_010_THUMBNAIL.jpg',
+    status: 'Available'
+  },
+  {
+    id: 'LOT-011',
+    name: 'Packard Bell airFrame 27" FHD Monitor',
+    price: '$299 - $399',
+    description: '27-inch Full HD monitor for productivity',
+    category: 'Monitors',
+    rating: 4,
+    image: '/LOT_011_Packard_Bell_airFrame_27_FHD_Monitor/LOT_011_THUMBNAIL.jpg',
+    status: 'Available'
+  },
+  {
+    id: 'LOT-012',
+    name: 'Panasonic LUMIX 4K Digital Camera',
+    price: '$699 - $999',
+    description: '4K digital camera with 30x Leica lens',
+    category: 'Photography',
+    rating: 5,
+    image: '/LOT_012_Panasonic_LUMIX_4K_Digital_Camera_with_30x_Leica_Lens/LOT_012_THUMBNAIL.jpg',
     status: 'Available'
   }
 ];
 
-const categories = ['All', 'Workstations', 'Laptops', 'Gaming', 'Audio', 'Tablets', 'Photography', 'Creative'];
+const categories = ['All', 'Tablets', 'Workstations', 'Mini PCs', 'Photography', 'Monitors', 'Projectors', 'Accessories', 'Recreation'];
 const ratings = [1, 2, 3, 4, 5];
 
 export default function ProductGrid() {
@@ -99,7 +139,7 @@ export default function ProductGrid() {
   const [sortBy, setSortBy] = useState('name');
 
   const filteredProducts = useMemo(() => {
-    let filtered = mockProducts.filter(product => {
+    let filtered = realProducts.filter(product => {
       const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                            product.description.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
@@ -229,7 +269,7 @@ export default function ProductGrid() {
         {/* Results Count */}
         <div className="flex justify-between items-center mb-8">
           <p className="text-muted-foreground">
-            Showing {filteredProducts.length} of {mockProducts.length} items
+            Showing {filteredProducts.length} of {realProducts.length} items
           </p>
           
           <div className="flex gap-2">
