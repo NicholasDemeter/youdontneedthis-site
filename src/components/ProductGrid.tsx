@@ -1,8 +1,9 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Search, Filter, Star, MessageCircle, ExternalLink } from 'lucide-react';
+import { Search, Filter, Star, MessageCircle, ExternalLink, Loader2 } from 'lucide-react';
 import ProductCard from './ProductCard';
 
 // Real product data from Google Sheet with price ranges and comparison links
@@ -263,7 +264,7 @@ export default function ProductGrid() {
     });
 
     return filtered;
-  }, [searchQuery, selectedCategory, selectedRating, sortBy, products]);
+  }, [searchQuery, selectedCategory, selectedRating, sortBy]);
 
   const clearFilters = () => {
     setSearchQuery('');
