@@ -263,7 +263,7 @@ export default function ProductGrid() {
     });
 
     return filtered;
-  }, [searchQuery, selectedCategory, selectedRating, sortBy]);
+  }, [searchQuery, selectedCategory, selectedRating, sortBy, products]);
 
   const clearFilters = () => {
     setSearchQuery('');
