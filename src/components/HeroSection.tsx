@@ -94,7 +94,7 @@ export default function HeroSection() {
               </h1>
               <p className="text-xl text-muted-foreground max-w-lg">
                 Curated premium tech for those who appreciate the extraordinary. 
-                80+ exclusive items that redefine luxury computing.
+                100+ exclusive items that redefine luxury gadgetry.
               </p>
             </div>
 
@@ -111,7 +111,7 @@ export default function HeroSection() {
             {/* Stats */}
             <div className="grid grid-cols-3 gap-8 pt-8">
               <div className="text-center">
-                <div className="text-3xl font-bold text-premium">80+</div>
+                <div className="text-3xl font-bold text-premium">100+</div>
                 <div className="text-sm text-muted-foreground">Premium Items</div>
               </div>
               <div className="text-center">
@@ -230,6 +230,16 @@ export default function HeroSection() {
             >
               <ChevronRight className="h-4 w-4" />
             </Button>
+          </div>
+        </div>
+        
+        {/* YDNT Rule Section */}
+        <div className="text-center pt-16 pb-8">
+          <div className="max-w-2xl mx-auto space-y-4">
+            <h3 className="text-2xl font-bold text-gold">YDNT Rule</h3>
+            <p className="text-lg text-muted-foreground italic">
+              "If you can't afford the first price, don't ask for the last"
+            </p>
           </div>
         </div>
       </div>
