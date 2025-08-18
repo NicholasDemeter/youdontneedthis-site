@@ -15,7 +15,7 @@ const realProducts = [
     description: '10.5" Touchscreen with Intel Core i3, 8GB Memory, 128GB SSD',
     category: 'Tablets',
     rating: 5,
-    image: '/LOT_001_Microsoft_Surface_Go_3_10_5_Touchscreen_Intel_R_CoreTM_i3_8GB_Memory_128GB_SSD/LOT_001_THUMBNAIL.jpg',
+    image: 'https://picsum.photos/400/300?random=1',
     status: 'Available'
   },
   {
@@ -26,7 +26,7 @@ const realProducts = [
     description: 'All-in-One Desktop workstation for creative professionals',
     category: 'Workstations',
     rating: 5,
-    image: '/LOT_002_Microsoft_Surface_Studio_2_All_in_One_Desktop/LOT_002_THUMBNAIL.jpg',
+    image: 'https://picsum.photos/400/300?random=2',
     status: 'Available'
   },
   {
@@ -37,7 +37,7 @@ const realProducts = [
     description: 'Mini PC with AMD Ryzen 7 7735HS processor',
     category: 'Mini PCs',
     rating: 5,
-    image: '/LOT_003_Minisforum_EliteMini_UM773_SE_Mini_PC_Ryzen_7_7735HS/LOT_003_THUMBNAIL.jpg',
+    image: 'https://picsum.photos/400/300?random=3',
     status: 'Available'
   },
   {
@@ -48,7 +48,7 @@ const realProducts = [
     description: 'Professional mobile photography lens collection',
     category: 'Photography',
     rating: 5,
-    image: '/LOT_004_Moment_M_Series_Professional_Mobile_Lens_Kit/LOT_004_THUMBNAIL.jpg',
+    image: 'https://picsum.photos/400/300?random=4',
     status: 'Available'
   },
   {
@@ -59,7 +59,7 @@ const realProducts = [
     description: 'Dual portable OLED monitors for enhanced productivity',
     category: 'Monitors',
     rating: 4,
-    image: '/LOT_005_Motyeowe_OLED_Monitors_18_5in_X2/LOT_005_THUMBNAIL.jpg',
+    image: 'https://picsum.photos/400/300?random=5',
     status: 'Available'
   },
   {
@@ -70,7 +70,7 @@ const realProducts = [
     description: '16GB RAM, Black, Intel i7 processor',
     category: 'Tablets',
     rating: 5,
-    image: '/LOT_006_MS_Surface_Pro_7_16gb_ram_black_i7/LOT_006_THUMBNAIL.jpg',
+    image: 'https://picsum.photos/400/300?random=6',
     status: 'Available'
   },
   {
@@ -81,7 +81,7 @@ const realProducts = [
     description: 'Portable projector for entertainment anywhere',
     category: 'Projectors',
     rating: 4,
-    image: '/LOT_007_Anker_Nebula_Capsule_Portable_Projector/LOT_007_THUMBNAIL.jpg',
+    image: 'https://picsum.photos/400/300?random=7',
     status: 'Available'
   },
   {
@@ -92,7 +92,7 @@ const realProducts = [
     description: 'High-performance laser projector with 1080P resolution',
     category: 'Projectors',
     rating: 5,
-    image: '/LOT_008_NEBULA_Cosmos_Laser_1080P_Projector/LOT_008_THUMBNAIL.jpg',
+    image: 'https://picsum.photos/400/300?random=8',
     status: 'Available'
   },
   {
@@ -103,7 +103,7 @@ const realProducts = [
     description: 'Premium mechanical keyboard for professionals',
     category: 'Accessories',
     rating: 5,
-    image: '/LOT_009_NuPhy_75_Keyboard/LOT_009_THUMBNAIL.jpg',
+    image: 'https://picsum.photos/400/300?random=9',
     status: 'Available'
   },
   {
@@ -114,7 +114,7 @@ const realProducts = [
     description: 'Self-balancing electric skateboard for urban mobility',
     category: 'Recreation',
     rating: 4,
-    image: '/LOT_010_OneWheel_V1_Self_Balancing_Electric_Skateboard/LOT_010_THUMBNAIL.jpg',
+    image: 'https://picsum.photos/400/300?random=10',
     status: 'Available'
   },
   {
@@ -125,7 +125,7 @@ const realProducts = [
     description: '27-inch Full HD monitor for productivity',
     category: 'Monitors',
     rating: 4,
-    image: '/LOT_011_Packard_Bell_airFrame_27_FHD_Monitor/LOT_011_THUMBNAIL.jpg',
+    image: 'https://picsum.photos/400/300?random=11',
     status: 'Available'
   },
   {
@@ -136,7 +136,7 @@ const realProducts = [
     description: '4K digital camera with 30x Leica lens',
     category: 'Photography',
     rating: 5,
-    image: '/LOT_012_Panasonic_LUMIX_4K_Digital_Camera_with_30x_Leica_Lens/LOT_012_THUMBNAIL.jpg',
+    image: 'https://picsum.photos/400/300?random=12',
     status: 'Available'
   },
   {
@@ -147,7 +147,7 @@ const realProducts = [
     description: 'Premium outdoor fire pit for gatherings',
     category: 'Recreation',
     rating: 4,
-    image: '/placeholder.svg',
+    image: 'https://picsum.photos/400/300?random=13',
     status: 'Available'
   },
   {
@@ -158,7 +158,7 @@ const realProducts = [
     description: 'Smart pellet grill for outdoor cooking',
     category: 'Recreation',
     rating: 5,
-    image: '/placeholder.svg',
+    image: 'https://picsum.photos/400/300?random=14',
     status: 'Available'
   },
   {
@@ -169,7 +169,7 @@ const realProducts = [
     description: 'AI-powered voice recording and transcription',
     category: 'Accessories',
     rating: 4,
-    image: '/placeholder.svg',
+    image: 'https://picsum.photos/400/300?random=15',
     status: 'Available'
   },
   {
@@ -180,7 +180,7 @@ const realProducts = [
     description: 'Minimalist lightweight rechargeable flashlight',
     category: 'Accessories',
     rating: 4,
-    image: '/placeholder.svg',
+    image: 'https://picsum.photos/400/300?random=16',
     status: 'Available'
   },
   {
@@ -191,7 +191,7 @@ const realProducts = [
     description: 'Premium aluminum stand with hub functionality',
     category: 'Accessories',
     rating: 5,
-    image: '/placeholder.svg',
+    image: 'https://picsum.photos/400/300?random=17',
     status: 'Available'
   },
   {
@@ -202,7 +202,7 @@ const realProducts = [
     description: 'Smart motorcycle helmet with communication',
     category: 'Recreation',
     rating: 5,
-    image: '/placeholder.svg',
+    image: 'https://picsum.photos/400/300?random=18',
     status: 'Available'
   },
   {
@@ -213,7 +213,7 @@ const realProducts = [
     description: 'Professional mobile photography grip system',
     category: 'Photography',
     rating: 5,
-    image: '/placeholder.svg',
+    image: 'https://picsum.photos/400/300?random=19',
     status: 'Available'
   },
   {
@@ -224,7 +224,7 @@ const realProducts = [
     description: 'Magnetic mobile grip with wireless charging',
     category: 'Photography',
     rating: 4,
-    image: '/placeholder.svg',
+    image: 'https://picsum.photos/400/300?random=20',
     status: 'Available'
   }
 ];
