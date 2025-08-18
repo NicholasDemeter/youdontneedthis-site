@@ -6,6 +6,7 @@ interface Product {
   id: string;
   name: string;
   price: string;
+  priceLink?: string;
   description: string;
   category: string;
   rating: number;
@@ -118,9 +119,23 @@ export default function ProductCard({ product }: ProductCardProps) {
 
         {/* Price */}
         <div className="mb-4">
-          <span className="text-xl font-bold text-gold">
-            {product.price}
-          </span>
+          {product.priceLink ? (
+            <Button
+              variant="ghost"
+              className="p-0 h-auto text-xl font-bold text-gold hover:text-primary-glow transition-colors"
+              onClick={(e) => {
+                e.stopPropagation();
+                window.open(product.priceLink, '_blank');
+              }}
+            >
+              {product.price}
+              <ExternalLink className="h-4 w-4 ml-2" />
+            </Button>
+          ) : (
+            <span className="text-xl font-bold text-gold">
+              {product.price}
+            </span>
+          )}
         </div>
 
         {/* Action Buttons */}
