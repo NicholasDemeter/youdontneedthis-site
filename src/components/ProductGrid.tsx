@@ -239,8 +239,23 @@ export default function ProductGrid() {
   const [selectedRating, setSelectedRating] = useState('All');
   const [sortBy, setSortBy] = useState('name');
 
+  // Fetch products from Google Sheets via Supabase Edge Function
+  const { data: productsData, isLoading, error } = useQuery({
+    queryKey: ['products'],
+    queryFn: async () => {
+      const response = await fetch('/functions/v1/fetch-products');
+      if (!response.ok) {
+        throw new Error('Failed to fetch products');
+      }
+      const data = await response.json();
+      return data.products;
+    },
+  });
+
+  const products = productsData || realProducts; // Fallback to static data
+
   const filteredProducts = useMemo(() => {
-    let filtered = realProducts.filter(product => {
+    let filtered = products.filter(product => {
       const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                            product.description.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
@@ -264,7 +279,7 @@ export default function ProductGrid() {
     });
 
     return filtered;
-  }, [searchQuery, selectedCategory, selectedRating, sortBy]);
+  }, [searchQuery, selectedCategory, selectedRating, sortBy, products]);
 
   const clearFilters = () => {
     setSearchQuery('');
@@ -272,6 +287,32 @@ export default function ProductGrid() {
     setSelectedRating('All');
     setSortBy('name');
   };
+
+  if (isLoading) {
+    return (
+      <section className="py-20 px-6 bg-background">
+        <div className="container mx-auto">
+          <div className="text-center">
+            <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4" />
+            <p className="text-muted-foreground">Loading products from Google Sheets...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="py-20 px-6 bg-background">
+        <div className="container mx-auto">
+          <div className="text-center">
+            <p className="text-destructive mb-4">Failed to load products: {error.message}</p>
+            <p className="text-muted-foreground">Showing fallback data instead.</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-20 px-6 bg-background">
@@ -370,7 +411,7 @@ export default function ProductGrid() {
         {/* Results Count */}
         <div className="flex justify-between items-center mb-8">
           <p className="text-muted-foreground">
-            Showing {filteredProducts.length} of {realProducts.length} items
+            Showing {filteredProducts.length} of {products.length} items
           </p>
           
           <div className="flex gap-2">
