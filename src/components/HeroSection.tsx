@@ -7,31 +7,31 @@ const featuredItems = [
     id: 'HERO-VIDEO',
     name: 'YDNT Collection',
     price: 'Featured',
-    image: '/Hero_Media.mp4',
+    image: 'https://picsum.photos/600/400?random=hero',
     description: 'Discover our premium tech collection',
-    type: 'video'
+    type: 'image'
   },
   {
     id: 'LOT-001',
     name: 'Surface Go 3',
-    price: '$799+',
-    image: '/LOT_001_Microsoft_Surface_Go_3_10_5_Touchscreen_Intel_R_CoreTM_i3_8GB_Memory_128GB_SSD/LOT_001_THUMBNAIL.jpg',
+    price: '$399-$549',
+    image: 'https://picsum.photos/600/400?random=21',
     description: '10.5" Touchscreen with Intel i3',
     type: 'image'
   },
   {
     id: 'LOT-002', 
     name: 'Surface Studio 2',
-    price: '$3,499+',
-    image: '/LOT_002_Microsoft_Surface_Studio_2_All_in_One_Desktop/LOT_002_THUMBNAIL.jpg',
+    price: '$3,499-$4,299',
+    image: 'https://picsum.photos/600/400?random=22',
     description: 'All-in-One Desktop workstation',
     type: 'image'
   },
   {
     id: 'LOT-003',
     name: 'EliteMini UM773 SE',
-    price: '$899+',
-    image: '/LOT_003_Minisforum_EliteMini_UM773_SE_Mini_PC_Ryzen_7_7735HS/LOT_003_THUMBNAIL.jpg',
+    price: '$349-$709',
+    image: 'https://picsum.photos/600/400?random=23',
     description: 'Mini PC with AMD Ryzen 7',
     type: 'image'
   }
