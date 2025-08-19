@@ -20,30 +20,19 @@ export default function ProductGrid() {
   const { data: productsData, isLoading, error } = useQuery({
     queryKey: ['products'],
     queryFn: async () => {
-      if (supabase) {
-        const { data, error } = await supabase.functions.invoke('fetch-products');
-        if (error) {
-          throw new Error(`Failed to fetch products: ${error.message}`);
-        }
-        return data.products;
-      } else {
-        // Direct fetch to Supabase Edge Function URL
-        const response = await fetch('https://your-project-ref.supabase.co/functions/v1/fetch-products', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        if (!response.ok) {
-          throw new Error(`Failed to fetch products: ${response.status}`);
-        }
-        const data = await response.json();
-        return data.products;
+      if (!supabase) {
+        throw new Error('Supabase client not configured. Please connect to Supabase.');
       }
+      
+      const { data, error } = await supabase.functions.invoke('fetch-products');
+      if (error) {
+        throw new Error(`Failed to fetch products: ${error.message}`);
+      }
+      return data.products || [];
     },
   });
 
-  const products = productsData || []; // No fallback to static data
+  const products = productsData || [];
 
   const filteredProducts = useMemo(() => {
     let filtered = products.filter(product => {
@@ -97,8 +86,14 @@ export default function ProductGrid() {
       <section className="py-20 px-6 bg-background">
         <div className="container mx-auto">
           <div className="text-center">
-            <p className="text-destructive mb-4">Failed to load products: {error.message}</p>
-            <p className="text-muted-foreground">Showing fallback data instead.</p>
+            <div className="text-6xl mb-4">⚠️</div>
+            <h3 className="text-2xl font-bold text-destructive mb-4">Unable to Load Products</h3>
+            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+              {error.message}
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Please ensure your Supabase connection is properly configured and the Google Sheets API key is set.
+            </p>
           </div>
         </div>
       </section>
