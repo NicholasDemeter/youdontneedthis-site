@@ -34,20 +34,21 @@ serve(async (req) => {
     const products = rows.map((row: string[], index: number) => {
       const folderName = row[1] // Column B - FOLDER_NAME
       const githubImageUrl = folderName 
-        ? `https://raw.githubusercontent.com/yourusername/yourrepo/main/${folderName}/image.jpg`
+        ? `https://raw.githubusercontent.com/NicholasDemeter/premium-gadget-showcase/main/${folderName}/image.jpg`
         : `https://picsum.photos/600/400?random=${index + 10}`
       
       return {
-        id: row[0] || `product-${index}`,
-        name: row[2] || 'Unnamed Product', // Shifted because B is folder name
-        price: row[6] || '$0', // Column G is price
-        description: row[3] || 'No description available',
-        category: row[4] || 'Uncategorized',
-        rating: parseFloat(row[5]) || 0,
+        id: row[0] || `product-${index}`, // Column A - LOT
+        name: row[2] || 'Unnamed Product', // Column C - OFFICIAL_NAME
+        price: row[6] || '$0', // Column G - PRICE
+        description: row[4] || 'No description available', // Column E - DESCRIPTION
+        category: row[8] || 'Uncategorized', // Column I - CATEGORY
+        rating: row[3] === '4 Stars' ? 4 : row[3] === '5 Stars' ? 5 : row[3] === '3 Stars' ? 3 : row[3] === '2 Stars' ? 2 : row[3] === '1 Star' ? 1 : 0, // Column D - COOLNESS_RATING
         image: githubImageUrl,
-        status: row[7] || 'Available',
-        link: row[8] || '',
-        folderName: folderName
+        status: 'Available',
+        link: row[7] || '', // Column H - PRICE ESTIMATE HYPERLINKS
+        folderName: folderName,
+        specifications: row[5] || '' // Column F - SPECIFICATIONS
       }
     })
 
