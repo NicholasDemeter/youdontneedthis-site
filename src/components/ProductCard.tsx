@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Star, MessageCircle, ExternalLink, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -11,7 +12,7 @@ interface Product {
   description: string;
   category: string;
   rating: number;
-  image: string;
+  image: string | null;
   status: string;
 }
 
@@ -30,71 +31,92 @@ export default function ProductCard({ product }: ProductCardProps) {
     window.location.href = `/?lot=${product.id}`;
   };
 
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+    setImageError(false);
+  };
+
+  const handleImageError = () => {
+    setImageError(true);
+    setImageLoaded(false);
+    console.log(`Failed to load image for ${product.name}: ${product.image}`);
+  };
+
+  // Only show image container if we have a valid image URL and it loads successfully
+  const showImage = product.image && !imageError && imageLoaded;
+  const hasValidImage = product.image && product.image.trim() !== '';
+
   return (
     <div className="glass-card group cursor-pointer h-full flex flex-col">
       
       {/* Product Image - Only show if image exists and loads successfully */}
-      {product.image && !imageError && (
+      {hasValidImage && (
         <div className="relative overflow-hidden rounded-t-lg mb-4">
           <img
             src={product.image}
             alt={product.name}
-            className="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110"
-            onLoad={() => setImageLoaded(true)}
-            onError={() => setImageError(true)}
-            style={{ display: imageLoaded ? 'block' : 'none' }}
+            className={`w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110 ${
+              imageLoaded ? 'block' : 'hidden'
+            }`}
+            onLoad={handleImageLoad}
+            onError={handleImageError}
           />
-        
-        {/* Status Badge */}
-        <Badge 
-          className={`absolute top-3 left-3 ${
-            product.status === 'Available' 
-              ? 'bg-gradient-primary text-primary-foreground' 
-              : 'bg-muted text-muted-foreground'
-          }`}
-        >
-          {product.status}
-        </Badge>
+          
+          {/* Only show overlays if image is loaded */}
+          {showImage && (
+            <>
+              {/* Status Badge */}
+              <Badge 
+                className={`absolute top-3 left-3 ${
+                  product.status === 'Available' 
+                    ? 'bg-gradient-primary text-primary-foreground' 
+                    : 'bg-muted text-muted-foreground'
+                }`}
+              >
+                {product.status}
+              </Badge>
 
-        {/* Category Badge */}
-        <Badge 
-          variant="outline" 
-          className="absolute top-3 right-3 bg-glass border-glass-border text-foreground"
-        >
-          {product.category}
-        </Badge>
+              {/* Category Badge */}
+              <Badge 
+                variant="outline" 
+                className="absolute top-3 right-3 bg-glass border-glass-border text-foreground"
+              >
+                {product.category}
+              </Badge>
 
-        {/* Hover Overlay */}
-        <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
-        
-          {/* Action Buttons Overlay */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 space-x-2">
-            <Button 
-              size="sm" 
-              variant="hero"
-              className="rounded-full p-3"
-              onClick={handleViewDetails}
-            >
-              <Eye className="h-4 w-4" />
-            </Button>
-            
-            <Button 
-              size="sm" 
-              variant="premium"
-              className="rounded-full p-3"
-              onClick={(e) => {
-                e.stopPropagation();
-                window.open(whatsappUrl, '_blank');
-              }}
-            >
-              <MessageCircle className="h-4 w-4" />
-            </Button>
-          </div>
+              {/* Hover Overlay */}
+              <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
+              
+              {/* Action Buttons Overlay */}
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 space-x-2">
+                <Button 
+                  size="sm" 
+                  variant="hero"
+                  className="rounded-full p-3"
+                  onClick={handleViewDetails}
+                >
+                  <Eye className="h-4 w-4" />
+                </Button>
+                
+                <Button 
+                  size="sm" 
+                  variant="premium"
+                  className="rounded-full p-3"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    window.open(whatsappUrl, '_blank');
+                  }}
+                >
+                  <MessageCircle className="h-4 w-4" />
+                </Button>
+              </div>
+            </>
+          )}
         </div>
       )}
 
       {/* Product Info */}
-      <div className="p-6 pt-0 flex-1 flex flex-col">
+      <div className={`p-6 ${hasValidImage && !showImage ? 'pt-6' : showImage ? 'pt-0' : 'pt-6'} flex-1 flex flex-col`}>
         
         {/* Header */}
         <div className="mb-3">
