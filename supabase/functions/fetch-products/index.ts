@@ -34,7 +34,7 @@ serve(async (req) => {
     const products = rows.map((row: string[], index: number) => {
       const folderName = row[1] // Column B - FOLDER_NAME
       const githubImageUrl = folderName 
-        ? `https://raw.githubusercontent.com/NicholasDemeter/YDNT_37.0/main/${folderName}/image.jpg`
+        ? `https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/${folderName}/image.jpg`
         : null // No fallback images
       
       return {
