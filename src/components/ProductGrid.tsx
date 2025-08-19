@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/integrations/supabase/client';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -20,15 +20,16 @@ export default function ProductGrid() {
   const { data: productsData, isLoading, error } = useQuery({
     queryKey: ['products'],
     queryFn: async () => {
-      if (!supabase) {
-        throw new Error('Supabase client not configured. Please connect to Supabase.');
-      }
-      
+      console.log('Fetching products...');
       const { data, error } = await supabase.functions.invoke('fetch-products');
       if (error) {
+        console.error('Supabase function error:', error);
         throw new Error(`Failed to fetch products: ${error.message}`);
       }
-      return data.products || [];
+      console.log('Raw products data:', data);
+      const products = data.products || [];
+      console.log('Processed products:', products);
+      return products;
     },
   });
 
