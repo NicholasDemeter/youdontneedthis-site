@@ -27,7 +27,13 @@ export default function ProductGrid() {
         }
         return data.products;
       } else {
-        const response = await fetch('/functions/v1/fetch-products');
+        // Direct fetch to Supabase Edge Function URL
+        const response = await fetch('https://your-project-ref.supabase.co/functions/v1/fetch-products', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
         if (!response.ok) {
           throw new Error(`Failed to fetch products: ${response.status}`);
         }
