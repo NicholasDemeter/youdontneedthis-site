@@ -31,17 +31,25 @@ serve(async (req) => {
     // Transform the raw data into product objects
     const [headers, ...rows] = data.values || []
     
-    const products = rows.map((row: string[], index: number) => ({
-      id: row[0] || `product-${index}`,
-      name: row[1] || 'Unnamed Product',
-      price: row[2] || '$0',
-      description: row[3] || 'No description available',
-      category: row[4] || 'Uncategorized',
-      rating: parseFloat(row[5]) || 0,
-      image: row[6] || `https://picsum.photos/600/400?random=${index + 10}`,
-      status: row[7] || 'Available',
-      link: row[8] || ''
-    }))
+    const products = rows.map((row: string[], index: number) => {
+      const folderName = row[1] // Column B - FOLDER_NAME
+      const githubImageUrl = folderName 
+        ? `https://raw.githubusercontent.com/yourusername/yourrepo/main/${folderName}/image.jpg`
+        : `https://picsum.photos/600/400?random=${index + 10}`
+      
+      return {
+        id: row[0] || `product-${index}`,
+        name: row[2] || 'Unnamed Product', // Shifted because B is folder name
+        price: row[6] || '$0', // Column G is price
+        description: row[3] || 'No description available',
+        category: row[4] || 'Uncategorized',
+        rating: parseFloat(row[5]) || 0,
+        image: githubImageUrl,
+        status: row[7] || 'Available',
+        link: row[8] || '',
+        folderName: folderName
+      }
+    })
 
     return new Response(
       JSON.stringify({ products }),
