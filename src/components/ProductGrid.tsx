@@ -1,5 +1,6 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { supabase } from '@/lib/supabase';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -243,11 +244,10 @@ export default function ProductGrid() {
   const { data: productsData, isLoading, error } = useQuery({
     queryKey: ['products'],
     queryFn: async () => {
-      const response = await fetch('/functions/v1/fetch-products');
-      if (!response.ok) {
-        throw new Error('Failed to fetch products');
+      const { data, error } = await supabase.functions.invoke('fetch-products');
+      if (error) {
+        throw new Error(`Failed to fetch products: ${error.message}`);
       }
-      const data = await response.json();
       return data.products;
     },
   });
