@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Star, MessageCircle, ExternalLink, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -19,6 +20,8 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
   const whatsappMessage = `Hi! I'm interested in ${product.name} (${product.id}). Can you provide more details?`;
   const whatsappUrl = `https://wa.me/1234567890?text=${encodeURIComponent(whatsappMessage)}`;
 
@@ -30,13 +33,17 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <div className="glass-card group cursor-pointer h-full flex flex-col">
       
-      {/* Product Image */}
-      <div className="relative overflow-hidden rounded-t-lg mb-4">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110"
-        />
+      {/* Product Image - Only show if image exists and loads successfully */}
+      {product.image && !imageError && (
+        <div className="relative overflow-hidden rounded-t-lg mb-4">
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110"
+            onLoad={() => setImageLoaded(true)}
+            onError={() => setImageError(true)}
+            style={{ display: imageLoaded ? 'block' : 'none' }}
+          />
         
         {/* Status Badge */}
         <Badge 
@@ -60,30 +67,31 @@ export default function ProductCard({ product }: ProductCardProps) {
         {/* Hover Overlay */}
         <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
         
-        {/* Action Buttons Overlay */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 space-x-2">
-          <Button 
-            size="sm" 
-            variant="hero"
-            className="rounded-full p-3"
-            onClick={handleViewDetails}
-          >
-            <Eye className="h-4 w-4" />
-          </Button>
-          
-          <Button 
-            size="sm" 
-            variant="premium"
-            className="rounded-full p-3"
-            onClick={(e) => {
-              e.stopPropagation();
-              window.open(whatsappUrl, '_blank');
-            }}
-          >
-            <MessageCircle className="h-4 w-4" />
-          </Button>
+          {/* Action Buttons Overlay */}
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 space-x-2">
+            <Button 
+              size="sm" 
+              variant="hero"
+              className="rounded-full p-3"
+              onClick={handleViewDetails}
+            >
+              <Eye className="h-4 w-4" />
+            </Button>
+            
+            <Button 
+              size="sm" 
+              variant="premium"
+              className="rounded-full p-3"
+              onClick={(e) => {
+                e.stopPropagation();
+                window.open(whatsappUrl, '_blank');
+              }}
+            >
+              <MessageCircle className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Product Info */}
       <div className="p-6 pt-0 flex-1 flex flex-col">
