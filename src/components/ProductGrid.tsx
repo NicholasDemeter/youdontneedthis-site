@@ -244,11 +244,41 @@ export default function ProductGrid() {
   const { data: productsData, isLoading, error } = useQuery({
     queryKey: ['products'],
     queryFn: async () => {
-      const { data, error } = await supabase.functions.invoke('fetch-products');
-      if (error) {
-        throw new Error(`Failed to fetch products: ${error.message}`);
+      console.log('Attempting to fetch products...')
+      console.log('Supabase client available:', !!supabase)
+      
+      if (supabase) {
+        // Try using Supabase client first
+        console.log('Using Supabase client')
+        const { data, error } = await supabase.functions.invoke('fetch-products');
+        if (error) {
+          console.error('Supabase function error:', error)
+          throw new Error(`Failed to fetch products: ${error.message}`);
+        }
+        return data.products;
+      } else {
+        // Fallback to direct fetch - this might work in Lovable environment
+        console.log('Falling back to direct fetch')
+        const response = await fetch('/functions/v1/fetch-products');
+        console.log('Fetch response status:', response.status)
+        console.log('Fetch response ok:', response.ok)
+        
+        if (!response.ok) {
+          throw new Error(`Failed to fetch products: ${response.status}`);
+        }
+        
+        const text = await response.text();
+        console.log('Response text preview:', text.substring(0, 100))
+        
+        try {
+          const data = JSON.parse(text);
+          return data.products;
+        } catch (parseError) {
+          console.error('JSON parse error:', parseError)
+          console.error('Response was not JSON:', text.substring(0, 200))
+          throw new Error('Server returned invalid JSON response');
+        }
       }
-      return data.products;
     },
   });
 
