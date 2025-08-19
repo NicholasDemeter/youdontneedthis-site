@@ -34,8 +34,8 @@ serve(async (req) => {
     const products = rows.map((row: string[], index: number) => {
       const folderName = row[1] // Column B - FOLDER_NAME
       const githubImageUrl = folderName 
-        ? `https://raw.githubusercontent.com/NicholasDemeter/premium-gadget-showcase/main/${folderName}/image.jpg`
-        : `https://picsum.photos/600/400?random=${index + 10}`
+        ? `https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/${folderName}/image.jpg`
+        : null // No fallback images
       
       return {
         id: row[0] || `product-${index}`, // Column A - LOT
