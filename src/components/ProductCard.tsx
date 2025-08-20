@@ -37,8 +37,8 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <div className="glass-card group cursor-pointer h-full flex flex-col">
       
-      {/* Product Image - Only show if valid image exists */}
-      {shouldShowImage && (
+      {/* Product Image - Show image or fallback */}
+      {shouldShowImage ? (
         <div className="relative overflow-hidden rounded-t-lg mb-4">
           <img
             src={product.image}
@@ -93,6 +93,10 @@ export default function ProductCard({ product }: ProductCardProps) {
               <MessageCircle className="h-4 w-4" />
             </Button>
           </div>
+        </div>
+      ) : (
+        <div className="w-full h-48 rounded-t-lg border border-dashed grid place-items-center mb-4 text-muted-foreground">
+          No image
         </div>
       )}
 
