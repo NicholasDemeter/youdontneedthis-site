@@ -14,7 +14,7 @@ serve(async (req) => {
   try {
     const GOOGLE_SHEETS_API_KEY = Deno.env.get('GOOGLE_SHEETS_API_KEY')
     const SHEET_ID = '1Pp6bvp4DoDJqVKIrNuN9N6zS_MhVex9UDRSC-nIGI6k'
-    const RANGE = 'Sheet1!A1:I1000'
+    const RANGE = 'A1:Z1000' // Use generic range without sheet name
     
     if (!GOOGLE_SHEETS_API_KEY) {
       throw new Error('Google Sheets API key not configured')
