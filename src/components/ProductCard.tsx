@@ -1,5 +1,4 @@
 
-import { useState } from 'react';
 import { Star, MessageCircle, ExternalLink, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -21,7 +20,6 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const [imageError, setImageError] = useState(false);
   const whatsappMessage = `Hi! I'm interested in ${product.name} (${product.id}). Can you provide more details?`;
   const whatsappUrl = `https://wa.me/1234567890?text=${encodeURIComponent(whatsappMessage)}`;
 
@@ -30,15 +28,11 @@ export default function ProductCard({ product }: ProductCardProps) {
   };
 
   const handleImageError = () => {
-    setImageError(true);
     console.log(`Failed to load image for ${product.name}: ${product.image}`);
   };
 
-  // Only show image if we have a valid URL AND it hasn't errored
-  const shouldShowImage = product.image && 
-                         product.image.trim() !== '' && 
-                         !product.image.includes('placeholder') &&
-                         !imageError;
+  // Only show image if we have a valid URL
+  const shouldShowImage = !!(product.image && product.image.trim() !== '');
 
   return (
     <div className="glass-card group cursor-pointer h-full flex flex-col">
