@@ -36,23 +36,39 @@ serve(async (req) => {
     console.log('Headers:', headers)
     console.log('First few rows:', rows.slice(0, 3))
     
+    // Header-based mapping
+    const headerNames = headers.map((h: string) => h.trim());
+    const headerIndex = (key: string) => headerNames.findIndex(h => h.toLowerCase() === key.toLowerCase());
+    const idx = {
+      id: headerIndex('lot'),
+      folderName: headerIndex('folder_name'),
+      name: headerIndex('official_name'),
+      description: headerIndex('description'),
+      category: headerIndex('category'),
+      rating: headerIndex('coolness_rating'),
+      price: headerIndex('price'),
+      priceLink: headerIndex('price estimate hyperlinks'),
+      specifications: headerIndex('specifications'),
+    };
+    const get = (i: number, r: string[]) => (i >= 0 && r[i] != null ? String(r[i]).trim() : '');
+    
     const products = rows
       .filter((row: string[]) => {
         // Only include rows with valid data
-        const folderName = row[1]?.trim()
-        const officialName = row[2]?.trim()
+        const folderName = get(idx.folderName, row)
+        const officialName = get(idx.name, row)
         console.log(`Row filter check - folderName: "${folderName}", officialName: "${officialName}"`)
         return folderName && officialName && folderName !== '' && officialName !== ''
       })
       .map((row: string[], index: number) => {
-        const folderName = row[1]?.trim()
-        const officialName = row[2]?.trim()
-        const price = row[6]?.trim()
-        const description = row[4]?.trim()
-        const category = row[8]?.trim()
-        const coolnessRating = row[3]?.trim()
-        const priceLink = row[7]?.trim()
-        const specifications = row[5]?.trim()
+        const folderName = get(idx.folderName, row)
+        const officialName = get(idx.name, row)
+        const price = get(idx.price, row)
+        const description = get(idx.description, row)
+        const category = get(idx.category, row)
+        const coolnessRating = get(idx.rating, row)
+        const priceLink = get(idx.priceLink, row)
+        const specifications = get(idx.specifications, row)
         
         // Create GitHub image URL - only if folder name exists
         let githubImageUrl = null
@@ -71,7 +87,7 @@ serve(async (req) => {
         }
         
         return {
-          id: row[0]?.trim() || `product-${index}`,
+          id: get(idx.id, row) || `product-${index}`,
           name: officialName,
           price: price || '$0',
           description: description || 'No description available',
