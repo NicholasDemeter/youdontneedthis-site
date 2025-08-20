@@ -49,6 +49,7 @@ serve(async (req) => {
       price: headerIndex('price'),
       priceLink: headerIndex('price estimate hyperlinks'),
       specifications: headerIndex('specifications'),
+      image: headerIndex('image'),
     };
     const get = (i: number, r: string[]) => (i >= 0 && r[i] != null ? String(r[i]).trim() : '');
     
@@ -71,9 +72,9 @@ serve(async (req) => {
         const specifications = get(idx.specifications, row)
         
         // Create GitHub image URL - only if folder name exists
-        let githubImageUrl = null
+        let githubImageUrl = null;
         if (folderName && folderName !== '') {
-          githubImageUrl = `https://raw.githubusercontent.com/NicholasDemeter/ydnt-inventory/main/${folderName}/image.jpg`
+          githubImageUrl = `https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/${folderName}/Photos/thumb.jpg`;
         }
         
         // Parse rating
@@ -86,20 +87,27 @@ serve(async (req) => {
           else if (coolnessRating.includes('1')) rating = 1
         }
         
-        return {
+        const sheetImage = idx.image >= 0 ? get(idx.image, row) : '';
+        const isAbsolute = (u: string) => /^https?:\/\//i.test(u);
+        
+        const product = {
           id: get(idx.id, row) || `product-${index}`,
           name: officialName,
           price: price || '$0',
           description: description || 'No description available',
           category: category || 'Uncategorized',
           rating: rating,
-          image: githubImageUrl,
+          image: (sheetImage && isAbsolute(sheetImage)) ? sheetImage : githubImageUrl,
           status: 'Available',
           link: priceLink || '',
           priceLink: priceLink || '',
           folderName: folderName,
           specifications: specifications || ''
         }
+        
+        console.log('IMAGE_DEBUG', { id: product.id, folderName, image: product.image });
+        
+        return product
       })
 
     console.log(`Successfully processed ${products.length} products`)
