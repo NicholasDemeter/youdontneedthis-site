@@ -33,12 +33,15 @@ serve(async (req) => {
 
     const [headers, ...rows] = data.values || []
     console.log(`Processing ${rows.length} products...`)
+    console.log('Headers:', headers)
+    console.log('First few rows:', rows.slice(0, 3))
     
     const products = rows
       .filter((row: string[]) => {
         // Only include rows with valid data
         const folderName = row[1]?.trim()
         const officialName = row[2]?.trim()
+        console.log(`Row filter check - folderName: "${folderName}", officialName: "${officialName}"`)
         return folderName && officialName && folderName !== '' && officialName !== ''
       })
       .map((row: string[], index: number) => {
