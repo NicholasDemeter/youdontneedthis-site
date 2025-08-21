@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Input } from '@/components/ui/input';
@@ -15,6 +15,25 @@ export default function ProductGrid() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedRating, setSelectedRating] = useState('All');
   const [sortBy, setSortBy] = useState('name');
+
+  // Production-only runtime probe (temporary)
+  useEffect(() => {
+    if (!import.meta.env.PROD) return; // only in production
+    const url = import.meta.env.VITE_SUPABASE_URL;
+    const anon = import.meta.env.VITE_SUPABASE_ANON_KEY;
+    console.log('[SUPABASE_ENV]', { url, anonDefined: !!anon });
+    if (!url || !anon) return;
+    fetch(`${url}/functions/v1/fetch-products`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${anon}` },
+      body: '{}'
+    })
+    .then(async r => {
+      const text = await r.text();
+      console.log('[SUPABASE_PROBE]', { status: r.status, preview: text.slice(0,160) });
+    })
+    .catch(e => console.error('[SUPABASE_PROBE_ERROR]', e?.message || String(e)));
+  }, []);
 
   // Fetch products from Google Sheets via Supabase Edge Function
   const { data: productsData, isLoading, error } = useQuery({
