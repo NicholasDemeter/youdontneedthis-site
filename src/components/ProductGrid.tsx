@@ -35,21 +35,40 @@ export default function ProductGrid() {
     .catch(e => console.error('[SUPABASE_PROBE_ERROR]', e?.message || String(e)));
   }, []);
 
+  async function fetchProductsDirect(): Promise<any[]> {
+    const url  = import.meta.env.VITE_SUPABASE_URL;
+    const anon = import.meta.env.VITE_SUPABASE_ANON_KEY;
+    const endpoint = `${url}/functions/v1/fetch-products`;
+    console.log('[FETCH_ENDPOINT]', endpoint);
+    const res = await fetch(endpoint, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${anon}`,
+      },
+      body: '{}',
+    });
+    const text = await res.text();
+
+    if (!res.ok) {
+      throw new Error(`[fetch-products ${res.status}] ${text.slice(0,160)}`);
+    }
+    if (text.trim().startsWith('<!DOCTYPE') || text.trim().startsWith('<html')) {
+      throw new Error('[fetch-products] Received HTML instead of JSON (check endpoint/env). Preview: ' + text.slice(0,160));
+    }
+
+    let data: any;
+    try { data = JSON.parse(text); }
+    catch { throw new Error('[fetch-products] Invalid JSON. Preview: ' + text.slice(0,160)); }
+
+    return data?.products ?? [];
+  }
+
   // Fetch products from Google Sheets via Supabase Edge Function
   const { data: productsData, isLoading, error } = useQuery({
     queryKey: ['products'],
-    queryFn: async () => {
-      console.log('Fetching products...');
-      const { data, error } = await supabase.functions.invoke('fetch-products');
-      if (error) {
-        console.error('Supabase function error:', error);
-        throw new Error(`Failed to fetch products: ${error.message}`);
-      }
-      console.log('Raw products data:', data);
-      const products = data.products || [];
-      console.log('Processed products:', products);
-      return products;
-    },
+    queryFn: fetchProductsDirect,
   });
 
   const products = productsData || [];
