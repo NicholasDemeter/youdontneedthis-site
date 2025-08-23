@@ -1,0 +1,2 @@
+OK ydnt-inventory (Pages)
+expects: https://dycjwrgieaontfzkfqvw.supabase.co/functions/v1/fetch-products
