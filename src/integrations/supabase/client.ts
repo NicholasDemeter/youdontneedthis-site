@@ -9,6 +9,24 @@ if (!SUPABASE_URL || !SUPABASE_KEY) {
   throw new Error('Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY — set build-time envs.');
 }
 
+// --- runtime diag (temporary) ---
+if (import.meta.env.PROD) {
+  try {
+    const urlHost = new URL(SUPABASE_URL!).host; // e.g., dycjwrgieaontfzkfqvw.supabase.co
+    const anon = SUPABASE_KEY!;
+    const payloadB64 = anon.split('.')[1];
+    const payloadJson = JSON.parse(atob(payloadB64));
+    const issHost = new URL(payloadJson.iss || 'https://invalid').host; // e.g., abcdef.supabase.co
+    const match = urlHost.startsWith(issHost.split('.')[0]); // compare refs
+    // eslint-disable-next-line no-console
+   console.log('[JWT_MATCH]', { urlHost, issHost, match });
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.log('[JWT_MATCH_ERR]', String(e));
+  }
+}
+// --- end diag ---
+
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
 
