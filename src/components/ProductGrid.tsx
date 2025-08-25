@@ -25,18 +25,22 @@ export default function ProductGrid() {
     if (!url || !anon) return;
     fetch(`${url}/functions/v1/fetch-products`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${anon}` },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${anon}`,
+        'apikey': anon, // <-- added
+      },
       body: '{}'
     })
-    .then(async r => {
-      const text = await r.text();
-      console.log('[SUPABASE_PROBE]', { status: r.status, preview: text.slice(0,160) });
-    })
-    .catch(e => console.error('[SUPABASE_PROBE_ERROR]', e?.message || String(e)));
+      .then(async r => {
+        const text = await r.text();
+        console.log('[SUPABASE_PROBE]', { status: r.status, preview: text.slice(0, 160) });
+      })
+      .catch(e => console.error('[SUPABASE_PROBE_ERROR]', e?.message || String(e)));
   }, []);
 
   async function fetchProductsDirect(): Promise<any[]> {
-    const url  = import.meta.env.VITE_SUPABASE_URL;
+    const url = import.meta.env.VITE_SUPABASE_URL;
     const anon = import.meta.env.VITE_SUPABASE_ANON_KEY;
     const endpoint = `${url}/functions/v1/fetch-products`;
     console.log('[FETCH_ENDPOINT]', endpoint);
@@ -46,21 +50,22 @@ export default function ProductGrid() {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${anon}`,
+        'apikey': anon, // <-- added
       },
       body: '{}',
     });
     const text = await res.text();
 
     if (!res.ok) {
-      throw new Error(`[fetch-products ${res.status}] ${text.slice(0,160)}`);
+      throw new Error(`[fetch-products ${res.status}] ${text.slice(0, 160)}`);
     }
     if (text.trim().startsWith('<!DOCTYPE') || text.trim().startsWith('<html')) {
-      throw new Error('[fetch-products] Received HTML instead of JSON (check endpoint/env). Preview: ' + text.slice(0,160));
+      throw new Error('[fetch-products] Received HTML instead of JSON (check endpoint/env). Preview: ' + text.slice(0, 160));
     }
 
     let data: any;
     try { data = JSON.parse(text); }
-    catch { throw new Error('[fetch-products] Invalid JSON. Preview: ' + text.slice(0,160)); }
+    catch { throw new Error('[fetch-products] Invalid JSON. Preview: ' + text.slice(0, 160)); }
 
     return data?.products ?? [];
   }
@@ -74,17 +79,18 @@ export default function ProductGrid() {
   const products = productsData || [];
 
   const filteredProducts = useMemo(() => {
-    let filtered = products.filter(product => {
-      const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                           product.description.toLowerCase().includes(searchQuery.toLowerCase());
+    let filtered = products.filter((product: any) => {
+      const matchesSearch =
+        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.description.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
       const matchesRating = selectedRating === 'All' || product.rating >= parseInt(selectedRating);
-      
+
       return matchesSearch && matchesCategory && matchesRating;
     });
 
     // Sort products
-    filtered.sort((a, b) => {
+    filtered.sort((a: any, b: any) => {
       switch (sortBy) {
         case 'name':
           return a.name.localeCompare(b.name);
@@ -142,7 +148,7 @@ export default function ProductGrid() {
   return (
     <section className="py-20 px-6 bg-background">
       <div className="container mx-auto">
-        
+
         {/* Header */}
         <div className="text-center mb-16 animate-slide-up">
           <h2 className="text-5xl font-bold mb-6">
@@ -150,7 +156,7 @@ export default function ProductGrid() {
             <span className="text-gold">Collection</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Discover our carefully curated selection of premium technology. 
+            Discover our carefully curated selection of premium technology.
             Each item represents the pinnacle of innovation and craftsmanship.
           </p>
         </div>
@@ -158,7 +164,7 @@ export default function ProductGrid() {
         {/* Search and Filters */}
         <div className="glass-card p-6 mb-12 animate-fade-in">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
-            
+
             {/* Search */}
             <div className="lg:col-span-2">
               <label className="text-sm font-medium text-foreground mb-2 block">Search</label>
@@ -220,8 +226,8 @@ export default function ProductGrid() {
                   <SelectItem value="category">Category</SelectItem>
                 </SelectContent>
               </Select>
-              
-              <Button 
+
+              <Button
                 variant="premium"
                 onClick={clearFilters}
                 className="whitespace-nowrap"
@@ -238,7 +244,7 @@ export default function ProductGrid() {
           <p className="text-muted-foreground">
             Showing {filteredProducts.length} of {products.length} items
           </p>
-          
+
           <div className="flex gap-2">
             <Button variant="premium">
               <MessageCircle className="h-4 w-4 mr-2" />
@@ -253,8 +259,8 @@ export default function ProductGrid() {
 
         {/* Product Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {filteredProducts.map((product, index) => (
-            <div 
+          {filteredProducts.map((product: any, index: number) => (
+            <div
               key={product.id}
               className="animate-slide-up"
               style={{ animationDelay: `${index * 0.1}s` }}
