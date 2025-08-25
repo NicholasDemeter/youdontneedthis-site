@@ -71,11 +71,21 @@ serve(async (req) => {
         const priceLink = get(idx.priceLink, row)
         const specifications = get(idx.specifications, row)
         
-        // Create GitHub image URL - only if folder name exists
-        let githubImageUrl = null;
-        if (folderName && folderName !== '') {
-          githubImageUrl = `https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/${folderName}/Photos/thumb.jpg`;
-        }
+        // Create GitHub image URLs - primary and alternative
+        const repo = 'youdontneedthis-inventory';
+        const folderRaw = (folderName || '').trim();
+
+        // Primary: encode as-is (supports real spaces in a few legacy folders)
+        const folderEnc = encodeURIComponent(folderRaw);
+
+        // Alt: convert spaces/dashes to underscores to match most repo folder names
+        const folderUnderscore = folderRaw
+          .replace(/\s+/g, '_')
+          .replace(/-+/g, '_');
+
+        // Candidate image URLs
+        const primaryImg = folderRaw ? `https://raw.githubusercontent.com/NicholasDemeter/${repo}/main/${folderEnc}/Photos/thumb.jpg` : null;
+        const altImg = folderRaw ? `https://raw.githubusercontent.com/NicholasDemeter/${repo}/main/${encodeURIComponent(folderUnderscore)}/Photos/thumb.jpg` : null;
         
         // Parse rating
         let rating = 0
@@ -97,15 +107,16 @@ serve(async (req) => {
           description: description || 'No description available',
           category: category || 'Uncategorized',
           rating: rating,
-          image: (sheetImage && isAbsolute(sheetImage)) ? sheetImage : githubImageUrl,
+          image: (sheetImage && isAbsolute(sheetImage)) ? sheetImage : primaryImg,
+          image_alt: altImg,
           status: 'Available',
           link: priceLink || '',
           priceLink: priceLink || '',
-          folderName: folderName,
+          folderName: folderRaw,
           specifications: specifications || ''
         }
         
-        console.log('IMAGE_DEBUG', { id: product.id, folderName, image: product.image });
+        console.log('IMAGE_DEBUG', { id: product.id, folderRaw, primaryImg, altImg });
         
         return product
       })

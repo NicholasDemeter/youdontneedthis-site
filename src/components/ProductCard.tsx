@@ -1,4 +1,5 @@
 
+import { useEffect, useState } from 'react';
 import { Star, MessageCircle, ExternalLink, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -12,6 +13,7 @@ interface Product {
   category: string;
   rating: number;
   image: string | null;
+  image_alt?: string | null;
   status: string;
 }
 
@@ -20,6 +22,11 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const [imgSrc, setImgSrc] = useState(product.image || '');
+  useEffect(() => {
+    setImgSrc(product.image || '');
+  }, [product.image]);
+
   const whatsappMessage = `Hi! I'm interested in ${product.name} (${product.id}). Can you provide more details?`;
   const whatsappUrl = `https://wa.me/1234567890?text=${encodeURIComponent(whatsappMessage)}`;
 
@@ -28,11 +35,16 @@ export default function ProductCard({ product }: ProductCardProps) {
   };
 
   const handleImageError = () => {
-    console.log(`Failed to load image for ${product.name}: ${product.image}`);
+    if (product.image_alt && imgSrc !== product.image_alt) {
+      setImgSrc(product.image_alt);    // one-time fallback to underscore-normalized path
+    } else {
+      console.warn('Image failed:', product.id, imgSrc);
+      // leave broken image visible (no beach placeholders)
+    }
   };
 
   // Only show image if we have a valid URL
-  const shouldShowImage = !!(product.image && product.image.trim() !== '');
+  const shouldShowImage = !!(imgSrc && imgSrc.trim() !== '');
 
   return (
     <div className="glass-card group cursor-pointer h-full flex flex-col">
@@ -41,11 +53,11 @@ export default function ProductCard({ product }: ProductCardProps) {
       {shouldShowImage ? (
         <div className="relative overflow-hidden rounded-t-lg mb-4">
           <img
-            src={product.image}
+            src={imgSrc}
             alt={product.name}
-            className="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110"
-            onError={handleImageError}
             loading="lazy"
+            onError={handleImageError}
+            className="w-full h-56 object-cover rounded-xl"
           />
           
           {/* Status Badge */}
