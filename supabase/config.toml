@@ -1,4 +1,0 @@
-project_id = "dycjwrgieaontfzkfqvw"
-
-[functions.fetch-products]
-verify_jwt = false

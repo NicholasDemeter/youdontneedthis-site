@@ -1,6 +1,5 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { supabase } from '@/integrations/supabase/client';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -16,64 +15,61 @@ export default function ProductGrid() {
   const [selectedRating, setSelectedRating] = useState('All');
   const [sortBy, setSortBy] = useState('name');
 
-  // Production-only runtime probe (temporary)
-  useEffect(() => {
-    if (!import.meta.env.PROD) return; // only in production
-    const url = import.meta.env.VITE_SUPABASE_URL;
-    const anon = import.meta.env.VITE_SUPABASE_ANON_KEY;
-    console.log('[SUPABASE_ENV]', { url, anonDefined: !!anon });
-    if (!url || !anon) return;
-    fetch(`${url}/functions/v1/fetch-products`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${anon}`,
-        'apikey': anon, // <-- added
-      },
-      body: '{}'
-    })
-      .then(async r => {
-        const text = await r.text();
-        console.log('[SUPABASE_PROBE]', { status: r.status, preview: text.slice(0, 160) });
-      })
-      .catch(e => console.error('[SUPABASE_PROBE_ERROR]', e?.message || String(e)));
-  }, []);
 
-  async function fetchProductsDirect(): Promise<any[]> {
-    const url = import.meta.env.VITE_SUPABASE_URL;
-    const anon = import.meta.env.VITE_SUPABASE_ANON_KEY;
-    const endpoint = `${url}/functions/v1/fetch-products`;
-    console.log('[FETCH_ENDPOINT]', endpoint);
-    const res = await fetch(endpoint, {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${anon}`,
-        'apikey': anon, // <-- added
-      },
-      body: '{}',
-    });
-    const text = await res.text();
-
-    if (!res.ok) {
-      throw new Error(`[fetch-products ${res.status}] ${text.slice(0, 160)}`);
+  async function fetchProductsFromSheet(): Promise<any[]> {
+    const SHEET_ID = '1Pp6bvp4DoDJqVKIrNuN9N6zS_MhVex9UDRSC-nIGI6k';
+    const csvUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`;
+    
+    try {
+      const response = await fetch(csvUrl);
+      const csvText = await response.text();
+      
+      const lines = csvText.split('\n');
+      const headers = lines[0].split(',').map(h => h.replace(/"/g, '').trim());
+      
+      const products = [];
+      for (let i = 1; i < lines.length; i++) {
+        const values = lines[i].split(',').map(v => v.replace(/"/g, '').trim());
+        if (values.length < headers.length) continue;
+        
+        const row: any = {};
+        headers.forEach((header, index) => {
+          row[header] = values[index] || '';
+        });
+        
+        if (!row.folder_name || !row.OFFICIAL_NAME) continue;
+        
+        // Generate site-relative paths
+        const folderName = row.folder_name;
+        const thumbPath = encodeURI(`/${folderName}/Photos/thumb.jpg`);
+        
+        products.push({
+          id: row.LOT_ID || folderName,
+          name: row.OFFICIAL_NAME,
+          price: row.PRICE_RANGE || 'Contact for price',
+          priceLink: row.URL,
+          description: row.DESCRIPTION || '',
+          category: row.CATEGORY || 'Uncategorized',
+          rating: parseInt(row.RATING) || 0,
+          image: thumbPath,
+          image_alt: thumbPath.replace('thumb.jpg', 'thumb.JPG'), // Case fallback
+          status: row.STATUS || 'Available',
+          folderName: folderName,
+          specifications: row.SPECS || ''
+        });
+      }
+      
+      return products;
+    } catch (error) {
+      console.error('Failed to fetch from Google Sheets:', error);
+      throw error;
     }
-    if (text.trim().startsWith('<!DOCTYPE') || text.trim().startsWith('<html')) {
-      throw new Error('[fetch-products] Received HTML instead of JSON (check endpoint/env). Preview: ' + text.slice(0, 160));
-    }
-
-    let data: any;
-    try { data = JSON.parse(text); }
-    catch { throw new Error('[fetch-products] Invalid JSON. Preview: ' + text.slice(0, 160)); }
-
-    return data?.products ?? [];
   }
 
-  // Fetch products from Google Sheets via Supabase Edge Function
+  // Fetch products directly from Google Sheets
   const { data: productsData, isLoading, error } = useQuery({
     queryKey: ['products'],
-    queryFn: fetchProductsDirect,
+    queryFn: fetchProductsFromSheet,
   });
 
   const products = productsData || [];
@@ -137,7 +133,7 @@ export default function ProductGrid() {
               {error.message}
             </p>
             <p className="text-sm text-muted-foreground">
-              Please ensure your Supabase connection is properly configured and the Google Sheets API key is set.
+              Unable to fetch data from Google Sheets. Please check your connection.
             </p>
           </div>
         </div>
