@@ -1,0 +1,6 @@
+LOT_ID,OFFICIAL_NAME,PRICE_RANGE,URL,DESCRIPTION,CATEGORY,RATING,STATUS,folder_name,SPECS
+LOT-001,Premium Tablet Device,$500-$800,https://example.com,High-performance tablet with stunning display,Tablets,5,Available,LOT-001,10.5 inch display - 256GB storage
+LOT-002,Professional Workstation,$1200-$2000,https://example.com,Powerful workstation for creative professionals,Workstations,5,Available,LOT-002,Intel Core i7 - 32GB RAM - NVIDIA RTX
+LOT-003,Compact Mini PC,$300-$500,https://example.com,Small form factor computer with big performance,Mini PCs,4,Available,LOT-003,Intel Core i5 - 16GB RAM - 512GB SSD
+LOT-047,Photography Equipment,$800-$1200,https://example.com,Professional camera equipment for photographers,Photography,5,Available,LOT-047,DSLR Camera - 24MP - Multiple lenses
+LOT-069,4K Monitor,$400-$700,https://example.com,Ultra-high definition monitor for professionals,Monitors,4,Available,LOT-069,27 inch 4K - HDR10 - USB-C
