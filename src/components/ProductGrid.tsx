@@ -1,9 +1,10 @@
 import { useState, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import Papa from 'papaparse';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Search, Filter, Star, MessageCircle, ExternalLink, Loader2 } from 'lucide-react';
+import { Search, Filter, Star, MessageCircle, ExternalLink, Loader2, AlertTriangle } from 'lucide-react';
 import ProductCard from './ProductCard';
 
 const categories = ['All', 'Tablets', 'Workstations', 'Mini PCs', 'Photography', 'Monitors', 'Projectors', 'Accessories', 'Recreation'];
@@ -17,7 +18,7 @@ export default function ProductGrid() {
 
 
   async function fetchProductsFromLocalCSV(): Promise<any[]> {
-    // Fetch from local CSV file in public folder
+    // Fetch CSV file using Papa Parse for better handling
     const csvUrl = '/data/products.csv';
     
     try {
@@ -27,40 +28,43 @@ export default function ProductGrid() {
       }
       const csvText = await response.text();
       
-      const lines = csvText.split('\n');
-      const headers = lines[0].split(',').map(h => h.replace(/"/g, '').trim());
+      // Parse CSV using Papa Parse for better reliability
+      const parseResult = Papa.parse(csvText, {
+        header: true,
+        skipEmptyLines: true,
+        transformHeader: (header: string) => header.trim(),
+        transform: (value: string) => value.trim()
+      });
       
-      const products = [];
-      for (let i = 1; i < lines.length; i++) {
-        const values = lines[i].split(',').map(v => v.replace(/"/g, '').trim());
-        if (values.length < headers.length) continue;
+      if (parseResult.errors.length > 0) {
+        console.warn('CSV parsing warnings:', parseResult.errors);
+      }
+      
+      const products = parseResult.data.map((row: any) => {
+        // Use FOLDER_NAME as the primary folder identifier
+        const folderName = row.FOLDER_NAME || row.folder_name || row.LOT;
+        if (!folderName || !row.OFFICIAL_NAME) return null;
         
-        const row: any = {};
-        headers.forEach((header, index) => {
-          row[header] = values[index] || '';
-        });
-        
-        if (!row.folder_name || !row.OFFICIAL_NAME) continue;
-        
-        // Generate site-relative paths
-        const folderName = row.folder_name;
+        // Generate site-relative paths with proper URI encoding
         const thumbPath = encodeURI(`/${folderName}/Photos/thumb.jpg`);
+        const thumbPathAlt = encodeURI(`/${folderName}/Photos/thumb.JPG`); // Case fallback
         
-        products.push({
-          id: row.LOT_ID || folderName,
+        return {
+          id: row.LOT || folderName,
           name: row.OFFICIAL_NAME,
-          price: row.PRICE_RANGE || 'Contact for price',
+          price: row.PRICE || row.PRICE_RANGE || 'Contact for price',
           priceLink: row.URL,
           description: row.DESCRIPTION || '',
           category: row.CATEGORY || 'Uncategorized',
           rating: parseInt(row.RATING) || 0,
           image: thumbPath,
-          image_alt: thumbPath.replace('thumb.jpg', 'thumb.JPG'), // Case fallback
+          image_alt: thumbPathAlt,
           status: row.STATUS || 'Available',
           folderName: folderName,
-          specifications: row.SPECS || ''
-        });
-      }
+          specifications: row.SPECS || '',
+          whatsappLink: `https://wa.me/1234567890?text=Hi, I'm interested in ${encodeURIComponent(row.OFFICIAL_NAME || '')}`
+        };
+      }).filter(Boolean); // Remove null entries
       
       return products;
     } catch (error) {

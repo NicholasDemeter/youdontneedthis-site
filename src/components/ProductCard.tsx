@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from 'react';
-import { Star, MessageCircle, ExternalLink, Eye } from 'lucide-react';
+import { Star, MessageCircle, ExternalLink, Eye, AlertTriangle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
@@ -15,6 +15,8 @@ interface Product {
   image: string | null;
   image_alt?: string | null;
   status: string;
+  whatsappLink?: string;
+  folderName?: string;
 }
 
 interface ProductCardProps {
@@ -23,12 +25,16 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   const [imgSrc, setImgSrc] = useState(product.image || '');
+  const [imageError, setImageError] = useState(false);
+  
   useEffect(() => {
     setImgSrc(product.image || '');
+    setImageError(false);
   }, [product.image]);
 
+  // Use whatsappLink from product data or fallback to generated one
   const whatsappMessage = `Hi! I'm interested in ${product.name} (${product.id}). Can you provide more details?`;
-  const whatsappUrl = `https://wa.me/1234567890?text=${encodeURIComponent(whatsappMessage)}`;
+  const whatsappUrl = product.whatsappLink || `https://wa.me/1234567890?text=${encodeURIComponent(whatsappMessage)}`;
 
   const handleViewDetails = () => {
     window.location.href = `/?lot=${product.id}`;
@@ -36,15 +42,15 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   const handleImageError = () => {
     if (product.image_alt && imgSrc !== product.image_alt) {
-      setImgSrc(product.image_alt);    // one-time fallback to underscore-normalized path
+      setImgSrc(product.image_alt);    // one-time fallback to case-sensitive alternative
     } else {
       console.warn('Image failed:', product.id, imgSrc);
-      // leave broken image visible (no beach placeholders)
+      setImageError(true);  // Mark as error to show missing asset badge
     }
   };
 
-  // Only show image if we have a valid URL
-  const shouldShowImage = !!(imgSrc && imgSrc.trim() !== '');
+  // Show image with error handling
+  const shouldShowImage = !!(imgSrc && imgSrc.trim() !== '' && !imageError);
 
   return (
     <div className="glass-card group cursor-pointer h-full flex flex-col">
@@ -107,8 +113,14 @@ export default function ProductCard({ product }: ProductCardProps) {
           </div>
         </div>
       ) : (
-        <div className="w-full h-48 rounded-t-lg border border-dashed grid place-items-center mb-4 text-muted-foreground">
-          No image
+        <div className="w-full h-56 rounded-t-lg border border-dashed bg-muted/20 grid place-items-center mb-4 text-muted-foreground">
+          <div className="text-center">
+            <AlertTriangle className="h-8 w-8 mx-auto mb-2 text-destructive" />
+            <Badge variant="destructive" className="mb-2">
+              Asset Missing
+            </Badge>
+            <p className="text-sm">Image not found</p>
+          </div>
         </div>
       )}
 
