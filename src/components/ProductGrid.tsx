@@ -17,9 +17,9 @@ export default function ProductGrid() {
   const [sortBy, setSortBy] = useState('name');
 
 
-  async function fetchProductsFromGoogleSheets(): Promise<any[]> {
-    // Fetch CSV from Google Sheets export URL
-    const csvUrl = 'https://docs.google.com/spreadsheets/d/1Pp6bvp4DoDJqVKIrNuN9N6zS_MhVex9UDRSC-nIGI6k/export?format=csv&gid=0';
+  async function fetchProductsFromLocalCSV(): Promise<any[]> {
+    // Fetch CSV file using Papa Parse for better handling
+    const csvUrl = '/data/products.csv';
     
     try {
       const response = await fetch(csvUrl);
@@ -68,15 +68,15 @@ export default function ProductGrid() {
       
       return products;
     } catch (error) {
-      console.error('Failed to fetch from Google Sheets:', error);
+      console.error('Failed to fetch from local CSV:', error);
       throw error;
     }
   }
 
-  // Fetch products from Google Sheets CSV export
+  // Fetch products from local CSV file
   const { data: productsData, isLoading, error } = useQuery({
     queryKey: ['products'],
-    queryFn: fetchProductsFromGoogleSheets,
+    queryFn: fetchProductsFromLocalCSV,
   });
 
   const products = productsData || [];
@@ -122,7 +122,7 @@ export default function ProductGrid() {
         <div className="container mx-auto">
           <div className="text-center">
             <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4" />
-            <p className="text-muted-foreground">Loading products from Google Sheets...</p>
+            <p className="text-muted-foreground">Loading products from CSV...</p>
           </div>
         </div>
       </section>
@@ -140,7 +140,7 @@ export default function ProductGrid() {
               {error.message}
             </p>
             <p className="text-sm text-muted-foreground">
-              Unable to fetch data from Google Sheets. Please check the export URL.
+              Unable to fetch data from CSV file. Please check if /data/products.csv exists.
             </p>
           </div>
         </div>
