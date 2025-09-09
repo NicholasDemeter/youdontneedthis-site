@@ -1,9 +1,30 @@
 {
+  "assetsBase": "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main",
   "carouselSize": 10,
   "carouselFillRating": 4,
   "heroMediaPath": "Carousel_HERO/Hero_Media.mp4",
   "whatsAppCTA": "https://wa.me/15551234567?text=Hi%20YDNT%2C%20I%27m%20interested%20in%20LOT%20___",
   "fallbackThumbnail": "images/placeholder.jpg",
-  "placeholderDataURL": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='#1f1b2e'/><stop offset='100%' stop-color='#0e0b16'/></linearGradient></defs><rect width='100%' height='100%' fill='url(%23g)'/><g fill='#8b5cf6' font-family='Inter,Arial' text-anchor='middle'><text x='50%' y='48%' font-size='48'>Image Unavailable</text><text x='50%' y='62%' font-size='20' fill='#d1d5db'>YDNT \u2022 Placeholder</text></g></svg>",
-  "whatsappTemplate": "Inquiry for {LOT}"
+  "placeholderDataURL": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='#1f1b2e'/><stop offset='100%' stop-color='#0e0b16'/></linearGradient></defs><rect width='100%' height='100%' fill='url(%23g)'/><rect width='100%' height='100%' fill='url(%23g)'/><g fill='#8b5cf6' font-family='Inter,Arial' text-anchor='middle'><text x='50%' y='48%' font-size='48'>Image Unavailable</text><text x='50%' y='62%' font-size='20' fill='#d1d5db'>YDNT \u2022 Placeholder</text></g></svg>",
+  "whatsappTemplate": "Inquiry for {LOT}",
+  "whatsapp": {
+    "number": "15551234567",
+    "message": "Hi! I'm interested in this item from You Don't Need This. Can you provide more details?"
+  },
+  "site": {
+    "title": "You Don't Need This - Premium Tech Boutique",
+    "description": "Curated premium tech for those who appreciate the extraordinary. 100+ exclusive items that redefine luxury gadgetry.",
+    "theme": {
+      "primaryColor": "#8b5cf6",
+      "accentColor": "#facc15",
+      "backgroundColor": "#0b0b12"
+    }
+  },
+  "features": {
+    "autoplayVideo": true,
+    "cursorTrail": true,
+    "smoothScrolling": true,
+    "carouselAutoAdvance": true,
+    "carouselInterval": 4000
+  }
 }
