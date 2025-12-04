@@ -1,4 +1,6 @@
 import type { Product } from "@/types/product"
+import { promises as fs } from "fs"
+import path from "path"
 
 function parseCSVLine(line: string): string[] {
   const result: string[] = []
@@ -33,24 +35,15 @@ function parseCoolnessRating(rating: string): number {
 }
 
 export async function getProducts(): Promise<Product[]> {
-  let csvContent: string
+  let csvContent = ""
 
-  // Use absolute URL for server-side, relative for client
-  if (typeof window === "undefined") {
-    // Server-side during build - read file directly
-    try {
-      const fs = require("fs")
-      const path = require("path")
-      const csvPath = path.join(process.cwd(), "public", "products.csv")
-      csvContent = fs.readFileSync(csvPath, "utf-8")
-    } catch {
-      // Fallback for environments where fs isn't available
-      csvContent = ""
-    }
-  } else {
-    // Client-side: fetch from URL
-    const response = await fetch("/products.csv")
-    csvContent = await response.text()
+  try {
+    // Server-side: read from file system
+    const csvPath = path.join(process.cwd(), "public", "products.csv")
+    csvContent = await fs.readFile(csvPath, "utf-8")
+  } catch (error) {
+    console.error("Failed to read products.csv:", error)
+    return []
   }
 
   if (!csvContent) return []
@@ -94,18 +87,11 @@ export async function getProducts(): Promise<Product[]> {
 }
 
 export async function getSiteConfig() {
-  if (typeof window === "undefined") {
-    try {
-      const fs = require("fs")
-      const path = require("path")
-      const configPath = path.join(process.cwd(), "public", "site_config.json")
-      const content = fs.readFileSync(configPath, "utf-8")
-      return JSON.parse(content)
-    } catch {
-      return {}
-    }
-  } else {
-    const response = await fetch("/site_config.json")
-    return response.json()
+  try {
+    const configPath = path.join(process.cwd(), "public", "site_config.json")
+    const content = await fs.readFile(configPath, "utf-8")
+    return JSON.parse(content)
+  } catch {
+    return {}
   }
 }
