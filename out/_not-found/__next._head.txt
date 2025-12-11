@@ -2,6 +2,6 @@
 2:I[67331,["/_next/static/chunks/e0c1989ae1fc843c.js","/_next/static/chunks/04ebc548d88c8b67.js","/_next/static/chunks/0cfcd6de1fbafc53.js"],"ViewportBoundary"]
 4:I[67331,["/_next/static/chunks/e0c1989ae1fc843c.js","/_next/static/chunks/04ebc548d88c8b67.js","/_next/static/chunks/0cfcd6de1fbafc53.js"],"MetadataBoundary"]
 5:"$Sreact.suspense"
-0:{"buildId":"_-3Rir5X110wmU2vxBzzr","rsc":["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L2",null,{"children":"$@3"}],["$","div",null,{"hidden":true,"children":["$","$L4",null,{"children":["$","$5",null,{"name":"Next.Metadata","children":"$@6"}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"loading":null,"isPartial":false}
+0:{"buildId":"KOCghYZULX7ABJ0lkecb8","rsc":["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L2",null,{"children":"$@3"}],["$","div",null,{"hidden":true,"children":["$","$L4",null,{"children":["$","$5",null,{"name":"Next.Metadata","children":"$@6"}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"loading":null,"isPartial":false}
 3:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
 6:[["$","title","0",{"children":"You Don't Need This - Premium Tech Boutique"}],["$","meta","1",{"name":"description","content":"Curated premium tech for those who appreciate the extraordinary. 100+ exclusive items that redefine luxury gadgetry."}],["$","meta","2",{"name":"generator","content":"v0.app"}]]
