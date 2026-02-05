@@ -33,11 +33,19 @@ export function HeroSection({ featuredProducts }: HeroSectionProps) {
         loop
         muted
         playsInline
+        crossOrigin="anonymous"
         onLoadedData={() => setVideoLoaded(true)}
+        onError={(e) => console.log('[v0] Video load error:', e)}
         className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
           videoLoaded ? 'opacity-40' : 'opacity-0'
         }`}
       >
+        {/* Primary source using GitHub's media delivery */}
+        <source
+          src="https://github.com/NicholasDemeter/youdontneedthis-inventory/raw/main/Carousel_HERO/Hero_Media.mp4"
+          type="video/mp4"
+        />
+        {/* Fallback using raw.githubusercontent */}
         <source
           src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/Carousel_HERO/Hero_Media.mp4"
           type="video/mp4"
