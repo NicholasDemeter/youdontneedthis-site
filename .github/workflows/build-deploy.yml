@@ -27,7 +27,6 @@ jobs:
         with:
           node-version: '18'
 
-
       - name: Build static site
         run: node build.js
 
