@@ -69,29 +69,38 @@ function parseCoolnessRating(ratingString) {
 
 // Fetch all photos for a LOT from GitHub API
 // Returns every file in Photos/ that starts with LOT_### (any naming pattern)
-async function getPhotoUrls(folderName, lotNumber) {
-  if (!folderName || !lotNumber) {
+async function getPhotoUrls(lotNumber, allFolders) {
+  if (!lotNumber) return { thumbnail: PLACEHOLDER_IMAGE, photos: [] };
+
+  const prefix = `LOT_${lotNumber}`;
+  const headers = {
+    'Accept': 'application/vnd.github.v3+json',
+    'User-Agent': 'YDNT-Build-Script',
+    ...(process.env.GITHUB_TOKEN ? { 'Authorization': `token ${process.env.GITHUB_TOKEN}` } : {})
+  };
+
+  // Find folder in inventory repo that starts with LOT_### prefix — ignore Column B entirely
+  const lotFolder = allFolders.find(
+    item => item.type === 'dir' && item.name.toUpperCase().startsWith(prefix.toUpperCase() + '_')
+  );
+
+  if (!lotFolder) {
+    console.warn(`  ⚠ No folder found for ${prefix}`);
     return { thumbnail: PLACEHOLDER_IMAGE, photos: [] };
   }
 
-  const thumbnailUrl = `${INVENTORY_REPO_BASE}/${folderName}/LOT_${lotNumber}_THUMBNAIL.jpg`;
+  const folderName = lotFolder.name;
+  const thumbnailUrl = `${INVENTORY_REPO_BASE}/${folderName}/${prefix}_THUMBNAIL.jpg`;
 
   try {
-    const apiUrl = `${INVENTORY_API_BASE}/${encodeURIComponent(folderName)}/Photos`;
-    const response = await fetch(apiUrl, {
-      headers: { 'Accept': 'application/vnd.github.v3+json', 'User-Agent': 'YDNT-Build-Script', ...(process.env.GITHUB_TOKEN ? { 'Authorization': `token ${process.env.GITHUB_TOKEN}` } : {}) }
-    });
-
-    if (!response.ok) {
-      console.warn(`  ⚠ No Photos folder found for ${folderName} (${response.status})`);
+    const photosResponse = await fetch(`${INVENTORY_API_BASE}/${encodeURIComponent(folderName)}/Photos`, { headers });
+    if (!photosResponse.ok) {
+      console.warn(`  ⚠ No Photos folder in ${folderName}`);
       return { thumbnail: thumbnailUrl, photos: [] };
     }
 
-    const files = await response.json();
-    const prefix = `LOT_${lotNumber}`;
-
-    // Load every file that starts with LOT_### — any naming pattern, any extension
-    const photos = files
+    const photoFiles = await photosResponse.json();
+    const photos = photoFiles
       .filter(f => f.type === 'file' && f.name.toUpperCase().startsWith(prefix.toUpperCase()))
       .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }))
       .map(f => `${INVENTORY_REPO_BASE}/${folderName}/Photos/${f.name}`);
@@ -99,7 +108,7 @@ async function getPhotoUrls(folderName, lotNumber) {
     return { thumbnail: thumbnailUrl, photos };
 
   } catch (err) {
-    console.warn(`  ⚠ Failed to fetch photos for ${folderName}: ${err.message}`);
+    console.warn(`  ⚠ Failed to fetch photos for ${prefix}: ${err.message}`);
     return { thumbnail: thumbnailUrl, photos: [] };
   }
 }
@@ -837,11 +846,25 @@ async function build() {
     console.log(`✓ Parsed ${products.length} products from CSV`);
     console.log('Fetching photo listings from GitHub API...');
 
-    // Fetch actual photo filenames from GitHub API for each LOT
+    // Fetch inventory repo root folder list ONCE
+    const headers = {
+      'Accept': 'application/vnd.github.v3+json',
+      'User-Agent': 'YDNT-Build-Script',
+      ...(process.env.GITHUB_TOKEN ? { 'Authorization': `token ${process.env.GITHUB_TOKEN}` } : {})
+    };
+    const rootResponse = await fetch(INVENTORY_API_BASE, { headers });
+    if (!rootResponse.ok) {
+      console.error(`Failed to fetch inventory repo root: ${rootResponse.status}`);
+      process.exit(1);
+    }
+    const allFolders = await rootResponse.json();
+    console.log(`✓ Found ${allFolders.filter(f => f.type === 'dir').length} folders in inventory repo`);
+
+    // Fetch photos for each LOT using prefix matching — Column B is ignored
     for (const product of products) {
-      if (!product.LOT || !product.FOLDER_NAME) continue;
+      if (!product.LOT) continue;
       const lotNumber = extractLotNumber(product.LOT);
-      const result = await getPhotoUrls(product.FOLDER_NAME, lotNumber);
+      const result = await getPhotoUrls(lotNumber, allFolders);
       product._thumbnail = result.thumbnail;
       product._photos = result.photos;
       process.stdout.write('.');
