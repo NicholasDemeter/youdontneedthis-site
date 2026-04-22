@@ -90,7 +90,20 @@ async function getPhotoUrls(lotNumber, allFolders) {
   }
 
   const folderName = lotFolder.name;
-  const thumbnailUrl = `${INVENTORY_REPO_BASE}/${folderName}/${prefix}_THUMBNAIL.jpg`;
+  // Discover thumbnail filename from API — handles .jpg, .JPG, any case variation
+  let thumbnailUrl = PLACEHOLDER_IMAGE;
+  const folderResponse = await fetch(`${INVENTORY_API_BASE}/${encodeURIComponent(folderName)}`, { headers });
+  if (folderResponse.ok) {
+    const folderFiles = await folderResponse.json();
+    const thumbFile = folderFiles.find(f =>
+      f.type === 'file' && f.name.toUpperCase().includes('THUMBNAIL')
+    );
+    if (thumbFile) {
+      thumbnailUrl = `${INVENTORY_REPO_BASE}/${folderName}/${thumbFile.name}`;
+    } else {
+      console.warn(`  ⚠ No thumbnail found in ${folderName}`);
+    }
+  }
 
   try {
     const photosResponse = await fetch(`${INVENTORY_API_BASE}/${encodeURIComponent(folderName)}/Photos`, { headers });
