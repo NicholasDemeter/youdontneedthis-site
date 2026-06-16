@@ -9,10 +9,39 @@ const CSV_PATH = path.join(__dirname, 'products.csv');
 const DIST_DIR = path.join(__dirname, 'dist');
 const OUTPUT_PATH = path.join(DIST_DIR, 'index.html');
 const INVENTORY_REPO_BASE = 'https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main';
-const INVENTORY_API_BASE = 'https://api.github.com/repos/NicholasDemeter/youdontneedthis-inventory/contents';
+const LOCAL_INVENTORY_PATH = path.resolve(__dirname, '..', 'youdontneedthis-inventory');
 const HERO_VIDEO_URL = `${INVENTORY_REPO_BASE}/Carousel_HERO/Hero_Media.mp4`;
 const WHATSAPP_NUMBER = '256780923638';
 const PLACEHOLDER_IMAGE = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E';
+
+const CATEGORY_GROUPS = {
+  'Computers, Tablets, Projectors': 'Computers | Monitors | Office | Peripherals',
+  'Monitors and Stands': 'Computers | Monitors | Office | Peripherals',
+  'Peripherals': 'Computers | Monitors | Office | Peripherals',
+  'Photography/Videography': 'Photography | Videography | Related',
+  'Studio Gear': 'Photography | Videography | Related',
+  'Lighting': 'Photography | Videography | Related',
+  'Hi-fidelity Audio and Video': 'Audiophile | Hi-Fidelity | Sound',
+  'Motorcycles and More': 'Motorcycle | Camping | Outdoor',
+  'Camping/Adventure': 'Motorcycle | Camping | Outdoor',
+  'Security': 'Security | Data | Surveillance',
+  'State-of-the-Art': 'State-of-the-Art',
+  'state-of-the-Art': 'State-of-the-Art'
+};
+
+const DROPDOWN_CATEGORIES = [
+  'Computers | Monitors | Office | Peripherals',
+  'Photography | Videography | Related',
+  'State-of-the-Art',
+  'Motorcycle | Camping | Outdoor',
+  'Audiophile | Hi-Fidelity | Sound',
+  'Security | Data | Surveillance',
+  'Jewelery | Bags | Leather'
+];
+
+function mapCategoryGroup(category) {
+  return CATEGORY_GROUPS[category] || '';
+}
 
 // Parse CSV file
 function parseCSV(csvContent) {
@@ -67,63 +96,55 @@ function parseCoolnessRating(ratingString) {
   return match ? Math.min(Math.max(parseInt(match[0]), 0), 10) : 0;
 }
 
-// Fetch all photos for a LOT from GitHub API
-// Returns every file in Photos/ that starts with LOT_### (any naming pattern)
-async function getPhotoUrls(lotNumber, allFolders) {
-  if (!lotNumber) return { thumbnail: PLACEHOLDER_IMAGE, photos: [] };
+// Fetch all photos for a LOT from the local inventory folder and build raw GitHub URLs
+function getPhotoUrls(lotNumber, folderName) {
+  if (!lotNumber && !folderName) return { thumbnail: PLACEHOLDER_IMAGE, photos: [] };
 
-  const prefix = `LOT_${lotNumber}`;
-  const headers = {
-    'Accept': 'application/vnd.github.v3+json',
-    'User-Agent': 'YDNT-Build-Script',
-    ...(process.env.GITHUB_TOKEN ? { 'Authorization': `token ${process.env.GITHUB_TOKEN}` } : {})
-  };
+  const localExists = fs.existsSync(LOCAL_INVENTORY_PATH) && fs.statSync(LOCAL_INVENTORY_PATH).isDirectory();
+  let lotFolderName = null;
 
-  // Find folder in inventory repo that starts with LOT_### prefix — ignore Column B entirely
-  const lotFolder = allFolders.find(
-    item => item.type === 'dir' && item.name.toUpperCase().startsWith(prefix.toUpperCase() + '_')
-  );
+  if (folderName) {
+    const candidatePath = path.join(LOCAL_INVENTORY_PATH, folderName);
+    if (localExists && fs.existsSync(candidatePath) && fs.statSync(candidatePath).isDirectory()) {
+      lotFolderName = folderName;
+    }
+  }
 
-  if (!lotFolder) {
-    console.warn(`  ⚠ No folder found for ${prefix}`);
+  if (!lotFolderName && lotNumber && localExists) {
+    const entries = fs.readdirSync(LOCAL_INVENTORY_PATH, { withFileTypes: true });
+    const match = entries.find(entry =>
+      entry.isDirectory() && entry.name.toUpperCase().startsWith(`LOT_${lotNumber}_`.toUpperCase())
+    );
+    if (match) lotFolderName = match.name;
+  }
+
+  if (!lotFolderName) {
+    const missingRef = folderName || `LOT_${lotNumber}`;
+    console.warn(`  ⚠ No local inventory folder found for ${missingRef}`);
     return { thumbnail: PLACEHOLDER_IMAGE, photos: [] };
   }
 
-  const folderName = lotFolder.name;
-  // Discover thumbnail filename from API — handles .jpg, .JPG, any case variation
+  const folderPath = path.join(LOCAL_INVENTORY_PATH, lotFolderName);
   let thumbnailUrl = PLACEHOLDER_IMAGE;
-  const folderResponse = await fetch(`${INVENTORY_API_BASE}/${encodeURIComponent(folderName)}`, { headers });
-  if (folderResponse.ok) {
-    const folderFiles = await folderResponse.json();
-    const thumbFile = folderFiles.find(f =>
-      f.type === 'file' && f.name.toUpperCase().includes('THUMBNAIL')
-    );
-    if (thumbFile) {
-      thumbnailUrl = `${INVENTORY_REPO_BASE}/${folderName}/${thumbFile.name}`;
-    } else {
-      console.warn(`  ⚠ No thumbnail found in ${folderName}`);
-    }
+
+  const folderEntries = fs.existsSync(folderPath)
+    ? fs.readdirSync(folderPath)
+    : [];
+
+  const thumbFile = folderEntries.find(name => name.toUpperCase().includes('THUMBNAIL'));
+  if (thumbFile) {
+    thumbnailUrl = `${INVENTORY_REPO_BASE}/${encodeURIComponent(lotFolderName)}/${encodeURIComponent(thumbFile)}`;
   }
 
-  try {
-    const photosResponse = await fetch(`${INVENTORY_API_BASE}/${encodeURIComponent(folderName)}/Photos`, { headers });
-    if (!photosResponse.ok) {
-      console.warn(`  ⚠ No Photos folder in ${folderName}`);
-      return { thumbnail: thumbnailUrl, photos: [] };
-    }
+  const photosDir = path.join(folderPath, 'Photos');
+  const photos = (fs.existsSync(photosDir) && fs.statSync(photosDir).isDirectory())
+    ? fs.readdirSync(photosDir)
+        .filter(name => /\.(jpe?g|png|gif|webp)$/i.test(name))
+        .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
+        .map(name => `${INVENTORY_REPO_BASE}/${encodeURIComponent(lotFolderName)}/Photos/${encodeURIComponent(name)}`)
+    : [];
 
-    const photoFiles = await photosResponse.json();
-    const photos = photoFiles
-      .filter(f => f.type === 'file' && f.name.toUpperCase().startsWith(prefix.toUpperCase()))
-      .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }))
-      .map(f => `${INVENTORY_REPO_BASE}/${folderName}/Photos/${f.name}`);
-
-    return { thumbnail: thumbnailUrl, photos };
-
-  } catch (err) {
-    console.warn(`  ⚠ Failed to fetch photos for ${prefix}: ${err.message}`);
-    return { thumbnail: thumbnailUrl, photos: [] };
-  }
+  return { thumbnail: thumbnailUrl, photos };
 }
 
 // Format price for display
@@ -145,7 +166,7 @@ function generateHTML(products) {
       return coolnessB - coolnessA;
     });
 
-  // Generate product data JSON (photos already resolved via API)
+  // Generate product data JSON (photos already resolved from local inventory folder)
   const productData = sorted.map(p => {
     const lotNumber = extractLotNumber(p.LOT);
     const coolness = parseCoolnessRating(p.COOLNESS_RATING);
@@ -160,7 +181,8 @@ function generateHTML(products) {
       description: p.DESCRIPTION || '',
       specs: p.SPECIFICATIONS || '',
       price: formatPrice(p.PRICE),
-      category: p.CATEGORY || '',
+      category: mapCategoryGroup(p.CATEGORY || ''),
+      rawCategory: p.CATEGORY || '',
       thumbnail: p._thumbnail || PLACEHOLDER_IMAGE,
       photos: p._photos || [],
       referenceUrl: p['PRICE ESTIMATE HYPERLINKS'] || ''
@@ -205,7 +227,6 @@ function generateHTML(products) {
           <p class="lot-tagline">${product.tagline}</p>
           <div class="lot-footer">
             <span class="lot-price-badge">${product.price}</span>
-            <span class="lot-coolness" title="Coolness Rating: ${product.coolness}/10">${coolnessStars}</span>
           </div>
         </div>
       </div>
@@ -215,6 +236,7 @@ function generateHTML(products) {
 
   // Generate product data script
   const productsScript = `window.PRODUCTS = ${JSON.stringify(productData, null, 2)};`;
+  const dropdownCategoriesScript = `window.DROPDOWN_CATEGORIES = ${JSON.stringify(DROPDOWN_CATEGORIES, null, 2)};`;
 
   const html = `<!DOCTYPE html>
 <html lang="en">
@@ -548,21 +570,26 @@ function generateHTML(products) {
 
     .lot-footer {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
+      gap: 0.75rem;
+      padding-right: 0.5rem;
     }
 
     .lot-price-badge {
       background: #222;
       color: #FFD700;
-      padding: 0.3rem 0.7rem;
+      padding: 0.4rem 0.9rem;
       border-radius: 20px;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       font-weight: 600;
       border: 1px solid #333;
+      margin-left: auto;
     }
 
-    .lot-coolness { font-size: 0.8rem; color: #ffd700; }
+    .lot-coolness {
+      display: none;
+    }
 
     /* Expanded modal */
     .lot-expanded {
@@ -769,13 +796,14 @@ function generateHTML(products) {
   </main>
 
   <script>
+    ${dropdownCategoriesScript}
     ${productsScript}
 
     let currentCategory = null;
 
     // Initialize category dropdown
     (function() {
-      const categories = [...new Set(window.PRODUCTS.map(p => p.category).filter(c => c))].sort();
+      const categories = DROPDOWN_CATEGORIES;
       const dropdownContent = document.getElementById('categoryDropdown');
       
       categories.forEach(cat => {
@@ -1000,31 +1028,19 @@ async function build() {
     }
 
     console.log(`✓ Parsed ${products.length} products from CSV`);
-    console.log('Fetching photo listings from GitHub API...');
+  const localInventoryExists = fs.existsSync(LOCAL_INVENTORY_PATH) && fs.statSync(LOCAL_INVENTORY_PATH).isDirectory();
+  if (!localInventoryExists) {
+    console.warn(`Warning: Local inventory folder not found at ${LOCAL_INVENTORY_PATH}. Photo discovery will fall back to placeholders.`);
+  }
 
-    // Fetch inventory repo root folder list ONCE
-    const headers = {
-      'Accept': 'application/vnd.github.v3+json',
-      'User-Agent': 'YDNT-Build-Script',
-      ...(process.env.GITHUB_TOKEN ? { 'Authorization': `token ${process.env.GITHUB_TOKEN}` } : {})
-    };
-    const rootResponse = await fetch(INVENTORY_API_BASE, { headers });
-    if (!rootResponse.ok) {
-      console.error(`Failed to fetch inventory repo root: ${rootResponse.status}`);
-      process.exit(1);
-    }
-    const allFolders = await rootResponse.json();
-    console.log(`✓ Found ${allFolders.filter(f => f.type === 'dir').length} folders in inventory repo`);
-
-    // Fetch photos for each LOT using prefix matching — Column B is ignored
-    for (const product of products) {
-      if (!product.LOT) continue;
-      const lotNumber = extractLotNumber(product.LOT);
-      const result = await getPhotoUrls(lotNumber, allFolders);
-      product._thumbnail = result.thumbnail;
-      product._photos = result.photos;
-      process.stdout.write('.');
-    }
+  for (const product of products) {
+    if (!product.LOT && !product.FOLDER_NAME) continue;
+    const lotNumber = extractLotNumber(product.LOT);
+    const result = getPhotoUrls(lotNumber, product.FOLDER_NAME);
+    product._thumbnail = result.thumbnail;
+    product._photos = result.photos;
+    process.stdout.write('.');
+  }
 
     console.log('\n✓ Photo listings fetched');
 
