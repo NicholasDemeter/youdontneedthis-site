@@ -36,7 +36,8 @@ const DROPDOWN_CATEGORIES = [
   'Motorcycle | Camping | Outdoor',
   'Audiophile | Hi-Fidelity | Sound',
   'Security | Data | Surveillance',
-  'Jewelery | Bags | Leather'
+  'Jewelery | Bags | Leather',
+  'Studio | Party | Music'
 ];
 
 function mapCategoryGroup(category) {
