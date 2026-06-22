@@ -66,6 +66,16 @@ NOTE: This counts SVG placeholder definition strings in JS, not just broken imag
 A count of 2-5 is normal (LOT_023, LOT_064 have no inventory folders).
 A count of 100+ means GitHub Actions rebuilt without local inventory access.
 
+**FALSE SIGNAL WARNING (confirmed June 22, 2026):** The "No Image Available" grep above
+counts a string embedded once per product in the page's JS data — it does NOT count
+rendered placeholders. A high number (110+) here does NOT necessarily mean images are
+broken. The correct diagnostic for actual rendered placeholders is:
+```bash
+curl -s https://youdontneedthis.us | grep -o 'src="data:image' | wc -l
+```
+Expected real placeholder count: 2-5 (matches LOT_023, LOT_064 exceptions).
+Always confirm with this command before concluding images are broken.
+
 ## STEP 7 — VISUAL VERIFICATION (last step, not first)
 Only after steps 1-6 are confirmed, open browser:
 - Hard refresh: Cmd+Shift+R
