@@ -14,35 +14,18 @@ const HERO_VIDEO_URL = `${INVENTORY_REPO_BASE}/Carousel_HERO/Hero_Media.mp4`;
 const WHATSAPP_NUMBER = '256780923638';
 const PLACEHOLDER_IMAGE = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E';
 
-const CATEGORY_GROUPS = {
-  'Computers, Tablets, Projectors': 'Computers | Monitors | Office | Peripherals',
-  'Monitors and Stands': 'Computers | Monitors | Office | Peripherals',
-  'Peripherals': 'Computers | Monitors | Office | Peripherals',
-  'Photography/Videography': 'Photography | Videography | Related',
-  'Studio Gear': 'Photography | Videography | Related',
-  'Lighting': 'Photography | Videography | Related',
-  'Hi-fidelity Audio and Video': 'Audiophile | Hi-Fidelity | Sound',
-  'Motorcycles and More': 'Motorcycle | Camping | Outdoor',
-  'Camping/Adventure': 'Motorcycle | Camping | Outdoor',
-  'Security': 'Security | Data | Surveillance',
-  'State-of-the-Art': 'State-of-the-Art',
-  'state-of-the-Art': 'State-of-the-Art'
-};
-
+// NEW: Uganda-optimized category structure
+// Categories now come DIRECTLY from CSV (Column I) - no mapping needed
 const DROPDOWN_CATEGORIES = [
-  'Computers | Monitors | Office | Peripherals',
-  'Photography | Videography | Related',
-  'State-of-the-Art',
-  'Motorcycle | Camping | Outdoor',
-  'Audiophile | Hi-Fidelity | Sound',
-  'Security | Data | Surveillance',
-  'Jewelery | Bags | Leather',
-  'Studio | Party | Music'
+  'Stuff You Want Most 🔥',
+  'The BEST Stuff',
+  'Gadget Stuff',
+  'Outdoor Stuff',
+  'Fashion Stuff',
+  'Combo Deals 🎁',
+  'Big Stuff',
+  'Stuff You Need'
 ];
-
-function mapCategoryGroup(category) {
-  return CATEGORY_GROUPS[category] || '';
-}
 
 // Parse CSV file
 function parseCSV(csvContent) {
@@ -156,6 +139,80 @@ function formatPrice(price) {
   return price;
 }
 
+// Generate SEO tags for search functionality
+function generateSEOTags(product) {
+  const tags = [];
+  const name = (product.name || '').toLowerCase();
+  const desc = (product.description || '').toLowerCase();
+  const lot = product.lot || '';
+  
+  // Laptops & Tablets
+  if (name.includes('surface') || name.includes('laptop') || name.includes('chromebook') || 
+      name.includes('tablet') || name.includes('pixelbook') || 
+      lot.match(/LOT_00[126]|LOT_066|LOT_113|LOT_129/)) {
+    tags.push('laptop', 'tablet', 'portable computer');
+  }
+  
+  // Mini PCs
+  if (name.includes('mini') || name.includes('minisforum') || name.includes('khadas') || 
+      name.includes('mac mini') || lot.match(/LOT_003|LOT_065|LOT_111|LOT_120/)) {
+    tags.push('mini pc', 'desktop', 'computer');
+  }
+  
+  // Monitors
+  if (name.includes('monitor') || name.includes('display') || name.includes('screen') ||
+      lot.match(/LOT_00[56]|LOT_011|LOT_045|LOT_047|LOT_070|LOT_078|LOT_117/)) {
+    tags.push('monitor', 'portable monitor', 'screen', 'display');
+  }
+  
+  // Phone Accessories
+  if (name.includes('moment') || name.includes('shiftcam') || name.includes('gimbal') ||
+      name.includes('phone') || name.includes('mobile') || 
+      lot.match(/LOT_004|LOT_01[79]|LOT_020|LOT_044|LOT_053|LOT_055|LOT_067|LOT_086|LOT_088|LOT_10[1-9]|LOT_123|LOT_124/)) {
+    tags.push('phone accessories', 'mobile accessories');
+    if (name.includes('lens')) tags.push('phone camera lens', 'mobile photography');
+    if (name.includes('gimbal')) tags.push('gimbal', 'stabilizer');
+  }
+  
+  // Audio
+  if (name.includes('speaker') || name.includes('soundbar') || name.includes('audio') ||
+      name.includes('devialet') || name.includes('bose') || name.includes('headphone') ||
+      lot.match(/LOT_02[36]|LOT_031|LOT_071|LOT_073|LOT_074|LOT_08[0-5]|LOT_097|LOT_127|LOT_128|LOT_130|LOT_131/)) {
+    tags.push('audio', 'speaker');
+    if (name.includes('soundbar')) tags.push('soundbar');
+    if (name.includes('headphone') || name.includes('earbud')) tags.push('headphones', 'earbuds');
+  }
+  
+  // Motorcycle / Boda Boda
+  if (name.includes('helmet') || name.includes('motorcycle') || name.includes('sena') ||
+      lot.match(/LOT_018|LOT_02[45]|LOT_091|LOT_09[89]|LOT_100|LOT_118/)) {
+    tags.push('motorcycle', 'boda boda', 'helmet');
+  }
+  
+  // Cameras
+  if (name.includes('camera') || name.includes('gopro') || name.includes('webcam') ||
+      lot.match(/LOT_021|LOT_049|LOT_052|LOT_108|LOT_116|LOT_132|LOT_133/)) {
+    tags.push('camera');
+  }
+  
+  // Security
+  if (name.includes('safe') || name.includes('security') || name.includes('gps') ||
+      lot.match(/LOT_036|LOT_037|LOT_050|LOT_062|LOT_068|LOT_094/)) {
+    tags.push('security', 'safe');
+  }
+  
+  // Premium Tech
+  if (name.includes('xreal') || name.includes('ar glass') || name.includes('plaud') ||
+      name.includes('apple watch ultra') || 
+      lot.match(/LOT_007|LOT_015|LOT_028|LOT_030|LOT_040|LOT_041|LOT_042|LOT_043|LOT_064|LOT_069|LOT_077|LOT_132/)) {
+    tags.push('premium tech', 'smart device');
+    if (name.includes('ar') || name.includes('xreal')) tags.push('ar glasses');
+    if (name.includes('watch')) tags.push('smart watch');
+  }
+  
+  return [...new Set(tags)];
+}
+
 // Generate HTML
 function generateHTML(products) {
   // Sort by coolness rating (highest first)
@@ -171,8 +228,8 @@ function generateHTML(products) {
   const productData = sorted.map(p => {
     const lotNumber = extractLotNumber(p.LOT);
     const coolness = parseCoolnessRating(p.COOLNESS_RATING);
-
-    return {
+    
+    const productObj = {
       lot: p.LOT,
       folderName: p.FOLDER_NAME,
       lotNumber: lotNumber,
@@ -182,16 +239,28 @@ function generateHTML(products) {
       description: p.DESCRIPTION || '',
       specs: p.SPECIFICATIONS || '',
       price: formatPrice(p.PRICE),
-      category: mapCategoryGroup(p.CATEGORY || ''),
-      rawCategory: p.CATEGORY || '',
+      category: p.CATEGORY || '',  // DIRECT from CSV (Column I) - new categories already applied
+      subcategory: p.SUBCATEGORY || '',  // NEW (Column K)
       thumbnail: p._thumbnail || PLACEHOLDER_IMAGE,
       photos: p._photos || [],
       referenceUrl: p['PRICE ESTIMATE HYPERLINKS'] || ''
     };
+    
+    productObj.seoTags = generateSEOTags(productObj);
+    
+    return productObj;
   });
 
-  // Filter hot items (coolness >= 6)
-  const hotItems = productData.filter(p => p.coolness >= 6);
+  // Filter featured items (coolness === 6)
+  const featuredItems = productData.filter(p => p.coolness === 6);
+  
+  // Sort remaining items by coolness (5 → 4 → 3 → 2 → 1)
+  const sortedByLowerCoolness = productData
+    .filter(p => p.coolness < 6)
+    .sort((a, b) => b.coolness - a.coolness);
+  
+  // Final display order: Featured first, then sorted rest
+  const displayOrder = [...featuredItems, ...sortedByLowerCoolness];
 
   // Generate coolness star HTML
   function generateCoolnessStars(rating) {
@@ -200,12 +269,12 @@ function generateHTML(products) {
     return '★'.repeat(filled) + '☆'.repeat(empty);
   }
 
-  // Generate hot items carousel HTML
-  const hotItemsHTML = hotItems.length > 0 ? `
-    <section class="hot-items-section">
-      <h2 class="hot-items-title">🔥 Hot Items</h2>
+  // Generate Featured Items carousel HTML
+  const featuredItemsHTML = featuredItems.length > 0 ? `
+    <section class="hot-items-section" id="hot-items">
+      <h2 class="hot-items-title">⭐ Featured Products</h2>
       <div class="hot-items-carousel">
-        ${hotItems.map((product, index) => `
+        ${featuredItems.map((product) => `
           <div class="hot-item" data-lot-index="${productData.indexOf(product)}" onclick="openExpanded(${productData.indexOf(product)})">
             <img src="${product.thumbnail}" alt="${product.name}" class="hot-item-thumbnail" onerror="this.src='${PLACEHOLDER_IMAGE}'">
             <div class="hot-item-name">${product.name}</div>
@@ -216,10 +285,12 @@ function generateHTML(products) {
   ` : '';
 
   // Generate product cards HTML
-  const cardsHTML = productData.map((product, index) => {
+  // Generate product cards HTML using displayOrder (Featured 6★ first, then 5→4→3→2→1)
+  const cardsHTML = displayOrder.map((product) => {
+    const originalIndex = productData.indexOf(product);  // Preserve original index for openExpanded()
     const coolnessStars = generateCoolnessStars(product.coolness);
     return `
-    <div class="lot-card" data-lot-index="${index}" onclick="openExpanded(${index})">
+    <div class="lot-card" data-lot-index="${originalIndex}" onclick="openExpanded(${originalIndex})">
       <div class="lot-card-content">
         <img src="${product.thumbnail}" alt="${product.name}" class="lot-thumbnail" onerror="this.src='${PLACEHOLDER_IMAGE}'">
         <div class="lot-info">
@@ -437,6 +508,71 @@ function generateHTML(products) {
     .category-reset-btn:hover {
       background: #2a2a2a;
       color: #ddd;
+    }
+
+    /* Search Bar */
+    .search-container {
+      position: relative;
+      margin-bottom: 1rem;
+      width: 100%;
+      max-width: 500px;
+    }
+    
+    .search-input {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+      border: 2px solid #ffcc00;
+      border-radius: 50px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+    
+    .search-input:focus {
+      outline: none;
+      border-color: #bb86fc;
+      box-shadow: 0 0 20px rgba(187, 134, 252, 0.5);
+    }
+    
+    .search-input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+    
+    .search-results {
+      position: absolute;
+      top: 110%;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(15px);
+      border-radius: 15px;
+      max-height: 400px;
+      overflow-y: auto;
+      z-index: 1000;
+      display: none;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+    }
+    
+    .search-results.active {
+      display: block;
+    }
+    
+    .search-result-item {
+      padding: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    
+    .search-result-item:hover {
+      background: rgba(255, 204, 0, 0.1);
+    }
+    
+    .search-tag-match {
+      color: #ffcc00;
+      font-weight: bold;
     }
 
     /* Hot Items */
@@ -727,6 +863,30 @@ function generateHTML(products) {
       word-break: break-word;
     }
 
+    .lot-action-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .lot-price-button {
+      background: #FFD700;
+      color: #000;
+      border: none;
+      padding: 0.9rem 1.5rem;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+      transition: background 0.2s;
+    }
+
+    .lot-price-button:hover { background: #FFC700; }
+
     .lot-contact-button {
       background: #25d366;
       color: #000;
@@ -739,7 +899,6 @@ function generateHTML(products) {
       text-decoration: none;
       display: block;
       text-align: center;
-      margin-top: 0.5rem;
       transition: background 0.2s;
     }
 
@@ -774,6 +933,16 @@ function generateHTML(products) {
       <p class="hero-subtitle">Curated premium tech for those who appreciate the extraordinary.</p>
       <p class="hero-tagline">100+ exclusive items that redefine luxury gadgetry.</p>
       <div class="hero-buttons">
+        <div class="search-container">
+          <input 
+            type="text" 
+            id="searchInput" 
+            class="search-input" 
+            placeholder="🔍 Search: laptop, speaker, helmet..."
+            oninput="handleSearch(this.value)"
+          />
+          <div class="search-results" id="searchResults"></div>
+        </div>
         <div class="category-dropdown-container">
           <button class="category-dropdown-btn" id="categoryBtn" onclick="toggleCategoryDropdown()">⚡ Explore Collection <span>▼</span></button>
           <div class="category-dropdown-content" id="categoryDropdown"></div>
@@ -785,7 +954,7 @@ function generateHTML(products) {
 
   <!-- Hot Items Carousel -->
   <div id="hot-items">
-    ${hotItemsHTML}
+    ${featuredItemsHTML}
   </div>
 
   <!-- Main Collection -->
@@ -871,6 +1040,110 @@ function generateHTML(products) {
         item.classList.toggle('active', item.textContent === category);
       });
     }
+
+    // Search functionality
+    function handleSearch(query) {
+      const searchResults = document.getElementById('searchResults');
+      const input = query.toLowerCase().trim();
+      
+      if (input.length < 2) {
+        searchResults.classList.remove('active');
+        return;
+      }
+      
+      const matches = window.PRODUCTS.filter(p => {
+        const name = p.name.toLowerCase();
+        const desc = p.description.toLowerCase();
+        const tags = p.seoTags || [];
+        
+        return name.includes(input) || 
+               desc.includes(input) || 
+               tags.some(tag => tag.includes(input));
+      });
+      
+      if (matches.length === 0) {
+        searchResults.innerHTML = '<div class="search-result-item">No items found</div>';
+        searchResults.classList.add('active');
+        return;
+      }
+      
+      // Group by matching tags
+      const tagGroups = {};
+      matches.forEach(p => {
+        const matchingTags = (p.seoTags || []).filter(tag => tag.includes(input));
+        matchingTags.forEach(tag => {
+          if (!tagGroups[tag]) tagGroups[tag] = [];
+          tagGroups[tag].push(p);
+        });
+      });
+      
+      let html = '';
+      
+      // Show tag groups
+      Object.keys(tagGroups).slice(0, 5).forEach(tag => {
+        const count = tagGroups[tag].length;
+        const escapedTag = tag.replace(/'/g, "\\\\'");
+        html += '<div class="search-result-item" onclick="filterByTag(\'' + escapedTag + '\')">';
+        html += '<span class="search-tag-match">' + tag + '</span> → ' + count + ' item' + (count > 1 ? 's' : '');
+        html += '</div>';
+      });
+      
+      // Show individual products
+      matches.slice(0, 5).forEach(p => {
+        const escapedLot = p.lot.replace(/'/g, "\\\\'");
+        html += '<div class="search-result-item" onclick="scrollToProduct(\'' + escapedLot + '\')">';
+        html += p.name + ' <span style="color: #ffcc00;">' + p.price + '</span>';
+        html += '</div>';
+      });
+      
+      searchResults.innerHTML = html;
+      searchResults.classList.add('active');
+    }
+    
+    function filterByTag(tag) {
+      const cards = document.querySelectorAll('.lot-card');
+      
+      cards.forEach(card => {
+        const indexStr = card.getAttribute('data-lot-index');
+        const index = parseInt(indexStr);
+        const product = window.PRODUCTS[index];
+        const tags = product.seoTags || [];
+        
+        if (tags.includes(tag)) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+      
+      document.getElementById('searchResults').classList.remove('active');
+      document.getElementById('searchInput').value = '';
+      document.getElementById('collection').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    function scrollToProduct(lotId) {
+      const cards = document.querySelectorAll('.lot-card');
+      cards.forEach(card => {
+        const indexStr = card.getAttribute('data-lot-index');
+        const index = parseInt(indexStr);
+        const product = window.PRODUCTS[index];
+        
+        if (product.lot === lotId) {
+          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+      
+      document.getElementById('searchResults').classList.remove('active');
+      document.getElementById('searchInput').value = '';
+    }
+    
+    // Close search on outside click
+    document.addEventListener('click', (e) => {
+      const searchContainer = document.querySelector('.search-container');
+      if (searchContainer && !searchContainer.contains(e.target)) {
+        document.getElementById('searchResults').classList.remove('active');
+      }
+    });
 
     // Particle animation
     (function() {
@@ -974,7 +1247,10 @@ function generateHTML(products) {
               </div>
               \${product.description ? \`<div class="lot-details-section"><h4>Description</h4><p>\${product.description}</p></div>\` : ''}
               \${product.specs ? \`<div class="lot-details-section"><h4>Specifications</h4><div class="lot-details-specs">\${product.specs}</div></div>\` : ''}
-              <a href="\${whatsappUrl}" target="_blank" class="lot-contact-button">💬 Contact via WhatsApp</a>
+              <div class="lot-action-buttons">
+                \${product.referenceUrl ? \`<a href="\${product.referenceUrl}" target="_blank" rel="noopener noreferrer" class="lot-price-button">💰 Check Current Price</a>\` : ''}
+                <a href="\${whatsappUrl}" target="_blank" class="lot-contact-button">💬 Contact via WhatsApp</a>
+              </div>
             </div>
           </div>
         </div>
