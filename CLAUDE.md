@@ -161,7 +161,7 @@ If any output is unexpected — stop and diagnose before proceeding.
 - Hero video from `Carousel_HERO/Hero_Media.mp4` in inventory repo
 - Hot items carousel: products with coolness rating ≥ 6
 - Category dropdown: 7 categories, filters by hiding/showing cards
-- Stars: hidden via CSS `display: none` — class exists in HTML but not visible
+- Stars: coolness rating is for internal sorting/Hot Items filtering only, never rendered to the UI. The card grid's `.lot-coolness` class was already unused dead CSS; the lot-detail modal used to render visible stars via `.lot-details-coolness` (gold color, not hidden) — that render call was removed from `build.js` directly so there's nothing to keep hidden via CSS anymore
 - Cards sorted by coolness rating (highest first)
 - WhatsApp contact: 256780923638
 - Modal gallery: supports both images and videos

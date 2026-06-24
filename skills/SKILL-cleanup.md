@@ -11,11 +11,11 @@
 
 ## FILE STANDARDS (non-negotiable)
 
-| File Type | Location | Naming | Max Size |
+| File Type | Location | Naming | Size Range |
 |-----------|----------|--------|----------|
-| Thumbnail | LOT root | LOT_###_THUMBNAIL.jpg | 200KB |
-| Photos | Photos/ subfolder | LOT_###_01.jpg, _02.jpg... | 400KB each |
-| Videos | Videos/ subfolder | LOT_###_VIDEO_01.mp4 | 10MB each |
+| Thumbnail | LOT root | LOT_###_THUMBNAIL.jpg | 100KB–200KB |
+| Photos | Photos/ subfolder | LOT_###_01.jpg, _02.jpg... | 300KB–400KB each |
+| Videos | Videos/ subfolder | LOT_###_VIDEO_01.mp4 | under 10MB each |
 
 Minimum: 3 photos per LOT
 All subfolders must exist even if empty (Photos/ and Videos/)
@@ -79,6 +79,8 @@ done
 ---
 
 ## STEP 4 — COMPRESS THUMBNAILS
+Target range: 100KB–200KB. Compress if over 200KB; flag (don't silently leave) if under 100KB —
+undersized thumbnails are also a compliance failure, not just a quality nice-to-have.
 ```bash
 cd /Users/nicholasdemeter/Documents/youdontneedthis-inventory
 for thumb in LOT_*/*THUMBNAIL*; do
@@ -86,11 +88,14 @@ for thumb in LOT_*/*THUMBNAIL*; do
   if [ "$size" -gt 200 ]; then
     echo "Compressing $thumb (${size}KB)"
     convert "$thumb" -resize 800x800\> -quality 80 "$thumb"
+  elif [ "$size" -lt 100 ]; then
+    echo "FLAG: $thumb is under 100KB (${size}KB) — re-derive from a higher-res original if available"
   fi
 done
 ```
 
 ## STEP 5 — COMPRESS PHOTOS
+Target range: 300KB–400KB. Compress if over 400KB; flag if under 300KB.
 ```bash
 cd /Users/nicholasdemeter/Documents/youdontneedthis-inventory
 for photosDir in LOT_*/Photos/; do
@@ -100,6 +105,8 @@ for photosDir in LOT_*/Photos/; do
     if [ "$size" -gt 400 ]; then
       echo "Compressing $img (${size}KB)"
       convert "$img" -resize 1200x1200\> -quality 82 "$img"
+    elif [ "$size" -lt 300 ]; then
+      echo "FLAG: $img is under 300KB (${size}KB) — re-derive from a higher-res original if available"
     fi
   done
 done
