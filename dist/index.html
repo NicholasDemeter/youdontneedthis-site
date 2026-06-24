@@ -4911,7 +4911,7 @@
 
     // Initialize category dropdown
     (function() {
-      const categories = DROPDOWN_CATEGORIES;
+      const categories = window.DROPDOWN_CATEGORIES;
       const dropdownContent = document.getElementById('categoryDropdown');
       
       categories.forEach(cat => {
@@ -5020,16 +5020,16 @@
       // Show tag groups
       Object.keys(tagGroups).slice(0, 5).forEach(tag => {
         const count = tagGroups[tag].length;
-        const escapedTag = tag.replace(/'/g, "\\'");
-        html += '<div class="search-result-item" onclick="filterByTag('' + escapedTag + '')">';
+        const escapedTag = tag.replace(/'/g, "\'");
+        html += '<div class="search-result-item" onclick="filterByTag(\'' + escapedTag + '\');">';
         html += '<span class="search-tag-match">' + tag + '</span> → ' + count + ' item' + (count > 1 ? 's' : '');
         html += '</div>';
       });
       
       // Show individual products
       matches.slice(0, 5).forEach(p => {
-        const escapedLot = p.lot.replace(/'/g, "\\'");
-        html += '<div class="search-result-item" onclick="scrollToProduct('' + escapedLot + '')">';
+        const escapedLot = p.lot.replace(/'/g, "\'");
+        html += '<div class="search-result-item" onclick="scrollToProduct(\'' + escapedLot + '\');">';
         html += p.name + ' <span style="color: #ffcc00;">' + p.price + '</span>';
         html += '</div>';
       });
