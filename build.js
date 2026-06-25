@@ -14,18 +14,8 @@ const HERO_VIDEO_URL = `${INVENTORY_REPO_BASE}/Carousel_HERO/Hero_Media.mp4`;
 const WHATSAPP_NUMBER = '256780923638';
 const PLACEHOLDER_IMAGE = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E';
 
-// NEW: Uganda-optimized category structure
-// Categories now come DIRECTLY from CSV (Column I) - no mapping needed
-const DROPDOWN_CATEGORIES = [
-  'Stuff You Want Most 🔥',
-  'The BEST Stuff',
-  'Gadget Stuff',
-  'Outdoor Stuff',
-  'Fashion Stuff',
-  'Combo Deals 🎁',
-  'Big Stuff',
-  'Stuff You Need'
-];
+// NEW: Categories are now DYNAMIC from CSV (no hardcoding)
+// DROPDOWN_CATEGORIES will be generated from products.csv Column I at build time
 
 // Parse CSV file
 function parseCSV(csvContent) {
@@ -251,6 +241,15 @@ function generateHTML(products) {
     return productObj;
   });
 
+  // Extract unique categories dynamically from CSV (Column I)
+  const DROPDOWN_CATEGORIES = [...new Set(
+    productData.map(p => p.category).filter(c => c && c.trim())
+  )].sort();
+  
+  // Filter items by subcategory for special sections
+  const portableWorkstations = productData.filter(p => p.subcategory === 'Portable Workstations');
+  const coolestGadgets = productData.filter(p => p.subcategory === 'Coolest Gadgets');
+  
   // Filter featured items (coolness === 6)
   const featuredItems = productData.filter(p => p.coolness === 6);
   
@@ -269,10 +268,57 @@ function generateHTML(products) {
     return '★'.repeat(filled) + '☆'.repeat(empty);
   }
 
+  // Generate special section HTML
+  function generateSpecialSection(title, items, sectionId, emoji) {
+    if (items.length === 0) return '';
+    
+    return `
+    <section class="special-section" id="${sectionId}">
+      <h2 class="section-title">${emoji} ${title}</h2>
+      <div class="lots-grid">
+        ${items.map((product) => {
+          const originalIndex = productData.indexOf(product);
+          const coolnessStars = generateCoolnessStars(product.coolness);
+          return `
+            <div class="lot-card" data-lot-index="${originalIndex}" onclick="openExpanded(${originalIndex})">
+              <div class="lot-card-content">
+                <img src="${product.thumbnail}" alt="${product.name}" class="lot-thumbnail" onerror="this.src='${PLACEHOLDER_IMAGE}'">
+                <div class="lot-info">
+                  <div class="lot-number">${product.lot}</div>
+                  <h3 class="lot-name">${product.name}</h3>
+                  <p class="lot-tagline">${product.tagline}</p>
+                  <div class="lot-footer">
+                    <span class="lot-price-badge">${product.price}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('')}
+      </div>
+    </section>
+    `;
+  }
+
+  // Generate special sections
+  const portableWorkstationsHTML = generateSpecialSection(
+    'Mobile Work',
+    portableWorkstations,
+    'portable-workstations',
+    '💼'
+  );
+  
+  const coolestGadgetsHTML = generateSpecialSection(
+    'The Coolest Stuff You Don\'t Need',
+    coolestGadgets,
+    'coolest-gadgets',
+    '🔥'
+  );
+
   // Generate Featured Items carousel HTML
   const featuredItemsHTML = featuredItems.length > 0 ? `
-    <section class="hot-items-section" id="hot-items">
-      <h2 class="hot-items-title">⭐ Featured Products</h2>
+    <section class="hot-items-section" id="featured-stuff">
+      <h2 class="hot-items-title">⭐ Featured Stuff</h2>
       <div class="hot-items-carousel">
         ${featuredItems.map((product) => `
           <div class="hot-item" data-lot-index="${productData.indexOf(product)}" onclick="openExpanded(${productData.indexOf(product)})">
@@ -395,35 +441,123 @@ function generateHTML(products) {
 
     .hero-buttons {
       display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto 3rem;
+    }
+
+    /* Special Section Buttons */
+    .special-buttons {
+      display: flex;
       gap: 1rem;
-      justify-content: center;
       flex-wrap: wrap;
-      margin-bottom: 3rem;
+      justify-content: center;
+      width: 100%;
     }
 
-    .hero-btn-primary {
-      background: #7c3aed;
+    .special-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: #fff;
-      padding: 0.8rem 2rem;
-      border-radius: 6px;
-      text-decoration: none;
+      border: none;
+      padding: 1rem 1.8rem;
+      border-radius: 12px;
       font-weight: 600;
       font-size: 0.95rem;
-      transition: background 0.2s;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 14px rgba(102, 126, 234, 0.4),
+                  0 2px 6px rgba(0, 0, 0, 0.2),
+                  inset 0 -2px 8px rgba(0, 0, 0, 0.15);
+      position: relative;
+      overflow: hidden;
     }
-    .hero-btn-primary:hover { background: #6d28d9; }
 
-    .hero-btn-secondary {
-      background: #FFD700;
-      color: #000;
-      padding: 0.8rem 2rem;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: background 0.2s;
+    .special-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
     }
-    .hero-btn-secondary:hover { background: #f0c800; }
+
+    .special-btn:hover::before {
+      left: 100%;
+    }
+
+    .special-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5),
+                  0 3px 8px rgba(0, 0, 0, 0.3),
+                  inset 0 -3px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .special-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3),
+                  inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .special-btn .btn-icon {
+      font-size: 1.2rem;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    }
+
+    .special-btn .btn-text {
+      font-size: 0.95rem;
+      letter-spacing: 0.3px;
+    }
+
+    /* Search Wrapper */
+    .search-wrapper {
+      display: flex;
+      gap: 0.8rem;
+      width: 100%;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* Search Container */
+    .search-container {
+      position: relative;
+      flex: 1;
+      min-width: 280px;
+      max-width: 500px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 1rem 1.2rem;
+      font-size: 0.95rem;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      color: #fff;
+      outline: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3),
+                  inset 0 1px 2px rgba(255, 255, 255, 0.1);
+    }
+
+    .search-input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .search-input:focus {
+      border-color: rgba(102, 126, 234, 0.6);
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 6px 16px rgba(102, 126, 234, 0.3),
+                  inset 0 1px 3px rgba(255, 255, 255, 0.15);
+    }
 
     /* Category Dropdown */
     .category-dropdown-container {
@@ -432,31 +566,54 @@ function generateHTML(products) {
     }
 
     .category-dropdown-btn {
-      background: #7c3aed;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
       color: #fff;
-      padding: 0.8rem 2rem;
+      padding: 1rem 1.8rem;
       border: none;
-      border-radius: 6px;
+      border-radius: 12px;
       font-weight: 600;
       font-size: 0.95rem;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.6rem;
+      box-shadow: 0 4px 14px rgba(245, 87, 108, 0.4),
+                  0 2px 6px rgba(0, 0, 0, 0.2),
+                  inset 0 -2px 8px rgba(0, 0, 0, 0.15);
+      white-space: nowrap;
     }
 
     .category-dropdown-btn:hover {
-      background: #6d28d9;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(245, 87, 108, 0.5),
+                  0 3px 8px rgba(0, 0, 0, 0.3),
+                  inset 0 -3px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .category-dropdown-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba(245, 87, 108, 0.3),
+                  inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .dropdown-arrow {
+      font-size: 0.75rem;
+      transition: transform 0.3s;
+    }
+
+    .category-dropdown-btn:hover .dropdown-arrow {
+      transform: translateY(2px);
     }
 
     .category-dropdown-content {
       position: absolute;
       top: 100%;
       left: 0;
-      background: #1a1a1a;
-      border: 1px solid #333;
-      border-radius: 6px;
+      background: rgba(26, 26, 26, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
       min-width: 250px;
       max-height: 400px;
       overflow-y: auto;
@@ -464,6 +621,7 @@ function generateHTML(products) {
       margin-top: 0.5rem;
       display: none;
       flex-direction: column;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
     }
 
     .category-dropdown-content.active {
@@ -475,7 +633,7 @@ function generateHTML(products) {
       color: #e0e0e0;
       cursor: pointer;
       transition: background 0.2s;
-      border-bottom: 1px solid #222;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
       font-size: 0.9rem;
     }
 
@@ -484,12 +642,12 @@ function generateHTML(products) {
     }
 
     .category-item:hover {
-      background: #2a2a2a;
+      background: rgba(102, 126, 234, 0.2);
       color: #ffd700;
     }
 
     .category-item.active {
-      background: #7c3aed;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: #fff;
     }
 
@@ -636,6 +794,19 @@ function generateHTML(products) {
       max-width: 1400px;
       margin: 0 auto;
       padding: 2rem 1rem;
+    }
+
+    /* Special Sections */
+    .special-section {
+      padding: 3rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.02);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .special-section:first-of-type {
+      margin-top: 2rem;
     }
 
     .section-title {
@@ -906,13 +1077,26 @@ function generateHTML(products) {
 
     @media (max-width: 768px) {
       .hero-title { font-size: 3rem; }
-      .hero-buttons { flex-direction: column; }
+      .hero-buttons { flex-direction: column; gap: 1.2rem; }
+      .special-buttons { flex-direction: column; width: 100%; }
+      .special-btn { width: 100%; justify-content: center; }
+      .search-wrapper { flex-direction: column; width: 100%; }
+      .search-container { max-width: 100%; }
       .category-dropdown-btn { width: 100%; justify-content: center; }
-      .category-dropdown-content { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; max-width: 90%; min-width: auto; }
+      .category-dropdown-content { 
+        position: fixed; 
+        top: 50%; 
+        left: 50%; 
+        transform: translate(-50%, -50%); 
+        width: 90%; 
+        max-width: 90%; 
+        min-width: auto; 
+      }
       .lot-expanded-content { grid-template-columns: 1fr; padding: 1.5rem; }
       .lot-details-header { padding-top: 0; }
       .lots-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }
       .lot-thumbnail { height: 160px; }
+      .special-section { padding: 2rem 1rem; }
     }
   </style>
 </head>
@@ -933,27 +1117,52 @@ function generateHTML(products) {
       <p class="hero-subtitle">Curated premium tech for those who appreciate the extraordinary.</p>
       <p class="hero-tagline">100+ exclusive items that redefine luxury gadgetry.</p>
       <div class="hero-buttons">
-        <div class="search-container">
-          <input 
-            type="text" 
-            id="searchInput" 
-            class="search-input" 
-            placeholder="🔍 Search: laptop, speaker, helmet..."
-            oninput="handleSearch(this.value)"
-          />
-          <div class="search-results" id="searchResults"></div>
+        <!-- Three Special Section Buttons -->
+        <div class="special-buttons">
+          <button class="special-btn" onclick="scrollToSection('portable-workstations')">
+            <span class="btn-icon">💼</span>
+            <span class="btn-text">Mobile Work</span>
+          </button>
+          <button class="special-btn" onclick="scrollToSection('coolest-gadgets')">
+            <span class="btn-icon">🔥</span>
+            <span class="btn-text">Coolest Stuff</span>
+          </button>
+          <button class="special-btn" onclick="scrollToSection('featured-stuff')">
+            <span class="btn-icon">⭐</span>
+            <span class="btn-text">Featured</span>
+          </button>
         </div>
-        <div class="category-dropdown-container">
-          <button class="category-dropdown-btn" id="categoryBtn" onclick="toggleCategoryDropdown()">⚡ Explore Collection <span>▼</span></button>
-          <div class="category-dropdown-content" id="categoryDropdown"></div>
+        
+        <!-- Search Bar with Category Dropdown -->
+        <div class="search-wrapper">
+          <div class="search-container">
+            <input 
+              type="text" 
+              id="searchInput" 
+              class="search-input" 
+              placeholder="🔍 Search gadgets, laptops, cameras..."
+              oninput="handleSearch(this.value)"
+            />
+            <div class="search-results" id="searchResults"></div>
+          </div>
+          <div class="category-dropdown-container">
+            <button class="category-dropdown-btn" id="categoryBtn" onclick="toggleCategoryDropdown()">
+              <span>📦 Categories</span>
+              <span class="dropdown-arrow">▼</span>
+            </button>
+            <div class="category-dropdown-content" id="categoryDropdown"></div>
+          </div>
         </div>
-        <a href="#hot-items" class="hero-btn-secondary">Featured Items</a>
       </div>
     </div>
   </section>
 
+  <!-- Special Sections -->
+  ${portableWorkstationsHTML}
+  ${coolestGadgetsHTML}
+
   <!-- Hot Items Carousel -->
-  <div id="hot-items">
+  <div id="featured-stuff">
     ${featuredItemsHTML}
   </div>
 
@@ -1002,6 +1211,14 @@ function generateHTML(products) {
       };
       dropdownContent.appendChild(resetBtn);
     })();
+
+    // Smooth scroll to section
+    function scrollToSection(sectionId) {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
 
     function toggleCategoryDropdown() {
       const dropdown = document.getElementById('categoryDropdown');
