@@ -459,61 +459,31 @@ function generateHTML(products) {
     }
 
     .special-btn {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
       color: #fff;
-      border: none;
-      padding: 1rem 1.8rem;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 0.95rem;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 0.9rem 2rem;
+      border-radius: 14px;
+      font-weight: 500;
+      font-size: 1rem;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 4px 14px rgba(102, 126, 234, 0.4),
-                  0 2px 6px rgba(0, 0, 0, 0.2),
-                  inset 0 -2px 8px rgba(0, 0, 0, 0.15);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .special-btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: left 0.5s;
-    }
-
-    .special-btn:hover::before {
-      left: 100%;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+      letter-spacing: 0.3px;
     }
 
     .special-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5),
-                  0 3px 8px rgba(0, 0, 0, 0.3),
-                  inset 0 -3px 10px rgba(0, 0, 0, 0.2);
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.25);
     }
 
     .special-btn:active {
-      transform: translateY(0);
-      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3),
-                  inset 0 2px 4px rgba(0, 0, 0, 0.3);
-    }
-
-    .special-btn .btn-icon {
-      font-size: 1.2rem;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-    }
-
-    .special-btn .btn-text {
-      font-size: 0.95rem;
-      letter-spacing: 0.3px;
+      transform: scale(0.98);
+      background: rgba(255, 255, 255, 0.12);
     }
 
     /* Search Wrapper */
@@ -566,35 +536,35 @@ function generateHTML(products) {
     }
 
     .category-dropdown-btn {
-      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
       color: #fff;
-      padding: 1rem 1.8rem;
-      border: none;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 0.95rem;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 0.9rem 2rem;
+      border-radius: 14px;
+      font-weight: 500;
+      font-size: 1rem;
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       align-items: center;
       gap: 0.6rem;
-      box-shadow: 0 4px 14px rgba(245, 87, 108, 0.4),
-                  0 2px 6px rgba(0, 0, 0, 0.2),
-                  inset 0 -2px 8px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
       white-space: nowrap;
+      letter-spacing: 0.3px;
     }
 
     .category-dropdown-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(245, 87, 108, 0.5),
-                  0 3px 8px rgba(0, 0, 0, 0.3),
-                  inset 0 -3px 10px rgba(0, 0, 0, 0.2);
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.25);
     }
 
     .category-dropdown-btn:active {
-      transform: translateY(0);
-      box-shadow: 0 2px 8px rgba(245, 87, 108, 0.3),
-                  inset 0 2px 4px rgba(0, 0, 0, 0.3);
+      transform: scale(0.98);
+      background: rgba(255, 255, 255, 0.12);
     }
 
     .dropdown-arrow {
@@ -803,10 +773,49 @@ function generateHTML(products) {
       margin: 0 auto;
       background: rgba(255, 255, 255, 0.02);
       border-top: 1px solid rgba(255, 255, 255, 0.05);
+      position: relative;
     }
 
     .special-section:first-of-type {
       margin-top: 2rem;
+    }
+
+    /* Home Button */
+    .home-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 0.7rem 1.2rem;
+      border-radius: 12px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+      z-index: 1001;
+      display: none;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .home-btn.visible {
+      display: flex;
+    }
+
+    .home-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.25);
+    }
+
+    .home-btn:active {
+      transform: scale(0.98);
     }
 
     .section-title {
@@ -1102,6 +1111,12 @@ function generateHTML(products) {
 </head>
 <body>
 
+  <!-- Home Button (shows when scrolled away from hero) -->
+  <button class="home-btn" id="homeBtn" onclick="scrollToTop()">
+    <span>←</span>
+    <span>Home</span>
+  </button>
+
   <!-- Hero Section -->
   <section class="hero" id="hero">
     <video class="hero-video" autoplay muted loop playsinline>
@@ -1120,16 +1135,13 @@ function generateHTML(products) {
         <!-- Three Special Section Buttons -->
         <div class="special-buttons">
           <button class="special-btn" onclick="scrollToSection('portable-workstations')">
-            <span class="btn-icon">💼</span>
-            <span class="btn-text">Mobile Work</span>
+            Mobile Work
           </button>
           <button class="special-btn" onclick="scrollToSection('coolest-gadgets')">
-            <span class="btn-icon">🔥</span>
-            <span class="btn-text">Coolest Stuff</span>
+            Coolest Stuff
           </button>
           <button class="special-btn" onclick="scrollToSection('featured-stuff')">
-            <span class="btn-icon">⭐</span>
-            <span class="btn-text">Featured</span>
+            Featured
           </button>
         </div>
         
@@ -1147,7 +1159,7 @@ function generateHTML(products) {
           </div>
           <div class="category-dropdown-container">
             <button class="category-dropdown-btn" id="categoryBtn" onclick="toggleCategoryDropdown()">
-              <span>📦 Categories</span>
+              <span>Categories</span>
               <span class="dropdown-arrow">▼</span>
             </button>
             <div class="category-dropdown-content" id="categoryDropdown"></div>
@@ -1219,6 +1231,21 @@ function generateHTML(products) {
         section.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
+
+    // Scroll to top
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Show/hide home button based on scroll position
+    window.addEventListener('scroll', function() {
+      const homeBtn = document.getElementById('homeBtn');
+      if (window.scrollY > 600) {
+        homeBtn.classList.add('visible');
+      } else {
+        homeBtn.classList.remove('visible');
+      }
+    });
 
     function toggleCategoryDropdown() {
       const dropdown = document.getElementById('categoryDropdown');
