@@ -272,9 +272,37 @@ function generateHTML(products) {
   function generateSpecialSection(title, items, sectionId, emoji) {
     if (items.length === 0) return '';
     
+    // Special handling for Mobile Work Bundles: show LOT_076 stands at top
+    let standsCallout = '';
+    if (sectionId === 'portable-workstations') {
+      const lot076 = productData.find(p => p.lot === 'LOT_076');
+      if (lot076) {
+        const lot076Index = productData.indexOf(lot076);
+        standsCallout = `
+        <div class="stands-callout">
+          <h3 class="stands-callout-title">🛠️ Professional Stand Options</h3>
+          <p class="stands-callout-text">
+            Complete your mobile workstation with professional mounting solutions. 
+            Choose from adjustable tripods, magnetic mounts, VESA brackets, and clamp arms 
+            to transform any surface into a stable dual-screen setup.
+          </p>
+          <div class="stands-preview" onclick="openExpanded(${lot076Index})">
+            <img src="${lot076.thumbnail}" alt="${lot076.name}" class="stands-thumbnail" onerror="this.src='${PLACEHOLDER_IMAGE}'">
+            <div class="stands-info">
+              <h4>${lot076.name}</h4>
+              <p>${lot076.tagline}</p>
+              <span class="stands-price">${lot076.price}</span>
+            </div>
+          </div>
+        </div>
+        `;
+      }
+    }
+    
     return `
     <section class="special-section" id="${sectionId}">
       <h2 class="section-title">${emoji} ${title}</h2>
+      ${standsCallout}
       <div class="lots-grid">
         ${items.map((product) => {
           const originalIndex = productData.indexOf(product);
@@ -789,6 +817,89 @@ function generateHTML(products) {
       margin-top: 2rem;
     }
 
+    /* Stands Callout (for Mobile Work Bundles) */
+    .stands-callout {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2.5rem;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .stands-callout-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .stands-callout-text {
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .stands-preview {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      padding: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .stands-preview:hover {
+      background: rgba(0, 0, 0, 0.4);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .stands-thumbnail {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .stands-info {
+      flex: 1;
+    }
+
+    .stands-info h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .stands-info p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+      line-height: 1.4;
+      margin-bottom: 0.8rem;
+    }
+
+    .stands-price {
+      display: inline-block;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
     /* Home Button */
     .home-btn {
       position: fixed;
@@ -1115,6 +1226,10 @@ function generateHTML(products) {
       .lots-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }
       .lot-thumbnail { height: 160px; }
       .special-section { padding: 2rem 1rem; }
+      .stands-callout { padding: 1.5rem; }
+      .stands-preview { flex-direction: column; text-align: center; }
+      .stands-thumbnail { width: 100px; height: 100px; }
+      .stands-info h4 { font-size: 1rem; }
     }
   </style>
 </head>
