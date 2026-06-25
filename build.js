@@ -302,7 +302,7 @@ function generateHTML(products) {
 
   // Generate special sections
   const portableWorkstationsHTML = generateSpecialSection(
-    'Mobile Work',
+    'Mobile Work Bundles',
     portableWorkstations,
     'portable-workstations',
     '💼'
@@ -459,31 +459,36 @@ function generateHTML(products) {
     }
 
     .special-btn {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
+      backdrop-filter: blur(15px) saturate(150%);
+      -webkit-backdrop-filter: blur(15px) saturate(150%);
       color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      border: 2px solid rgba(255, 255, 255, 0.3);
       padding: 0.9rem 2rem;
-      border-radius: 14px;
+      border-radius: 16px;
       font-weight: 500;
       font-size: 1rem;
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.2);
       letter-spacing: 0.3px;
+      position: relative;
     }
 
     .special-btn:hover {
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      transform: translateY(-1px);
-      box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.25);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.12));
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.3);
     }
 
     .special-btn:active {
-      transform: scale(0.98);
-      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(0) scale(0.98);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+      box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3),
+                  inset 0 2px 4px rgba(0, 0, 0, 0.2);
     }
 
     /* Search Wrapper */
@@ -536,13 +541,13 @@ function generateHTML(products) {
     }
 
     .category-dropdown-btn {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
+      backdrop-filter: blur(15px) saturate(150%);
+      -webkit-backdrop-filter: blur(15px) saturate(150%);
       color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      border: 2px solid rgba(255, 255, 255, 0.3);
       padding: 0.9rem 2rem;
-      border-radius: 14px;
+      border-radius: 16px;
       font-weight: 500;
       font-size: 1rem;
       cursor: pointer;
@@ -550,21 +555,25 @@ function generateHTML(products) {
       display: flex;
       align-items: center;
       gap: 0.6rem;
-      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.2);
       white-space: nowrap;
       letter-spacing: 0.3px;
     }
 
     .category-dropdown-btn:hover {
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      transform: translateY(-1px);
-      box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.25);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.12));
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.3);
     }
 
     .category-dropdown-btn:active {
-      transform: scale(0.98);
-      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(0) scale(0.98);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+      box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3),
+                  inset 0 2px 4px rgba(0, 0, 0, 0.2);
     }
 
     .dropdown-arrow {
@@ -1135,7 +1144,7 @@ function generateHTML(products) {
         <!-- Three Special Section Buttons -->
         <div class="special-buttons">
           <button class="special-btn" onclick="scrollToSection('portable-workstations')">
-            Mobile Work
+            Mobile Work Bundles
           </button>
           <button class="special-btn" onclick="scrollToSection('coolest-gadgets')">
             Coolest Stuff

@@ -101,31 +101,36 @@
     }
 
     .special-btn {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
+      backdrop-filter: blur(15px) saturate(150%);
+      -webkit-backdrop-filter: blur(15px) saturate(150%);
       color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      border: 2px solid rgba(255, 255, 255, 0.3);
       padding: 0.9rem 2rem;
-      border-radius: 14px;
+      border-radius: 16px;
       font-weight: 500;
       font-size: 1rem;
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.2);
       letter-spacing: 0.3px;
+      position: relative;
     }
 
     .special-btn:hover {
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      transform: translateY(-1px);
-      box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.25);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.12));
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.3);
     }
 
     .special-btn:active {
-      transform: scale(0.98);
-      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(0) scale(0.98);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+      box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3),
+                  inset 0 2px 4px rgba(0, 0, 0, 0.2);
     }
 
     /* Search Wrapper */
@@ -178,13 +183,13 @@
     }
 
     .category-dropdown-btn {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
+      backdrop-filter: blur(15px) saturate(150%);
+      -webkit-backdrop-filter: blur(15px) saturate(150%);
       color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      border: 2px solid rgba(255, 255, 255, 0.3);
       padding: 0.9rem 2rem;
-      border-radius: 14px;
+      border-radius: 16px;
       font-weight: 500;
       font-size: 1rem;
       cursor: pointer;
@@ -192,21 +197,25 @@
       display: flex;
       align-items: center;
       gap: 0.6rem;
-      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.2);
       white-space: nowrap;
       letter-spacing: 0.3px;
     }
 
     .category-dropdown-btn:hover {
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      transform: translateY(-1px);
-      box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.25);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.12));
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.3);
     }
 
     .category-dropdown-btn:active {
-      transform: scale(0.98);
-      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(0) scale(0.98);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+      box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3),
+                  inset 0 2px 4px rgba(0, 0, 0, 0.2);
     }
 
     .dropdown-arrow {
@@ -777,7 +786,7 @@
         <!-- Three Special Section Buttons -->
         <div class="special-buttons">
           <button class="special-btn" onclick="scrollToSection('portable-workstations')">
-            Mobile Work
+            Mobile Work Bundles
           </button>
           <button class="special-btn" onclick="scrollToSection('coolest-gadgets')">
             Coolest Stuff
@@ -814,7 +823,7 @@
   <!-- Special Sections -->
   
     <section class="special-section" id="portable-workstations">
-      <h2 class="section-title">💼 Mobile Work</h2>
+      <h2 class="section-title">💼 Mobile Work Bundles</h2>
       <div class="lots-grid">
         
             <div class="lot-card" data-lot-index="18" onclick="openExpanded(18)">
@@ -875,7 +884,7 @@
           
             <div class="lot-card" data-lot-index="45" onclick="openExpanded(45)">
               <div class="lot-card-content">
-                <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_070_AYY_Portable_Monitor/LOT_070_THUMBNAIL.jpg" alt="AYY 15.6 Portable Monitor (1080P FHD)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+                <img src="data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E" alt="AYY 15.6 Portable Monitor (1080P FHD)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
                   <div class="lot-number">LOT_070</div>
                   <h3 class="lot-name">AYY 15.6 Portable Monitor (1080P FHD)</h3>
@@ -1900,7 +1909,7 @@
     
     <div class="lot-card" data-lot-index="45" onclick="openExpanded(45)">
       <div class="lot-card-content">
-        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_070_AYY_Portable_Monitor/LOT_070_THUMBNAIL.jpg" alt="AYY 15.6 Portable Monitor (1080P FHD)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+        <img src="data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E" alt="AYY 15.6 Portable Monitor (1080P FHD)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
           <div class="lot-number">LOT_070</div>
           <h3 class="lot-name">AYY 15.6 Portable Monitor (1080P FHD)</h3>
@@ -3394,6 +3403,9 @@
     "subcategory": "Portable Workstations",
     "thumbnail": "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_005_Motyeowe_OLED_Monitors_18_5in_X2/LOT_005_THUMBNAIL.jpg",
     "photos": [
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_005_Motyeowe_OLED_Monitors_18_5in_X2/Photos/%20LOT_005_5.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_005_Motyeowe_OLED_Monitors_18_5in_X2/Photos/LOT_005_1.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_005_Motyeowe_OLED_Monitors_18_5in_X2/Photos/LOT_005_2.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_005_Motyeowe_OLED_Monitors_18_5in_X2/Photos/LOT_005_3.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_005_Motyeowe_OLED_Monitors_18_5in_X2/Photos/LOT_005_04.jpg"
     ],
@@ -3871,9 +3883,9 @@
     "thumbnail": "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_053_INVZI_MagHub_8_in_1_USB_C_Docking_Station/LOT_053_THUMBNAIL.jpg",
     "photos": [
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_053_INVZI_MagHub_8_in_1_USB_C_Docking_Station/Photos/LOT_053_1.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_053_INVZI_MagHub_8_in_1_USB_C_Docking_Station/Photos/LOT_053_02.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_053_INVZI_MagHub_8_in_1_USB_C_Docking_Station/Photos/LOT_053_2.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_053_INVZI_MagHub_8_in_1_USB_C_Docking_Station/Photos/LOT_053_03.jpg"
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_053_INVZI_MagHub_8_in_1_USB_C_Docking_Station/Photos/LOT_053_3.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_053_INVZI_MagHub_8_in_1_USB_C_Docking_Station/Photos/LOT_053_4.jpg"
     ],
     "referenceUrl": "https://www.amazon.com/s?k=INVZI+MagHub",
     "seoTags": [
@@ -4006,8 +4018,13 @@
     "price": "$175.00",
     "category": "Portable Ultra-Thin Laptop Monitors",
     "subcategory": "Portable Workstations",
-    "thumbnail": "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_070_AYY_Portable_Monitor/LOT_070_THUMBNAIL.jpg",
-    "photos": [],
+    "thumbnail": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"300\"%3E%3Crect fill=\"%23333\" width=\"400\" height=\"300\"/%3E%3Ctext x=\"50%25\" y=\"50%25\" font-size=\"18\" fill=\"%23999\" text-anchor=\"middle\" dy=\".3em\"%3ENo Image Available%3C/text%3E%3C/svg%3E",
+    "photos": [
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_070_AYY_Portable_Monitor/Photos/LOT_070_1.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_070_AYY_Portable_Monitor/Photos/LOT_070_2.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_070_AYY_Portable_Monitor/Photos/LOT_070_3.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_070_AYY_Portable_Monitor/Photos/LOT_070_4.jpg"
+    ],
     "referenceUrl": "https://www.amazon.com/s?k=AYY+15.6+Portable+Monitor",
     "seoTags": [
       "monitor",
