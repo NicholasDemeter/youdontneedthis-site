@@ -8,7 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CSV_PATH = path.join(__dirname, 'products.csv');
 const DIST_DIR = path.join(__dirname, 'dist');
 const OUTPUT_PATH = path.join(DIST_DIR, 'index.html');
-const INVENTORY_REPO_BASE = 'https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main';
+const INVENTORY_REPO_BASE = 'https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master';
 const LOCAL_INVENTORY_PATH = path.resolve(__dirname, '..', 'youdontneedthis-inventory');
 const HERO_VIDEO_URL = `${INVENTORY_REPO_BASE}/Carousel_HERO/Hero_Media.mp4`;
 const WHATSAPP_NUMBER = '256780923638';
@@ -445,9 +445,9 @@ function generateHTML(products) {
     }
 
     .hero-title {
-      font-size: clamp(3rem, 10vw, 7rem);
+      font-size: clamp(2.5rem, 8vw, 7rem);
       font-weight: 900;
-      line-height: 1;
+      line-height: 1.1;
       letter-spacing: -0.03em;
       margin-bottom: 1rem;
     }
@@ -487,29 +487,43 @@ function generateHTML(products) {
     }
 
     .special-btn {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
-      backdrop-filter: blur(15px) saturate(150%);
-      -webkit-backdrop-filter: blur(15px) saturate(150%);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.05));
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
       color: #fff;
-      border: 2px solid rgba(255, 255, 255, 0.3);
+      border: 2px solid transparent;
+      background-clip: padding-box;
+      position: relative;
       padding: 0.9rem 2rem;
       border-radius: 16px;
-      font-weight: 500;
+      font-weight: 600;
       font-size: 1rem;
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3),
-                  inset 0 1px 0 rgba(255, 255, 255, 0.2);
-      letter-spacing: 0.3px;
-      position: relative;
+      box-shadow: 
+        0 8px 32px 0 rgba(31, 38, 135, 0.15),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
+    }
+
+    .special-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      padding: 2px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
     }
 
     .special-btn:hover {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.12));
-      border: 2px solid rgba(255, 255, 255, 0.5);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1));
       transform: translateY(-2px);
-      box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4),
-                  inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      box-shadow: 
+        0 12px 40px 0 rgba(31, 38, 135, 0.25),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
     }
 
     .special-btn:active {
@@ -569,32 +583,47 @@ function generateHTML(products) {
     }
 
     .category-dropdown-btn {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
-      backdrop-filter: blur(15px) saturate(150%);
-      -webkit-backdrop-filter: blur(15px) saturate(150%);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.05));
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
       color: #fff;
-      border: 2px solid rgba(255, 255, 255, 0.3);
+      border: 2px solid transparent;
+      background-clip: padding-box;
       padding: 0.9rem 2rem;
       border-radius: 16px;
-      font-weight: 500;
+      font-weight: 600;
       font-size: 1rem;
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       align-items: center;
       gap: 0.6rem;
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3),
-                  inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      box-shadow: 
+        0 8px 32px 0 rgba(31, 38, 135, 0.15),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
       white-space: nowrap;
-      letter-spacing: 0.3px;
+      position: relative;
+    }
+
+    .category-dropdown-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      padding: 2px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
     }
 
     .category-dropdown-btn:hover {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.12));
-      border: 2px solid rgba(255, 255, 255, 0.5);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1));
       transform: translateY(-2px);
-      box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4),
-                  inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      box-shadow: 
+        0 12px 40px 0 rgba(31, 38, 135, 0.25),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
     }
 
     .category-dropdown-btn:active {
@@ -1595,31 +1624,49 @@ function generateHTML(products) {
       const contactMessage = encodeURIComponent(\`Hi, I'm interested in \${product.lot} - \${product.name}\`);
       const whatsappUrl = \`https://wa.me/${WHATSAPP_NUMBER}?text=\${contactMessage}\`;
 
+      // Special layout for LOT_076 (stands): description above gallery
+      const isStandsCollection = product.lot === 'LOT_076';
+
       const expandedHTML = \`
         <div class="lot-expanded" id="lotExpanded" onclick="handleOverlayClick(event)">
           <div class="lot-expanded-content">
             <button class="lot-expanded-close" onclick="closeExpanded()">✕</button>
+            \${isStandsCollection ? \`
+              <div class="lot-details-header">
+                <div class="lot-details-number">\${product.lot}</div>
+                <h2 class="lot-details-name">\${product.name}</h2>
+                <p class="lot-details-tagline">\${product.tagline}</p>
+                <div class="lot-details-price">\${product.price}</div>
+              </div>
+              \${product.description ? \`<div class="lot-details-section"><h4>What's Included</h4><p>\${product.description}</p></div>\` : ''}
+              \${product.specs ? \`<div class="lot-details-section"><h4>Specifications</h4><div class="lot-details-specs">\${product.specs}</div></div>\` : ''}
+            \` : ''}
             <div class="lot-gallery">
               <div class="lot-gallery-main" id="galleryMain">
                 \${mediaElement(mainMedia, product.name, '')}
               </div>
               <div class="lot-gallery-thumbs">\${thumbsHTML}</div>
             </div>
-            <div class="lot-details">
-              <div class="lot-details-header">
-                <div class="lot-details-number">\${product.lot}</div>
-                <h2 class="lot-details-name">\${product.name}</h2>
-                <p class="lot-details-tagline">\${product.tagline}</p>
-                <div class="lot-details-price">\${product.price}</div>
-                <div class="lot-details-coolness">\${generateCoolnessStars(product.coolness)}</div>
+            \${!isStandsCollection ? \`
+              <div class="lot-details">
+                <div class="lot-details-header">
+                  <div class="lot-details-number">\${product.lot}</div>
+                  <h2 class="lot-details-name">\${product.name}</h2>
+                  <p class="lot-details-tagline">\${product.tagline}</p>
+                  <div class="lot-details-price">\${product.price}</div>
+                </div>
+                \${product.description ? \`<div class="lot-details-section"><h4>Description</h4><p>\${product.description}</p></div>\` : ''}
+                \${product.specs ? \`<div class="lot-details-section"><h4>Specifications</h4><div class="lot-details-specs">\${product.specs}</div></div>\` : ''}
+                <div class="lot-action-buttons">
+                  \${product.referenceUrl ? \`<a href="\${product.referenceUrl}" target="_blank" rel="noopener noreferrer" class="lot-price-button">💰 Check Current Price</a>\` : ''}
+                  <a href="\${whatsappUrl}" target="_blank" class="lot-contact-button">💬 Contact via WhatsApp</a>
+                </div>
               </div>
-              \${product.description ? \`<div class="lot-details-section"><h4>Description</h4><p>\${product.description}</p></div>\` : ''}
-              \${product.specs ? \`<div class="lot-details-section"><h4>Specifications</h4><div class="lot-details-specs">\${product.specs}</div></div>\` : ''}
-              <div class="lot-action-buttons">
-                \${product.referenceUrl ? \`<a href="\${product.referenceUrl}" target="_blank" rel="noopener noreferrer" class="lot-price-button">💰 Check Current Price</a>\` : ''}
+            \` : \`
+              <div class="lot-action-buttons" style="margin-top: 1.5rem;">
                 <a href="\${whatsappUrl}" target="_blank" class="lot-contact-button">💬 Contact via WhatsApp</a>
               </div>
-            </div>
+            \`}
           </div>
         </div>
       \`;
