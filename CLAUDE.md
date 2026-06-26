@@ -106,6 +106,28 @@ Do NOT edit these. Do NOT ask questions about these. Ignore them entirely.
 
 ---
 
+## VERIFICATION (no test suite exists)
+
+This project has **no canonical test suite, no linter, no automated tests**.
+
+When making changes that need verification:
+1. Create a temporary bash script under `/var/folders/.../T/hermes-verify-*.sh`
+2. Run focused checks (grep patterns, exit codes, file presence)
+3. Clean up the script after execution
+4. Report results as **"ad-hoc verification"** (not "suite green" or "tests pass")
+
+Example verification script pattern:
+```bash
+#!/bin/bash
+set -e
+grep -q "expected-pattern" dist/index.html || { echo "FAIL"; exit 1; }
+echo "✅ PASS"
+```
+
+Do NOT claim "all tests pass" — there are no tests. Use "verification checks passed" instead.
+
+---
+
 ## VERIFICATION COMMANDS (use these, not browser)
 
 ```bash

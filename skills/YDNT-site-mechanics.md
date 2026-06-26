@@ -37,7 +37,7 @@ NICHOLAS
    ├─── 3. Runs: node build.js
    │         └── Reads products.csv
    │         └── Reads local inventory folders
-   │         └── Builds GitHub image URLs  ← ? SEE ISSUE #1 BELOW
+   │         └── Builds GitHub image URLs
    │         └── Outputs: dist/index.html (self-contained, 318KB)
    │
    ├─── 4. Verifies locally: open dist/index.html in browser
@@ -46,7 +46,6 @@ NICHOLAS
    │         └── GitHub receives dist/index.html
    │         └── GitHub Actions workflow triggers (.github/workflows/deploy.yml)
    │                   └── Deploys dist/ folder to GitHub Pages
-   │                             └── ? SEE ISSUE #2 BELOW
    │
    └─── 6. youdontneedthis.us serves new page (after ~2-3 min cache expiry)
 ```
@@ -95,13 +94,8 @@ https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main
    ▼
 Browser on youdontneedthis.us loads that URL directly from GitHub
    │
-   │  ? ISSUE #1: Images confirmed at 200 (URL is valid, file is on GitHub)
-   │  ? BUT: Images not rendering in browser on live site
-   │  ? UNKNOWN: Whether this is CORS, browser security policy,
-   │  ? GitHub rate limiting, or something else entirely
-   │
    ▼
-? Image appears on site (UNCONFIRMED AS OF JUNE 22, 2026)
+Image appears on site
 ```
 
 ---
@@ -128,6 +122,62 @@ CRITICAL RULES:
 ❌ "LOT_002" alone (no underscore after) → may not match
 ✅ Case insensitive matching
 ✅ Accepted photo formats: .jpg .jpeg .png .gif .webp
+```
+
+---
+
+## MOBILE-CRITICAL PATTERNS (DO NOT BREAK)
+
+### iOS Safari Video Playback
+**REQUIRED:** The hero `<video>` tag MUST have `playsinline` attribute.
+```html
+<video class="hero-video" autoplay muted loop playsinline>
+```
+Without `playsinline`, video fails **silently** on iOS Safari (no error, no playback).
+Location in build.js: Line ~1253
+
+### Viewport Units
+**USE:** `100svh` (small viewport height) instead of `100vh` for mobile.
+```css
+@media (max-width: 768px) {
+  .hero { min-height: 100svh; }  /* NOT 100vh */
+}
+```
+Reason: Accounts for iOS Safari's collapsing address bar. Prevents layout shift on scroll.
+
+### Mobile Breakpoints
+```
+Desktop:  > 768px  (no overrides)
+Tablet:   ≤ 768px  (@media (max-width: 768px))
+Phone:    ≤ 480px  (@media (max-width: 480px))
+```
+All mobile CSS lives in these TWO media query blocks at the end of the `<style>` tag.
+**NEVER** scatter mobile rules outside these blocks.
+
+### Button Width Pattern
+```css
+@media (max-width: 768px) {
+  .special-btn {
+    width: 100%;          /* Fills container */
+    max-width: 280px;     /* BUT capped for thumb reach */
+    margin: 0 auto;       /* Centered, not edge-to-edge */
+  }
+}
+```
+Full-width buttons (no max-width) break mobile UX. User's thumb can't reach center.
+
+### Product Grid Responsive Pattern
+```css
+/* Tablet: 2-column auto-fit */
+@media (max-width: 768px) {
+  .lots-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+}
+
+/* Phone: Single column (readability) */
+@media (max-width: 480px) {
+  .lots-grid { grid-template-columns: 1fr; }
+  .lot-thumbnail { height: 200px; }  /* Taller for single column */
+}
 ```
 
 ---
@@ -224,38 +274,16 @@ youdontneedthis-inventory/
 
 ---
 
-## KNOWN ISSUES AS OF JUNE 22, 2026
+## KNOWN ISSUES AS OF JUNE 26, 2026
 
-### ? ISSUE #1 — Images not rendering on live site (ACTIVE, UNRESOLVED)
-**Symptoms:** Cards show alt text instead of photos. Hot items carousel shows text only.
-**What we know:**
-- build.js generates correct GitHub raw URLs ✅
-- Images confirmed present on GitHub inventory repo (HTTP 200) ✅
-- Local build works correctly ✅
-- URLs are correctly baked into dist/index.html ✅
-**What we don't know:**
-- Why browser is not rendering images that return 200
-- Whether this is CORS headers, GitHub rate limiting, or browser security policy
-- Whether this was ever working or has always been broken
-**Next diagnostic:** Check browser console errors on youdontneedthis.us (F12 → Console tab)
-
-### ? ISSUE #2 — GitHub Actions workflow behavior
-**What we know:**
-- Workflow exists at .github/workflows/deploy.yml ✅
-- Workflow triggers on push to main ✅
-- Workflow deploys dist/ folder to GitHub Pages ✅
-- Workflow does NOT run build.js (intentional — build happens locally) ✅
-**What we don't know:**
-- Whether previous workflow runs that DID run build.js corrupted anything
-
-### ISSUE #3 — Inventory branch naming (LOW PRIORITY)
+### ISSUE #1 — Inventory branch naming (LOW PRIORITY)
 Local inventory branch is `master`, GitHub is `main`.
 Push command: `git push origin master:main`
 Functional but inconsistent. Rename when convenient.
 
 ---
 
-## SITE FEATURES (confirmed working June 22, 2026)
+## SITE FEATURES (confirmed working June 26, 2026)
 
 | Feature | Status |
 |---------|--------|
@@ -263,17 +291,17 @@ Functional but inconsistent. Rename when convenient.
 | Hero copy (YOU DON'T / NEED THIS) | ✅ Working |
 | Explore Collection dropdown (7 categories) | ✅ Working |
 | Featured Items button | ✅ Working |
-| Hot Items carousel (coolness ≥ 6) | ✅ Working (no images yet) |
-| Product cards with copy | ✅ Working (no images yet) |
+| Hot Items carousel (coolness ≥ 6) | ✅ Working |
+| Product cards with thumbnails | ✅ Working |
 | Category filter (hide/show cards) | ✅ Working |
 | Stars hidden on cards | ✅ Working |
 | Hero stats block removed (100+, $2M+, 5★) | ✅ Working |
 | WhatsApp contact button | ✅ Working |
-| Modal gallery with photos | ? Untested (no images loading) |
-| Modal gallery with videos | ? Untested |
-| Mobile responsive layout | ? Untested |
-| Thumbnail images on cards | ❌ NOT WORKING (active issue) |
-| Photo gallery in modal | ❌ NOT WORKING (active issue) |
+| Modal gallery with photos | ✅ Working |
+| Modal gallery with videos | ✅ Working |
+| Mobile responsive layout (768px + 480px) | ✅ Working |
+| Thumbnail images on cards | ✅ Working |
+| Photo gallery in modal | ✅ Working |
 
 ---
 
