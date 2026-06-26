@@ -1164,9 +1164,16 @@ function generateHTML(products) {
 
     .lot-details-tagline { font-size: 1rem; color: #999; margin-bottom: 0.5rem; }
 
-    .lot-details-price { font-size: 1.4rem; font-weight: 600; color: #FFD700; }
-
-    .lot-details-coolness { font-size: 0.85rem; color: #ffd700; }
+    /* Price now appears right-aligned after description */
+    .lot-details-price-right {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #FFD700;
+      text-align: right;
+      margin-top: 1rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(255, 215, 0, 0.2);
+    }
 
     .lot-details-section { border-top: 1px solid #2a2a2a; padding-top: 1rem; }
 
@@ -1636,9 +1643,8 @@ function generateHTML(products) {
                 <div class="lot-details-number">\${product.lot}</div>
                 <h2 class="lot-details-name">\${product.name}</h2>
                 <p class="lot-details-tagline">\${product.tagline}</p>
-                <div class="lot-details-price">\${product.price}</div>
               </div>
-              \${product.description ? \`<div class="lot-details-section"><h4>What's Included</h4><p>\${product.description}</p></div>\` : ''}
+              \${product.description ? \`<div class="lot-details-section"><h4>What's Included</h4><p>\${product.description}</p><div class="lot-details-price-right">\${product.price}</div></div>\` : ''}
               \${product.specs ? \`<div class="lot-details-section"><h4>Specifications</h4><div class="lot-details-specs">\${product.specs}</div></div>\` : ''}
             \` : ''}
             <div class="lot-gallery">
@@ -1653,9 +1659,8 @@ function generateHTML(products) {
                   <div class="lot-details-number">\${product.lot}</div>
                   <h2 class="lot-details-name">\${product.name}</h2>
                   <p class="lot-details-tagline">\${product.tagline}</p>
-                  <div class="lot-details-price">\${product.price}</div>
                 </div>
-                \${product.description ? \`<div class="lot-details-section"><h4>Description</h4><p>\${product.description}</p></div>\` : ''}
+                \${product.description ? \`<div class="lot-details-section"><h4>Description</h4><p>\${product.description}</p><div class="lot-details-price-right">\${product.price}</div></div>\` : ''}
                 \${product.specs ? \`<div class="lot-details-section"><h4>Specifications</h4><div class="lot-details-specs">\${product.specs}</div></div>\` : ''}
                 <div class="lot-action-buttons">
                   \${product.referenceUrl ? \`<a href="\${product.referenceUrl}" target="_blank" rel="noopener noreferrer" class="lot-price-button">💰 Check Current Price</a>\` : ''}
