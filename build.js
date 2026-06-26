@@ -278,21 +278,22 @@ function generateHTML(products) {
       const lot076 = productData.find(p => p.lot === 'LOT_076');
       if (lot076) {
         const lot076Index = productData.indexOf(lot076);
+        const lot076Images = lot076.photos.length > 0 ? lot076.photos : [lot076.thumbnail];
+        
         standsCallout = `
         <div class="stands-callout">
-          <h3 class="stands-callout-title">🛠️ Professional Stand Options</h3>
+          <h3 class="stands-callout-title">Mix and Match</h3>
           <p class="stands-callout-text">
             Complete your mobile workstation with professional mounting solutions. 
             Choose from adjustable tripods, magnetic mounts, VESA brackets, and clamp arms 
             to transform any surface into a stable dual-screen setup.
           </p>
-          <div class="stands-preview" onclick="openExpanded(${lot076Index})">
-            <img src="${lot076.thumbnail}" alt="${lot076.name}" class="stands-thumbnail" onerror="this.src='${PLACEHOLDER_IMAGE}'">
-            <div class="stands-info">
-              <h4>${lot076.name}</h4>
-              <p>${lot076.tagline}</p>
-              <span class="stands-price">${lot076.price}</span>
-            </div>
+          <div class="stands-preview-grid">
+            ${lot076Images.map(imgUrl => `
+              <div class="stands-preview-item" onclick="openExpanded(${lot076Index})">
+                <img src="${imgUrl}" alt="${lot076.name}" class="stands-preview-thumb" onerror="this.src='${PLACEHOLDER_IMAGE}'">
+              </div>
+            `).join('')}
           </div>
         </div>
         `;
@@ -862,9 +863,6 @@ function generateHTML(products) {
       font-weight: 600;
       color: #fff;
       margin-bottom: 0.8rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
     }
 
     .stands-callout-text {
@@ -874,59 +872,33 @@ function generateHTML(products) {
       font-size: 0.95rem;
     }
 
-    .stands-preview {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 12px;
-      padding: 1.2rem;
+    .stands-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 1rem;
+    }
+
+    .stands-preview-item {
       cursor: pointer;
       transition: all 0.3s ease;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.3);
     }
 
-    .stands-preview:hover {
-      background: rgba(0, 0, 0, 0.4);
-      border-color: rgba(255, 255, 255, 0.2);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    .stands-preview-item:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 215, 0, 0.5);
+      box-shadow: 0 8px 24px rgba(255, 215, 0, 0.2);
     }
 
-    .stands-thumbnail {
-      width: 120px;
+    .stands-preview-thumb {
+      width: 100%;
       height: 120px;
       object-fit: cover;
-      border-radius: 8px;
-      flex-shrink: 0;
+      display: block;
     }
-
-    .stands-info {
-      flex: 1;
-    }
-
-    .stands-info h4 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 0.5rem;
-    }
-
-    .stands-info p {
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 0.9rem;
-      line-height: 1.4;
-      margin-bottom: 0.8rem;
-    }
-
-    .stands-price {
-      display: inline-block;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: #fff;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 0.95rem;
     }
 
     /* Home Button */
@@ -1263,9 +1235,8 @@ function generateHTML(products) {
       .lot-thumbnail { height: 160px; }
       .special-section { padding: 2rem 1rem; }
       .stands-callout { padding: 1.5rem; }
-      .stands-preview { flex-direction: column; text-align: center; }
-      .stands-thumbnail { width: 100px; height: 100px; }
-      .stands-info h4 { font-size: 1rem; }
+      .stands-preview-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 0.75rem; }
+      .stands-preview-thumb { height: 100px; }
     }
   </style>
 </head>

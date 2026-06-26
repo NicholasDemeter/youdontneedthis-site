@@ -476,9 +476,6 @@
       font-weight: 600;
       color: #fff;
       margin-bottom: 0.8rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
     }
 
     .stands-callout-text {
@@ -488,59 +485,33 @@
       font-size: 0.95rem;
     }
 
-    .stands-preview {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 12px;
-      padding: 1.2rem;
+    .stands-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 1rem;
+    }
+
+    .stands-preview-item {
       cursor: pointer;
       transition: all 0.3s ease;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.3);
     }
 
-    .stands-preview:hover {
-      background: rgba(0, 0, 0, 0.4);
-      border-color: rgba(255, 255, 255, 0.2);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    .stands-preview-item:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 215, 0, 0.5);
+      box-shadow: 0 8px 24px rgba(255, 215, 0, 0.2);
     }
 
-    .stands-thumbnail {
-      width: 120px;
+    .stands-preview-thumb {
+      width: 100%;
       height: 120px;
       object-fit: cover;
-      border-radius: 8px;
-      flex-shrink: 0;
+      display: block;
     }
-
-    .stands-info {
-      flex: 1;
-    }
-
-    .stands-info h4 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 0.5rem;
-    }
-
-    .stands-info p {
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 0.9rem;
-      line-height: 1.4;
-      margin-bottom: 0.8rem;
-    }
-
-    .stands-price {
-      display: inline-block;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: #fff;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 0.95rem;
     }
 
     /* Home Button */
@@ -877,9 +848,8 @@
       .lot-thumbnail { height: 160px; }
       .special-section { padding: 2rem 1rem; }
       .stands-callout { padding: 1.5rem; }
-      .stands-preview { flex-direction: column; text-align: center; }
-      .stands-thumbnail { width: 100px; height: 100px; }
-      .stands-info h4 { font-size: 1rem; }
+      .stands-preview-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 0.75rem; }
+      .stands-preview-thumb { height: 100px; }
     }
   </style>
 </head>
@@ -949,19 +919,54 @@
       <h2 class="section-title">💼 Mobile Work Bundles</h2>
       
         <div class="stands-callout">
-          <h3 class="stands-callout-title">🛠️ Professional Stand Options</h3>
+          <h3 class="stands-callout-title">Mix and Match</h3>
           <p class="stands-callout-text">
             Complete your mobile workstation with professional mounting solutions. 
             Choose from adjustable tripods, magnetic mounts, VESA brackets, and clamp arms 
             to transform any surface into a stable dual-screen setup.
           </p>
-          <div class="stands-preview" onclick="openExpanded(23)">
-            <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_076_Portable_Monitor_Stands/LOT_076_THUMBNAIL.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
-            <div class="stands-info">
-              <h4>Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms</h4>
-              <p>Your monitor wobbles on a stack of books. These stands include tripods, magnetic mounts, VESA brackets, and your dignity back.</p>
-              <span class="stands-price">$89.00</span>
-            </div>
+          <div class="stands-preview-grid">
+            
+              <div class="stands-preview-item" onclick="openExpanded(23)">
+                <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_01.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+              </div>
+            
+              <div class="stands-preview-item" onclick="openExpanded(23)">
+                <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_02.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+              </div>
+            
+              <div class="stands-preview-item" onclick="openExpanded(23)">
+                <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_03.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+              </div>
+            
+              <div class="stands-preview-item" onclick="openExpanded(23)">
+                <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_04.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+              </div>
+            
+              <div class="stands-preview-item" onclick="openExpanded(23)">
+                <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_05.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+              </div>
+            
+              <div class="stands-preview-item" onclick="openExpanded(23)">
+                <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_06.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+              </div>
+            
+              <div class="stands-preview-item" onclick="openExpanded(23)">
+                <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_07.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+              </div>
+            
+              <div class="stands-preview-item" onclick="openExpanded(23)">
+                <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_08.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+              </div>
+            
+              <div class="stands-preview-item" onclick="openExpanded(23)">
+                <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_09.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+              </div>
+            
+              <div class="stands-preview-item" onclick="openExpanded(23)">
+                <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_10.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+              </div>
+            
           </div>
         </div>
         
@@ -1039,7 +1044,7 @@
           
             <div class="lot-card" data-lot-index="25" onclick="openExpanded(25)">
               <div class="lot-card-content">
-                <img src="data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E" alt="Motyeowe OLED Monitors 18.5in - X2" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+                <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_005_Motyeowe_OLED_Monitors_18_5in_X2/LOT_005_THUMBNAIL.jpg" alt="Motyeowe OLED Monitors 18.5in - X2" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
                   <div class="lot-number">LOT_005</div>
                   <h3 class="lot-name">Motyeowe OLED Monitors 18.5in - X2</h3>
@@ -1953,7 +1958,7 @@
     
     <div class="lot-card" data-lot-index="25" onclick="openExpanded(25)">
       <div class="lot-card-content">
-        <img src="data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E" alt="Motyeowe OLED Monitors 18.5in - X2" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_005_Motyeowe_OLED_Monitors_18_5in_X2/LOT_005_THUMBNAIL.jpg" alt="Motyeowe OLED Monitors 18.5in - X2" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
           <div class="lot-number">LOT_005</div>
           <h3 class="lot-name">Motyeowe OLED Monitors 18.5in - X2</h3>
@@ -3810,9 +3815,13 @@
     "price": "$150.00",
     "category": "Portable Ultra-Thin Laptop Monitors",
     "subcategory": "Portable Workstations",
-    "thumbnail": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"300\"%3E%3Crect fill=\"%23333\" width=\"400\" height=\"300\"/%3E%3Ctext x=\"50%25\" y=\"50%25\" font-size=\"18\" fill=\"%23999\" text-anchor=\"middle\" dy=\".3em\"%3ENo Image Available%3C/text%3E%3C/svg%3E",
+    "thumbnail": "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_005_Motyeowe_OLED_Monitors_18_5in_X2/LOT_005_THUMBNAIL.jpg",
     "photos": [
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_005_Motyeowe_OLED_Monitors_18_5in_X2/Photos/LOT_005_04.jpg"
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_005_Motyeowe_OLED_Monitors_18_5in_X2/Photos/LOT_005_1.jpeg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_005_Motyeowe_OLED_Monitors_18_5in_X2/Photos/LOT_005_2.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_005_Motyeowe_OLED_Monitors_18_5in_X2/Photos/LOT_005_3.jpeg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_005_Motyeowe_OLED_Monitors_18_5in_X2/Photos/LOT_005_04.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_005_Motyeowe_OLED_Monitors_18_5in_X2/Photos/LOT_005_4.png"
     ],
     "referenceUrl": "https://www.amazon.com/s?k=Motyeowe+OLED+Monitor+18.5",
     "seoTags": [
