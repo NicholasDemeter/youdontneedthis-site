@@ -132,6 +132,33 @@ CRITICAL RULES:
 
 ---
 
+## CSS MODIFICATION RULES
+
+**CRITICAL:** All CSS lives inside `build.js` as a template literal, NOT in `dist/index.html`.
+
+```
+CORRECT WORKFLOW:
+1. Edit CSS inside build.js (around line 394-1242, inside the <style> tag)
+2. Run: node build.js
+3. Verify: open dist/index.html in browser
+4. Commit both build.js AND dist/index.html
+5. Push
+
+NEVER:
+- Edit CSS in dist/index.html directly (it's regenerated on every build)
+- Add external .css files (entire site is single-file HTML)
+```
+
+**Mobile CSS Location:**
+- Desktop styles: Lines ~394-1214 (main CSS block)
+- Mobile overrides: Single `@media (max-width: 768px)` block at line ~1215
+- Small phone overrides: `@media (max-width: 480px)` block (if present)
+
+**The Rule:** Mobile CSS changes ONLY go in the @media blocks. Never scatter !important 
+or mobile-specific rules in the main CSS block.
+
+---
+
 ## WHAT LIVES WHERE IN THE SITE REPO
 
 ```

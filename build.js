@@ -1213,10 +1213,28 @@ function generateHTML(products) {
     .lot-contact-button:hover { background: #20ba5a; }
 
     @media (max-width: 768px) {
+      .hero-video {
+        opacity: 0.65;
+        width: 100%;
+        height: 100%;
+        min-height: 100svh;
+        object-fit: cover;
+        object-position: center;
+      }
+      .hero {
+        min-height: 100svh;
+        overflow: hidden;
+      }
       .hero-title { font-size: 3rem; }
       .hero-buttons { flex-direction: column; gap: 1.2rem; }
       .special-buttons { flex-direction: column; width: 100%; }
-      .special-btn { width: 100%; justify-content: center; }
+      .special-btn { 
+        width: 100%; 
+        max-width: 280px;
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
+        justify-content: center; 
+      }
       .search-wrapper { flex-direction: column; width: 100%; }
       .search-container { max-width: 100%; }
       .category-dropdown-btn { width: 100%; justify-content: center; }
@@ -1237,6 +1255,12 @@ function generateHTML(products) {
       .stands-callout { padding: 1.5rem; }
       .stands-preview-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 0.75rem; }
       .stands-preview-thumb { height: 100px; }
+      .home-btn { left: auto; right: 16px; top: 16px; }
+    }
+
+    @media (max-width: 480px) {
+      .lots-grid { grid-template-columns: 1fr; gap: 0.75rem; }
+      .lot-thumbnail { height: 200px; }
     }
   </style>
 </head>
