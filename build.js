@@ -334,7 +334,7 @@ function generateHTML(products) {
     'Mobile Work Bundles',
     portableWorkstations,
     'portable-workstations',
-    '💼'
+    '' // Removed briefcase emoji - cleaner look
   );
   
   const coolestGadgetsHTML = generateSpecialSection(
@@ -874,8 +874,9 @@ function generateHTML(products) {
 
     .stands-preview-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
+      gap: 0.75rem;
+      max-width: 100%;
     }
 
     .stands-preview-item {
@@ -901,42 +902,44 @@ function generateHTML(products) {
     }
     }
 
-    /* Home Button */
+    /* Home Button - Always visible, top-right, modern glassy style */
     .home-btn {
       position: fixed;
       top: 20px;
-      left: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      right: 20px;
+      background: linear-gradient(135deg, rgba(83, 167, 234, 0.25), rgba(83, 167, 234, 0.15));
+      backdrop-filter: blur(15px) saturate(180%);
+      -webkit-backdrop-filter: blur(15px) saturate(180%);
       color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      padding: 0.7rem 1.2rem;
+      border: 2px solid rgba(83, 167, 234, 0.4);
+      padding: 0.75rem 1.5rem;
       border-radius: 12px;
-      font-weight: 500;
-      font-size: 0.9rem;
+      font-weight: 600;
+      font-size: 0.95rem;
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+      box-shadow: 0 8px 32px 0 rgba(83, 167, 234, 0.2);
       z-index: 1001;
-      display: none;
+      display: flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .home-btn.visible {
-      display: flex;
+      display: flex; /* Legacy class kept for compatibility */
     }
 
     .home-btn:hover {
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      transform: translateY(-1px);
-      box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.25);
+      background: linear-gradient(135deg, rgba(83, 167, 234, 0.35), rgba(83, 167, 234, 0.25));
+      border-color: rgba(83, 167, 234, 0.6);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px 0 rgba(83, 167, 234, 0.35);
     }
 
     .home-btn:active {
-      transform: scale(0.98);
+      transform: translateY(0) scale(0.98);
     }
 
     .section-title {
@@ -1253,9 +1256,9 @@ function generateHTML(products) {
       .lot-thumbnail { height: 160px; }
       .special-section { padding: 2rem 1rem; }
       .stands-callout { padding: 1.5rem; }
-      .stands-preview-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 0.75rem; }
-      .stands-preview-thumb { height: 100px; }
-      .home-btn { left: auto; right: 16px; top: 16px; }
+      .stands-preview-grid { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+      .stands-preview-thumb { height: 90px; }
+      .home-btn { top: 16px; right: 16px; padding: 0.6rem 1.2rem; font-size: 0.85rem; }
     }
 
     @media (max-width: 480px) {
@@ -1266,10 +1269,9 @@ function generateHTML(products) {
 </head>
 <body>
 
-  <!-- Home Button (shows when scrolled away from hero) -->
+  <!-- Home Button (always visible, top-right) -->
   <button class="home-btn" id="homeBtn" onclick="scrollToTop()">
-    <span>←</span>
-    <span>Home</span>
+    HOME
   </button>
 
   <!-- Hero Section -->
