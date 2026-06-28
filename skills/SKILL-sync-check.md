@@ -1,119 +1,94 @@
 # SKILL-sync-check.md
-# YDNT — Three Sources of Truth Sync Check
-# Save to: /Users/nicholasdemeter/Documents/youdontneedthis-site/skills/SKILL-sync-check.md
+# YDNT — Session Start & Sync Check
+# Run at the START of every session, before touching anything.
 
-## DRAFT STATUS — June 22, 2026
-## This skill is complete and not contingent on the image loading issue.
-## Run this at the START of every session before touching anything.
-
----
-
-## THE THREE SOURCES OF TRUTH
-1. Google Sheets → products.csv → site repo
-2. youdontneedthis-inventory repo (local + GitHub)
-3. dist/index.html (built from 1+2, served by GitHub Pages)
-
-All three must align. If any one is out of sync, the site shows wrong content.
+## SELF-CORRECTION RULE
+If any result below is inconsistent with what this skill or ARCHITECTURE.md describes,
+STOP and ask Nicholas. If the cause is a stale/incorrect document, propose the exact fix
+and update the source of truth with approval — same session.
 
 ---
 
-## SESSION START — RUN THESE EVERY TIME
+## THE THREE THINGS THAT MUST AGREE
+1. products.csv (site repo)        — what items exist and their data
+2. inventory folders (inventory repo) — the media for those items
+3. dist/index.html (built, served)  — the page, built from 1 + 2
+
+If these drift apart, the live site shows wrong or imageless content.
+
+---
+
+## SESSION START — RUN EVERY TIME
 
 ```bash
-# 1. Site repo local status
-git -C /Users/nicholasdemeter/Documents/youdontneedthis-site status
+# 1. Site repo status
+git -C ~/Documents/youdontneedthis-site status
 
-# 2. Inventory repo local status  
-git -C /Users/nicholasdemeter/Documents/youdontneedthis-inventory status
+# 2. Inventory repo status
+git -C ~/Documents/youdontneedthis-inventory status
 
-# 3. What's live on GitHub site repo
-curl -s https://api.github.com/repos/NicholasDemeter/youdontneedthis-site/commits/main | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['sha'][:7], d['commit']['message'])"
+# 3. What commit is live on GitHub (site repo)
+curl -s https://api.github.com/repos/NicholasDemeter/youdontneedthis-site/commits/main \
+ | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['sha'][:7], d['commit']['message'])"
 
-# 4. Is live site current
+# 4. Is the current build live (not a stale cache)?
 curl -s https://youdontneedthis.us | grep -c "PREMIUM ITEMS\|hero-stats"
+#   0 = current build is live.  non-zero = older cache; wait and retry.
 ```
 
-Interpret results:
-- Site repo shows modified files = uncommitted local changes exist
-- Inventory repo shows modified files = unpushed inventory changes exist  
-- GitHub commit doesn't match local = local ahead or behind GitHub
-- curl returns 2 = old build is live
+Report the four results to Nicholas, then wait for the task. Do not act yet.
 
 ---
 
 ## FULL SYNC CHECK — RUN BEFORE ANY PUSH
 
-### Check 1 — Local vs GitHub (site repo)
+### Check 1 — local vs GitHub (site repo)
 ```bash
-git -C /Users/nicholasdemeter/Documents/youdontneedthis-site diff origin/main --name-only
+git -C ~/Documents/youdontneedthis-site diff origin/main --name-only
 ```
-Empty output = in sync. Files listed = local has changes not on GitHub.
+Empty = in sync. Files listed = local has unpushed changes.
 
-### Check 2 — Local vs GitHub (inventory repo)
+### Check 2 — local vs GitHub (inventory repo)
 ```bash
-git -C /Users/nicholasdemeter/Documents/youdontneedthis-inventory fetch origin
-git -C /Users/nicholasdemeter/Documents/youdontneedthis-inventory log --oneline master...origin/main
+git -C ~/Documents/youdontneedthis-inventory fetch origin
+git -C ~/Documents/youdontneedthis-inventory log --oneline master...origin/main
 ```
-Empty output = in sync. Commits listed = diverged (needs resolution).
+Empty = in sync. Commits listed = diverged; resolve before pushing.
 
-### Check 3 — CSV vs inventory folders
+### Check 3 — CSV item count vs inventory folder count
 ```bash
-# How many LOTs in CSV?
-tail -n +2 /Users/nicholasdemeter/Documents/youdontneedthis-site/products.csv | grep -c "^LOT_"
+# LOTs in the CSV (uses a real CSV parser; fields contain commas)
+python3 -c "import csv;print(sum(1 for r in csv.DictReader(open('$HOME/Documents/youdontneedthis-site/products.csv')) if r['LOT'].strip().startswith('LOT_')))"
 
-# How many LOT folders in inventory?
-ls /Users/nicholasdemeter/Documents/youdontneedthis-inventory | grep -c "^LOT_"
+# LOT folders in inventory
+ls ~/Documents/youdontneedthis-inventory | grep -c '^LOT_'
 ```
-Numbers don't need to match exactly (some LOTs may have no folder yet)
-BUT: any LOT in CSV without a folder = panel with no images on live site
+They need not be equal (an item can lack a folder), but every CSV LOT without a folder
+will render with no images on the live site. Use Check 4 to list them.
 
-### Check 4 — Find LOTs in CSV with no inventory folder
+### Check 4 — which CSV items have NO matching inventory folder
 ```bash
-node -e "
-const fs = require('fs');
-const path = require('path');
-const csv = fs.readFileSync('/Users/nicholasdemeter/Documents/youdontneedthis-site/products.csv', 'utf-8');
-const inv = '/Users/nicholasdemeter/Documents/youdontneedthis-inventory';
-const lines = csv.trim().split('\n').slice(1);
-const invFolders = fs.readdirSync(inv);
-const missing = [];
-lines.forEach(line => {
-  const lot = line.split(',')[0].trim();
-  if (!lot.startsWith('LOT_')) return;
-  const num = lot.match(/LOT_(\d+)/)?.[1];
-  if (!num) return;
-  const found = invFolders.find(f => f.toUpperCase().startsWith('LOT_' + num + '_'));
-  if (!found) missing.push(lot);
-});
-console.log('LOTs in CSV with no inventory folder:', missing.length);
-console.log(missing.join('\n'));
+python3 -c "
+import csv, os, re
+csv_path = os.path.expanduser('~/Documents/youdontneedthis-site/products.csv')
+inv = os.path.expanduser('~/Documents/youdontneedthis-inventory')
+folders = [f for f in os.listdir(inv) if f.upper().startswith('LOT_')]
+missing = []
+for r in csv.DictReader(open(csv_path)):
+    lot = r['LOT'].strip()
+    m = re.match(r'LOT_(\d+)', lot)
+    if not m: continue
+    num = m.group(1)
+    if not any(f.upper().startswith(f'LOT_{num}_') for f in folders):
+        missing.append(lot)
+print('CSV items with no inventory folder:', len(missing))
+print('\n'.join(missing))
 "
 ```
-These LOTs will show panels with no images. Expected: LOT_023, LOT_064.
-Any others = either missing photos or naming mismatch.
-
-### Check 5 — FOLDER_NAME column integrity
-```bash
-node -e "
-const fs = require('fs');
-const csv = fs.readFileSync('/Users/nicholasdemeter/Documents/youdontneedthis-site/products.csv', 'utf-8');
-const lines = csv.trim().split('\n');
-const headers = lines[0].split(',');
-const folderIdx = headers.indexOf('FOLDER_NAME');
-const inv = '/Users/nicholasdemeter/Documents/youdontneedthis-inventory';
-const invFolders = fs.readdirSync(inv);
-let mismatches = 0;
-lines.slice(1).forEach(line => {
-  const vals = line.split(',');
-  const folderName = vals[folderIdx]?.trim().replace(/^\"|\"$/g,'');
-  if (!folderName) return;
-  const exact = invFolders.includes(folderName);
-  if (!exact) { console.log('MISMATCH:', folderName); mismatches++; }
-});
-console.log('Total mismatches:', mismatches);
-"
-```
-Any mismatch = that LOT will fall back to prefix matching (usually OK but worth knowing).
+There is no "expected" list of missing folders. Whatever appears here is the current,
+real set of items that will show placeholders. For each, the fix is either add the
+folder (SKILL-new-lot.md) or remove the row from the CSV. Report the list to Nicholas;
+do not assume any of them are "known/acceptable."
 
 ---
 
@@ -121,17 +96,9 @@ Any mismatch = that LOT will fall back to prefix matching (usually OK but worth 
 
 | Situation | Action |
 |-----------|--------|
-| Everything in sync | Proceed with push |
-| Site repo has uncommitted changes | Review, commit or discard |
-| Inventory diverged from GitHub | Check which is newer, push or force push |
-| LOTs missing from inventory | Note them — panels will show no images |
-| FOLDER_NAME mismatches | Not blocking but flag for cleanup |
-| Live site showing old build | Wait for cache expiry (10 min max) |
-
----
-
-## KNOWN PERMANENT EXCEPTIONS
-- LOT_023 (DEVALIET EARDRUM SPECIAL) — no inventory folder, remove from CSV when ready
-- LOT_064 (PrinCube) — no inventory folder, remove from CSV when ready
-- Inventory local branch is `master`, GitHub is `main` — this is normal, use `push origin master:main`
-- .DS_Store always shows as modified in site repo — ignore it, never commit it
+| Everything in sync | Proceed |
+| Site repo has uncommitted changes | Review with Nicholas; commit or discard |
+| Inventory diverged from GitHub | Determine which is newer before pushing |
+| CSV items missing folders (Check 4) | Report the list; add folders or remove rows |
+| Live site on old build | Wait for cache (a few minutes), recheck |
+| .DS_Store shows as modified | Normal; never commit it |

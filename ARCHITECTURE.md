@@ -1,356 +1,295 @@
-# YDNT ARCHITECTURE
-# youdontneedthis.us — Complete System Reference
-# Last updated: June 26, 2026
-# Maintained in: youdontneedthis-site repo (root)
-# Read by: All AI agents working on either repo
+# YDNT ARCHITECTURE — THE ONE DOCUMENT
+# youdontneedthis.us — complete system reference
+# This is the ONLY canonical document. If anything goes wrong, the cause is:
+# this file was not read completely and accurately. There is no other explanation to chase.
+
+# RULE FOR MAINTAINING THIS FILE:
+# This document describes HOW THE SYSTEM WORKS. It must NEVER contain volatile state —
+# no specific LOT numbers, no item names, no counts, no prices, no commit hashes, no dates.
+# Those things change constantly. The moment you write one down here, this file starts lying.
+# Describe the machine, never its current contents.
 
 ---
 
-## READ THIS FIRST — THE FOOD TRUCK ANALOGY
+## 1. WHAT THIS SYSTEM IS
 
-This site works like a food truck operation:
-
-| Analogy | Reality |
-|---------|---------|
-| The Menu | `products.csv` (downloaded from Google Sheets) |
-| The Kitchen | `youdontneedthis-inventory` repo (photos, videos, thumbnails) |
-| The Printer | `build.js` (reads menu + kitchen, outputs one HTML file) |
-| The Laminated Menu Card | `dist/index.html` (the actual website file) |
-| The Window | GitHub Pages (serves the card to customers) |
-| The Customer | Anyone visiting youdontneedthis.us |
-
-**The Golden Rule:** Every time the Menu OR Kitchen changes, you MUST run the Printer
-and push the new card to the Window. The Window has no printer of its own.
-
----
-
-## THE FOUR SOURCES OF TRUTH (never violate hierarchy)
-
-1. **Google Sheets** → master product data → exported as `products.csv`
-2. **youdontneedthis-inventory repo** → all media (photos, videos, thumbnails)
-3. **build.js** → reads both, generates `dist/index.html`
-4. **ARCHITECTURE.md** → this file → authoritative system reference for all agents
-
-If any agent is uncertain about system behavior, check this file before asking Nicholas.
-If this file doesn't answer the question, flag it as an ARCHITECTURE GAP and update this file.
-
----
-
-## REPO LOCATIONS
+youdontneedthis.us is a curated tech resale site. It is built from three inputs into one
+output file, which is served as a static page. There is no database and no server-side code.
 
 ```
-LOCAL (Mac):
-  Site:      /Users/nicholasdemeter/Documents/youdontneedthis-site
-  Inventory: /Users/nicholasdemeter/Documents/youdontneedthis-inventory
-  ↑ MUST be siblings in Documents/ — build.js resolves inventory at ../youdontneedthis-inventory
-
-GITHUB:
-  Site:      https://github.com/NicholasDemeter/youdontneedthis-site
-  Inventory: https://github.com/NicholasDemeter/youdontneedthis-inventory
-  Live site: https://youdontneedthis.us
+products.csv  +  inventory folders  →  build.js  →  dist/index.html  →  GitHub Pages
+   (data)          (media)            (engine)      (the website)       (the window)
 ```
+
+Two GitHub repositories:
+- **Site repo** — code, build script, the CSV, and the generated HTML
+- **Inventory repo** — all media (thumbnails and photos), one folder per item
+
+The site repo and inventory repo are SIBLINGS on the local machine, both inside ~/Documents/.
+build.js reaches the inventory at the relative path `../youdontneedthis-inventory`.
 
 ---
 
-## HOW DEPLOYMENT WORKS
+## 2. THE ONE MATCHING RULE (this is the heart of the system)
+
+For every row in products.csv, build.js finds that item's media by ONE key only:
 
 ```
-1. Nicholas edits Google Sheet
-2. Downloads → replaces products.csv in site repo
-3. Adds/edits photos in inventory repo (local Mac)
-4. Runs: node build.js  ← NEVER skip. Reads CSV + local inventory. Outputs dist/index.html
-5. Verifies locally: open dist/index.html in browser
-6. git add dist/index.html products.csv
-7. git commit -m "descriptive message"
-8. git push origin main  (site repo)
-9. GitHub Actions deploys dist/ to GitHub Pages
-10. Wait 2-3 min → verify with curl (NOT browser)
+The LOT id in column A, formatted as exactly:  LOT_###
 ```
 
-**CRITICAL — WHY build.js MUST RUN LOCALLY:**
-GitHub Actions does NOT have access to the local inventory repo.
-If build.js runs on GitHub's servers it finds no photos → generates placeholders.
-Always build locally first, commit dist/index.html, then push.
-This was the root cause of the June 2026 image outage.
+It then finds the inventory folder whose name STARTS WITH `LOT_###_`
+(the LOT id followed by an underscore). It uses that folder. Everything in the folder
+name AFTER `LOT_###_` is ignored completely — never read, never compared.
+
+```
+Column A says:        LOT_130
+Matching folder:      LOT_130_anything_at_all_here   ← matches
+                      LOT_130_Different_Name_Entirely ← also matches
+                      (the part after LOT_130_ is decoration for humans, not for the code)
+```
+
+Why it works this way: the LOT id is a strict machine key. The human-readable name is
+decoration. If the code tried to match the full name, a single character difference
+(a hyphen instead of an underscore, a typo, a renamed item) would break the match.
+By matching only the strict key, the name can be anything and the link still holds.
+
+**The format of the key is non-negotiable. All three parts must be exact:**
+- Capital letters: `LOT` — not `lot`, `Lot`, or `lOT`
+- An underscore
+- EXACTLY three digits, zero-padded: `LOT_012` — not `LOT_12`
+- Followed by an underscore before the rest of the folder name
+
+If the key is malformed in either the CSV or the folder name, the match fails and the
+item shows on the site with its text but a grey "No Image Available" box.
 
 ---
 
-## INVENTORY PUSH COMMAND (branch mismatch — known issue)
+## 3. WHAT A PLACEHOLDER MEANS
 
-```bash
-cd /Users/nicholasdemeter/Documents/youdontneedthis-inventory
-git add .
-git commit -m "descriptive message"
-git push origin master:main
-# If rejected: git push origin master:main --force
-# Only use --force if local is confirmed newer than GitHub
-```
+If the live site shows an item with text but a grey "No Image Available" box, there are
+exactly two possible causes — no others:
 
-Local branch is `master`, GitHub is `main`. Functional but inconsistent. Rename when convenient.
+1. **The CSV has a row, but no inventory folder starts with `LOT_###_`** for that item.
+   Fix: create the folder (Section 6) or remove the row from the CSV.
 
-**After every inventory push → must also rebuild and push site repo.**
-Pushing inventory alone does NOT update the live site.
+2. **build.js was run by GitHub Actions instead of locally.** GitHub's servers have no
+   access to the local inventory, so build.js finds no folders and generates placeholders
+   for EVERYTHING. If you see placeholders across the whole site, this is the cause.
+   Fix: rebuild locally (Section 5) and push the correct dist/index.html.
+
+There is no "expected" or "normal" placeholder count. In correct operation, every item
+that has a folder shows its images. A placeholder is always one of the two causes above.
 
 ---
 
-## SESSION START CHECKLIST
+## 4. THE THREE INPUTS (sources of truth)
 
-Run these at the start of EVERY session before touching anything:
+**products.csv** — lives in the site repo root. Generated by Nicholas from Google Sheets
+and dropped in. Columns, in order:
 
-```bash
-git -C /Users/nicholasdemeter/Documents/youdontneedthis-site status
-git -C /Users/nicholasdemeter/Documents/youdontneedthis-inventory status
+```
+A  LOT              ← the matching key. LOT_### (see Section 2). THE ONLY MATCH FIELD.
+C  OFFICIAL_NAME    ← human-readable product name. Used for display and as the seed
+                      for naming new inventory folders. NOT used for matching.
+   (then) COOLNESS_RATING, TAGLINE, DESCRIPTION, SPECIFICATIONS, PRICE,
+          CATEGORY, PRICE ESTIMATE HYPERLINKS, SUBCATEGORY
+```
+
+Rule: if an item is not a row in the CSV, it does not appear on the site. Period.
+
+**inventory folders** — one folder per item in the inventory repo. Each folder:
+```
+LOT_###_Sanitized_Official_Name/
+├── (a file with THUMBNAIL in its name)   ← the card image. In the folder ROOT.
+└── Photos/
+    ├── (image files)                      ← gallery images, shown in the item modal
+```
+- Thumbnail: any file whose name CONTAINS the word THUMBNAIL (case-insensitive),
+  sitting in the folder root (not inside Photos/). Common extensions are recognized
+  (.jpg .jpeg .png .gif .webp). The thumbnail is what the CARD displays.
+- Photos: image files inside the Photos/ subfolder. Sorted naturally by filename.
+  The LOT PAGE gallery leads with the FIRST photo by natural sort (e.g. LOT_###_01),
+  not the thumbnail. The thumbnail should be derived from that same first photo (a
+  compressed copy of LOT_###_01), so the card and the gallery's opening image match.
+  Thumbnail and first photo are separate files; both must exist for both to show images.
+- The hero/background video is a single fixed file in the inventory repo's Carousel_HERO/
+  folder and is referenced directly by the build; it is not per-item.
+
+**build.js** — the engine in the site repo. Reads the CSV, applies the matching rule,
+constructs raw GitHub image URLs pointing at the inventory repo, and writes the finished
+dist/index.html. It must run LOCALLY, where the inventory folders exist.
+
+---
+
+## 5. THE ONLY CORRECT UPDATE WORKFLOW
+
+```
+1. Edit Google Sheet → download → replace products.csv in the site repo root
+2. Add or edit inventory folders locally (Section 6 for new items)
+3. cd into the site repo
+4. node build.js                         ← NEVER skip. Builds dist/index.html locally.
+5. open dist/index.html                  ← look at it. Confirm images appear.
+6. Commit the inventory repo and push it  (branch note in Section 7)
+7. Commit the site repo (products.csv + dist/index.html) and push it
+8. Wait ~2-3 minutes for GitHub Pages, then verify live (Section 8)
+```
+
+Pushing the inventory repo alone does NOTHING to the live site. The live site only changes
+when a freshly-built dist/index.html is pushed in the site repo. Always do both.
+
+---
+
+## 6. CREATING A NEW ITEM (the intake sequence)
+
+When adding a new item from a staging folder of raw images:
+
+```
+1. Assign the next LOT id: LOT_### — capital LOT, three digits, zero-padded.
+   (Check the existing CSV/inventory for the highest current number and add one.)
+2. Create the inventory folder, named:  LOT_###_<official name, sanitized>
+   - Take the official name, replace spaces with underscores, strip punctuation
+     (no quotes, slashes, apostrophes, or other characters illegal in folder names).
+   - Only LOT_### needs to be exact. The sanitized name is for humans; the code ignores it.
+3. Inside the folder, create a Photos/ subfolder. Put the gallery images there.
+   Rename them to a consistent natural-sort order (e.g. LOT_###_01, LOT_###_02, ...).
+4. Compress images to keep them web-light (thumbnails small, photos moderate).
+5. Create the thumbnail by copying the FIRST photo (LOT_###_01), compressing it, and
+   placing the copy in the folder ROOT (not in Photos/). Its filename must contain the
+   word THUMBNAIL. Do not subjectively pick a "best" image — always derive from the
+   natural-sort first photo so the card matches the gallery's opening image.
+6. Add the matching row to products.csv with the same LOT id in column A,
+   the official name in column C, and the remaining columns filled
+   (rating, tagline, description, specs, price, category, subcategory).
+7. Run build.js, verify locally, then push both repos (Section 5).
+```
+
+The official name in column C is the seed an agent can use to research and write the
+remaining columns (e.g. by looking up the product). The folder name is also human-readable
+so Nicholas can audit the inventory repo by eye.
+
+---
+
+## 7. REPO FACTS (stable, not volatile — safe to state)
+
+```
+Site repo:       ~/Documents/youdontneedthis-site
+                 GitHub: NicholasDemeter/youdontneedthis-site
+                 Default branch: main
+                 Push: git push origin main
+
+Inventory repo:  ~/Documents/youdontneedthis-inventory
+                 GitHub: NicholasDemeter/youdontneedthis-inventory
+                 Local branch is master, GitHub branch is main (a known, stable mismatch)
+                 Push: git push origin master:main
+
+Image URLs:      build.js points image URLs at the inventory repo's served branch.
+                 This branch is set ONCE in build.js (the INVENTORY_REPO_BASE constant).
+                 If you ever hand-write a raw image URL to test it, copy the branch
+                 from that constant — do not assume. The site repo and the inventory
+                 repo do not necessarily serve from the same branch name.
+
+Live site:       https://youdontneedthis.us  (GitHub Pages, ~2-3 min after a site push)
+```
+
+GitHub Actions deploys whatever dist/index.html is already committed. It must NOT run
+build.js itself (no inventory access on GitHub's servers → whole-site placeholders).
+Never delete CNAME or the .github/workflows/ deploy file.
+
+---
+
+## 8. VERIFYING THE LIVE SITE
+
+```
+# Is the freshly-built page live (not a stale cache)?
 curl -s https://youdontneedthis.us | grep -c "PREMIUM ITEMS\|hero-stats"
-# Expected: 0. If 2 = old cache still live, wait 2-3 min and retry.
-```
-
-If any output is unexpected — stop and diagnose before proceeding.
-
----
-
-## DO NOT PROCEED WITHOUT ASKING NICHOLAS
-
-Never assume. Always ask Nicholas if:
-- A LOT folder in staging matches an existing inventory item
-- A new LOT number assignment is needed (check tail of products.csv first)
-- Category assignment for a new item
-- Pricing or description decisions
-- Whether to delete or archive a sold item
-- Any structural change to build.js or deploy.yml
-
----
-
-## FOLDER MATCHING — HOW build.js FINDS PHOTOS
-
-```
-products.csv row:
-LOT = "LOT_002"
-FOLDER_NAME = "LOT_002_Microsoft_Surface_Studio_2_All_in_One_Desktop"
-
-build.js matching logic (in order):
-  1. Exact FOLDER_NAME match → use it
-  2. Prefix match: any folder starting with "LOT_002_" → use it
-  3. Neither matches → show placeholder ("No Image Available")
-
-RULES:
-✅ LOT ID format: LOT_### (always 3 digits, zero-padded)
-✅ Folder MUST have content after number: LOT_069_Apple_Watch ✅
-❌ LOT_069 alone (nothing after underscore) → may not match
-✅ Case insensitive matching
-✅ Photos: must be in Photos/ subfolder
-✅ Thumbnail: must contain "THUMBNAIL" in filename, in LOT root (not Photos/)
-✅ Videos: must be in Videos/ subfolder
-✅ Accepted image formats: .jpg .jpeg .png .gif .webp
-✅ Accepted video formats: .mp4 .mov .webm
-```
-
----
-
-## INVENTORY REPO — FOLDER STRUCTURE (strict, never deviate)
-
-```
-youdontneedthis-inventory/
-├── Carousel_HERO/
-│   └── Hero_Media.mp4           ← hero video. NEVER DELETE.
-├── LOT_001_ITEM_NAME/
-│   ├── LOT_001_THUMBNAIL.jpg    ← MUST be in root, not in Photos/
-│   ├── Photos/
-│   │   ├── LOT_001_01.jpg
-│   │   ├── LOT_001_02.jpg
-│   │   └── LOT_001_03.jpg       ← minimum 3 photos
-│   └── Videos/
-│       └── LOT_001_VIDEO_01.mp4
-└── [more LOT folders...]
-```
-
-**File size limits:**
-| Type | Max Size |
-|------|----------|
-| Thumbnail | 200KB |
-| Photos | 400KB each |
-| Videos | 10MB each |
-
----
-
-## SITE REPO — WHAT LIVES WHERE
-
-```
-youdontneedthis-site/
-├── ARCHITECTURE.md   ← THIS FILE. Single source of truth. Keep updated.
-├── CLAUDE.md         ← Short stub pointing here. Auto-read by Claude Code.
-├── build.js          ← THE ENGINE. Never delete.
-├── products.csv      ← Source of truth #1. Replace with Google Sheets export.
-├── CNAME             ← Contains "youdontneedthis.us". NEVER DELETE.
-├── dist/
-│   └── index.html   ← Generated by build.js. NEVER edit directly.
-├── .github/
-│   └── workflows/
-│       └── deploy.yml ← Tells GitHub how to publish. NEVER DELETE.
-└── skills/
-    ├── SKILL-push.md
-    ├── SKILL-new-lot.md
-    ├── SKILL-verify-live.md
-    ├── SKILL-sync-check.md
-    └── SKILL-cleanup.md
-
-DEAD WEIGHT (never edit, ignore entirely):
-  app/ components/ hooks/ lib/ types/
-  next.config.mjs tsconfig.json pnpm-lock.yaml postcss.config.mjs components.json
-  Root index.html (622 bytes) styles.css app.js
-  Stale branches: v0/nicholasdemeter, vercel/react-server-components-cve, YDNT_Sandbox
-```
-
----
-
-## CSS MODIFICATION RULES
-
-All CSS lives inside `build.js` as a template literal. dist/index.html is generated output.
-
-```
-CORRECT WORKFLOW:
-1. Edit CSS inside build.js (inside the <style> tag template literal)
-2. Run: node build.js
-3. Verify: open dist/index.html in browser
-4. Commit both build.js AND dist/index.html
-5. Push
-
-NEVER:
-- Edit CSS in dist/index.html (regenerated on every build, changes are lost)
-- Add external .css files (site is intentionally single-file HTML)
-- Scatter mobile CSS outside the @media blocks
-```
-
-**Mobile breakpoints — two blocks only:**
-```
-Desktop:  > 768px   (main CSS block, no media query)
-Tablet:   ≤ 768px   (@media (max-width: 768px))
-Phone:    ≤ 480px   (@media (max-width: 480px))
-```
-
----
-
-## MOBILE-CRITICAL PATTERNS (DO NOT BREAK)
-
-**iOS Safari video — requires playsinline:**
-```html
-<video class="hero-video" autoplay muted loop playsinline>
-```
-Without `playsinline`, video fails silently on iOS Safari. No error. No playback. Just black.
-
-**Viewport units — use svh not vh:**
-```css
-.hero { min-height: 100svh; }  /* NOT 100vh */
-```
-Accounts for iOS Safari's collapsing address bar. Prevents layout shift on scroll.
-
-**Button width pattern on mobile:**
-```css
-@media (max-width: 768px) {
-  .special-btn {
-    width: 100%;
-    max-width: 280px;   /* cap — no full-width stretch */
-    margin: 0 auto;
-  }
-}
-```
-
-**Product grid responsive:**
-```css
-@media (max-width: 768px) {
-  .lots-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
-}
-@media (max-width: 480px) {
-  .lots-grid { grid-template-columns: 1fr; }
-  .lot-thumbnail { height: 200px; }
-}
-```
-
----
-
-## HOW IMAGES GET FROM MAC TO THE BROWSER
-
-```
-Local file:
-/Users/nicholasdemeter/Documents/youdontneedthis-inventory/LOT_002_.../Photos/LOT_002_01.jpg
-  ↓
-build.js constructs GitHub raw URL:
-https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_002_.../Photos/LOT_002_01.jpg
-  ↓
-URL baked into dist/index.html
-  ↓
-Visitor's browser fetches image directly from GitHub
-```
-
----
-
-## SITE FEATURES (confirmed working June 26, 2026)
-
-| Feature | Status |
-|---------|--------|
-| Hero video (background) | ✅ Working |
-| Hero copy (YOU DON'T / NEED THIS) | ✅ Working |
-| Category dropdown (7 categories) | ✅ Working |
-| Featured Items button | ✅ Working |
-| Hot Items carousel (coolness ≥ 6) | ✅ Working |
-| Product cards with thumbnails | ✅ Working |
-| Category filter (hide/show cards) | ✅ Working |
-| WhatsApp contact button | ✅ Working |
-| Modal gallery with photos | ✅ Working |
-| Modal gallery with videos | ✅ Working |
-| Mobile responsive layout (768px + 480px) | ✅ Working |
-| Stars hidden (internal use only) | ✅ Working |
-
----
-
-## VERIFICATION COMMANDS
-
-```bash
-# Is correct build live?
-curl -s https://youdontneedthis.us | grep -c "PREMIUM ITEMS\|hero-stats"
-# Expected: 0
+# 0 = the current build is live.  A non-zero count = an older build/cache; wait and retry.
 
 # Are images loading?
 curl -s https://youdontneedthis.us | grep -c "No Image Available"
-# Expected: 2-5 (LOT_023 and LOT_064 have no folders — known)
-# If 100+: build.js ran on GitHub servers without inventory. Rebuild locally and push.
+# A high count across the whole site = a GitHub-Actions-without-inventory build (Section 3,
+# cause 2). A small count = that many CSV rows lack a matching folder (Section 3, cause 1).
+# Resolve by the matching cause; do not treat any count as "expected."
 
-# Test a specific image URL
-curl -s -o /dev/null -w "%{http_code}" "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_002_Microsoft_Surface_Studio_2_All_in_One_Desktop/LOT_002_THUMBNAIL.jpg"
-# Expected: 200
-
-# What commit is live on GitHub?
-curl -s https://api.github.com/repos/NicholasDemeter/youdontneedthis-site/commits/main | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['sha'][:7], d['commit']['message'])"
-
-# Cache status
-curl -s -I https://youdontneedthis.us | grep -i "age\|last-modified"
-
-# Is local site repo in sync with GitHub?
-git -C /Users/nicholasdemeter/Documents/youdontneedthis-site diff origin/main --name-only
-
-# Is local inventory in sync with GitHub?
-git -C /Users/nicholasdemeter/Documents/youdontneedthis-inventory status
+# What commit is live?
+curl -s https://api.github.com/repos/NicholasDemeter/youdontneedthis-site/commits/main \
+ | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['sha'][:7], d['commit']['message'])"
 ```
 
----
-
-## KNOWN ISSUES (as of June 26, 2026)
-
-| Issue | Priority | Notes |
-|-------|----------|-------|
-| Inventory local branch `master` vs GitHub `main` | Low | Use `git push origin master:main`. Rename when convenient. |
-| LOT_023 (DEVALIET EARDRUM SPECIAL) — no folder | Low | Shows placeholder. Add folder or remove from CSV. |
-| LOT_064 (PrinCube) — no folder | Low | Shows placeholder. Add folder or remove from CSV. |
-| Dead weight files in site repo | Low | Next.js scaffolding. Ignore. Delete when convenient. |
+Browser cache lies. Use curl to confirm, not the browser.
 
 ---
 
-## GOLDEN RULES (violations break the live site)
+## 9. MOBILE-CRITICAL PATTERNS (do not remove these — they fail SILENTLY on phones)
 
-1. Never edit `dist/index.html` directly — always regenerate via `node build.js`
-2. Never run `build.js` on GitHub Actions (no inventory access there)
-3. Never push inventory without also rebuilding and pushing site repo
-4. Never delete `CNAME`, `deploy.yml`, or `Carousel_HERO/`
-5. Never commit `.DS_Store` files
-6. Always verify with curl — browser cache lies
-7. Not in `products.csv` → not on site. Period.
-8. In CSV but no matching inventory folder → shows placeholder, not broken
+All site CSS lives inside build.js as a template literal. dist/index.html is generated
+output — never edit it directly. Edit CSS in build.js, then rebuild.
+
+```
+playsinline on the hero <video> tag   → without it, iOS Safari shows black, no error
+100svh (not 100vh) for hero height    → accounts for iOS Safari's collapsing address bar
+button max-width on mobile            → prevents full-width stretch; keeps thumb reach
+@media (max-width: 768px) block       → tablet/phone breakpoint
+@media (max-width: 480px) block       → small-phone breakpoint
+```
+
+All mobile rules live ONLY inside those two @media blocks. Never scatter mobile rules
+elsewhere in the stylesheet.
+
+---
+
+## 10. AGENT OPERATING RULES (how to work on this safely)
+
+**PUSH GATE — never push without explicit approval in the current session.**
+```
+make changes → node build.js → open dist/index.html → STOP and report what to look at
+→ wait for Nicholas to say "push it" → only then git add/commit/push
+```
+A general "go ahead" from a past task does NOT carry forward. Approval is per-session,
+for the specific changes in front of you.
+
+**FRICTION STOP — if anything fails unexpectedly, STOP and report.**
+Auth error, rejected push, missing file, surprising output → do NOT invent a workaround,
+do NOT switch to SSH/gh-CLI/force flags on your own. Report the exact error and ask.
+Silent workarounds are how a small problem becomes a site outage.
+
+**VISUAL HONESTY — you cannot see the rendered page.**
+A grep that finds a CSS string proves the code exists, not that it looks right. For any
+visual change, build locally and ask Nicholas to look at dist/index.html. Never report
+a visual change as "verified." Say: "Built locally — please confirm it looks right."
+
+**DON'T INVENT DATA.** Product facts come from Google Sheets or Nicholas, or from
+researching the official name. Never fabricate a price, spec, or item.
+
+**DON'T edit dist/index.html directly. DON'T run build.js on GitHub Actions.
+DON'T commit .DS_Store. DON'T delete CNAME, the deploy workflow, or Carousel_HERO/.**
+
+---
+
+## 11. DEEPER PROCEDURES (the /skills folder)
+
+The site repo has a /skills folder with longer step-by-step procedures. You do NOT need
+to read them to do routine work — the sequences above (Sections 5, 6, 8) are sufficient
+for the common tasks. Open a skill only if a task needs its specific depth:
+
+```
+skills/SKILL-new-lot.md     → the full new-item intake, in granular detail
+skills/SKILL-push.md        → the full push sequence with every verification gate
+skills/SKILL-cleanup.md     → inventory hygiene: naming, sizes, structure compliance
+skills/SKILL-sync-check.md  → confirming CSV, inventory, and site are all in agreement
+skills/SKILL-verify-live.md → the full live-site verification protocol
+```
+
+If a skill ever contradicts THIS document, this document wins, and the skill is stale
+and should be flagged for correction. This document is the single source of truth.
+
+---
+
+## 12. WHAT TO ASK NICHOLAS BEFORE PROCEEDING
+
+Ask, don't assume, when:
+- Assigning a new LOT number (confirm the next free number)
+- A staging folder might duplicate an existing item
+- Category/subcategory or pricing for a new item
+- Deleting or archiving a sold item
+- Any change to build.js logic, the deploy workflow, or the CSV column structure

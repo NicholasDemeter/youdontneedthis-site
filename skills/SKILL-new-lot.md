@@ -1,215 +1,156 @@
 # SKILL-new-lot.md
-# YDNT — New Item Intake Workflow
-# Save to: /Users/nicholasdemeter/Documents/youdontneedthis-site/skills/SKILL-new-lot.md
+# YDNT — New Item Intake (raw photos → live on site)
 
-## OVERVIEW
-This skill governs adding a new item to YDNT from raw photos/videos to live on site.
-It involves THREE phases: Prep, Inventory, and Publish.
-Never proceed to next phase without completing all gates in current phase.
+## SELF-CORRECTION RULE
+If anything (a folder, a column, a count, a path) doesn't match this skill or
+ARCHITECTURE.md, STOP and ask Nicholas. If a document is wrong, propose the fix and
+update it with approval in the same session.
 
----
+## NEVER ASSUME
+Never auto-assign a LOT number, auto-merge a duplicate, or invent price/category/specs.
+Those are Nicholas's decisions. Ask.
 
 ## STAGING LOCATION
-All new items start here before processing:
-`/Users/nicholasdemeter/Desktop/YDNT_BACKUP/To Clean for YDNT`
+Raw items start here: `~/Desktop/YDNT_BACKUP/To Clean for YDNT`
 
 ---
 
 ## PHASE 1 — INTAKE ASSESSMENT (ask before touching anything)
 
-### Step 1 — Scan staging folder
+1. Scan staging:
 ```bash
-ls '/Users/nicholasdemeter/Desktop/YDNT_BACKUP/To Clean for YDNT'
+ls "$HOME/Desktop/YDNT_BACKUP/To Clean for YDNT"
 ```
-
-### Step 2 — Check for duplicates against inventory repo
-For EACH folder in staging, run:
+2. Check each staged item against existing inventory for duplicates:
 ```bash
-ls /Users/nicholasdemeter/Documents/youdontneedthis-inventory | grep -i "KEYWORD"
+ls ~/Documents/youdontneedthis-inventory | grep -i "KEYWORD"   # distinctive word from the item
 ```
-Replace KEYWORD with distinctive word from staging folder name.
-
-### Step 3 — ASK NICHOLAS before proceeding
-For each item found, report:
-- "LOT_XXX in staging appears to match LOT_YYY already in inventory ([name]). 
-   Do you want to: (a) replace existing, (b) add as new LOT, or (c) skip?"
-- NEVER assume. NEVER auto-merge. ALWAYS ask.
-
-### Step 4 — Determine LOT number for genuinely new items
+3. For anything that looks like a match, ask Nicholas: replace existing / add as new LOT / skip.
+4. Determine the LOT number for genuinely new items. Find the current highest:
 ```bash
-# Check current tail of products.csv
-tail -5 /Users/nicholasdemeter/Documents/youdontneedthis-site/products.csv | cut -d',' -f1
+python3 -c "
+import csv, re, os
+rows=list(csv.DictReader(open(os.path.expanduser('~/Documents/youdontneedthis-site/products.csv'))))
+nums=sorted(int(re.match(r'LOT_(\d+)',r['LOT']).group(1)) for r in rows if re.match(r'LOT_(\d+)',r['LOT']))
+print('highest LOT:', f'LOT_{nums[-1]:03d}' if nums else 'none')
+"
 ```
-Ask Nicholas: "The last LOT in products.csv is LOT_###. Should the new item be LOT_### 
-(next in sequence) or fill a gap? Please confirm the LOT number."
+Ask Nicholas to confirm the new number (next in sequence, or fill a gap). LOT numbers are
+never reused once retired.
 
 ---
 
-## PHASE 2 — FOLDER COMPLIANCE
+## PHASE 2 — BUILD THE INVENTORY FOLDER
 
-### Step 1 — Create compliant folder structure
+The ONLY hard rule for matching: the folder name must start with `LOT_###_` —
+capital LOT, three zero-padded digits, underscore. Everything after is for humans and is
+ignored by the code. Seed the readable part from the item's official name, sanitized
+(spaces → underscores, strip quotes/slashes/apostrophes and other illegal characters).
+
 ```bash
-mkdir -p "/Users/nicholasdemeter/Documents/youdontneedthis-inventory/LOT_###_ITEM_NAME/Photos"
-mkdir -p "/Users/nicholasdemeter/Documents/youdontneedthis-inventory/LOT_###_ITEM_NAME/Videos"
-```
-Folder naming rules:
-- Must start with `LOT_###_` (3-digit zero-padded number + underscore)
-- Use underscores not spaces
-- Keep it descriptive but not too long
-
-### Step 2 — Move and rename photos
-Move all photos to `Photos/` subfolder.
-Rename sequentially:
-- `LOT_###_01.jpg`
-- `LOT_###_02.jpg`
-- `LOT_###_03.jpg` (minimum 3 photos required)
-
-Accepted formats: `.jpg .jpeg .png .gif .webp`
-Convert any other formats before adding.
-
-### Step 3 — Move and rename videos (if any)
-Move all videos to `Videos/` subfolder.
-Rename:
-- `LOT_###_VIDEO_01.mp4`
-- `LOT_###_VIDEO_02.mp4`
-
-Accepted formats: `.mp4 .mov .webm`
-Convert `.mov` to `.mp4` where possible for compatibility.
-
-### Step 4 — Create thumbnail
-Best photo from the set becomes the thumbnail.
-Place in LOT ROOT (not in Photos subfolder).
-Name: `LOT_###_THUMBNAIL.jpg`
-Target size: under 200KB
-
-### Step 5 — Compress all files
-Thumbnails: 100KB–200KB (not larger than 200KB, not smaller than 100KB)
-Photos: 300KB–400KB each (not larger than 400KB, not smaller than 300KB)
-Videos: under 10MB each
-
-Use Claude Code with ImageMagick or ffmpeg:
-```bash
-# Compress photos
-mogrify -resize 1200x1200\> -quality 85 "Photos/*.jpg"
-
-# Compress thumbnail  
-convert "LOT_###_THUMBNAIL.jpg" -resize 800x800\> -quality 85 "LOT_###_THUMBNAIL.jpg"
-
-# Compress videos (if ffmpeg available)
-ffmpeg -i input.mp4 -vcodec h264 -acodec aac -crf 28 output.mp4
+LOT="LOT_###_Sanitized_Official_Name"
+mkdir -p ~/Documents/youdontneedthis-inventory/"$LOT"/Photos
+mkdir -p ~/Documents/youdontneedthis-inventory/"$LOT"/Videos   # optional; fine if left empty
 ```
 
-### Step 6 — Verify compliance
+Move and rename photos into Photos/, sequential and natural-sorting:
+`LOT_###_01.jpg`, `LOT_###_02.jpg`, ... (minimum 3 recommended).
+Accepted images: .jpg .jpeg .png .gif .webp — convert anything else first.
+
+Videos (if any) go in Videos/, e.g. `LOT_###_VIDEO_01.mp4`.
+Accepted: .mp4 .mov .webm — prefer .mp4. (build.js appends videos to the gallery.)
+
+Thumbnail: derive it from the FIRST photo by natural sort — i.e. LOT_###_01 (the file
+that sorts to the top of Photos/ by name, NOT a subjective "best" pick). Copy that first
+photo, compress it to thumbnail size, place the copy in the folder ROOT (not Photos/), and
+name it so it contains the word THUMBNAIL, e.g. `LOT_###_THUMBNAIL.jpg`.
+
+Why first-by-name and not "best": the card shows the THUMBNAIL file; the LOT page gallery
+leads with the first photo in Photos/. Deriving the thumbnail from that same first photo
+keeps the card and the LOT page's opening image consistent. "Best" is subjective and not
+reproducible — always use the natural-sort first photo.
+
+---
+
+## PHASE 3 — COMPRESS TO STANDARD (see SKILL-cleanup.md for the batch tooling)
+
+| File | Target size |
+|------|-------------|
+| Thumbnail | 100KB–200KB |
+| Each photo | 300KB–400KB |
+| Each video | under 10MB |
+
+Under-compressing (below the lower bound) is also a compliance miss, not just oversize.
+
+Verify compliance:
 ```bash
-ls LOT_###_ITEM_NAME/           # should show THUMBNAIL + Photos/ + Videos/
-ls LOT_###_ITEM_NAME/Photos/    # should show 3+ images
-ls LOT_###_ITEM_NAME/Videos/    # empty is OK
+ls ~/Documents/youdontneedthis-inventory/"$LOT"/           # THUMBNAIL + Photos/ (+ Videos/)
+ls ~/Documents/youdontneedthis-inventory/"$LOT"/Photos/    # the images
 ```
 
 ---
 
-## PHASE 3 — COPY AND CSV POPULATION
+## PHASE 4 — RESEARCH COPY & POPULATE THE CSV
 
-### Step 1 — Research item (Claude.ai session, not Claude Code)
-Open claude.ai and provide:
-- Item name / model number
-- Any Amazon/eBay/manufacturer links you have
-- Photos if helpful for identification
+Research the item (official name, specs, market price, a witty on-brand description, a
+reference URL). Then add ONE row to the Google Sheet, matching the CSV's 10 columns
+IN THIS EXACT ORDER:
 
-Ask Claude to find:
-- Official product name
-- Full specifications
-- Current market price (Amazon/eBay)
-- Product description (match tone of existing items — witty, direct)
-- Category (must match one of the 7 dropdown categories exactly)
+```
+LOT, OFFICIAL_NAME, COOLNESS_RATING, TAGLINE, DESCRIPTION,
+SPECIFICATIONS, PRICE, CATEGORY, PRICE ESTIMATE HYPERLINKS, SUBCATEGORY
+```
 
-### Step 2 — Questions Claude will always ask Nicholas
-These cannot be automated — Nicholas must answer:
-1. "What price do you want to list this at?"
-2. "Which category? [list the 7 options]"
-3. "What's your coolness rating? (1-10, items rated 6+ appear in Hot Items carousel)"
-4. "Do you have a reference URL for price comparison? (Amazon/eBay preferred)"
+There is NO FOLDER_NAME column — do not add one. The LOT id (column A) is the only link
+to the folder.
 
-### Step 3 — Update Google Sheet
-Add new row to products Google Sheet:
-https://docs.google.com/spreadsheets/d/17OHlKS3aTwR0ane3qJefjXm6SPHpI6KqYO0Qg4jFyvk/
+Nicholas must supply (do not guess): PRICE, CATEGORY, COOLNESS_RATING (items rated 6 appear
+in Featured), reference URL, and SUBCATEGORY if the item belongs to a special section.
 
-Column order (must match exactly):
-LOT, FOLDER_NAME, OFFICIAL_NAME, COOLNESS_RATING, TAGLINE, DESCRIPTION, 
-SPECIFICATIONS, PRICE, CATEGORY, PRICE ESTIMATE HYPERLINKS
+CATEGORY values populate the dropdown dynamically — any value works, but reuse an existing
+category string when the item fits one (check current values with the command in Phase 1's
+file, or `cut`-free parser). SUBCATEGORY only matters for the special on-site sections; the
+two the build currently groups are `Portable Workstations` and `Coolest Gadgets` — these
+strings must match exactly to land in those sections.
 
-FOLDER_NAME must match EXACTLY the folder name in inventory repo.
-Category must be one of the 7 exact strings in DROPDOWN_CATEGORIES in build.js.
-
-### Step 4 — Download and replace products.csv
-File → Download → Comma Separated Values
-Replace: `/Users/nicholasdemeter/Documents/youdontneedthis-site/products.csv`
-
-### Step 5 — Remove sold items
-Before downloading, verify sold items are deleted from Google Sheet.
-Corresponding LOT folders should also be removed from inventory repo.
+Then download the sheet as CSV and replace:
+`~/Documents/youdontneedthis-site/products.csv`
 
 ---
 
-## PRE-PUSH PROTOCOL (run before SKILL-push.md, every time)
+## PRE-PUSH PROTOCOL (verify with real commands, not from memory)
 
-Before touching git, produce an inline review list for Nicholas covering ALL of the following.
-Do not skip straight to pushing on the assumption a step is "probably fine" — verify each item
-with an actual command, not from memory of what you intended to do.
+Before any git action, produce a review list for Nicholas:
 
-1. **New LOT folder names** — list every new LOT_### folder created in the inventory repo this session.
-2. **New LOT folders — thumbnail + photo names and sizes** — for each new folder, list the thumbnail
-   filename/size and every photo filename/size. Confirm each is in range (100-200KB thumbnail,
-   300-400KB photo) with an actual `du -k` check, not an assumption from the compression command's exit code.
-3. **New images added to existing LOTs** — for any staging photos merged into already-existing LOT
-   folders (supplemental photos, placeholder replacements), list filenames/sizes added. Note explicitly
-   if any pre-existing photos in that folder are still out of range — that's a separate cleanup
-   (SKILL-cleanup.md), not something to silently fix or silently ignore.
-4. **New items added to products.csv** — list every new LOT row added (LOT, FOLDER_NAME, PRICE, CATEGORY).
-   Verify with a CSV-aware parser (python `csv` module, not `cut -d','`) since description/tagline fields
-   contain embedded commas that break naive column splitting.
-5. **products.csv integrity check** — after any edit (sed, heredoc append, manual append), reparse the
-   whole file with `csv.DictReader` and confirm: total row count is sane, zero duplicate LOT values,
-   and every new LOT appears exactly once. A file missing a trailing newline before an append will silently
-   merge the last existing row with the first appended row — this will NOT show up in a quick `grep`,
-   only in a full CSV-aware reparse.
-6. **FOLDER_NAME -> folder existence check** — for every LOT touched, confirm `FOLDER_NAME` in the CSV
-   points to a folder that actually exists in the inventory repo.
+1. New LOT folder name(s) created this session.
+2. For each: thumbnail filename + size, every photo filename + size — confirm ranges with
+   an actual `du -k`, not the compression command's exit status.
+3. Any photos added to pre-existing folders: filenames + sizes; note any pre-existing files
+   still out of range (that's a separate SKILL-cleanup pass, not a silent fix).
+4. New CSV rows added (LOT, OFFICIAL_NAME, PRICE, CATEGORY, SUBCATEGORY).
+5. Full-file CSV integrity, parsed with a CSV-aware tool (commas live inside fields):
+```bash
+python3 -c "
+import csv, os
+rows=list(csv.DictReader(open(os.path.expanduser('~/Documents/youdontneedthis-site/products.csv'))))
+lots=[r['LOT'].strip() for r in rows]
+dupes=[l for l in set(lots) if lots.count(l)>1]
+print('total rows:', len(rows))
+print('duplicate LOTs:', dupes or 'none')
+print('columns:', list(rows[0].keys()))
+"
+```
+   A file missing a trailing newline before an append silently merges two rows — this only
+   shows up in a full parse, not a grep. Confirm row count is sane and no duplicate LOTs.
+6. Folder existence: for every new/edited LOT, confirm an inventory folder starts with its
+   `LOT_###_`.
 
-Only after all 6 are confirmed clean and the list has been shown to Nicholas for review should you
-proceed to SKILL-push.md.
-
----
-
-## PHASE 4 — PUSH (follow SKILL-push.md)
-
-After phases 1-3 and the PRE-PUSH PROTOCOL above are complete:
-1. Push inventory repo first (new LOT folder)
-2. Run node build.js locally
-3. Verify locally (grep -c "No Image Available" dist/index.html should be low)
-4. Push site repo
-5. Verify live site
+Only after all six are clean and shown to Nicholas, proceed to SKILL-push.md.
 
 ---
 
-## KNOWN GOTCHAS
-
-- FOLDER_NAME in CSV should match the inventory folder name character for character, but this is not strict for image loading: build.js tries an exact FOLDER_NAME match first, then falls back to scanning for any folder starting with `LOT_###_` if that fails. Only the `LOT_###_` prefix is required for the backend to find images — everything after it is cosmetic for matching purposes, but still matters for keeping FOLDER_NAME accurate for anyone reading the CSV, and for lot card/page content correctness
-- Category string must match EXACTLY — copy from build.js DROPDOWN_CATEGORIES array
-- Minimum 3 photos per LOT or card looks sparse
-- Thumbnails must land between 100KB and 200KB; photos between 300KB and 400KB — too-aggressive compression (undershooting the lower bound) is also a compliance failure, not just oversized files
-- Thumbnail must be in LOT ROOT not in Photos/ subfolder
-- Videos are supported in modal gallery but add to page weight — keep under 10MB
-- LOT numbers are never reused once deleted (to avoid ghost data)
-- .DS_Store files will appear in folders on Mac — they are harmless but don't commit them
-
----
-
-## THE 7 VALID CATEGORIES (copy exactly)
-1. `Computers | Monitors | Office | Peripherals`
-2. `Photography | Videography | Related`
-3. `State-of-the-Art`
-4. `Motorcycle | Camping | Outdoor`
-5. `Audiophile | Hi-Fidelity | Sound`
-6. `Security | Data | Surveillance`
-7. `Jewelery | Bags | Leather`
+## NOTES
+- Minimum 3 photos keeps a card from looking sparse.
+- Thumbnail must stay in the folder ROOT and contain "THUMBNAIL".
+- Remove sold items from the Sheet and delete their inventory folder (don't reuse the LOT).
+- .DS_Store appears on Mac; never commit it.

@@ -70,31 +70,25 @@ function parseCoolnessRating(ratingString) {
   return match ? Math.min(Math.max(parseInt(match[0]), 0), 10) : 0;
 }
 
-// Fetch all photos for a LOT from the local inventory folder and build raw GitHub URLs
-function getPhotoUrls(lotNumber, folderName) {
-  if (!lotNumber && !folderName) return { thumbnail: PLACEHOLDER_IMAGE, photos: [] };
+// Fetch thumbnail, photos, and videos for a LOT from the local inventory folder.
+// MATCHING RULE: the folder is found by the LOT_### key ONLY. Everything in the
+// folder name after `LOT_###_` is ignored. The CSV's FOLDER_NAME column is NOT used.
+function getPhotoUrls(lotNumber) {
+  if (!lotNumber) return { thumbnail: PLACEHOLDER_IMAGE, photos: [] };
 
   const localExists = fs.existsSync(LOCAL_INVENTORY_PATH) && fs.statSync(LOCAL_INVENTORY_PATH).isDirectory();
+  if (!localExists) return { thumbnail: PLACEHOLDER_IMAGE, photos: [] };
+
+  // Find the inventory folder whose name STARTS WITH `LOT_###_` (case-insensitive).
   let lotFolderName = null;
-
-  if (folderName) {
-    const candidatePath = path.join(LOCAL_INVENTORY_PATH, folderName);
-    if (localExists && fs.existsSync(candidatePath) && fs.statSync(candidatePath).isDirectory()) {
-      lotFolderName = folderName;
-    }
-  }
-
-  if (!lotFolderName && lotNumber && localExists) {
-    const entries = fs.readdirSync(LOCAL_INVENTORY_PATH, { withFileTypes: true });
-    const match = entries.find(entry =>
-      entry.isDirectory() && entry.name.toUpperCase().startsWith(`LOT_${lotNumber}_`.toUpperCase())
-    );
-    if (match) lotFolderName = match.name;
-  }
+  const entries = fs.readdirSync(LOCAL_INVENTORY_PATH, { withFileTypes: true });
+  const match = entries.find(entry =>
+    entry.isDirectory() && entry.name.toUpperCase().startsWith(`LOT_${lotNumber}_`.toUpperCase())
+  );
+  if (match) lotFolderName = match.name;
 
   if (!lotFolderName) {
-    const missingRef = folderName || `LOT_${lotNumber}`;
-    console.warn(`  ⚠ No local inventory folder found for ${missingRef}`);
+    console.warn(`  ⚠ No local inventory folder found for LOT_${lotNumber}`);
     return { thumbnail: PLACEHOLDER_IMAGE, photos: [] };
   }
 
@@ -105,11 +99,13 @@ function getPhotoUrls(lotNumber, folderName) {
     ? fs.readdirSync(folderPath)
     : [];
 
+  // Thumbnail: any file in the folder ROOT whose name contains THUMBNAIL.
   const thumbFile = folderEntries.find(name => name.toUpperCase().includes('THUMBNAIL'));
   if (thumbFile) {
     thumbnailUrl = `${INVENTORY_REPO_BASE}/${encodeURIComponent(lotFolderName)}/${encodeURIComponent(thumbFile)}`;
   }
 
+  // Photos: image files inside the Photos/ subfolder, natural-sorted.
   const photosDir = path.join(folderPath, 'Photos');
   const photos = (fs.existsSync(photosDir) && fs.statSync(photosDir).isDirectory())
     ? fs.readdirSync(photosDir)
@@ -118,7 +114,18 @@ function getPhotoUrls(lotNumber, folderName) {
         .map(name => `${INVENTORY_REPO_BASE}/${encodeURIComponent(lotFolderName)}/Photos/${encodeURIComponent(name)}`)
     : [];
 
-  return { thumbnail: thumbnailUrl, photos };
+  // Videos: video files inside the Videos/ subfolder, natural-sorted.
+  // Appended to the photos array so the existing gallery (which already detects and
+  // plays videos via isVideo()/mediaElement()) renders them as media items.
+  const videosDir = path.join(folderPath, 'Videos');
+  const videos = (fs.existsSync(videosDir) && fs.statSync(videosDir).isDirectory())
+    ? fs.readdirSync(videosDir)
+        .filter(name => /\.(mp4|mov|webm)$/i.test(name))
+        .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
+        .map(name => `${INVENTORY_REPO_BASE}/${encodeURIComponent(lotFolderName)}/Videos/${encodeURIComponent(name)}`)
+    : [];
+
+  return { thumbnail: thumbnailUrl, photos: [...photos, ...videos] };
 }
 
 // Format price for display
@@ -221,7 +228,6 @@ function generateHTML(products) {
     
     const productObj = {
       lot: p.LOT,
-      folderName: p.FOLDER_NAME,
       lotNumber: lotNumber,
       name: p.OFFICIAL_NAME || '',
       coolness: coolness,
@@ -902,29 +908,45 @@ function generateHTML(products) {
     }
     }
 
-    /* Home Button - Always visible, top-right, modern glassy style */
+    /* Home Button - Always visible, top-right, matches other glassy buttons */
     .home-btn {
       position: fixed;
-      top: 20px;
-      right: 20px;
-      background: linear-gradient(135deg, rgba(83, 167, 234, 0.25), rgba(83, 167, 234, 0.15));
-      backdrop-filter: blur(15px) saturate(180%);
-      -webkit-backdrop-filter: blur(15px) saturate(180%);
+      top: 24px;
+      right: 24px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.05));
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
       color: #fff;
-      border: 2px solid rgba(83, 167, 234, 0.4);
-      padding: 0.75rem 1.5rem;
-      border-radius: 12px;
+      border: 2px solid transparent;
+      background-clip: padding-box;
+      padding: 0.9rem 2rem;
+      border-radius: 16px;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 1rem;
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 8px 32px 0 rgba(83, 167, 234, 0.2);
+      box-shadow: 
+        0 8px 32px 0 rgba(31, 38, 135, 0.15),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
       z-index: 1001;
       display: flex;
       align-items: center;
       gap: 0.5rem;
       text-transform: uppercase;
       letter-spacing: 0.5px;
+    }
+
+    .home-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      padding: 2px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      z-index: -1;
     }
 
     .home-btn.visible {
@@ -1258,7 +1280,7 @@ function generateHTML(products) {
       .stands-callout { padding: 1.5rem; }
       .stands-preview-grid { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
       .stands-preview-thumb { height: 90px; }
-      .home-btn { top: 16px; right: 16px; padding: 0.6rem 1.2rem; font-size: 0.85rem; }
+      .home-btn { top: 16px; right: 16px; padding: 0.8rem 1.8rem; font-size: 0.95rem; }
     }
 
     @media (max-width: 480px) {
@@ -1728,9 +1750,9 @@ async function build() {
   }
 
   for (const product of products) {
-    if (!product.LOT && !product.FOLDER_NAME) continue;
+    if (!product.LOT) continue;
     const lotNumber = extractLotNumber(product.LOT);
-    const result = getPhotoUrls(lotNumber, product.FOLDER_NAME);
+    const result = getPhotoUrls(lotNumber);
     product._thumbnail = result.thumbnail;
     product._photos = result.photos;
     process.stdout.write('.');

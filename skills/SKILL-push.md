@@ -1,105 +1,92 @@
 # SKILL-push.md
-# YDNT — Complete Push Workflow
-# Save to: /Users/nicholasdemeter/Documents/youdontneedthis-site/skills/SKILL-push.md
+# YDNT — Push an Update to the Live Site
 
-## WHEN TO USE THIS SKILL
-Any time you need to update the live site at youdontneedthis.us
+## SELF-CORRECTION RULE
+If a step's result doesn't match expectations, STOP and ask Nicholas. If a document is
+the cause, propose the fix and update it with approval before continuing.
 
-## PREREQUISITE — RUN SYNC CHECK FIRST
-Before anything else, confirm all three sources of truth are aligned:
+## PUSH GATE — never push without Nicholas's explicit approval this session.
+Build → verify locally → report → wait for "push it" → only then git push.
+A general "go ahead" from a prior task does not carry forward.
+
+---
+
+## STEP 0 — SYNC CHECK FIRST
+Run SKILL-sync-check.md. Resolve anything unexpected before continuing.
+
+## STEP 1 — UPDATE products.csv (if data changed)
+Nicholas edits the Google Sheet, downloads as CSV, and replaces:
+`~/Documents/youdontneedthis-site/products.csv`
+Sanity-check the row count with a real parser:
 ```bash
-git -C /Users/nicholasdemeter/Documents/youdontneedthis-site status
-git -C /Users/nicholasdemeter/Documents/youdontneedthis-inventory status
+python3 -c "import csv;print('rows:',sum(1 for _ in csv.DictReader(open('$HOME/Documents/youdontneedthis-site/products.csv'))))"
 ```
-If either shows unexpected changes — STOP. Resolve before proceeding.
 
-## STEP 1 — UPDATE PRODUCTS.CSV (if needed)
-1. Edit Google Sheet
-2. File → Download → CSV
-3. Replace: /Users/nicholasdemeter/Documents/youdontneedthis-site/products.csv
-4. Verify row count looks right before proceeding
-
-## STEP 2 — UPDATE INVENTORY (if needed)
-Push any new/changed LOT folders to inventory repo first:
+## STEP 2 — UPDATE INVENTORY (if media changed)
+Push new/changed LOT folders FIRST:
 ```bash
-cd /Users/nicholasdemeter/Documents/youdontneedthis-inventory
+cd ~/Documents/youdontneedthis-inventory
 git add .
-git commit -m "description of changes"
+git commit -m "describe the media change"
 git push origin master:main
 ```
-Verify push succeeded before proceeding to Step 3.
+Confirm the push succeeded before Step 3. Pushing inventory alone does NOT update the
+live site — the site only changes when a freshly-built dist/index.html is pushed.
 
 ## STEP 3 — BUILD LOCALLY (never skip)
 ```bash
-cd /Users/nicholasdemeter/Documents/youdontneedthis-site
+cd ~/Documents/youdontneedthis-site
 node build.js
 ```
-Expected output: "✓ Build complete!" with dot progress for each product.
-Warnings about missing folders are OK — they mean that LOT will show no images.
-Any ERROR = stop and fix before proceeding.
+Expect "✓ Build complete!" Warnings about a missing folder mean that LOT will show no
+images — note them. Any ERROR = stop and fix.
 
-## STEP 4 — VERIFY BUILD HAS REAL IMAGES (never skip)
+## STEP 4 — VERIFY THE BUILD HAS REAL IMAGES
 ```bash
 grep -c "No Image Available" dist/index.html
 ```
-Expected: a LOW number (2-5 max for known missing LOTs like LOT_023, LOT_064)
-If returns 50+ — images are not loading. DO NOT PUSH. Diagnose first.
+This counts a placeholder string. Any non-trivial count means that many CSV items lack a
+matching folder. Cross-check against SKILL-sync-check Check 4. If the count is unexpectedly
+high (e.g. most of the catalogue), DO NOT PUSH — that pattern means build.js could not see
+the inventory. Diagnose first (SKILL-verify-live.md).
 
 ## STEP 5 — VERIFY LOCALLY IN BROWSER
 ```bash
-open /Users/nicholasdemeter/Documents/youdontneedthis-site/dist/index.html
+open ~/Documents/youdontneedthis-site/dist/index.html
 ```
-Visually confirm:
-- Hero video playing
-- Hot items carousel showing images
-- Product cards showing thumbnails
-- Dropdown filter working
-- No hero stats block (100+, $2M+, 5★)
+Confirm: hero video plays, special sections populate, product cards show thumbnails,
+dropdown filters. VISUAL CHECK IS NICHOLAS'S CALL — you cannot see the render. Report what
+to look at; do not claim a visual passed. If anything is wrong, DO NOT PUSH.
 
-If anything looks wrong — DO NOT PUSH. Fix first.
+## STEP 6 — REPORT & GET APPROVAL (the gate)
+Tell Nicholas exactly what changed and what you confirmed. Wait for explicit approval.
 
-## STEP 6 — COMMIT AND PUSH SITE
+## STEP 7 — COMMIT AND PUSH SITE
 ```bash
-cd /Users/nicholasdemeter/Documents/youdontneedthis-site
+cd ~/Documents/youdontneedthis-site
 git add dist/index.html products.csv
-git commit -m "Rebuild: [describe what changed]"
+git commit -m "Rebuild: describe what changed"
 git push origin main
 ```
-If push rejected due to unstaged changes:
+If the push is rejected or any auth/credential error appears: STOP. Report the exact error.
+Do NOT switch methods, use --force, or invent a workaround on your own.
+
+## STEP 8 — CONFIRM GITHUB RECEIVED IT
 ```bash
-git stash push -m "temp stash before push"
-git pull --rebase origin main
-git push origin main
-git stash pop
+curl -s https://api.github.com/repos/NicholasDemeter/youdontneedthis-site/commits/main \
+ | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['sha'][:7], d['commit']['message'])"
 ```
+Should show your commit. If not, the push did not land.
 
-## STEP 7 — VERIFY GITHUB RECEIVED THE PUSH
+## STEP 9 — CONFIRM LIVE (wait ~2-3 min)
 ```bash
-curl -s https://api.github.com/repos/NicholasDemeter/youdontneedthis-site/commits/main | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['sha'][:7], d['commit']['message'])"
+curl -s https://youdontneedthis.us | grep -c "PREMIUM ITEMS\|hero-stats"   # expect 0
+curl -s https://youdontneedthis.us | grep -o 'src="data:image' | wc -l     # rendered placeholders
 ```
-Should return your commit SHA and message. If not — push failed silently.
+The second command counts ACTUAL rendered placeholders (the reliable image check). A high
+number across the whole site means a build ran without inventory — see SKILL-verify-live.md.
 
-## STEP 8 — VERIFY LIVE SITE (wait 2-3 minutes first)
-```bash
-curl -s https://youdontneedthis.us | grep -c "PREMIUM ITEMS\|hero-stats"
-```
-Expected: 0
-If returns 2: old cache. Wait 2 more minutes and retry. Do NOT push again.
-If returns 2 after 10 minutes: check GitHub Actions tab for failed workflow.
-
-## STEP 9 — CHECK IMAGE COUNT ON LIVE SITE
-```bash
-curl -s https://youdontneedthis.us | grep -c "No Image Available"
-```
-Expected: same low number as Step 4.
-If returns 100+: GitHub Actions rebuilt without local inventory. See SKILL-troubleshoot.md.
-
-## VERIFICATION COMPLETE
-All steps green = wish granted. Site is live with correct content and images.
-
-## KNOWN GOTCHAS
-- Never push dist/index.html built by GitHub Actions — it has placeholder images
-- Always build locally where inventory exists before pushing
-- CNAME file at repo root — never delete it
-- .github/workflows/deploy.yml — never delete it
-- .DS_Store should not be committed — it will show as modified but ignore it
+## DON'T
+- Never push a dist/index.html built by GitHub Actions (it has placeholders).
+- Never delete CNAME or the .github/workflows deploy file.
+- Never commit .DS_Store.

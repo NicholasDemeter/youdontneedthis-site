@@ -515,29 +515,45 @@
     }
     }
 
-    /* Home Button - Always visible, top-right, modern glassy style */
+    /* Home Button - Always visible, top-right, matches other glassy buttons */
     .home-btn {
       position: fixed;
-      top: 20px;
-      right: 20px;
-      background: linear-gradient(135deg, rgba(83, 167, 234, 0.25), rgba(83, 167, 234, 0.15));
-      backdrop-filter: blur(15px) saturate(180%);
-      -webkit-backdrop-filter: blur(15px) saturate(180%);
+      top: 24px;
+      right: 24px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.05));
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
       color: #fff;
-      border: 2px solid rgba(83, 167, 234, 0.4);
-      padding: 0.75rem 1.5rem;
-      border-radius: 12px;
+      border: 2px solid transparent;
+      background-clip: padding-box;
+      padding: 0.9rem 2rem;
+      border-radius: 16px;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 1rem;
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 8px 32px 0 rgba(83, 167, 234, 0.2);
+      box-shadow: 
+        0 8px 32px 0 rgba(31, 38, 135, 0.15),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
       z-index: 1001;
       display: flex;
       align-items: center;
       gap: 0.5rem;
       text-transform: uppercase;
       letter-spacing: 0.5px;
+    }
+
+    .home-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      padding: 2px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      z-index: -1;
     }
 
     .home-btn.visible {
@@ -871,7 +887,7 @@
       .stands-callout { padding: 1.5rem; }
       .stands-preview-grid { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
       .stands-preview-thumb { height: 90px; }
-      .home-btn { top: 16px; right: 16px; padding: 0.6rem 1.2rem; font-size: 0.85rem; }
+      .home-btn { top: 16px; right: 16px; padding: 0.8rem 1.8rem; font-size: 0.95rem; }
     }
 
     @media (max-width: 480px) {
@@ -953,43 +969,43 @@
           </p>
           <div class="stands-preview-grid">
             
-              <div class="stands-preview-item" onclick="openExpanded(104)">
+              <div class="stands-preview-item" onclick="openExpanded(96)">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_01.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
               </div>
             
-              <div class="stands-preview-item" onclick="openExpanded(104)">
+              <div class="stands-preview-item" onclick="openExpanded(96)">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_02.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
               </div>
             
-              <div class="stands-preview-item" onclick="openExpanded(104)">
+              <div class="stands-preview-item" onclick="openExpanded(96)">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_03.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
               </div>
             
-              <div class="stands-preview-item" onclick="openExpanded(104)">
+              <div class="stands-preview-item" onclick="openExpanded(96)">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_04.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
               </div>
             
-              <div class="stands-preview-item" onclick="openExpanded(104)">
+              <div class="stands-preview-item" onclick="openExpanded(96)">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_05.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
               </div>
             
-              <div class="stands-preview-item" onclick="openExpanded(104)">
+              <div class="stands-preview-item" onclick="openExpanded(96)">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_06.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
               </div>
             
-              <div class="stands-preview-item" onclick="openExpanded(104)">
+              <div class="stands-preview-item" onclick="openExpanded(96)">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_07.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
               </div>
             
-              <div class="stands-preview-item" onclick="openExpanded(104)">
+              <div class="stands-preview-item" onclick="openExpanded(96)">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_08.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
               </div>
             
-              <div class="stands-preview-item" onclick="openExpanded(104)">
+              <div class="stands-preview-item" onclick="openExpanded(96)">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_09.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
               </div>
             
-              <div class="stands-preview-item" onclick="openExpanded(104)">
+              <div class="stands-preview-item" onclick="openExpanded(96)">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_10.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
               </div>
             
@@ -1138,7 +1154,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="76" onclick="openExpanded(76)">
+            <div class="lot-card" data-lot-index="68" onclick="openExpanded(68)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_003_Minisforum_EliteMini_UM773_SE_Mini_PC_Ryzen_7_7735HS/LOT_003_THUMBNAIL.jpg" alt="Minisforum EliteMini UM773 SE Mini PC (Ryzen 7 7735HS)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1152,7 +1168,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="78" onclick="openExpanded(78)">
+            <div class="lot-card" data-lot-index="70" onclick="openExpanded(70)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_017_Satechi_Dual_USB_C_Docking_Station_with_Dual_4K_HDMI/LOT_017_THUMBNAIL.jpg" alt="Satechi Dual USB-C Docking Station with Dual 4K HDMI" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1166,7 +1182,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="87" onclick="openExpanded(87)">
+            <div class="lot-card" data-lot-index="79" onclick="openExpanded(79)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_067_Anker_577_Thunderbolt_Docking_Station_13_in_1/LOT_067_THUMBNAIL.jpg" alt="Anker 577 Thunderbolt Docking Station (13-in-1)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1180,7 +1196,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="96" onclick="openExpanded(96)">
+            <div class="lot-card" data-lot-index="88" onclick="openExpanded(88)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_124_Plugable_Hub_(Dual_Macbook_Screens)/LOT_124_THUMBNAIL.jpg" alt="Plugable USB-C Hub (Dual MacBook Screens)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1581,7 +1597,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="75" onclick="openExpanded(75)">
+            <div class="lot-card" data-lot-index="67" onclick="openExpanded(67)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_131_Sony2.1_HT_AX7_Portable_Surround/LOT_131_THUMBNAIL.jpg" alt="Sony HT-AX7 Portable Theater System" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1595,7 +1611,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="85" onclick="openExpanded(85)">
+            <div class="lot-card" data-lot-index="77" onclick="openExpanded(77)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_042_XREAL_Beam_Spatial_Computing_Device_1st_Generation/LOT_042_THUMBNAIL.jpg" alt="XREAL Beam Spatial Computing Device (1st Generation)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -2460,118 +2476,6 @@
     
     <div class="lot-card" data-lot-index="58" onclick="openExpanded(58)">
       <div class="lot-card-content">
-        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_101_Moment_37mm_Filters/LOT_101_THUMBNAIL.jpg" alt="Moment 37mm Cine Filter Set" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
-        <div class="lot-info">
-          <div class="lot-number">LOT_101</div>
-          <h3 class="lot-name">Moment 37mm Cine Filter Set</h3>
-          <p class="lot-tagline">Cheeky utility that earns its spot, no questions asked #14 Bonus: another thing to charge nightly.</p>
-          <div class="lot-footer">
-            <span class="lot-price-badge">$200.00</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="lot-card" data-lot-index="59" onclick="openExpanded(59)">
-      <div class="lot-card-content">
-        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_102_Moment_Filter_Mount/LOT_102_THUMBNAIL.jpg" alt="Moment Filter Mount" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
-        <div class="lot-info">
-          <div class="lot-number">LOT_102</div>
-          <h3 class="lot-name">Moment Filter Mount</h3>
-          <p class="lot-tagline">Pocket tools that shift your style on demand #2 Bonus: your camera bag evolves into a personality.</p>
-          <div class="lot-footer">
-            <span class="lot-price-badge">$50.00</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="lot-card" data-lot-index="60" onclick="openExpanded(60)">
-      <div class="lot-card-content">
-        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_103_2x_Moment_Pouch/LOT_103_THUMBNAIL.jpg" alt="2x Moment Pouch Leather Tan" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
-        <div class="lot-info">
-          <div class="lot-number">LOT_103</div>
-          <h3 class="lot-name">2x Moment Pouch Leather Tan</h3>
-          <p class="lot-tagline">Pocket tools that shift your style on demand #3 Bonus: your camera bag evolves into a personality.</p>
-          <div class="lot-footer">
-            <span class="lot-price-badge">$15.00</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="lot-card" data-lot-index="61" onclick="openExpanded(61)">
-      <div class="lot-card-content">
-        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_104_Moment_Telephoto_58mm/LOT_104_THUMBNAIL.jpg" alt="Moment Telephoto 58mm" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
-        <div class="lot-info">
-          <div class="lot-number">LOT_104</div>
-          <h3 class="lot-name">Moment Telephoto 58mm</h3>
-          <p class="lot-tagline">Pocket tools that shift your style on demand #4 Bonus: your camera bag evolves into a personality.</p>
-          <div class="lot-footer">
-            <span class="lot-price-badge">$50.00</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="lot-card" data-lot-index="62" onclick="openExpanded(62)">
-      <div class="lot-card-content">
-        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_105_Moment_Camera_Case_for_iPhone_Android/LOT_105_THUMBNAIL.jpg" alt="Moment Camera Case for iPhone/Android" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
-        <div class="lot-info">
-          <div class="lot-number">LOT_105</div>
-          <h3 class="lot-name">Moment Camera Case for iPhone/Android</h3>
-          <p class="lot-tagline">Footage so steady it boosts your confidence #4 Bonus: friends start asking for ‘just one more photo’—forever.</p>
-          <div class="lot-footer">
-            <span class="lot-price-badge">$25.00</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="lot-card" data-lot-index="63" onclick="openExpanded(63)">
-      <div class="lot-card-content">
-        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_106_Moment_10x_Macro_Mobile_Lens/LOT_106_THUMBNAIL.jpg" alt="Moment 10x Macro Mobile Lens" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
-        <div class="lot-info">
-          <div class="lot-number">LOT_106</div>
-          <h3 class="lot-name">Moment 10x Macro Mobile Lens</h3>
-          <p class="lot-tagline">Pocket tools that shift your style on demand #5 Bonus: your camera bag evolves into a personality.</p>
-          <div class="lot-footer">
-            <span class="lot-price-badge">$50.00</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="lot-card" data-lot-index="64" onclick="openExpanded(64)">
-      <div class="lot-card-content">
-        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_107_Moment_Lens_Roll/LOT_107_THUMBNAIL.jpg" alt="Moment Mobile Lens Roll" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
-        <div class="lot-info">
-          <div class="lot-number">LOT_107</div>
-          <h3 class="lot-name">Moment Mobile Lens Roll</h3>
-          <p class="lot-tagline">Pocket tools that shift your style on demand #6 Bonus: your camera bag evolves into a personality.</p>
-          <div class="lot-footer">
-            <span class="lot-price-badge">$25.00</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="lot-card" data-lot-index="65" onclick="openExpanded(65)">
-      <div class="lot-card-content">
-        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_109_MOMENT_REMOTE/LOT_109_THUMBNAIL.jpg" alt="Moment Remote Control" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
-        <div class="lot-info">
-          <div class="lot-number">LOT_109</div>
-          <h3 class="lot-name">Moment Remote Control</h3>
-          <p class="lot-tagline">Tiny control that saves you steps and adds mystery. Bonus: engineered to vanish exactly when you need it.</p>
-          <div class="lot-footer">
-            <span class="lot-price-badge">$25.00</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="lot-card" data-lot-index="66" onclick="openExpanded(66)">
-      <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_114_Vintage_Nicolai_Piquadro_Leather_Messenger/LOT_114_THUMBNAIL.jpg" alt="Vintage Nicolai Piquadro Leather Messenger Bag" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
           <div class="lot-number">LOT_114</div>
@@ -2584,7 +2488,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="67" onclick="openExpanded(67)">
+    <div class="lot-card" data-lot-index="59" onclick="openExpanded(59)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_115_Paravel_Grand_Tour_Luxury_Duffle_Bag/LOT_115_THUMBNAIL.jpg" alt="Paravel Grand Tour Luxury Duffle Bag" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2598,7 +2502,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="68" onclick="openExpanded(68)">
+    <div class="lot-card" data-lot-index="60" onclick="openExpanded(60)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_123_Moment_Camera_Phone_Lens_Package/LOT_123_THUMBNAIL.jpg" alt="Moment Camera Phone Lens Package" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2612,7 +2516,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="69" onclick="openExpanded(69)">
+    <div class="lot-card" data-lot-index="61" onclick="openExpanded(61)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_125_Anker_Nebula_Capsule%2C_Smart_Wi-Fi_Mini_Projector/LOT_125_THUMBNAIL.jpg" alt="Anker Nebula Capsule Smart Wi-Fi Mini Projector" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2626,7 +2530,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="70" onclick="openExpanded(70)">
+    <div class="lot-card" data-lot-index="62" onclick="openExpanded(62)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_126_HUGE_Vehicle_Entertainment_System/LOT_126_THUMBNAIL.jpg" alt="HUGE Vehicle Entertainment System" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2640,7 +2544,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="71" onclick="openExpanded(71)">
+    <div class="lot-card" data-lot-index="63" onclick="openExpanded(63)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_127_Airpod_Pro_2_Lightning/LOT_127_THUMBNAIL.jpg" alt="Apple AirPods Pro (2nd Generation) with MagSafe Case (Lightning)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2654,7 +2558,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="72" onclick="openExpanded(72)">
+    <div class="lot-card" data-lot-index="64" onclick="openExpanded(64)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_128_Airpod_Pro_2_USB_C/LOT_128_THUMBNAIL.jpg" alt="Apple AirPods Pro (2nd Generation) with MagSafe Case (USB-C)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2668,7 +2572,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="73" onclick="openExpanded(73)">
+    <div class="lot-card" data-lot-index="65" onclick="openExpanded(65)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_129_Samsung_3S_Tab_Galaxy/LOT_129_THUMBNAIL.jpg" alt="Samsung Galaxy Tab S3 9.7-inch (32GB)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2682,7 +2586,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="74" onclick="openExpanded(74)">
+    <div class="lot-card" data-lot-index="66" onclick="openExpanded(66)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_130_ShureMV88/LOT_130_THUMBNAIL.jpg" alt="Shure MV88+ Video Kit Digital Stereo Condenser Microphone" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2696,7 +2600,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="75" onclick="openExpanded(75)">
+    <div class="lot-card" data-lot-index="67" onclick="openExpanded(67)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_131_Sony2.1_HT_AX7_Portable_Surround/LOT_131_THUMBNAIL.jpg" alt="Sony HT-AX7 Portable Theater System" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2710,7 +2614,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="76" onclick="openExpanded(76)">
+    <div class="lot-card" data-lot-index="68" onclick="openExpanded(68)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_003_Minisforum_EliteMini_UM773_SE_Mini_PC_Ryzen_7_7735HS/LOT_003_THUMBNAIL.jpg" alt="Minisforum EliteMini UM773 SE Mini PC (Ryzen 7 7735HS)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2724,7 +2628,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="77" onclick="openExpanded(77)">
+    <div class="lot-card" data-lot-index="69" onclick="openExpanded(69)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_004_Moment_M_Series_Professional_Mobile_Lens_Kit/LOT_004_THUMBNAIL.jpg" alt="Moment M-Series Professional Mobile Lens Kit" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2738,7 +2642,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="78" onclick="openExpanded(78)">
+    <div class="lot-card" data-lot-index="70" onclick="openExpanded(70)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_017_Satechi_Dual_USB_C_Docking_Station_with_Dual_4K_HDMI/LOT_017_THUMBNAIL.jpg" alt="Satechi Dual USB-C Docking Station with Dual 4K HDMI" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2752,7 +2656,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="79" onclick="openExpanded(79)">
+    <div class="lot-card" data-lot-index="71" onclick="openExpanded(71)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_018_Sena_Outrush_Modular_Bluetooth_Motorcycle_Helmet/LOT_018_THUMBNAIL.jpg" alt="Sena Outrush Modular Bluetooth Motorcycle Helmet" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2766,7 +2670,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="80" onclick="openExpanded(80)">
+    <div class="lot-card" data-lot-index="72" onclick="openExpanded(72)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_026_TC_Helicon_Acoustic_Pedal/LOT_026_THUMBNAIL.jpg" alt="TC Helicon VoiceTone Acoustic Guitar/Vocal Processor" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2780,7 +2684,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="81" onclick="openExpanded(81)">
+    <div class="lot-card" data-lot-index="73" onclick="openExpanded(73)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_027_Thule_Vital_Hydration_Backpack/LOT_027_THUMBNAIL.jpg" alt="Thule Vital Hydration Backpack" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2794,7 +2698,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="82" onclick="openExpanded(82)">
+    <div class="lot-card" data-lot-index="74" onclick="openExpanded(74)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_030_XIAOMI_5G_Routers_x2/LOT_030_THUMBNAIL.jpg" alt="Xiaomi - TP-Link Routers and Relays" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2808,7 +2712,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="83" onclick="openExpanded(83)">
+    <div class="lot-card" data-lot-index="75" onclick="openExpanded(75)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_036_Jinxnobi_Wall_Mount_Safe/LOT_036_THUMBNAIL.jpg" alt="Jinxnobi Wall Mount Safe" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2822,7 +2726,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="84" onclick="openExpanded(84)">
+    <div class="lot-card" data-lot-index="76" onclick="openExpanded(76)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_037_Stealth_Hidden_Wall_Safe_22_8_x_15_4_Black/LOT_037_THUMBNAIL.jpg" alt="Stealth Hidden Wall Safe - 22.8 x 15.4 Black" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2836,7 +2740,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="85" onclick="openExpanded(85)">
+    <div class="lot-card" data-lot-index="77" onclick="openExpanded(77)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_042_XREAL_Beam_Spatial_Computing_Device_1st_Generation/LOT_042_THUMBNAIL.jpg" alt="XREAL Beam Spatial Computing Device (1st Generation)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2850,7 +2754,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="86" onclick="openExpanded(86)">
+    <div class="lot-card" data-lot-index="78" onclick="openExpanded(78)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_049_GoPro_HERO7_Black_Action_Camera/LOT_049_THUMBNAIL.jpg" alt="GoPro HERO7 Black Action Camera" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2864,7 +2768,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="87" onclick="openExpanded(87)">
+    <div class="lot-card" data-lot-index="79" onclick="openExpanded(79)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_067_Anker_577_Thunderbolt_Docking_Station_13_in_1/LOT_067_THUMBNAIL.jpg" alt="Anker 577 Thunderbolt Docking Station (13-in-1)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2878,7 +2782,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="88" onclick="openExpanded(88)">
+    <div class="lot-card" data-lot-index="80" onclick="openExpanded(80)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_075_Bushnell_Equinox_X650_Night_Vision_5x32_Monocular_review/LOT_075_THUMBNAIL.jpg" alt="Bushnell Equinox X650 5x32mm Digital Night Vision Monocular" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2892,7 +2796,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="89" onclick="openExpanded(89)">
+    <div class="lot-card" data-lot-index="81" onclick="openExpanded(81)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_078_Dell_SE2222H_22_inch_Monitor/LOT_078_THUMBNAIL.jpg" alt="Dell SE2222H 22-inch LED Monitor" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2906,7 +2810,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="90" onclick="openExpanded(90)">
+    <div class="lot-card" data-lot-index="82" onclick="openExpanded(82)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_088_Doqo_iPad_Air_M2_Hub/LOT_088_THUMBNAIL.jpg" alt="Doqo iPad Air M2 Keyboard Hub" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2920,7 +2824,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="91" onclick="openExpanded(91)">
+    <div class="lot-card" data-lot-index="83" onclick="openExpanded(83)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_091_KEMIMOTO_Motorcycle_Helmet_Backpack_Bag_for_Men_with_USB_Charging_Port/LOT_091_THUMBNAIL.jpg" alt="KEMIMOTO Motorcycle Helmet Backpack Bag" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2934,7 +2838,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="92" onclick="openExpanded(92)">
+    <div class="lot-card" data-lot-index="84" onclick="openExpanded(84)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_099_Dianese_XL_Pants/LOT_099_THUMBNAIL.jpg" alt="Dainese D-Explorer Gore-Tex Pants XL Black Red" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2948,7 +2852,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="93" onclick="openExpanded(93)">
+    <div class="lot-card" data-lot-index="85" onclick="openExpanded(85)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_100_Dianese_Jacket_XL/LOT_100_THUMBNAIL.jpg" alt="Dainese Super Rider D-Dry Jacket XL Black Red" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2962,7 +2866,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="94" onclick="openExpanded(94)">
+    <div class="lot-card" data-lot-index="86" onclick="openExpanded(86)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_118_KLIM_Ballistic_Motorcycle_Jeans/LOT_118_THUMBNAIL.jpg" alt="KLIM Ballistic Motorcycle Jeans" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2976,7 +2880,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="95" onclick="openExpanded(95)">
+    <div class="lot-card" data-lot-index="87" onclick="openExpanded(87)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_119_JOOLA_Professional_Ping_Pong_Table/LOT_119_THUMBNAIL.jpg" alt="JOOLA Professional Ping Pong Table" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2990,7 +2894,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="96" onclick="openExpanded(96)">
+    <div class="lot-card" data-lot-index="88" onclick="openExpanded(88)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_124_Plugable_Hub_(Dual_Macbook_Screens)/LOT_124_THUMBNAIL.jpg" alt="Plugable USB-C Hub (Dual MacBook Screens)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -3004,7 +2908,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="97" onclick="openExpanded(97)">
+    <div class="lot-card" data-lot-index="89" onclick="openExpanded(89)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_033_Fishman_Loudbox_Mini_Acoustic_Guitar_Amplifier/LOT_033_THUMBNAIL.jpg" alt="Fishman Loudbox Mini Acoustic Guitar Amplifier" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -3018,7 +2922,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="98" onclick="openExpanded(98)">
+    <div class="lot-card" data-lot-index="90" onclick="openExpanded(90)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_035_Waeco_Car_Refrigerator/LOT_035_THUMBNAIL.jpg" alt="Dometic (Waeco) CF-50 Portable Electric Cooler/Freezer" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -3032,7 +2936,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="99" onclick="openExpanded(99)">
+    <div class="lot-card" data-lot-index="91" onclick="openExpanded(91)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_050_SentrySafe_Fire_Resistant_Home_Safe_Box/LOT_050_THUMBNAIL.jpg" alt="SentrySafe Fireproof Home Safe with Digital Lock" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -3046,7 +2950,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="100" onclick="openExpanded(100)">
+    <div class="lot-card" data-lot-index="92" onclick="openExpanded(92)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_061_Logitech_K780_Multi_Device_Wireless_Keyboard/LOT_061_THUMBNAIL.jpg" alt="Logitech K780 Multi-Device Wireless Keyboard" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -3060,7 +2964,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="101" onclick="openExpanded(101)">
+    <div class="lot-card" data-lot-index="93" onclick="openExpanded(93)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_062_Lumary_2K_Floodlight_Security_Camera/LOT_062_THUMBNAIL.jpg" alt="Lumary 2K Smart Floodlight Security Camera with Dual Band Wi-Fi" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -3074,7 +2978,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="102" onclick="openExpanded(102)">
+    <div class="lot-card" data-lot-index="94" onclick="openExpanded(94)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_087_American_Vizio_TV_50_P502ui_B1/LOT_087_THUMBNAIL.jpg" alt="American Vizio TV - 50_ P502ui-B1" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -3088,7 +2992,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="103" onclick="openExpanded(103)">
+    <div class="lot-card" data-lot-index="95" onclick="openExpanded(95)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_072_BigBlue_Portable_Solar_Charger_28W/LOT_072_THUMBNAIL.jpg" alt="BigBlue 28W Foldable Solar Charger Panel" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -3102,7 +3006,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="104" onclick="openExpanded(104)">
+    <div class="lot-card" data-lot-index="96" onclick="openExpanded(96)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_076_Portable_Monitor_Stands/LOT_076_THUMBNAIL.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -3140,7 +3044,6 @@
     window.PRODUCTS = [
   {
     "lot": "LOT_002",
-    "folderName": "LOT_002_Microsoft_Surface_Studio_2_All_in_One_Desktop",
     "lotNumber": "002",
     "name": "Microsoft Surface Studio 2 All-in-One Desktop",
     "coolness": 7,
@@ -3157,7 +3060,8 @@
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_002_Microsoft_Surface_Studio_2_All_in_One_Desktop/Photos/LOT_002_1_3.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_002_Microsoft_Surface_Studio_2_All_in_One_Desktop/Photos/LOT_002_1.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_002_Microsoft_Surface_Studio_2_All_in_One_Desktop/Photos/LOT_002_2.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_002_Microsoft_Surface_Studio_2_All_in_One_Desktop/Photos/LOT_002_12.jpg"
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_002_Microsoft_Surface_Studio_2_All_in_One_Desktop/Photos/LOT_002_12.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_002_Microsoft_Surface_Studio_2_All_in_One_Desktop/Videos/LOT_002_1.mp4"
     ],
     "referenceUrl": "https://www.microsoft.com/en-us/d/surface-studio-2/8vlfqc3597k4",
     "seoTags": [
@@ -3168,7 +3072,6 @@
   },
   {
     "lot": "LOT_010",
-    "folderName": "LOT_010_OneWheel_V1_Self_Balancing_Electric_Skateboard",
     "lotNumber": "010",
     "name": "OneWheel V1 Self-Balancing Electric Skateboard",
     "coolness": 6,
@@ -3184,14 +3087,14 @@
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_010_OneWheel_V1_Self_Balancing_Electric_Skateboard/Photos/LOT_010_1_2.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_010_OneWheel_V1_Self_Balancing_Electric_Skateboard/Photos/LOT_010_1_3.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_010_OneWheel_V1_Self_Balancing_Electric_Skateboard/Photos/LOT_010_1_4.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_010_OneWheel_V1_Self_Balancing_Electric_Skateboard/Photos/LOT_010_6.jpg"
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_010_OneWheel_V1_Self_Balancing_Electric_Skateboard/Photos/LOT_010_6.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_010_OneWheel_V1_Self_Balancing_Electric_Skateboard/Videos/LOT_010_1.mp4"
     ],
     "referenceUrl": "https://onewheel.com",
     "seoTags": []
   },
   {
     "lot": "LOT_021",
-    "folderName": "LOT_021_Sony_Cyber_shot_DSC_QX100_Lens_Style_Camera",
     "lotNumber": "021",
     "name": "Sony Cyber-shot DSC-QX100 Lens-Style Camera",
     "coolness": 6,
@@ -3209,7 +3112,9 @@
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_021_Sony_Cyber_shot_DSC_QX100_Lens_Style_Camera/Photos/LOT_021_1_4.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_021_Sony_Cyber_shot_DSC_QX100_Lens_Style_Camera/Photos/LOT_021_1_5.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_021_Sony_Cyber_shot_DSC_QX100_Lens_Style_Camera/Photos/LOT_021_1_6.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_021_Sony_Cyber_shot_DSC_QX100_Lens_Style_Camera/Photos/LOT_021_06.jpg"
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_021_Sony_Cyber_shot_DSC_QX100_Lens_Style_Camera/Photos/LOT_021_06.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_021_Sony_Cyber_shot_DSC_QX100_Lens_Style_Camera/Videos/LOT_021_1.mp4",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_021_Sony_Cyber_shot_DSC_QX100_Lens_Style_Camera/Videos/SonyCyber_upclose_compressed.MP4"
     ],
     "referenceUrl": "https://www.amazon.com/s?k=Sony+DSC-QX100",
     "seoTags": [
@@ -3218,7 +3123,6 @@
   },
   {
     "lot": "LOT_041",
-    "folderName": "LOT_041_XREAL_Air_2_AR_Smart_Glasses_2nd_Generation",
     "lotNumber": "041",
     "name": "XREAL Air 2 AR Smart Glasses (2nd Generation)",
     "coolness": 6,
@@ -3233,7 +3137,10 @@
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_041_XREAL_Air_2_AR_Smart_Glasses_2nd_Generation/Photos/LOT_041_4.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_041_XREAL_Air_2_AR_Smart_Glasses_2nd_Generation/Photos/LOT_041_5.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_041_XREAL_Air_2_AR_Smart_Glasses_2nd_Generation/Photos/LOT_041_6.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_041_XREAL_Air_2_AR_Smart_Glasses_2nd_Generation/Photos/LOT_041_8.jpg"
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_041_XREAL_Air_2_AR_Smart_Glasses_2nd_Generation/Photos/LOT_041_8.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_041_XREAL_Air_2_AR_Smart_Glasses_2nd_Generation/Videos/LOT_041_1.mp4",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_041_XREAL_Air_2_AR_Smart_Glasses_2nd_Generation/Videos/Xreal_upclose_compressed.MP4",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_041_XREAL_Air_2_AR_Smart_Glasses_2nd_Generation/Videos/Xreals_upxlose_compressed.MP4"
     ],
     "referenceUrl": "https://www.amazon.com/s?k=XREAL+Air+2",
     "seoTags": [
@@ -3244,7 +3151,6 @@
   },
   {
     "lot": "LOT_043",
-    "folderName": "LOT_043_XREAL_Beam_Pro_Spatial_Computing_Device_2nd_Generation",
     "lotNumber": "043",
     "name": "XREAL Beam Pro Spatial Computing Device (2nd Generation)",
     "coolness": 6,
@@ -3259,7 +3165,9 @@
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_043_XREAL_Beam_Pro_Spatial_Computing_Device_2nd_Generation/Photos/LOT_043_1_1.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_043_XREAL_Beam_Pro_Spatial_Computing_Device_2nd_Generation/Photos/LOT_043_1_2.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_043_XREAL_Beam_Pro_Spatial_Computing_Device_2nd_Generation/Photos/LOT_043_1_3.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_043_XREAL_Beam_Pro_Spatial_Computing_Device_2nd_Generation/Photos/LOT_043_1_4.jpg"
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_043_XREAL_Beam_Pro_Spatial_Computing_Device_2nd_Generation/Photos/LOT_043_1_4.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_043_XREAL_Beam_Pro_Spatial_Computing_Device_2nd_Generation/Videos/Xreal_upclose_compressed.MP4",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_043_XREAL_Beam_Pro_Spatial_Computing_Device_2nd_Generation/Videos/Xreals_upxlose_compressed.MP4"
     ],
     "referenceUrl": "https://www.amazon.com/s?k=XREAL+Beam+Pro",
     "seoTags": [
@@ -3270,7 +3178,6 @@
   },
   {
     "lot": "LOT_047",
-    "folderName": "LOT_047_Geminos_T_Dual_28_inch_4K_Stacked_Monitor_System",
     "lotNumber": "047",
     "name": "Geminos T Dual 28-inch 4K Stacked Monitor System",
     "coolness": 6,
@@ -3294,7 +3201,8 @@
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_047_Geminos_T_Dual_28_inch_4K_Stacked_Monitor_System/Photos/LOT_047_1_10.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_047_Geminos_T_Dual_28_inch_4K_Stacked_Monitor_System/Photos/LOT_047_1_11.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_047_Geminos_T_Dual_28_inch_4K_Stacked_Monitor_System/Photos/LOT_047_1_12.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_047_Geminos_T_Dual_28_inch_4K_Stacked_Monitor_System/Photos/LOT_047_08.jpg"
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_047_Geminos_T_Dual_28_inch_4K_Stacked_Monitor_System/Photos/LOT_047_08.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_047_Geminos_T_Dual_28_inch_4K_Stacked_Monitor_System/Videos/LOT_047_1.mp4"
     ],
     "referenceUrl": "https://www.amazon.com/s?k=Geminos+T+Dual+Monitor",
     "seoTags": [
@@ -3306,7 +3214,6 @@
   },
   {
     "lot": "LOT_069",
-    "folderName": "LOT_069_Apple_Watch_Ultra_2",
     "lotNumber": "069",
     "name": "Apple Watch Ultra 2",
     "coolness": 6,
@@ -3331,7 +3238,9 @@
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_069_Apple_Watch_Ultra_2/Photos/LOT_069_22.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_069_Apple_Watch_Ultra_2/Photos/LOT_069_23.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_069_Apple_Watch_Ultra_2/Photos/LOT_069_24.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_069_Apple_Watch_Ultra_2/Photos/LOT_069_25.jpg"
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_069_Apple_Watch_Ultra_2/Photos/LOT_069_25.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_069_Apple_Watch_Ultra_2/Videos/LOT_069_1.mp4",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_069_Apple_Watch_Ultra_2/Videos/LOT_069_2.mp4"
     ],
     "referenceUrl": "https://www.apple.com/apple-watch-ultra-2/",
     "seoTags": [
@@ -3342,7 +3251,6 @@
   },
   {
     "lot": "LOT_007",
-    "folderName": "LOT_007_Plaud_Al_Note_x_2",
     "lotNumber": "007",
     "name": "Plaud Al Note",
     "coolness": 5,
@@ -3367,7 +3275,6 @@
   },
   {
     "lot": "LOT_009",
-    "folderName": "LOT_009_NuPhy_Air75_Wireless_Mechanical_Keyboard",
     "lotNumber": "009",
     "name": "NuPhy Air75 Wireless Mechanical Keyboard + NuFolio Cover",
     "coolness": 5,
@@ -3390,7 +3297,6 @@
   },
   {
     "lot": "LOT_015",
-    "folderName": "LOT_015_Plaud_Al_Note_x_2",
     "lotNumber": "015",
     "name": "Plaud Al Note",
     "coolness": 5,
@@ -3415,7 +3321,6 @@
   },
   {
     "lot": "LOT_071",
-    "folderName": "LOT_071_Beyerdynamic_DT_990_Premium_Edition_Headphones",
     "lotNumber": "071",
     "name": "Beyerdynamic DT 990 Premium Edition 250 Ohm Over-Ear Headphones",
     "coolness": 5,
@@ -3445,7 +3350,6 @@
   },
   {
     "lot": "LOT_080",
-    "folderName": "LOT_080_Devialet_Mania_Portable_Smart_Speaker_Light_Grey",
     "lotNumber": "080",
     "name": "Devialet Mania Portable Smart Speaker - Light Grey",
     "coolness": 5,
@@ -3469,7 +3373,6 @@
   },
   {
     "lot": "LOT_081",
-    "folderName": "LOT_081_Devialet_Phantom_II_95_dB_Compact_Wireless_Speaker_1",
     "lotNumber": "081",
     "name": "Devialet Phantom II 95 dB Compact Wireless Speaker - Matte Black",
     "coolness": 5,
@@ -3486,7 +3389,12 @@
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_081_Devialet_Phantom_II_95_dB_Compact_Wireless_Speaker_1/Photos/LOT_081_5.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_081_Devialet_Phantom_II_95_dB_Compact_Wireless_Speaker_1/Photos/LOT_081_6.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_081_Devialet_Phantom_II_95_dB_Compact_Wireless_Speaker_1/Photos/LOT_081_07.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_081_Devialet_Phantom_II_95_dB_Compact_Wireless_Speaker_1/Photos/LOT_081_08.jpg"
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_081_Devialet_Phantom_II_95_dB_Compact_Wireless_Speaker_1/Photos/LOT_081_08.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_081_Devialet_Phantom_II_95_dB_Compact_Wireless_Speaker_1/Videos/LOT_081_1.mp4",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_081_Devialet_Phantom_II_95_dB_Compact_Wireless_Speaker_1/Videos/LOT_081_2.mp4",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_081_Devialet_Phantom_II_95_dB_Compact_Wireless_Speaker_1/Videos/LOT_081_3.mp4",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_081_Devialet_Phantom_II_95_dB_Compact_Wireless_Speaker_1/Videos/Phantom_Thump.MP4",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_081_Devialet_Phantom_II_95_dB_Compact_Wireless_Speaker_1/Videos/Phantom_Upclose_compressed.MP4"
     ],
     "referenceUrl": "https://www.devialet.com/en-us/speakers/phantom/",
     "seoTags": [
@@ -3496,7 +3404,6 @@
   },
   {
     "lot": "LOT_108",
-    "folderName": "LOT_108_Insta360_Link_AI_Powered_4K_Webcam",
     "lotNumber": "108",
     "name": "Insta360 Link AI-Powered 4K Webcam",
     "coolness": 5,
@@ -3523,7 +3430,6 @@
   },
   {
     "lot": "LOT_111",
-    "folderName": "LOT_111_Khadas_Micro_Computer",
     "lotNumber": "111",
     "name": "Khadas VIM4 Single Board Computer",
     "coolness": 5,
@@ -3549,7 +3455,6 @@
   },
   {
     "lot": "LOT_112",
-    "folderName": "LOT_112_Vintage_and_New_Timepieces",
     "lotNumber": "112",
     "name": "Vintage and New Timepieces Collection",
     "coolness": 5,
@@ -3586,7 +3491,6 @@
   },
   {
     "lot": "LOT_113",
-    "folderName": "LOT_113_Google_Pixelbook_i7_16gb_Chromebook",
     "lotNumber": "113",
     "name": "Google Pixelbook (i7, 16GB RAM, 512GB)",
     "coolness": 5,
@@ -3609,7 +3513,6 @@
   },
   {
     "lot": "LOT_116",
-    "folderName": "LOT_116_SONY_Cybershot_Bundle_with_Remote_Wrist_Band",
     "lotNumber": "116",
     "name": "Sony Cybershot Bundle with Remote Wrist Band",
     "coolness": 5,
@@ -3642,7 +3545,6 @@
   },
   {
     "lot": "LOT_117",
-    "folderName": "LOT_117_Virzen_OLED_Split_Screen_Ultra_Thin_Monitor",
     "lotNumber": "117",
     "name": "Virzen OLED Split Screen Ultra-Thin Monitor",
     "coolness": 5,
@@ -3670,7 +3572,6 @@
   },
   {
     "lot": "LOT_120",
-    "folderName": "LOT_120_Apple_Mac_Mini_M4_16gb",
     "lotNumber": "120",
     "name": "Apple Mac Mini M4 16GB",
     "coolness": 5,
@@ -3697,7 +3598,6 @@
   },
   {
     "lot": "LOT_006",
-    "folderName": "LOT_006_SOTSU_UltraSlim_Portable_Monitor",
     "lotNumber": "006",
     "name": "SOTSU UltraSlim 12.5 Portable Monitor - Ultra-Thin Lightweight Aluminum Design",
     "coolness": 5,
@@ -3727,7 +3627,6 @@
   },
   {
     "lot": "LOT_008",
-    "folderName": "LOT_008_EHOMEWEI_X1_Foldable_Dual_Screen",
     "lotNumber": "008",
     "name": "EHOMEWEI X1 Foldable Dual Screen Portable Monitor 16×2 - Magnetic Alignment Travel Workstation",
     "coolness": 5,
@@ -3754,7 +3653,6 @@
   },
   {
     "lot": "LOT_023",
-    "folderName": "LOT_023_INNOCN_Portable_Monitor_OLED",
     "lotNumber": "023",
     "name": "INNOCN 13.3 OLED Portable Monitor - FHD 1080P, 100% DCI-P3, HDR10 Color-Accurate Display",
     "coolness": 5,
@@ -3783,7 +3681,6 @@
   },
   {
     "lot": "LOT_001",
-    "folderName": "LOT_001_Microsoft_Surface_Go_3_10_5_Touchscreen_Intel_Core_i3_8GB_Memory_128GB_SSD",
     "lotNumber": "001",
     "name": "Microsoft Surface Go 3 - 10.5_ Touchscreen - Intel® Core™ i3 - 8GB Memory - 128GB SSD",
     "coolness": 4,
@@ -3813,7 +3710,6 @@
   },
   {
     "lot": "LOT_005",
-    "folderName": "LOT_005_Motyeowe_OLED_Monitor_18_5in",
     "lotNumber": "005",
     "name": "Motyeowe OLED Monitors 18.5in - X2",
     "coolness": 4,
@@ -3841,7 +3737,6 @@
   },
   {
     "lot": "LOT_006",
-    "folderName": "LOT_006_Motyeowe_OLED_Monitor_18_5in",
     "lotNumber": "006",
     "name": "Motyeowe OLED Monitors 18.5in - X2",
     "coolness": 4,
@@ -3871,7 +3766,6 @@
   },
   {
     "lot": "LOT_011",
-    "folderName": "LOT_011_Packard_Bell_airFrame_27_FHD_Monitor",
     "lotNumber": "011",
     "name": "Packard Bell airFrame 27_ FHD Monitors",
     "coolness": 4,
@@ -3907,7 +3801,6 @@
   },
   {
     "lot": "LOT_016",
-    "folderName": "LOT_016_HOTO_Outdoor_Camping_Flashlight_Rechargeable_3_in1_Camping_Lantern",
     "lotNumber": "016",
     "name": "HOTO Outdoor Camping Flashlight Rechargeable, 3-in1 Camping Lantern",
     "coolness": 4,
@@ -3926,7 +3819,6 @@
   },
   {
     "lot": "LOT_019",
-    "folderName": "LOT_019_ShiftCam_ProGrip_Mobile_Battery_Grip_Starter_Kit",
     "lotNumber": "019",
     "name": "ShiftCam ProGrip Mobile Battery Grip Starter Kit",
     "coolness": 4,
@@ -3946,7 +3838,6 @@
   },
   {
     "lot": "LOT_020",
-    "folderName": "LOT_020_ShiftCam_SnapGrip_Mobile_Battery_Grip_for_iPhone",
     "lotNumber": "020",
     "name": "ShiftCam SnapGrip Mobile Battery Grip for iPhone",
     "coolness": 4,
@@ -3971,7 +3862,6 @@
   },
   {
     "lot": "LOT_024",
-    "folderName": "LOT_024_SteelMate_H2_Smart_Helmet_Brake_Light_System",
     "lotNumber": "024",
     "name": "SteelMate H2 Smart Helmet Brake Light System",
     "coolness": 4,
@@ -4002,7 +3892,6 @@
   },
   {
     "lot": "LOT_025",
-    "folderName": "LOT_025_SteelMate_Bluetooth_Tire_Pressure_Monitoring_System_TPMS",
     "lotNumber": "025",
     "name": "SteelMate Bluetooth Tire Pressure Monitoring System (TPMS)",
     "coolness": 4,
@@ -4016,7 +3905,8 @@
     "photos": [
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_025_SteelMate_Bluetooth_Tire_Pressure_Monitoring_System_TPMS/Photos/LOT_025_1.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_025_SteelMate_Bluetooth_Tire_Pressure_Monitoring_System_TPMS/Photos/LOT_025_4.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_025_SteelMate_Bluetooth_Tire_Pressure_Monitoring_System_TPMS/Photos/LOT_025_5.jpg"
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_025_SteelMate_Bluetooth_Tire_Pressure_Monitoring_System_TPMS/Photos/LOT_025_5.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_025_SteelMate_Bluetooth_Tire_Pressure_Monitoring_System_TPMS/Videos/LOT_025_1.mp4"
     ],
     "referenceUrl": "https://www.amazon.com/s?k=SteelMate+TPMS",
     "seoTags": [
@@ -4031,7 +3921,6 @@
   },
   {
     "lot": "LOT_028",
-    "folderName": "LOT_028_TimeKettle_WT2_Edge_Real_Time_Translation_Earbuds",
     "lotNumber": "028",
     "name": "TimeKettle WT2 Edge Real-Time Translation Earbuds",
     "coolness": 4,
@@ -4056,7 +3945,6 @@
   },
   {
     "lot": "LOT_031",
-    "folderName": "LOT_031_Traveler_Guitar_Ultra_Light_Electric_Travel_Guitar",
     "lotNumber": "031",
     "name": "Traveler Guitar Ultra-Light Electric Travel Guitar",
     "coolness": 4,
@@ -4086,7 +3974,6 @@
   },
   {
     "lot": "LOT_038",
-    "folderName": "LOT_038_Wemax_Dice_Mini_Portable_1080P_Projector",
     "lotNumber": "038",
     "name": "Wemax Dice Mini Portable 1080P Projector",
     "coolness": 4,
@@ -4120,7 +4007,6 @@
   },
   {
     "lot": "LOT_039",
-    "folderName": "LOT_039_Wemax_Go_Advanced_Portable_Laser_Projector",
     "lotNumber": "039",
     "name": "Wemax Go Advanced Portable Laser Projector",
     "coolness": 4,
@@ -4143,7 +4029,6 @@
   },
   {
     "lot": "LOT_040",
-    "folderName": "LOT_040_XREAL_Air_AR_Smart_Glasses_1st_Generation",
     "lotNumber": "040",
     "name": "XREAL Air AR Smart Glasses (1st Generation)",
     "coolness": 4,
@@ -4168,7 +4053,10 @@
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_040_XREAL_Air_AR_Smart_Glasses_1st_Generation/Photos/LOT_040_4.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_040_XREAL_Air_AR_Smart_Glasses_1st_Generation/Photos/LOT_040_5.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_040_XREAL_Air_AR_Smart_Glasses_1st_Generation/Photos/LOT_040_6.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_040_XREAL_Air_AR_Smart_Glasses_1st_Generation/Photos/LOT_040_7.jpg"
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_040_XREAL_Air_AR_Smart_Glasses_1st_Generation/Photos/LOT_040_7.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_040_XREAL_Air_AR_Smart_Glasses_1st_Generation/Videos/LOT_040_1.mp4",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_040_XREAL_Air_AR_Smart_Glasses_1st_Generation/Videos/Xreal_upclose_compressed.MP4",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_040_XREAL_Air_AR_Smart_Glasses_1st_Generation/Videos/Xreals_upxlose_compressed.MP4"
     ],
     "referenceUrl": "https://www.amazon.com/s?k=XREAL+Air+AR+Glasses",
     "seoTags": [
@@ -4179,7 +4067,6 @@
   },
   {
     "lot": "LOT_044",
-    "folderName": "LOT_044_FeiyuTech_WG2X_3_Axis_Wearable_Gimbal_Stabilizer",
     "lotNumber": "044",
     "name": "FeiyuTech WG2X 3-Axis Wearable Gimbal Stabilizer",
     "coolness": 4,
@@ -4197,7 +4084,8 @@
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_044_FeiyuTech_WG2X_3_Axis_Wearable_Gimbal_Stabilizer/Photos/LOT_044_5.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_044_FeiyuTech_WG2X_3_Axis_Wearable_Gimbal_Stabilizer/Photos/LOT_044_6.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_044_FeiyuTech_WG2X_3_Axis_Wearable_Gimbal_Stabilizer/Photos/LOT_044_7.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_044_FeiyuTech_WG2X_3_Axis_Wearable_Gimbal_Stabilizer/Photos/LOT_044_8.jpg"
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_044_FeiyuTech_WG2X_3_Axis_Wearable_Gimbal_Stabilizer/Photos/LOT_044_8.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_044_FeiyuTech_WG2X_3_Axis_Wearable_Gimbal_Stabilizer/Videos/LOT_044_1.mp4"
     ],
     "referenceUrl": "https://www.amazon.com/s?k=FeiyuTech+WG2X",
     "seoTags": [
@@ -4209,7 +4097,6 @@
   },
   {
     "lot": "LOT_045",
-    "folderName": "LOT_045_Frunsi_15_6_inch_Dual_Portable_Monitor_for_Laptop",
     "lotNumber": "045",
     "name": "Frunsi 15.6-inch Dual Portable Monitor for Laptop",
     "coolness": 4,
@@ -4237,7 +4124,6 @@
   },
   {
     "lot": "LOT_046",
-    "folderName": "LOT_046_GameSir_X2_Pro_Mobile_Gaming_Controller",
     "lotNumber": "046",
     "name": "GameSir X2 Bluetooth Mobile Gaming Controller",
     "coolness": 4,
@@ -4269,7 +4155,6 @@
   },
   {
     "lot": "LOT_052",
-    "folderName": "LOT_052_Insta360_Pocket_2_Action_Camera",
     "lotNumber": "052",
     "name": "DJI Pocket 2 Creator Combo Handheld Camera",
     "coolness": 4,
@@ -4288,7 +4173,8 @@
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_052_Insta360_Pocket_2_Action_Camera/Photos/LOT_052_1_5.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_052_Insta360_Pocket_2_Action_Camera/Photos/LOT_052_1_6.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_052_Insta360_Pocket_2_Action_Camera/Photos/LOT_052_05.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_052_Insta360_Pocket_2_Action_Camera/Photos/LOT_052_7.jpg"
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_052_Insta360_Pocket_2_Action_Camera/Photos/LOT_052_7.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_052_Insta360_Pocket_2_Action_Camera/Videos/LOT_052_1.mp4"
     ],
     "referenceUrl": "https://www.amazon.com/s?k=DJI+Pocket+2",
     "seoTags": [
@@ -4297,7 +4183,6 @@
   },
   {
     "lot": "LOT_053",
-    "folderName": "LOT_053_INVZI_MagHub_8_in_1_USB_C_Docking_Station",
     "lotNumber": "053",
     "name": "INVZI MagHub 8-in-1 USB-C Docking Station for MacBook",
     "coolness": 4,
@@ -4322,7 +4207,6 @@
   },
   {
     "lot": "LOT_055",
-    "folderName": "LOT_055_IOGear_USB_C_Pro_Dock_with_Power_Delivery",
     "lotNumber": "055",
     "name": "IOGEAR 4-Port USB 3.0 SuperSpeed Hub",
     "coolness": 4,
@@ -4342,7 +4226,6 @@
   },
   {
     "lot": "LOT_065",
-    "folderName": "LOT_065_MeLE_Quieter3Q_Mini_PC_N5105",
     "lotNumber": "065",
     "name": "MeLE Quieter3Q Mini PC with Intel N5105 Processor",
     "coolness": 4,
@@ -4373,7 +4256,6 @@
   },
   {
     "lot": "LOT_066",
-    "folderName": "LOT_066_Microsoft_Surface_Go_2_10_5_Touchscreen_8GB_Memory_128GB_SSD",
     "lotNumber": "066",
     "name": "Microsoft Surface Go 2 - 10.5 Touchscreen - 8GB Memory - 128GB SSD",
     "coolness": 4,
@@ -4409,7 +4291,6 @@
   },
   {
     "lot": "LOT_068",
-    "folderName": "LOT_068_Aokler_GPS_Dog_Tracker_Collar",
     "lotNumber": "068",
     "name": "Aokler GPS Dog Tracker Collar",
     "coolness": 4,
@@ -4435,7 +4316,6 @@
   },
   {
     "lot": "LOT_070",
-    "folderName": "LOT_070_AYY_Portable_Monitor",
     "lotNumber": "070",
     "name": "AYY 15.6 Portable Monitor (1080P FHD)",
     "coolness": 4,
@@ -4459,7 +4339,6 @@
   },
   {
     "lot": "LOT_073",
-    "folderName": "LOT_073_Bose_Smart_Soundbar_300",
     "lotNumber": "073",
     "name": "Bose Smart Soundbar 300",
     "coolness": 4,
@@ -4476,7 +4355,8 @@
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_073_Bose_Smart_Soundbar_300/Photos/LOT_073_2.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_073_Bose_Smart_Soundbar_300/Photos/LOT_073_3.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_073_Bose_Smart_Soundbar_300/Photos/LOT_073_4.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_073_Bose_Smart_Soundbar_300/Photos/LOT_073_8.jpg"
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_073_Bose_Smart_Soundbar_300/Photos/LOT_073_8.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_073_Bose_Smart_Soundbar_300/Videos/LOT_073_1.mp4"
     ],
     "referenceUrl": "https://www.bose.com/en_us/products/speakers/soundbars/bose-smart-soundbar-300.html",
     "seoTags": [
@@ -4487,7 +4367,6 @@
   },
   {
     "lot": "LOT_074",
-    "folderName": "LOT_074_Boss_RC_505_e02_Loop_Station",
     "lotNumber": "074",
     "name": "Boss RC-505 mkII Loop Station",
     "coolness": 4,
@@ -4512,7 +4391,6 @@
   },
   {
     "lot": "LOT_077",
-    "folderName": "LOT_077_CMF_Watch_Pro_Smartwatch_1_96_AMOLED_Display_IP68_Water_Resistant",
     "lotNumber": "077",
     "name": "CMF Watch Pro by Nothing - 1.96 AMOLED Smartwatch",
     "coolness": 4,
@@ -4527,7 +4405,8 @@
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_077_CMF_Watch_Pro_Smartwatch_1_96_AMOLED_Display_IP68_Water_Resistant/Photos/LOT_077_1.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_077_CMF_Watch_Pro_Smartwatch_1_96_AMOLED_Display_IP68_Water_Resistant/Photos/LOT_077_2.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_077_CMF_Watch_Pro_Smartwatch_1_96_AMOLED_Display_IP68_Water_Resistant/Photos/LOT_077_3.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_077_CMF_Watch_Pro_Smartwatch_1_96_AMOLED_Display_IP68_Water_Resistant/Photos/LOT_077_4.jpg"
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_077_CMF_Watch_Pro_Smartwatch_1_96_AMOLED_Display_IP68_Water_Resistant/Photos/LOT_077_4.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_077_CMF_Watch_Pro_Smartwatch_1_96_AMOLED_Display_IP68_Water_Resistant/Videos/LOT_077_1.mp4"
     ],
     "referenceUrl": "https://nothing.tech/products/cmf-watch-pro",
     "seoTags": [
@@ -4539,7 +4418,6 @@
   },
   {
     "lot": "LOT_082",
-    "folderName": "LOT_082_Devialet_Phantom_II_95_dB_Compact_Wireless_Speaker_2",
     "lotNumber": "082",
     "name": "Devialet Phantom II 95 dB Compact Wireless Speaker - Matte Black",
     "coolness": 4,
@@ -4554,7 +4432,11 @@
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_082_Devialet_Phantom_II_95_dB_Compact_Wireless_Speaker_2/Photos/LOT_082_4.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_082_Devialet_Phantom_II_95_dB_Compact_Wireless_Speaker_2/Photos/LOT_082_05.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_082_Devialet_Phantom_II_95_dB_Compact_Wireless_Speaker_2/Photos/LOT_082_5.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_082_Devialet_Phantom_II_95_dB_Compact_Wireless_Speaker_2/Photos/LOT_082_06.jpg"
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_082_Devialet_Phantom_II_95_dB_Compact_Wireless_Speaker_2/Photos/LOT_082_06.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_082_Devialet_Phantom_II_95_dB_Compact_Wireless_Speaker_2/Videos/LOT_082_1.mp4",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_082_Devialet_Phantom_II_95_dB_Compact_Wireless_Speaker_2/Videos/LOT_082_2.mp4",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_082_Devialet_Phantom_II_95_dB_Compact_Wireless_Speaker_2/Videos/Phantom_Thump.MP4",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_082_Devialet_Phantom_II_95_dB_Compact_Wireless_Speaker_2/Videos/Phantom_Upclose_compressed.MP4"
     ],
     "referenceUrl": "https://www.devialet.com/en-us/speakers/phantom/",
     "seoTags": [
@@ -4564,7 +4446,6 @@
   },
   {
     "lot": "LOT_083",
-    "folderName": "LOT_083_Devialet_Phantom_II_Remote",
     "lotNumber": "083",
     "name": "Devialet Phantom Remote Control",
     "coolness": 4,
@@ -4588,7 +4469,6 @@
   },
   {
     "lot": "LOT_084",
-    "folderName": "LOT_084_Devialet_Phantom_II_Travel_Case_1",
     "lotNumber": "084",
     "name": "Devialet Phantom Customized Travel Case - Single Speaker",
     "coolness": 4,
@@ -4610,7 +4490,6 @@
   },
   {
     "lot": "LOT_085",
-    "folderName": "LOT_085_Devialet_Phantom_II_Travel_Case_2",
     "lotNumber": "085",
     "name": "Devialet Phantom Travel Case - Duo Configuration",
     "coolness": 4,
@@ -4632,7 +4511,6 @@
   },
   {
     "lot": "LOT_086",
-    "folderName": "LOT_086_DJI_OSMO",
     "lotNumber": "086",
     "name": "DJI Osmo Mobile 6 Smartphone Gimbal Stabilizer",
     "coolness": 4,
@@ -4648,7 +4526,8 @@
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_086_DJI_Osmo_Mobile_6_Smartphone_Gimbal_Stabilizer/Photos/LOT_086_1_2.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_086_DJI_Osmo_Mobile_6_Smartphone_Gimbal_Stabilizer/Photos/LOT_086_1_3.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_086_DJI_Osmo_Mobile_6_Smartphone_Gimbal_Stabilizer/Photos/LOT_086_1_4.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_086_DJI_Osmo_Mobile_6_Smartphone_Gimbal_Stabilizer/Photos/LOT_086_08.jpg"
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_086_DJI_Osmo_Mobile_6_Smartphone_Gimbal_Stabilizer/Photos/LOT_086_08.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_086_DJI_Osmo_Mobile_6_Smartphone_Gimbal_Stabilizer/Videos/LOT_086_1.mp4"
     ],
     "referenceUrl": "https://www.dji.com/osmo-mobile-6",
     "seoTags": [
@@ -4660,7 +4539,6 @@
   },
   {
     "lot": "LOT_094",
-    "folderName": "LOT_094_Ledger_Nano_S_Crypto_Hardware_Wallet",
     "lotNumber": "094",
     "name": "Ledger Nano S Hardware Wallet",
     "coolness": 4,
@@ -4680,7 +4558,6 @@
   },
   {
     "lot": "LOT_097",
-    "folderName": "LOT_097_VocoproHeroKaraokeStation",
     "lotNumber": "097",
     "name": "VocoPro HERO-REC Multi-Format Portable PA Karaoke System with Digital Recorder Vocopro",
     "coolness": 4,
@@ -4709,7 +4586,6 @@
   },
   {
     "lot": "LOT_098",
-    "folderName": "LOT_098_Dianese_Backpack",
     "lotNumber": "098",
     "name": "Dainese D-Exchange Backpack Black Red",
     "coolness": 4,
@@ -4735,183 +4611,7 @@
     ]
   },
   {
-    "lot": "LOT_101",
-    "folderName": "LOT_101_Moment_37mm_Filters",
-    "lotNumber": "101",
-    "name": "Moment 37mm Cine Filter Set",
-    "coolness": 4,
-    "tagline": "Cheeky utility that earns its spot, no questions asked #14 Bonus: another thing to charge nightly.",
-    "description": "Professional 37mm filters designed for smartphone cinematography and photography. Compatible with Moment 37mm Phone Filter Mount for attaching over phone's native camera lenses.",
-    "specs": "37mm threadCompatibility | Works with Moment Phone Filter MountTypes | ND and CPL filters availableMaterial | Professional cinema-grade glassUse | Mount over phone's 1x or telephoto lens</li></ul>",
-    "price": "$200.00",
-    "category": "Cameras",
-    "subcategory": "",
-    "thumbnail": "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_101_Moment_37mm_Filters/LOT_101_THUMBNAIL.jpg",
-    "photos": [],
-    "referenceUrl": "https://www.insta360.com/product/insta360-link; https://www.amazon.com/insta360-Link-Noise-Canceling-Microphones-Specialized/dp/B0B826KS4B",
-    "seoTags": [
-      "phone accessories",
-      "mobile accessories"
-    ]
-  },
-  {
-    "lot": "LOT_102",
-    "folderName": "LOT_102_Moment_Filter_Mount",
-    "lotNumber": "102",
-    "name": "Moment Filter Mount",
-    "coolness": 4,
-    "tagline": "Pocket tools that shift your style on demand #2 Bonus: your camera bag evolves into a personality.",
-    "description": "Attach a standard 67mm Filter to your Moment Lenses. The Moment Filter Adapters let you attach a standard 67mm filter to your Moment Lenses (Tele, Wide, and Anamorphics). Simply press fit the mount onto your lens, and you’re ready to go. The interchangeable rubber collars are also included and allow you to use them with both sizes of our lenses. Whether you’re trying to balance the sunset perfectly, cut glare off of water, or shoot long exposure during the day, photography filters help you create effects and control light in ways digital editing can’t",
-    "specs": "",
-    "price": "$50.00",
-    "category": "Cameras",
-    "subcategory": "",
-    "thumbnail": "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_102_Moment_Filter_Mount/LOT_102_THUMBNAIL.jpg",
-    "photos": [],
-    "referenceUrl": "https://www.shopmoment.com/products/filter-mount",
-    "seoTags": [
-      "phone accessories",
-      "mobile accessories"
-    ]
-  },
-  {
-    "lot": "LOT_103",
-    "folderName": "LOT_103_2x_Moment_Pouch",
-    "lotNumber": "103",
-    "name": "2x Moment Pouch Leather Tan",
-    "coolness": 4,
-    "tagline": "Pocket tools that shift your style on demand #3 Bonus: your camera bag evolves into a personality.",
-    "description": "Weatherproof travel case designed to protect and organize Moment lenses and mobile photography accessories. Available in 2-lens and 4-lens configurations.",
-    "specs": "2 or 4 mobile lensesMaterial | Water-resistant weatherproof constructionFeatures | Removable padded dividersProtection | Dust, rain, and scratch resistantOrganization | Multiple pockets for accessoriesDesign | Compact and travel-friendly</li></ul>",
-    "price": "$15.00",
-    "category": "Cameras",
-    "subcategory": "",
-    "thumbnail": "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_103_2x_Moment_Pouch/LOT_103_THUMBNAIL.jpg",
-    "photos": [
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_103_2x_Moment_Pouch/Photos/LOT_103_01.jpg"
-    ],
-    "referenceUrl": "https://www.shopmoment.com/products/weatherproof-mobile-lens-pouch",
-    "seoTags": [
-      "phone accessories",
-      "mobile accessories"
-    ]
-  },
-  {
-    "lot": "LOT_104",
-    "folderName": "LOT_104_Moment_Telephoto_58mm",
-    "lotNumber": "104",
-    "name": "Moment Telephoto 58mm",
-    "coolness": 4,
-    "tagline": "Pocket tools that shift your style on demand #4 Bonus: your camera bag evolves into a personality.",
-    "description": "Professional 58mm telephoto lens that provides 2x optical magnification on phone's wide camera or 4x/6x when mounted over telephoto lens. Features cinema-grade glass and aerospace-grade metal construction.",
-    "specs": "True 58mm equivalent Magnification | 2x optical zoom (wide lens), 4x-6x (telephoto lens)Optical Design | 6 elements, 4 groups, all-glass constructionMaterial | Aerospace-grade metal housingGlass | Hand-polished cinema-grade glassFilter Thread | 67mm (removable front ring)Minimum Focus | 7.25 inchesWarranty | Lifetime guarantee</li></ul>",
-    "price": "$50.00",
-    "category": "Cameras",
-    "subcategory": "",
-    "thumbnail": "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_104_Moment_Telephoto_58mm/LOT_104_THUMBNAIL.jpg",
-    "photos": [],
-    "referenceUrl": "https://www.shopmoment.com/products/weatherproof-mobile-lens-carrying-case-2-lenses; https://www.amazon.com/MOMENT-Weatherproof-Mobile-Lens-Carrying/dp/B0C72T1DFD",
-    "seoTags": [
-      "phone accessories",
-      "mobile accessories"
-    ]
-  },
-  {
-    "lot": "LOT_105",
-    "folderName": "LOT_105_Moment_Camera_Case_for_iPhone_Android",
-    "lotNumber": "105",
-    "name": "Moment Camera Case for iPhone/Android",
-    "coolness": 4,
-    "tagline": "Footage so steady it boosts your confidence #4 Bonus: friends start asking for ‘just one more photo’—forever.",
-    "description": "Protective smartphone case designed specifically for mounting Moment lenses. Features integrated lens mount system and drop protection while maintaining slim profile.",
-    "specs": "iPhone, Pixel, Galaxy, OnePlusMount System | T-Series or M-Series lens interfaceProtection | Drop protection with raised edgesMaterial | Premium materials with textured gripDesign | Slim profile maintains phone ergonomicsLens Access | Precise cutouts for all camera lenses</li></ul>",
-    "price": "$25.00",
-    "category": "Cameras",
-    "subcategory": "",
-    "thumbnail": "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_105_Moment_Camera_Case_for_iPhone_Android/LOT_105_THUMBNAIL.jpg",
-    "photos": [
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_105_Moment_Camera_Case_for_iPhone_Android/Photos/LOT_105_01.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_105_Moment_Camera_Case_for_iPhone_Android/Photos/LOT_105_02.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_105_Moment_Camera_Case_for_iPhone_Android/Photos/LOT_105_03.jpg"
-    ],
-    "referenceUrl": "https://www.shopmoment.com/products/58mm-tele-lens; https://www.amazon.com/Moment-iPhone-Samsung-Galaxy-OnePlus/dp/B07K4T1NG7",
-    "seoTags": [
-      "phone accessories",
-      "mobile accessories",
-      "camera"
-    ]
-  },
-  {
-    "lot": "LOT_106",
-    "folderName": "LOT_106_Moment_10x_Macro_Mobile_Lens",
-    "lotNumber": "106",
-    "name": "Moment 10x Macro Mobile Lens",
-    "coolness": 4,
-    "tagline": "Pocket tools that shift your style on demand #5 Bonus: your camera bag evolves into a personality.",
-    "description": "Ultra-close-up lens that captures life-sized images of tiny subjects from just 1 inch away. Features premium glass construction and included diffuser hood for professional macro photography.",
-    "specs": "10x macro capabilityWorking Distance | 1 inch from subjectOptical Design | Premium multi-element glassFeatures | Edge-to-edge clarity, natural bokehIncludes | Removable diffuser hood, lens cap, microfiber bagCompatibility | M-Series and T-Series mountsWarranty | Lifetime guarantee</li></ul>",
-    "price": "$50.00",
-    "category": "Cameras",
-    "subcategory": "",
-    "thumbnail": "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_106_Moment_10x_Macro_Mobile_Lens/LOT_106_THUMBNAIL.jpg",
-    "photos": [],
-    "referenceUrl": "https://www.shopmoment.com/cases; https://www.shopmoment.com/pages/phone-lenses",
-    "seoTags": [
-      "phone accessories",
-      "mobile accessories",
-      "phone camera lens",
-      "mobile photography"
-    ]
-  },
-  {
-    "lot": "LOT_107",
-    "folderName": "LOT_107_Moment_Lens_Roll",
-    "lotNumber": "107",
-    "name": "Moment Mobile Lens Roll",
-    "coolness": 4,
-    "tagline": "Pocket tools that shift your style on demand #6 Bonus: your camera bag evolves into a personality.",
-    "description": "Canvas and leather carrying solution designed to organize and protect multiple Moment lenses and mobile photography accessories in a compact roll-up format.",
-    "specs": "Rugged canvas and leather constructionCapacity | 2-lens or 4-lens configurationsDesign | Roll-up format for compact storageCompatibility | Works with Moment Leather Lens PouchesOrganization | Individual slots for lenses and accessoriesTravel | Secure tie closure system</li></ul>",
-    "price": "$25.00",
-    "category": "Cameras",
-    "subcategory": "",
-    "thumbnail": "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_107_Moment_Lens_Roll/LOT_107_THUMBNAIL.jpg",
-    "photos": [
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_107_Moment_Lens_Roll/Photos/LOT_107_01.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_107_Moment_Lens_Roll/Photos/LOT_107_02.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_107_Moment_Lens_Roll/Photos/LOT_107_03.jpg"
-    ],
-    "referenceUrl": "https://www.shopmoment.com/products/10x-macro-lens; https://www.amazon.com/Moment-10x-Macro-Lens-Close-Ups/dp/B074KP1QZF",
-    "seoTags": [
-      "phone accessories",
-      "mobile accessories",
-      "phone camera lens",
-      "mobile photography"
-    ]
-  },
-  {
-    "lot": "LOT_109",
-    "folderName": "LOT_109_MOMENT_REMOTE",
-    "lotNumber": "109",
-    "name": "Moment Remote Control",
-    "coolness": 4,
-    "tagline": "Tiny control that saves you steps and adds mystery. Bonus: engineered to vanish exactly when you need it.",
-    "description": "The next evolution of our bluetooth remote, completely redesigned from the ground up. With full iOS & Android compatibility, a dedicated on/off switch, and an oversized shutter button… It lets you trigger your phone’s camera from up to 10 meters away with the touch of a button. A more ergonomic physical design feels great in hand, while the battery is good for over 5,000 shots. There’s also a built in attachment cord to clip to keys, tripods, or just about anywhere so you’re always ready to shoot. It’s the perfect companion to your phone for anything from long-exposure landscapes, to group photos, video, and more.",
-    "specs": "",
-    "price": "$25.00",
-    "category": "Cameras",
-    "subcategory": "",
-    "thumbnail": "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_109_MOMENT_REMOTE/LOT_109_THUMBNAIL.jpg",
-    "photos": [],
-    "referenceUrl": "https://www.shopmoment.com/products/remote-control",
-    "seoTags": [
-      "phone accessories",
-      "mobile accessories"
-    ]
-  },
-  {
     "lot": "LOT_114",
-    "folderName": "LOT_114_Vintage_Nicolai_Piquadro_Leather_Messenger",
     "lotNumber": "114",
     "name": "Vintage Nicolai Piquadro Leather Messenger Bag",
     "coolness": 4,
@@ -4930,7 +4630,6 @@
   },
   {
     "lot": "LOT_115",
-    "folderName": "LOT_115_Paravel_Grand_Tour_Luxury_Duffle_Bag",
     "lotNumber": "115",
     "name": "Paravel Grand Tour Luxury Duffle Bag",
     "coolness": 4,
@@ -4945,14 +4644,14 @@
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_115_Paravel_Grand_Tour_Luxury_Duffle_Bag/Photos/LOT_115_1_1.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_115_Paravel_Grand_Tour_Luxury_Duffle_Bag/Photos/LOT_115_1_2.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_115_Paravel_Grand_Tour_Luxury_Duffle_Bag/Photos/LOT_115_1_3.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_115_Paravel_Grand_Tour_Luxury_Duffle_Bag/Photos/LOT_115_1_4.jpg"
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_115_Paravel_Grand_Tour_Luxury_Duffle_Bag/Photos/LOT_115_1_4.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_115_Paravel_Grand_Tour_Luxury_Duffle_Bag/Videos/LOT_115_1.mp4"
     ],
     "referenceUrl": "https://tourparavel.com/products/grand-tour",
     "seoTags": []
   },
   {
     "lot": "LOT_123",
-    "folderName": "LOT_123_Moment_Camera_Phone_Lens_Package",
     "lotNumber": "123",
     "name": "Moment Camera Phone Lens Package",
     "coolness": 4,
@@ -4998,7 +4697,6 @@
   },
   {
     "lot": "LOT_125",
-    "folderName": "LOT_125_Anker_Nebula_Capsule_Smart_Wi-Fi_Mini_Projector",
     "lotNumber": "125",
     "name": "Anker Nebula Capsule Smart Wi-Fi Mini Projector",
     "coolness": 4,
@@ -5015,7 +4713,8 @@
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_125_Anker_Nebula_Capsule%2C_Smart_Wi-Fi_Mini_Projector/Photos/LOT_125_1_3.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_125_Anker_Nebula_Capsule%2C_Smart_Wi-Fi_Mini_Projector/Photos/LOT_125_04.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_125_Anker_Nebula_Capsule%2C_Smart_Wi-Fi_Mini_Projector/Photos/LOT_125_05.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_125_Anker_Nebula_Capsule%2C_Smart_Wi-Fi_Mini_Projector/Photos/LOT_125_06.jpg"
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_125_Anker_Nebula_Capsule%2C_Smart_Wi-Fi_Mini_Projector/Photos/LOT_125_06.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_125_Anker_Nebula_Capsule%2C_Smart_Wi-Fi_Mini_Projector/Videos/LOT_125_1.mp4"
     ],
     "referenceUrl": "https://www.amazon.com/Anker-Nebula-Capsule-Projector/dp/B07B6SH1SV",
     "seoTags": [
@@ -5026,7 +4725,6 @@
   },
   {
     "lot": "LOT_126",
-    "folderName": "LOT_126_HUGE_Vehicle_Entertainment_System",
     "lotNumber": "126",
     "name": "HUGE Vehicle Entertainment System",
     "coolness": 4,
@@ -5048,7 +4746,6 @@
   },
   {
     "lot": "LOT_127",
-    "folderName": "LOT_127_Airpod_Pro_2_Lightning",
     "lotNumber": "127",
     "name": "Apple AirPods Pro (2nd Generation) with MagSafe Case (Lightning)",
     "coolness": 4,
@@ -5073,7 +4770,6 @@
   },
   {
     "lot": "LOT_128",
-    "folderName": "LOT_128_Airpod_Pro_2_USB_C",
     "lotNumber": "128",
     "name": "Apple AirPods Pro (2nd Generation) with MagSafe Case (USB-C)",
     "coolness": 4,
@@ -5099,7 +4795,6 @@
   },
   {
     "lot": "LOT_129",
-    "folderName": "LOT_129_Samsung_3S_Tab_Galaxy",
     "lotNumber": "129",
     "name": "Samsung Galaxy Tab S3 9.7-inch (32GB)",
     "coolness": 4,
@@ -5128,7 +4823,6 @@
   },
   {
     "lot": "LOT_130",
-    "folderName": "LOT_130_ShureMV88",
     "lotNumber": "130",
     "name": "Shure MV88+ Video Kit Digital Stereo Condenser Microphone",
     "coolness": 4,
@@ -5155,7 +4849,6 @@
   },
   {
     "lot": "LOT_131",
-    "folderName": "LOT_131_Sony2.1_Portable_Surround",
     "lotNumber": "131",
     "name": "Sony HT-AX7 Portable Theater System",
     "coolness": 4,
@@ -5186,7 +4879,6 @@
   },
   {
     "lot": "LOT_003",
-    "folderName": "LOT_003_Minisforum_EliteMini_UM773_SE_Mini_PC_Ryzen_7_7735HS",
     "lotNumber": "003",
     "name": "Minisforum EliteMini UM773 SE Mini PC (Ryzen 7 7735HS)",
     "coolness": 3,
@@ -5214,7 +4906,6 @@
   },
   {
     "lot": "LOT_004",
-    "folderName": "LOT_004_Moment_M_Series_Professional_Mobile_Lens_Kit",
     "lotNumber": "004",
     "name": "Moment M-Series Professional Mobile Lens Kit",
     "coolness": 3,
@@ -5241,7 +4932,6 @@
   },
   {
     "lot": "LOT_017",
-    "folderName": "LOT_017_Satechi_Dual_USB_C_Docking_Station_with_Dual_4K_HDMI",
     "lotNumber": "017",
     "name": "Satechi Dual USB-C Docking Station with Dual 4K HDMI",
     "coolness": 3,
@@ -5267,7 +4957,6 @@
   },
   {
     "lot": "LOT_018",
-    "folderName": "LOT_018_Sena_Outrush_Modular_Bluetooth_Motorcycle_Helmet",
     "lotNumber": "018",
     "name": "Sena Outrush Modular Bluetooth Motorcycle Helmet",
     "coolness": 3,
@@ -5294,7 +4983,6 @@
   },
   {
     "lot": "LOT_026",
-    "folderName": "LOT_026_TC_Helicon_Acoustic_Pedal",
     "lotNumber": "026",
     "name": "TC Helicon VoiceTone Acoustic Guitar/Vocal Processor",
     "coolness": 3,
@@ -5314,7 +5002,8 @@
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_026_TC_Helicon_Acoustic_Pedal/Photos/LOT_026_06.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_026_TC_Helicon_Acoustic_Pedal/Photos/LOT_026_07.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_026_TC_Helicon_Acoustic_Pedal/Photos/LOT_026_08.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_026_TC_Helicon_Acoustic_Pedal/Photos/LOT_026_09.jpg"
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_026_TC_Helicon_Acoustic_Pedal/Photos/LOT_026_09.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_026_TC_Helicon_Acoustic_Pedal/Videos/LOT_026_VIDEO_01.MP4"
     ],
     "referenceUrl": "https://www.amazon.com/s?k=TC+Helicon+VoiceTone+Acoustic",
     "seoTags": [
@@ -5324,7 +5013,6 @@
   },
   {
     "lot": "LOT_027",
-    "folderName": "LOT_027_Thule_Vital_Hydration_Backpack",
     "lotNumber": "027",
     "name": "Thule Vital Hydration Backpack",
     "coolness": 3,
@@ -5346,7 +5034,6 @@
   },
   {
     "lot": "LOT_030",
-    "folderName": "LOT_030_XIAOMI_5G_Routers_x2",
     "lotNumber": "030",
     "name": "Xiaomi - TP-Link Routers and Relays",
     "coolness": 3,
@@ -5366,7 +5053,6 @@
   },
   {
     "lot": "LOT_036",
-    "folderName": "LOT_036_Jinxnobi_Wall_Mount_Safe",
     "lotNumber": "036",
     "name": "Jinxnobi Wall Mount Safe",
     "coolness": 3,
@@ -5390,7 +5076,6 @@
   },
   {
     "lot": "LOT_037",
-    "folderName": "LOT_037_Stealth_Hidden_Wall_Safe_22_8_x_15_4_Black",
     "lotNumber": "037",
     "name": "Stealth Hidden Wall Safe - 22.8 x 15.4 Black",
     "coolness": 3,
@@ -5415,7 +5100,6 @@
   },
   {
     "lot": "LOT_042",
-    "folderName": "LOT_042_XREAL_Beam_Spatial_Computing_Device_1st_Generation",
     "lotNumber": "042",
     "name": "XREAL Beam Spatial Computing Device (1st Generation)",
     "coolness": 3,
@@ -5430,7 +5114,9 @@
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_042_XREAL_Beam_Spatial_Computing_Device_1st_Generation/Photos/LOT_042_2.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_042_XREAL_Beam_Spatial_Computing_Device_1st_Generation/Photos/LOT_042_3.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_042_XREAL_Beam_Spatial_Computing_Device_1st_Generation/Photos/LOT_042_5.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_042_XREAL_Beam_Spatial_Computing_Device_1st_Generation/Photos/LOT_042_8.jpg"
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_042_XREAL_Beam_Spatial_Computing_Device_1st_Generation/Photos/LOT_042_8.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_042_XREAL_Beam_Spatial_Computing_Device_1st_Generation/Videos/Xreal_upclose_compressed.MP4",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_042_XREAL_Beam_Spatial_Computing_Device_1st_Generation/Videos/Xreals_upxlose_compressed.MP4"
     ],
     "referenceUrl": "https://www.amazon.com/s?k=XREAL+Beam",
     "seoTags": [
@@ -5441,7 +5127,6 @@
   },
   {
     "lot": "LOT_049",
-    "folderName": "LOT_049_GoPro_HERO7_Black_Action_Camera",
     "lotNumber": "049",
     "name": "GoPro HERO7 Black Action Camera",
     "coolness": 3,
@@ -5470,7 +5155,6 @@
   },
   {
     "lot": "LOT_067",
-    "folderName": "LOT_067_Anker_577_Thunderbolt_Docking_Station_13_in_1",
     "lotNumber": "067",
     "name": "Anker 577 Thunderbolt Docking Station (13-in-1)",
     "coolness": 3,
@@ -5496,7 +5180,6 @@
   },
   {
     "lot": "LOT_075",
-    "folderName": "LOT_075_Bushnell_Equinox_X650_Night_Vision_5x32_Monocular_review",
     "lotNumber": "075",
     "name": "Bushnell Equinox X650 5x32mm Digital Night Vision Monocular",
     "coolness": 3,
@@ -5520,7 +5203,6 @@
   },
   {
     "lot": "LOT_078",
-    "folderName": "LOT_078_Dell_SE2222H_22_inch_Monitor",
     "lotNumber": "078",
     "name": "Dell SE2222H 22-inch LED Monitor",
     "coolness": 3,
@@ -5546,7 +5228,6 @@
   },
   {
     "lot": "LOT_088",
-    "folderName": "LOT_088_Doqo_iPad_Air_M2_Hub",
     "lotNumber": "088",
     "name": "Doqo iPad Air M2 Keyboard Hub",
     "coolness": 3,
@@ -5578,7 +5259,6 @@
   },
   {
     "lot": "LOT_091",
-    "folderName": "LOT_091_KEMIMOTO_Motorcycle_Helmet_Backpack_Bag_for_Men_with_USB_Charging_Port",
     "lotNumber": "091",
     "name": "KEMIMOTO Motorcycle Helmet Backpack Bag",
     "coolness": 3,
@@ -5607,7 +5287,6 @@
   },
   {
     "lot": "LOT_099",
-    "folderName": "LOT_099_Dianese_XL_Pants",
     "lotNumber": "099",
     "name": "Dainese D-Explorer Gore-Tex Pants XL Black Red",
     "coolness": 3,
@@ -5633,7 +5312,6 @@
   },
   {
     "lot": "LOT_100",
-    "folderName": "LOT_100_Dianese_JacketXL",
     "lotNumber": "100",
     "name": "Dainese Super Rider D-Dry Jacket XL Black Red",
     "coolness": 3,
@@ -5658,7 +5336,6 @@
   },
   {
     "lot": "LOT_118",
-    "folderName": "LOT_118_KLIM_Ballistic_Motorcycle_Jeans",
     "lotNumber": "118",
     "name": "KLIM Ballistic Motorcycle Jeans",
     "coolness": 3,
@@ -5688,7 +5365,6 @@
   },
   {
     "lot": "LOT_119",
-    "folderName": "LOT_119_JOOLA_Professional_Ping_Pong_Table",
     "lotNumber": "119",
     "name": "JOOLA Professional Ping Pong Table",
     "coolness": 3,
@@ -5701,14 +5377,14 @@
     "thumbnail": "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_119_JOOLA_Professional_Ping_Pong_Table/LOT_119_THUMBNAIL.jpg",
     "photos": [
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_119_JOOLA_Professional_Ping_Pong_Table/Photos/LOT_119_1_1.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_119_JOOLA_Professional_Ping_Pong_Table/Photos/LOT_119_1_2.jpg"
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_119_JOOLA_Professional_Ping_Pong_Table/Photos/LOT_119_1_2.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_119_JOOLA_Professional_Ping_Pong_Table/Videos/LOT_119_1.mp4"
     ],
     "referenceUrl": "https://www.amazon.com/s?k=joola+professional+ping+pong+table",
     "seoTags": []
   },
   {
     "lot": "LOT_124",
-    "folderName": "LOT_124_Plugable_Hub_(Dual_Macbook_Screens)",
     "lotNumber": "124",
     "name": "Plugable USB-C Hub (Dual MacBook Screens)",
     "coolness": 3,
@@ -5737,7 +5413,6 @@
   },
   {
     "lot": "LOT_033",
-    "folderName": "LOT_033_Fishman_Loudbox_Mini_Acoustic_Guitar_Amplifier",
     "lotNumber": "033",
     "name": "Fishman Loudbox Mini Acoustic Guitar Amplifier",
     "coolness": 2,
@@ -5751,7 +5426,8 @@
     "photos": [
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_033_Fishman_Loudbox_Mini_Acoustic_Guitar_Amplifier/Photos/LOT_033_1_1.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_033_Fishman_Loudbox_Mini_Acoustic_Guitar_Amplifier/Photos/LOT_033_1_2.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_033_Fishman_Loudbox_Mini_Acoustic_Guitar_Amplifier/Photos/LOT_033_05.jpg"
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_033_Fishman_Loudbox_Mini_Acoustic_Guitar_Amplifier/Photos/LOT_033_05.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/master/LOT_033_Fishman_Loudbox_Mini_Acoustic_Guitar_Amplifier/Videos/LOT_033_1.mp4"
     ],
     "referenceUrl": "https://www.amazon.com/s?k=Fishman+Loudbox+Mini",
     "seoTags": [
@@ -5762,7 +5438,6 @@
   },
   {
     "lot": "LOT_035",
-    "folderName": "LOT_035_Waeco_Car_Refrigerator",
     "lotNumber": "035",
     "name": "Dometic (Waeco) CF-50 Portable Electric Cooler/Freezer",
     "coolness": 2,
@@ -5781,7 +5456,6 @@
   },
   {
     "lot": "LOT_050",
-    "folderName": "LOT_050_SentrySafe_Fire_Resistant_Home_Safe_Box",
     "lotNumber": "050",
     "name": "SentrySafe Fireproof Home Safe with Digital Lock",
     "coolness": 2,
@@ -5806,7 +5480,6 @@
   },
   {
     "lot": "LOT_061",
-    "folderName": "LOT_061_Logitech_K780_Multi_Device_Wireless_Keyboard",
     "lotNumber": "061",
     "name": "Logitech K780 Multi-Device Wireless Keyboard",
     "coolness": 2,
@@ -5833,7 +5506,6 @@
   },
   {
     "lot": "LOT_062",
-    "folderName": "LOT_062_Lumary_2K_Floodlight_Security_Camera",
     "lotNumber": "062",
     "name": "Lumary 2K Smart Floodlight Security Camera with Dual Band Wi-Fi",
     "coolness": 2,
@@ -5858,7 +5530,6 @@
   },
   {
     "lot": "LOT_087",
-    "folderName": "LOT_087_American_Vizio_TV_50_P502ui_B1",
     "lotNumber": "087",
     "name": "American Vizio TV - 50_ P502ui-B1",
     "coolness": 2,
@@ -5882,7 +5553,6 @@
   },
   {
     "lot": "LOT_072",
-    "folderName": "LOT_072_BigBlue_Portable_Solar_Charger_28W",
     "lotNumber": "072",
     "name": "BigBlue 28W Foldable Solar Charger Panel",
     "coolness": 1,
@@ -5904,7 +5574,6 @@
   },
   {
     "lot": "LOT_076",
-    "folderName": "LOT_076_Portable_Monitor_Stands",
     "lotNumber": "076",
     "name": "Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms",
     "coolness": 1,

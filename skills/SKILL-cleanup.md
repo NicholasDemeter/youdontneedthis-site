@@ -1,184 +1,123 @@
 # SKILL-cleanup.md
-# YDNT — Inventory Compliance and Cleanup
-# Save to: /Users/nicholasdemeter/Documents/youdontneedthis-site/skills/SKILL-cleanup.md
+# YDNT — Inventory Compliance & Cleanup
 
-## DRAFT STATUS — June 22, 2026
-## This skill is a DRAFT. The compression commands need to be tested.
-## Verify ImageMagick and ffmpeg are installed before running any compress commands.
-## Image loading on live site is UNRESOLVED — cleanup may help or may be unrelated.
+## SELF-CORRECTION RULE
+If a path, count, or result is inconsistent with this skill or ARCHITECTURE.md, STOP and
+ask Nicholas. If a document is the cause, propose the fix and update it with approval.
+
+## TOOLS USED HERE
+ImageMagick (`convert`, `mogrify`) for images, `ffmpeg` for video. Confirm first:
+```bash
+which convert ffmpeg mogrify
+# if missing: brew install imagemagick && brew install ffmpeg
+```
 
 ---
 
 ## FILE STANDARDS (non-negotiable)
 
-| File Type | Location | Naming | Size Range |
-|-----------|----------|--------|----------|
-| Thumbnail | LOT root | LOT_###_THUMBNAIL.jpg | 100KB–200KB |
-| Photos | Photos/ subfolder | LOT_###_01.jpg, _02.jpg... | 300KB–400KB each |
+| Type | Location | Naming | Size |
+|------|----------|--------|------|
+| Thumbnail | LOT folder ROOT | contains "THUMBNAIL", e.g. LOT_###_THUMBNAIL.jpg | 100KB–200KB |
+| Photos | Photos/ subfolder | LOT_###_01.jpg, _02.jpg … | 300KB–400KB each |
 | Videos | Videos/ subfolder | LOT_###_VIDEO_01.mp4 | under 10MB each |
 
-Minimum: 3 photos per LOT
-All subfolders must exist even if empty (Photos/ and Videos/)
+Matching depends ONLY on the folder starting with `LOT_###_`. Renaming the readable part
+of a folder never breaks anything as long as that prefix is intact and correctly formatted
+(capital LOT, three zero-padded digits, underscore).
 
 ---
 
-## STEP 1 — CHECK TOOLS ARE AVAILABLE
-```bash
-which convert    # ImageMagick for images
-which ffmpeg     # for videos
-which mogrify    # ImageMagick batch tool
-```
-If any return "not found":
-```bash
-brew install imagemagick
-brew install ffmpeg
-```
-
----
-
-## STEP 2 — FULL INVENTORY AUDIT
-Run this to get a complete compliance report:
+## STEP 1 — FULL INVENTORY AUDIT
 ```bash
 node -e "
-const fs = require('fs');
-const path = require('path');
-const inv = '/Users/nicholasdemeter/Documents/youdontneedthis-inventory';
-const lots = fs.readdirSync(inv).filter(f => f.startsWith('LOT_'));
-const report = {noThumb: [], noPhotos: [], fewPhotos: [], noVideosFolder: []};
-lots.forEach(lot => {
-  const lotPath = path.join(inv, lot);
-  const files = fs.readdirSync(lotPath);
-  const hasThumb = files.some(f => f.toUpperCase().includes('THUMBNAIL'));
-  const photosPath = path.join(lotPath, 'Photos');
-  const hasPhotos = fs.existsSync(photosPath);
-  const photoCount = hasPhotos ? fs.readdirSync(photosPath).filter(f => /\.(jpe?g|png|gif|webp)$/i.test(f)).length : 0;
-  const hasVideos = fs.existsSync(path.join(lotPath, 'Videos'));
-  if (!hasThumb) report.noThumb.push(lot);
-  if (!hasPhotos || photoCount === 0) report.noPhotos.push(lot);
-  else if (photoCount < 3) report.fewPhotos.push(lot + ' (' + photoCount + ' photos)');
-  if (!hasVideos) report.noVideosFolder.push(lot);
+const fs=require('fs'),path=require('path');
+const inv=process.env.HOME+'/Documents/youdontneedthis-inventory';
+const lots=fs.readdirSync(inv).filter(f=>/^LOT_/i.test(f));
+const r={noThumb:[],noPhotos:[],fewPhotos:[],badPrefix:[]};
+lots.forEach(lot=>{
+  if(!/^LOT_\d{3}_/.test(lot)) r.badPrefix.push(lot);   // flags lot_, LOT_12_, etc.
+  const p=path.join(inv,lot), files=fs.readdirSync(p);
+  if(!files.some(f=>f.toUpperCase().includes('THUMBNAIL'))) r.noThumb.push(lot);
+  const ph=path.join(p,'Photos');
+  const n=fs.existsSync(ph)?fs.readdirSync(ph).filter(f=>/\.(jpe?g|png|gif|webp)$/i.test(f)).length:0;
+  if(n===0) r.noPhotos.push(lot); else if(n<3) r.fewPhotos.push(lot+' ('+n+')');
 });
-console.log('Missing thumbnail:', report.noThumb.length, '\n', report.noThumb.join('\n'));
-console.log('Missing photos:', report.noPhotos.length, '\n', report.noPhotos.join('\n'));
-console.log('Fewer than 3 photos:', report.fewPhotos.length, '\n', report.fewPhotos.join('\n'));
-console.log('Missing Videos folder:', report.noVideosFolder.length);
+const show=(t,a)=>console.log(t+':',a.length,a.length?'\n  '+a.join('\n  '):'');
+show('Malformed LOT prefix (WILL break matching)',r.badPrefix);
+show('Missing thumbnail',r.noThumb);
+show('No photos',r.noPhotos);
+show('Fewer than 3 photos',r.fewPhotos);
 "
 ```
+The "Malformed LOT prefix" list is the critical one — those folders won't match the CSV.
+Report it; fixing means renaming the prefix to the strict `LOT_###_` form.
 
 ---
 
-## STEP 3 — CREATE MISSING SUBFOLDERS
+## STEP 2 — COMPRESS THUMBNAILS (target 100KB–200KB)
 ```bash
-# Create Videos folder for ALL LOTs that are missing it
-for dir in /Users/nicholasdemeter/Documents/youdontneedthis-inventory/LOT_*/; do
-  mkdir -p "$dir/Photos"
-  mkdir -p "$dir/Videos"
-done
-```
-
----
-
-## STEP 4 — COMPRESS THUMBNAILS
-Target range: 100KB–200KB. Compress if over 200KB; flag (don't silently leave) if under 100KB —
-undersized thumbnails are also a compliance failure, not just a quality nice-to-have.
-```bash
-cd /Users/nicholasdemeter/Documents/youdontneedthis-inventory
+cd ~/Documents/youdontneedthis-inventory
 for thumb in LOT_*/*THUMBNAIL*; do
+  [ -f "$thumb" ] || continue
   size=$(du -k "$thumb" | cut -f1)
   if [ "$size" -gt 200 ]; then
     echo "Compressing $thumb (${size}KB)"
     convert "$thumb" -resize 800x800\> -quality 80 "$thumb"
   elif [ "$size" -lt 100 ]; then
-    echo "FLAG: $thumb is under 100KB (${size}KB) — re-derive from a higher-res original if available"
+    echo "FLAG (too small): $thumb (${size}KB) — re-derive from a higher-res original if available"
   fi
 done
 ```
 
-## STEP 5 — COMPRESS PHOTOS
-Target range: 300KB–400KB. Compress if over 400KB; flag if under 300KB.
+## STEP 3 — COMPRESS PHOTOS (target 300KB–400KB each)
 ```bash
-cd /Users/nicholasdemeter/Documents/youdontneedthis-inventory
-for photosDir in LOT_*/Photos/; do
-  for img in "$photosDir"*.{jpg,jpeg,JPG,JPEG,png,PNG}; do
-    [ -f "$img" ] || continue
-    size=$(du -k "$img" | cut -f1)
-    if [ "$size" -gt 400 ]; then
-      echo "Compressing $img (${size}KB)"
-      convert "$img" -resize 1200x1200\> -quality 82 "$img"
-    elif [ "$size" -lt 300 ]; then
-      echo "FLAG: $img is under 300KB (${size}KB) — re-derive from a higher-res original if available"
-    fi
-  done
+cd ~/Documents/youdontneedthis-inventory
+for img in LOT_*/Photos/*.{jpg,jpeg,JPG,JPEG,png,PNG,webp}; do
+  [ -f "$img" ] || continue
+  size=$(du -k "$img" | cut -f1)
+  if [ "$size" -gt 400 ]; then
+    echo "Compressing $img (${size}KB)"
+    convert "$img" -resize 1200x1200\> -quality 82 "$img"
+  elif [ "$size" -lt 300 ]; then
+    echo "FLAG (too small): $img (${size}KB) — re-derive from a higher-res original if available"
+  fi
 done
 ```
 
-## STEP 6 — COMPRESS VIDEOS (DRAFT — test on one video first)
+## STEP 4 — COMPRESS VIDEOS (target under 10MB) — test on ONE first
 ```bash
-# Test on single video first before batch
 ffmpeg -i "INPUT.mp4" -vcodec h264 -acodec aac -crf 28 -preset medium "OUTPUT.mp4"
-# If output is under 10MB and quality is acceptable, proceed with batch
+# If output is under 10MB and looks acceptable, then batch the rest.
 ```
 
----
-
-## STEP 7 — RENAME PHOTOS TO SEQUENTIAL FORMAT
+## STEP 5 — RENAME PHOTOS TO SEQUENTIAL FORMAT (per LOT, with confirmation)
 ```bash
-# For a specific LOT — replace LOT_002 and folder name as needed
-cd "/Users/nicholasdemeter/Documents/youdontneedthis-inventory/LOT_002_Microsoft_Surface_Studio_2_All_in_One_Desktop/Photos"
-counter=1
-for f in $(ls | sort); do
+# Confirm the LOT number with Nicholas first. Replace the folder name below.
+cd ~/Documents/youdontneedthis-inventory/LOT_###_<folder>/Photos
+n=1
+for f in $(ls | sort -V); do
   ext="${f##*.}"
-  new="LOT_002_$(printf '%02d' $counter).${ext,,}"
-  mv "$f" "$new"
-  ((counter++))
+  mv "$f" "LOT_###_$(printf '%02d' $n).${ext:l}"   # zsh lowercases ext
+  n=$((n+1))
 done
 ```
-NOTE: Ask Nicholas to confirm LOT number before running rename commands.
-Never batch rename across all LOTs without per-LOT confirmation.
+Never batch-rename across all LOTs without per-LOT confirmation.
 
 ---
 
-## STEP 8 — DEAD WEIGHT CLEANUP IN SITE REPO
-These files serve no function and should be deleted in a dedicated cleanup session:
-```
-app/
-components/
-hooks/
-lib/
-types/
-next.config.mjs
-tsconfig.json
-pnpm-lock.yaml
-postcss.config.mjs
-components.json
-index.html (root, 622 bytes)
-styles.css (root)
-app.js (root)
-```
-AND delete stale branches:
+## STEP 6 — PUSH INVENTORY, THEN REBUILD SITE
 ```bash
-git push origin --delete v0/nicholasdemeter-5c8450d7
-git push origin --delete YDNT_Sandbox
-git push origin --delete feature/explore-collection-dropdown
+git -C ~/Documents/youdontneedthis-inventory add .
+git -C ~/Documents/youdontneedthis-inventory commit -m "Cleanup: describe what changed"
+git -C ~/Documents/youdontneedthis-inventory push origin master:main
 ```
-WARNING: Do not delete `main` branch. Do not delete `.github/` folder. Do not delete `CNAME`.
+Then follow SKILL-push.md to rebuild and push the site (inventory alone changes nothing live).
 
 ---
 
-## STEP 9 — VERIFY AND PUSH INVENTORY
-After any cleanup:
-```bash
-git -C /Users/nicholasdemeter/Documents/youdontneedthis-inventory add .
-git -C /Users/nicholasdemeter/Documents/youdontneedthis-inventory commit -m "Cleanup: [describe what changed]"
-git -C /Users/nicholasdemeter/Documents/youdontneedthis-inventory push origin master:main
-```
-Then follow SKILL-push.md to rebuild and push site.
-
----
-
-## KNOWN GOTCHAS
-- .DS_Store files appear in every folder on Mac — harmless, don't commit them
-- Some LOTs have Specs/ subfolder — leave it alone, build.js ignores it
-- Mixed .jpg and .JPG extensions — build.js handles case-insensitive, but standardize to lowercase for cleanliness
-- Never rename the THUMBNAIL file to anything that doesn't contain "THUMBNAIL"
-- Videos folder can be empty — that's fine, build.js only loads videos if they exist
+## NOTES
+- .DS_Store appears in every Mac folder — harmless, never commit it.
+- Mixed .jpg / .JPG — build.js is case-insensitive, but standardize to lowercase for tidiness.
+- A LOT's Videos/ folder may be empty or absent — build.js only includes videos if present.
+- Never rename a thumbnail to something without "THUMBNAIL" in it.
