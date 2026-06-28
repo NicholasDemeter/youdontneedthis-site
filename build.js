@@ -778,23 +778,23 @@ function generateHTML(products) {
 
     /* Hot Items */
     .hot-items-section {
-      padding: 2rem 1rem;
-      background: #111;
-      border-bottom: 1px solid #222;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .hot-items-title {
       font-size: 1.5rem;
       font-weight: 700;
       margin-bottom: 1.5rem;
-      padding: 0 1rem;
     }
 
     .hot-items-carousel {
       display: flex;
       gap: 1rem;
       overflow-x: auto;
-      padding: 0 1rem 1rem;
+      padding-bottom: 1rem;
       scrollbar-width: thin;
       scrollbar-color: #333 #111;
     }
@@ -880,7 +880,7 @@ function generateHTML(products) {
 
     .stands-preview-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(95px, 1fr));
       gap: 0.75rem;
       max-width: 100%;
     }
@@ -906,62 +906,6 @@ function generateHTML(products) {
       object-fit: cover;
       display: block;
     }
-    }
-
-    /* Home Button - Always visible, top-right, matches other glassy buttons */
-    .home-btn {
-      position: fixed;
-      top: 24px;
-      right: 24px;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.05));
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      color: #fff;
-      border: 2px solid transparent;
-      background-clip: padding-box;
-      padding: 0.9rem 2rem;
-      border-radius: 16px;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 
-        0 8px 32px 0 rgba(31, 38, 135, 0.15),
-        inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
-      z-index: 1001;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .home-btn::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 14px;
-      padding: 2px;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      z-index: -1;
-    }
-
-    .home-btn.visible {
-      display: flex; /* Legacy class kept for compatibility */
-    }
-
-    .home-btn:hover {
-      background: linear-gradient(135deg, rgba(83, 167, 234, 0.35), rgba(83, 167, 234, 0.25));
-      border-color: rgba(83, 167, 234, 0.6);
-      transform: translateY(-2px);
-      box-shadow: 0 12px 40px 0 rgba(83, 167, 234, 0.35);
-    }
-
-    .home-btn:active {
-      transform: translateY(0) scale(0.98);
     }
 
     .section-title {
@@ -1280,7 +1224,6 @@ function generateHTML(products) {
       .stands-callout { padding: 1.5rem; }
       .stands-preview-grid { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
       .stands-preview-thumb { height: 90px; }
-      .home-btn { top: 16px; right: 16px; padding: 0.8rem 1.8rem; font-size: 0.95rem; }
     }
 
     @media (max-width: 480px) {
@@ -1290,11 +1233,6 @@ function generateHTML(products) {
   </style>
 </head>
 <body>
-
-  <!-- Home Button (always visible, top-right) -->
-  <button class="home-btn" id="homeBtn" onclick="scrollToTop()">
-    HOME
-  </button>
 
   <!-- Hero Section -->
   <section class="hero" id="hero">
@@ -1410,21 +1348,6 @@ function generateHTML(products) {
         section.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
-
-    // Scroll to top
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // Show/hide home button based on scroll position
-    window.addEventListener('scroll', function() {
-      const homeBtn = document.getElementById('homeBtn');
-      if (window.scrollY > 600) {
-        homeBtn.classList.add('visible');
-      } else {
-        homeBtn.classList.remove('visible');
-      }
-    });
 
     function toggleCategoryDropdown() {
       const dropdown = document.getElementById('categoryDropdown');
