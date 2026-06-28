@@ -38,6 +38,7 @@ digits, then an underscore (LOT_012 not LOT_12; LOT not lot).
 | Add a new item (raw photos → live) | SKILL-new-lot.md |
 | Compress / rename / fix inventory files | SKILL-cleanup.md |
 | Live site not behaving as expected | SKILL-verify-live.md |
+| Verify docs still match the code (run periodically) | SKILL-self-audit.md |
 
 You do NOT need to pre-load these. ARCHITECTURE.md carries the core sequences.
 Open a skill only when a task needs its specific depth.
