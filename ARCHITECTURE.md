@@ -108,6 +108,11 @@ LOT_###_Sanitized_Official_Name/
 - Thumbnail: any file whose name CONTAINS the word THUMBNAIL (case-insensitive),
   sitting in the folder root (not inside Photos/). Common extensions are recognized
   (.jpg .jpeg .png .gif .webp). The thumbnail is what the CARD displays.
+  EXTENSION CASE RULE: always lowercase the extension (.jpg not .JPG). The code finds
+  files regardless of case but writes the URL with the on-disk filename; GitHub raw URLs
+  are case-sensitive, so if the case on GitHub differs from what the build wrote, the image
+  404s on the live site even though it loads locally. When changing only a file's case, use
+  `git mv -f` so git records it (macOS is case-insensitive and a plain rename can be missed).
 - Photos: image files inside the Photos/ subfolder. Sorted naturally by filename.
   The LOT PAGE gallery leads with the FIRST photo by natural sort (e.g. LOT_###_01),
   not the thumbnail. The thumbnail should be derived from that same first photo (a
@@ -142,7 +147,13 @@ when a freshly-built dist/index.html is pushed in the site repo. Always do both.
 
 ## 6. CREATING A NEW ITEM (the intake sequence)
 
-When adding a new item from a staging folder of raw images:
+New items are cleaned in a STAGING area OUTSIDE the repo, then moved into the inventory
+repo only once compliant. The inventory repo is the source of truth — never clean a raw,
+non-compliant folder inside it (a stray non-compliant folder risks shipping broken state).
+
+Staging location:  ~/Documents/YDNT_HERMES_Agent_Folder/LOTS_to_be_Cleaned
+
+When adding a new item from that staging folder of raw images:
 
 ```
 1. Assign the next LOT id: LOT_### — capital LOT, three digits, zero-padded.
@@ -153,7 +164,12 @@ When adding a new item from a staging folder of raw images:
    - Only LOT_### needs to be exact. The sanitized name is for humans; the code ignores it.
 3. Inside the folder, create a Photos/ subfolder. Put the gallery images there.
    Rename them to a consistent natural-sort order (e.g. LOT_###_01, LOT_###_02, ...).
-4. Compress images to keep them web-light (thumbnails small, photos moderate).
+4. Compress images to these size limits (both an UPPER and a LOWER bound — under the
+   lower bound is also a compliance miss, not just oversize files):
+     - Thumbnail: 100KB–200KB
+     - Each photo: 300KB–400KB
+     - Each video: under 10MB
+   (Full compression commands are in skills/SKILL-cleanup.md.)
 5. Create the thumbnail by copying the FIRST photo (LOT_###_01), compressing it, and
    placing the copy in the folder ROOT (not in Photos/). Its filename must contain the
    word THUMBNAIL. Do not subjectively pick a "best" image — always derive from the

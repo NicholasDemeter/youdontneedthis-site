@@ -11,7 +11,7 @@ Never auto-assign a LOT number, auto-merge a duplicate, or invent price/category
 Those are Nicholas's decisions. Ask.
 
 ## STAGING LOCATION
-Raw items start here: `~/Desktop/YDNT_BACKUP/To Clean for YDNT`
+Raw items start here: `~/Documents/YDNT_HERMES_Agent_Folder/LOTS_to_be_Cleaned`
 
 ---
 
@@ -19,7 +19,7 @@ Raw items start here: `~/Desktop/YDNT_BACKUP/To Clean for YDNT`
 
 1. Scan staging:
 ```bash
-ls "$HOME/Desktop/YDNT_BACKUP/To Clean for YDNT"
+ls "$HOME/Documents/YDNT_HERMES_Agent_Folder/LOTS_to_be_Cleaned"
 ```
 2. Check each staged item against existing inventory for duplicates:
 ```bash
@@ -90,11 +90,10 @@ ls ~/Documents/youdontneedthis-inventory/"$LOT"/Photos/    # the images
 
 ---
 
-## PHASE 4 — RESEARCH COPY & POPULATE THE CSV
+## PHASE 4 — RESEARCH COPY & DELIVER THE CSV ROW
 
 Research the item (official name, specs, market price, a witty on-brand description, a
-reference URL). Then add ONE row to the Google Sheet, matching the CSV's 10 columns
-IN THIS EXACT ORDER:
+reference URL). Assemble ONE row matching the CSV's 10 columns IN THIS EXACT ORDER:
 
 ```
 LOT, OFFICIAL_NAME, COOLNESS_RATING, TAGLINE, DESCRIPTION,
@@ -105,16 +104,47 @@ There is NO FOLDER_NAME column — do not add one. The LOT id (column A) is the 
 to the folder.
 
 Nicholas must supply (do not guess): PRICE, CATEGORY, COOLNESS_RATING (items rated 6 appear
-in Featured), reference URL, and SUBCATEGORY if the item belongs to a special section.
+in Featured), reference URL, and SUBCATEGORY if the item belongs to a special section. ASK
+for these before assembling the row — do not invent them.
 
-CATEGORY values populate the dropdown dynamically — any value works, but reuse an existing
-category string when the item fits one (check current values with the command in Phase 1's
-file, or `cut`-free parser). SUBCATEGORY only matters for the special on-site sections; the
-two the build currently groups are `Portable Workstations` and `Coolest Gadgets` — these
-strings must match exactly to land in those sections.
+CATEGORY values populate the dropdown dynamically — reuse an existing category string when
+the item fits one. Check current values:
+```bash
+python3 -c "import csv,collections,os;print('\n'.join(sorted(set(r['CATEGORY'] for r in csv.DictReader(open(os.path.expanduser('~/Documents/youdontneedthis-site/products.csv')))))))"
+```
+SUBCATEGORY only matters for special on-site sections; the two the build groups are
+`Portable Workstations` and `Coolest Gadgets` — match exactly to land in those sections.
 
-Then download the sheet as CSV and replace:
-`~/Documents/youdontneedthis-site/products.csv`
+### YOU CANNOT EDIT THE GOOGLE SHEET — deliver a Google Apps Script instead
+The master data lives in a Google Sheet that you have NO access to. You therefore must NOT
+try to edit it, and editing the local products.csv directly is not the workflow (it would be
+overwritten on the next Sheet export). Instead, produce a Google Apps Script that Nicholas
+runs from the Sheet (Extensions → Apps Script → paste → Run) to append the new row. Template:
+
+```javascript
+function addNewLot() {
+  // Appends one new YDNT product row. Review the values before running.
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var row = [
+    "LOT_###",                 // LOT  (must match the inventory folder prefix exactly)
+    "Official Product Name",   // OFFICIAL_NAME
+    "5",                       // COOLNESS_RATING  (Nicholas-supplied; 6 = Featured)
+    "Cheeky one-line tagline", // TAGLINE
+    "Witty on-brand description explaining why you do NOT need this.", // DESCRIPTION
+    "Spec | value | Spec | value", // SPECIFICATIONS
+    "$0",                      // PRICE  (Nicholas-supplied)
+    "Category",                // CATEGORY  (Nicholas-supplied; reuse existing string)
+    "https://reference-url",   // PRICE ESTIMATE HYPERLINKS
+    ""                         // SUBCATEGORY  (blank, or Portable Workstations / Coolest Gadgets)
+  ];
+  sheet.appendRow(row);
+}
+```
+
+Fill every value, show the completed script to Nicholas, and STOP. Nicholas runs it, then
+downloads the updated Sheet as CSV and replaces ~/Documents/youdontneedthis-site/products.csv.
+Only after that replacement do you rebuild and push (SKILL-push.md). Do NOT proceed to build
+until Nicholas confirms the Sheet is updated and the new CSV is in place.
 
 ---
 

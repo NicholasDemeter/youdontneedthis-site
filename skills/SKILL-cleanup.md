@@ -118,6 +118,13 @@ Then follow SKILL-push.md to rebuild and push the site (inventory alone changes 
 
 ## NOTES
 - .DS_Store appears in every Mac folder — harmless, never commit it.
-- Mixed .jpg / .JPG — build.js is case-insensitive, but standardize to lowercase for tidiness.
+- File extension case (.jpg vs .JPG): build.js FINDS files regardless of case, but it
+  writes the URL using the EXACT filename on disk. GitHub raw URLs are case-sensitive, so
+  if the case committed to GitHub differs from what the build wrote (a common macOS trap —
+  the filesystem is case-insensitive, so a rename can fail to register), the image 404s on
+  the live site even though it loads locally. RULE: standardize all extensions to lowercase
+  (.jpg, .jpeg, .png), and when changing only a file's case, use `git mv -f OLD NEW` so git
+  actually records the change. After any case rename, verify with: the build's written URL
+  (grep dist/index.html) must match a 200 from curl on the GitHub raw URL.
 - A LOT's Videos/ folder may be empty or absent — build.js only includes videos if present.
 - Never rename a thumbnail to something without "THUMBNAIL" in it.
