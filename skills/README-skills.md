@@ -66,6 +66,8 @@ Site repo:       ~/Documents/youdontneedthis-site         branch: main   push: g
 Inventory repo:  ~/Documents/youdontneedthis-inventory    local master → GitHub main   push: git push origin master:main
 Live site:       https://youdontneedthis.us               (GitHub Pages, ~2-3 min after a site push)
 Image URLs are served from the inventory repo's branch set in build.js (INVENTORY_REPO_BASE).
+This MUST be `main` — the inventory's local branch is `master` but it pushes to GitHub `main`,
+so images live on `main`. If INVENTORY_REPO_BASE ends in `/master`, every image 404s.
 If hand-testing a raw image URL, copy the branch from that constant — do not assume.
 ```
 

@@ -82,3 +82,8 @@ remove the row from the CSV. This is expected, not a malfunction.
 
 ### Push rejected / auth error
 STOP. Report the exact error to Nicholas. Do not switch to SSH/gh-CLI/--force on your own.
+
+### Whole-site blank images but files ARE on GitHub (200 on direct curl)
+Check INVENTORY_REPO_BASE in build.js. It MUST end in `/main`. The inventory's local
+branch is `master` but it is pushed to GitHub's `main`, so images live on `main`. If the
+constant says `/master`, every image URL 404s. Fix the constant to `/main`, rebuild, push.

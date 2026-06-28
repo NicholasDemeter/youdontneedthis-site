@@ -184,7 +184,13 @@ Inventory repo:  ~/Documents/youdontneedthis-inventory
                  Push: git push origin master:main
 
 Image URLs:      build.js points image URLs at the inventory repo's served branch.
-                 This branch is set ONCE in build.js (the INVENTORY_REPO_BASE constant).
+                 This branch is set ONCE in build.js (the INVENTORY_REPO_BASE constant)
+                 and MUST be `main` — that is the GitHub branch the inventory is served from.
+                 IMPORTANT: the inventory's LOCAL branch is `master` but it is pushed to
+                 GitHub's `main` (git push origin master:main). Images therefore live on
+                 `main` on GitHub. INVENTORY_REPO_BASE must end in `/main`, NOT `/master`,
+                 or every image URL will 404 even though the files exist. (This exact
+                 mismatch caused a site-wide blank-image bug — keep it on `main`.)
                  If you ever hand-write a raw image URL to test it, copy the branch
                  from that constant — do not assume. The site repo and the inventory
                  repo do not necessarily serve from the same branch name.
