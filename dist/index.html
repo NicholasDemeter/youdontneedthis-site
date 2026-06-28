@@ -385,23 +385,23 @@
 
     /* Hot Items */
     .hot-items-section {
-      padding: 2rem 1rem;
-      background: #111;
-      border-bottom: 1px solid #222;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .hot-items-title {
       font-size: 1.5rem;
       font-weight: 700;
       margin-bottom: 1.5rem;
-      padding: 0 1rem;
     }
 
     .hot-items-carousel {
       display: flex;
       gap: 1rem;
       overflow-x: auto;
-      padding: 0 1rem 1rem;
+      padding-bottom: 1rem;
       scrollbar-width: thin;
       scrollbar-color: #333 #111;
     }
@@ -487,7 +487,7 @@
 
     .stands-preview-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(95px, 1fr));
       gap: 0.75rem;
       max-width: 100%;
     }
@@ -541,6 +541,7 @@
       gap: 0.5rem;
       text-transform: uppercase;
       letter-spacing: 0.5px;
+      will-change: transform;
     }
 
     .home-btn::before {
@@ -553,7 +554,7 @@
       -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
       mask-composite: exclude;
-      z-index: -1;
+      pointer-events: none;
     }
 
     .home-btn.visible {
@@ -561,14 +562,18 @@
     }
 
     .home-btn:hover {
-      background: linear-gradient(135deg, rgba(83, 167, 234, 0.35), rgba(83, 167, 234, 0.25));
-      border-color: rgba(83, 167, 234, 0.6);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1));
       transform: translateY(-2px);
-      box-shadow: 0 12px 40px 0 rgba(83, 167, 234, 0.35);
+      box-shadow: 
+        0 12px 40px 0 rgba(31, 38, 135, 0.25),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
     }
 
     .home-btn:active {
       transform: translateY(0) scale(0.98);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+      box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3),
+                  inset 0 2px 4px rgba(0, 0, 0, 0.2);
     }
 
     .section-title {
@@ -969,43 +974,43 @@
           </p>
           <div class="stands-preview-grid">
             
-              <div class="stands-preview-item" onclick="openExpanded(96)">
+              <div class="stands-preview-item" onclick="openExpanded(97)">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_01.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
               </div>
             
-              <div class="stands-preview-item" onclick="openExpanded(96)">
+              <div class="stands-preview-item" onclick="openExpanded(97)">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_02.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
               </div>
             
-              <div class="stands-preview-item" onclick="openExpanded(96)">
+              <div class="stands-preview-item" onclick="openExpanded(97)">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_03.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
               </div>
             
-              <div class="stands-preview-item" onclick="openExpanded(96)">
+              <div class="stands-preview-item" onclick="openExpanded(97)">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_04.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
               </div>
             
-              <div class="stands-preview-item" onclick="openExpanded(96)">
+              <div class="stands-preview-item" onclick="openExpanded(97)">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_05.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
               </div>
             
-              <div class="stands-preview-item" onclick="openExpanded(96)">
+              <div class="stands-preview-item" onclick="openExpanded(97)">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_06.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
               </div>
             
-              <div class="stands-preview-item" onclick="openExpanded(96)">
+              <div class="stands-preview-item" onclick="openExpanded(97)">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_07.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
               </div>
             
-              <div class="stands-preview-item" onclick="openExpanded(96)">
+              <div class="stands-preview-item" onclick="openExpanded(97)">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_08.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
               </div>
             
-              <div class="stands-preview-item" onclick="openExpanded(96)">
+              <div class="stands-preview-item" onclick="openExpanded(97)">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_09.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
               </div>
             
-              <div class="stands-preview-item" onclick="openExpanded(96)">
+              <div class="stands-preview-item" onclick="openExpanded(97)">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_076_Portable_Monitor_Stands/Photos/LOT_076_10.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="stands-preview-thumb" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
               </div>
             
@@ -1014,21 +1019,7 @@
         
       <div class="lots-grid">
         
-            <div class="lot-card" data-lot-index="18" onclick="openExpanded(18)">
-              <div class="lot-card-content">
-                <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_117_Virzen_OLED_Split_Screen_Ultra_Thin_Monitor/LOT_117_THUMBNAIL.jpg" alt="Virzen OLED Split Screen Ultra-Thin Monitor" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
-                <div class="lot-info">
-                  <div class="lot-number">LOT_117</div>
-                  <h3 class="lot-name">Virzen OLED Split Screen Ultra-Thin Monitor</h3>
-                  <p class="lot-tagline">Two screens. One panel. Zero excuses for not being productive. Bonus: OLED blacks so deep your spreadsheets look dramatic.</p>
-                  <div class="lot-footer">
-                    <span class="lot-price-badge">$350</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          
-            <div class="lot-card" data-lot-index="20" onclick="openExpanded(20)">
+            <div class="lot-card" data-lot-index="8" onclick="openExpanded(8)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_006_SOTSU_UltraSlim_Portable_Monitor/LOT_006_THUMBNAIL.jpg" alt="SOTSU UltraSlim 12.5 Portable Monitor - Ultra-Thin Lightweight Aluminum Design" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1042,7 +1033,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="21" onclick="openExpanded(21)">
+            <div class="lot-card" data-lot-index="10" onclick="openExpanded(10)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_008_EHOMEWEI_X1_Foldable_Dual_Screen/LOT_008_THUMBNAIL.jpg" alt="EHOMEWEI X1 Foldable Dual Screen Portable Monitor 16×2 - Magnetic Alignment Travel Workstation" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1056,7 +1047,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="22" onclick="openExpanded(22)">
+            <div class="lot-card" data-lot-index="13" onclick="openExpanded(13)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_023_INNOCN_Portable_Monitor_OLED/LOT_023_THUMBNAIL.jpg" alt="INNOCN 13.3 OLED Portable Monitor - FHD 1080P, 100% DCI-P3, HDR10 Color-Accurate Display" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1070,7 +1061,21 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="23" onclick="openExpanded(23)">
+            <div class="lot-card" data-lot-index="22" onclick="openExpanded(22)">
+              <div class="lot-card-content">
+                <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_117_Virzen_OLED_Split_Screen_Ultra_Thin_Monitor/LOT_117_THUMBNAIL.jpg" alt="Virzen OLED Split Screen Ultra-Thin Monitor" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+                <div class="lot-info">
+                  <div class="lot-number">LOT_117</div>
+                  <h3 class="lot-name">Virzen OLED Split Screen Ultra-Thin Monitor</h3>
+                  <p class="lot-tagline">Two screens. One panel. Zero excuses for not being productive. Bonus: OLED blacks so deep your spreadsheets look dramatic.</p>
+                  <div class="lot-footer">
+                    <span class="lot-price-badge">$350</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+            <div class="lot-card" data-lot-index="24" onclick="openExpanded(24)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_001_Microsoft_Surface_Go_3_10_5_Touchscreen_Intel_R_CoreTM_i3_8GB_Memory_128GB_SSD/LOT_001_THUMBNAIL.jpg" alt="Microsoft Surface Go 3 - 10.5_ Touchscreen - Intel® Core™ i3 - 8GB Memory - 128GB SSD" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1084,7 +1089,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="24" onclick="openExpanded(24)">
+            <div class="lot-card" data-lot-index="25" onclick="openExpanded(25)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_005_Motyeowe_OLED_Monitors_18_5in_X2/LOT_005_THUMBNAIL.jpg" alt="Motyeowe OLED Monitors 18.5in - X2" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1098,7 +1103,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="25" onclick="openExpanded(25)">
+            <div class="lot-card" data-lot-index="26" onclick="openExpanded(26)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_006_SOTSU_UltraSlim_Portable_Monitor/LOT_006_THUMBNAIL.jpg" alt="Motyeowe OLED Monitors 18.5in - X2" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1112,7 +1117,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="38" onclick="openExpanded(38)">
+            <div class="lot-card" data-lot-index="39" onclick="openExpanded(39)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_045_Frunsi_15_6_inch_Dual_Portable_Monitor_for_Laptop/LOT_045_THUMBNAIL.jpg" alt="Frunsi 15.6-inch Dual Portable Monitor for Laptop" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1126,7 +1131,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="43" onclick="openExpanded(43)">
+            <div class="lot-card" data-lot-index="44" onclick="openExpanded(44)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_065_MeLE_Quieter3Q_Mini_PC_N5105/LOT_065_THUMBNAIL.jpg" alt="MeLE Quieter3Q Mini PC with Intel N5105 Processor" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1140,7 +1145,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="46" onclick="openExpanded(46)">
+            <div class="lot-card" data-lot-index="47" onclick="openExpanded(47)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_070_AYY_Portable_Monitor/LOT_070_THUMBNAIL.jpg" alt="AYY 15.6 Portable Monitor (1080P FHD)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1154,7 +1159,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="68" onclick="openExpanded(68)">
+            <div class="lot-card" data-lot-index="69" onclick="openExpanded(69)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_003_Minisforum_EliteMini_UM773_SE_Mini_PC_Ryzen_7_7735HS/LOT_003_THUMBNAIL.jpg" alt="Minisforum EliteMini UM773 SE Mini PC (Ryzen 7 7735HS)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1168,7 +1173,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="70" onclick="openExpanded(70)">
+            <div class="lot-card" data-lot-index="71" onclick="openExpanded(71)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_017_Satechi_Dual_USB_C_Docking_Station_with_Dual_4K_HDMI/LOT_017_THUMBNAIL.jpg" alt="Satechi Dual USB-C Docking Station with Dual 4K HDMI" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1182,7 +1187,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="79" onclick="openExpanded(79)">
+            <div class="lot-card" data-lot-index="80" onclick="openExpanded(80)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_067_Anker_577_Thunderbolt_Docking_Station_13_in_1/LOT_067_THUMBNAIL.jpg" alt="Anker 577 Thunderbolt Docking Station (13-in-1)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1196,7 +1201,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="88" onclick="openExpanded(88)">
+            <div class="lot-card" data-lot-index="89" onclick="openExpanded(89)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_124_Plugable_Hub_(Dual_Macbook_Screens)/LOT_124_THUMBNAIL.jpg" alt="Plugable USB-C Hub (Dual MacBook Screens)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1319,6 +1324,20 @@
           
             <div class="lot-card" data-lot-index="7" onclick="openExpanded(7)">
               <div class="lot-card-content">
+                <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_101_Moment_Professional_Mobile_Phone_Lens_Bundle/LOT_101_THUMBNAIL.jpg" alt="Moment Professional Mobile Phone Lens Bundle" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+                <div class="lot-info">
+                  <div class="lot-number">LOT_101</div>
+                  <h3 class="lot-name">Moment Professional Mobile Phone Lens Bundle</h3>
+                  <p class="lot-tagline">Because one lens was never going to be enough. Bonus: now your phone has more glass than your kitchen.</p>
+                  <div class="lot-footer">
+                    <span class="lot-price-badge">$450.00</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+            <div class="lot-card" data-lot-index="9" onclick="openExpanded(9)">
+              <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_007_Anker_Nebula_Capsule_Portable_Projector/LOT_007_THUMBNAIL.jpg" alt="Plaud Al Note" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
                   <div class="lot-number">LOT_007</div>
@@ -1331,7 +1350,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="8" onclick="openExpanded(8)">
+            <div class="lot-card" data-lot-index="11" onclick="openExpanded(11)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_009_NuPhy_75_Keyboard/LOT_009_THUMBNAIL.jpg" alt="NuPhy Air75 Wireless Mechanical Keyboard + NuFolio Cover" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1345,7 +1364,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="9" onclick="openExpanded(9)">
+            <div class="lot-card" data-lot-index="12" onclick="openExpanded(12)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_015_Plaud_Al_Note_x_2/LOT_015_THUMBNAIL.jpg" alt="Plaud Al Note" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1359,7 +1378,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="10" onclick="openExpanded(10)">
+            <div class="lot-card" data-lot-index="14" onclick="openExpanded(14)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_071_Beyerdynamic_DT_990_Premium_Edition_Headphones/LOT_071_THUMBNAIL.jpg" alt="Beyerdynamic DT 990 Premium Edition 250 Ohm Over-Ear Headphones" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1373,7 +1392,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="11" onclick="openExpanded(11)">
+            <div class="lot-card" data-lot-index="15" onclick="openExpanded(15)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_080_Devialet_Mania_Portable_Smart_Speaker_Light_Grey/LOT_080_THUMBNAIL.jpg" alt="Devialet Mania Portable Smart Speaker - Light Grey" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1387,7 +1406,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="12" onclick="openExpanded(12)">
+            <div class="lot-card" data-lot-index="16" onclick="openExpanded(16)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_081_Devialet_Phantom_II_95_dB_Compact_Wireless_Speaker_1/LOT_081_THUMBNAIL.jpg" alt="Devialet Phantom II 95 dB Compact Wireless Speaker - Matte Black" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1401,7 +1420,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="13" onclick="openExpanded(13)">
+            <div class="lot-card" data-lot-index="17" onclick="openExpanded(17)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_108_Insta360_Link_AI_Powered_4K_Webcam/LOT_108_THUMBNAIL.jpg" alt="Insta360 Link AI-Powered 4K Webcam" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1415,7 +1434,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="14" onclick="openExpanded(14)">
+            <div class="lot-card" data-lot-index="18" onclick="openExpanded(18)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_111_Khadas_Micro_Computer/LOT_111_THUMBNAIL.jpg" alt="Khadas VIM4 Single Board Computer" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1429,7 +1448,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="16" onclick="openExpanded(16)">
+            <div class="lot-card" data-lot-index="20" onclick="openExpanded(20)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_113_Google_Pixelbook_i7_16gb_Chromebook/LOT_113_THUMBNAIL.jpg" alt="Google Pixelbook (i7, 16GB RAM, 512GB)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1443,7 +1462,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="17" onclick="openExpanded(17)">
+            <div class="lot-card" data-lot-index="21" onclick="openExpanded(21)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_116_SONY_Cybershot_Bundle_with_Remote_Wrist_Band/LOT_116_THUMBNAIL.jpg" alt="Sony Cybershot Bundle with Remote Wrist Band" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1457,7 +1476,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="19" onclick="openExpanded(19)">
+            <div class="lot-card" data-lot-index="23" onclick="openExpanded(23)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_120_Apple_Mac_Mini_M4_16gb/LOT_120_THUMBNAIL.jpg" alt="Apple Mac Mini M4 16GB" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1471,7 +1490,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="27" onclick="openExpanded(27)">
+            <div class="lot-card" data-lot-index="28" onclick="openExpanded(28)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_016_HOTO_Outdoor_Camping_Flashlight/LOT_016_THUMBNAIL.jpg" alt="HOTO Outdoor Camping Flashlight Rechargeable, 3-in1 Camping Lantern" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1485,7 +1504,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="32" onclick="openExpanded(32)">
+            <div class="lot-card" data-lot-index="33" onclick="openExpanded(33)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_028_TimeKettle_WT2_Edge_Real_Time_Translation_Earbuds/LOT_028_THUMBNAIL.jpg" alt="TimeKettle WT2 Edge Real-Time Translation Earbuds" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1499,7 +1518,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="33" onclick="openExpanded(33)">
+            <div class="lot-card" data-lot-index="34" onclick="openExpanded(34)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_031_Traveler_Guitar_Ultra_Light_Electric_Travel_Guitar/LOT_031_THUMBNAIL.jpg" alt="Traveler Guitar Ultra-Light Electric Travel Guitar" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1513,7 +1532,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="35" onclick="openExpanded(35)">
+            <div class="lot-card" data-lot-index="36" onclick="openExpanded(36)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_039_Wemax_Go_Advanced_Portable_Laser_Projector/LOT_039_THUMBNAIL.jpg" alt="Wemax Go Advanced Portable Laser Projector" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1527,7 +1546,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="36" onclick="openExpanded(36)">
+            <div class="lot-card" data-lot-index="37" onclick="openExpanded(37)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_040_XREAL_Air_AR_Smart_Glasses_1st_Generation/LOT_040_THUMBNAIL.jpg" alt="XREAL Air AR Smart Glasses (1st Generation)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1541,7 +1560,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="39" onclick="openExpanded(39)">
+            <div class="lot-card" data-lot-index="40" onclick="openExpanded(40)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_046_GameSir_X2_Pro_Mobile_Gaming_Controller/LOT_046_THUMBNAIL.jpg" alt="GameSir X2 Bluetooth Mobile Gaming Controller" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1555,7 +1574,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="40" onclick="openExpanded(40)">
+            <div class="lot-card" data-lot-index="41" onclick="openExpanded(41)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_052_Insta360_Pocket_2_Action_Camera/LOT_052_THUMBNAIL.jpg" alt="DJI Pocket 2 Creator Combo Handheld Camera" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1569,7 +1588,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="49" onclick="openExpanded(49)">
+            <div class="lot-card" data-lot-index="50" onclick="openExpanded(50)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_077_CMF_Watch_Pro_Smartwatch_1_96_AMOLED_Display_IP68_Water_Resistant/LOT_077_THUMBNAIL.jpg" alt="CMF Watch Pro by Nothing - 1.96 AMOLED Smartwatch" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1583,7 +1602,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="50" onclick="openExpanded(50)">
+            <div class="lot-card" data-lot-index="51" onclick="openExpanded(51)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_082_Devialet_Phantom_II_95_dB_Compact_Wireless_Speaker_2/LOT_082_THUMBNAIL.jpg" alt="Devialet Phantom II 95 dB Compact Wireless Speaker - Matte Black" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1597,7 +1616,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="67" onclick="openExpanded(67)">
+            <div class="lot-card" data-lot-index="68" onclick="openExpanded(68)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_131_Sony2.1_HT_AX7_Portable_Surround/LOT_131_THUMBNAIL.jpg" alt="Sony HT-AX7 Portable Theater System" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1611,7 +1630,7 @@
               </div>
             </div>
           
-            <div class="lot-card" data-lot-index="77" onclick="openExpanded(77)">
+            <div class="lot-card" data-lot-index="78" onclick="openExpanded(78)">
               <div class="lot-card-content">
                 <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_042_XREAL_Beam_Spatial_Computing_Device_1st_Generation/LOT_042_THUMBNAIL.jpg" alt="XREAL Beam Spatial Computing Device (1st Generation)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
                 <div class="lot-info">
@@ -1664,6 +1683,11 @@
           <div class="hot-item" data-lot-index="6" onclick="openExpanded(6)">
             <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_069_Apple_Watch_Ultra_2/LOT_069_THUMBNAIL.jpg" alt="Apple Watch Ultra 2" class="hot-item-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
             <div class="hot-item-name">Apple Watch Ultra 2</div>
+          </div>
+        
+          <div class="hot-item" data-lot-index="7" onclick="openExpanded(7)">
+            <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_101_Moment_Professional_Mobile_Phone_Lens_Bundle/LOT_101_THUMBNAIL.jpg" alt="Moment Professional Mobile Phone Lens Bundle" class="hot-item-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+            <div class="hot-item-name">Moment Professional Mobile Phone Lens Bundle</div>
           </div>
         
       </div>
@@ -1762,187 +1786,19 @@
     
     <div class="lot-card" data-lot-index="7" onclick="openExpanded(7)">
       <div class="lot-card-content">
-        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_007_Anker_Nebula_Capsule_Portable_Projector/LOT_007_THUMBNAIL.jpg" alt="Plaud Al Note" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_101_Moment_Professional_Mobile_Phone_Lens_Bundle/LOT_101_THUMBNAIL.jpg" alt="Moment Professional Mobile Phone Lens Bundle" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
-          <div class="lot-number">LOT_007</div>
-          <h3 class="lot-name">Plaud Al Note</h3>
-          <p class="lot-tagline">Useful enough to justify, cool enough to flaunt. Bonus: another thing to charge nightly.</p>
+          <div class="lot-number">LOT_101</div>
+          <h3 class="lot-name">Moment Professional Mobile Phone Lens Bundle</h3>
+          <p class="lot-tagline">Because one lens was never going to be enough. Bonus: now your phone has more glass than your kitchen.</p>
           <div class="lot-footer">
-            <span class="lot-price-badge">$137.00</span>
+            <span class="lot-price-badge">$450.00</span>
           </div>
         </div>
       </div>
     </div>
     
     <div class="lot-card" data-lot-index="8" onclick="openExpanded(8)">
-      <div class="lot-card-content">
-        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_009_NuPhy_75_Keyboard/LOT_009_THUMBNAIL.jpg" alt="NuPhy Air75 Wireless Mechanical Keyboard + NuFolio Cover" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
-        <div class="lot-info">
-          <div class="lot-number">LOT_009</div>
-          <h3 class="lot-name">NuPhy Air75 Wireless Mechanical Keyboard + NuFolio Cover</h3>
-          <p class="lot-tagline">The thinnest mechanical keyboard on the market, plus a cover so it survives the bag it definitely deserves. Bonus: your typing will sound better than your excuses.</p>
-          <div class="lot-footer">
-            <span class="lot-price-badge">$150.00</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="lot-card" data-lot-index="9" onclick="openExpanded(9)">
-      <div class="lot-card-content">
-        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_015_Plaud_Al_Note_x_2/LOT_015_THUMBNAIL.jpg" alt="Plaud Al Note" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
-        <div class="lot-info">
-          <div class="lot-number">LOT_015</div>
-          <h3 class="lot-name">Plaud Al Note</h3>
-          <p class="lot-tagline">Useful enough to justify, cool enough to flaunt. Bonus: another thing to charge nightly.</p>
-          <div class="lot-footer">
-            <span class="lot-price-badge">$137.00</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="lot-card" data-lot-index="10" onclick="openExpanded(10)">
-      <div class="lot-card-content">
-        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_071_Beyerdynamic_DT_990_Premium_Edition_Headphones/LOT_071_THUMBNAIL.jpg" alt="Beyerdynamic DT 990 Premium Edition 250 Ohm Over-Ear Headphones" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
-        <div class="lot-info">
-          <div class="lot-number">LOT_071</div>
-          <h3 class="lot-name">Beyerdynamic DT 990 Premium Edition 250 Ohm Over-Ear Headphones</h3>
-          <p class="lot-tagline">Studio clarity that flatters mixes and exposes mistakes. Bonus: your playlist quality becomes painfully obvious.</p>
-          <div class="lot-footer">
-            <span class="lot-price-badge">$175.00</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="lot-card" data-lot-index="11" onclick="openExpanded(11)">
-      <div class="lot-card-content">
-        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_080_Devialet_Mania_Portable_Smart_Speaker_Light_Grey/LOT_080_THUMBNAIL.jpg" alt="Devialet Mania Portable Smart Speaker - Light Grey" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
-        <div class="lot-info">
-          <div class="lot-number">LOT_080</div>
-          <h3 class="lot-name">Devialet Mania Portable Smart Speaker - Light Grey</h3>
-          <p class="lot-tagline">Sound big enough to surprise your space #1 Bonus: neighbors discover your taste, like it or not.</p>
-          <div class="lot-footer">
-            <span class="lot-price-badge">$799.00</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="lot-card" data-lot-index="12" onclick="openExpanded(12)">
-      <div class="lot-card-content">
-        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_081_Devialet_Phantom_II_95_dB_Compact_Wireless_Speaker_1/LOT_081_THUMBNAIL.jpg" alt="Devialet Phantom II 95 dB Compact Wireless Speaker - Matte Black" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
-        <div class="lot-info">
-          <div class="lot-number">LOT_081</div>
-          <h3 class="lot-name">Devialet Phantom II 95 dB Compact Wireless Speaker - Matte Black</h3>
-          <p class="lot-tagline">Sound big enough to surprise your space #2 Bonus: neighbors discover your taste, like it or not.</p>
-          <div class="lot-footer">
-            <span class="lot-price-badge">$1,399.00</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="lot-card" data-lot-index="13" onclick="openExpanded(13)">
-      <div class="lot-card-content">
-        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_108_Insta360_Link_AI_Powered_4K_Webcam/LOT_108_THUMBNAIL.jpg" alt="Insta360 Link AI-Powered 4K Webcam" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
-        <div class="lot-info">
-          <div class="lot-number">LOT_108</div>
-          <h3 class="lot-name">Insta360 Link AI-Powered 4K Webcam</h3>
-          <p class="lot-tagline">Footage so steady it boosts your confidence #5 Bonus: friends start asking for ‘just one more photo’—forever.</p>
-          <div class="lot-footer">
-            <span class="lot-price-badge">$250.00</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="lot-card" data-lot-index="14" onclick="openExpanded(14)">
-      <div class="lot-card-content">
-        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_111_Khadas_Micro_Computer/LOT_111_THUMBNAIL.jpg" alt="Khadas VIM4 Single Board Computer" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
-        <div class="lot-info">
-          <div class="lot-number">LOT_111</div>
-          <h3 class="lot-name">Khadas VIM4 Single Board Computer</h3>
-          <p class="lot-tagline">Pocket-sized horsepower that makes your desktop feel insecure. Bonus: fits in a drawer you forgot you had.</p>
-          <div class="lot-footer">
-            <span class="lot-price-badge">$350.00</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="lot-card" data-lot-index="15" onclick="openExpanded(15)">
-      <div class="lot-card-content">
-        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_112_Vintage_and_New_Timepieces/LOT_112_THUMBNAIL.jpg" alt="Vintage and New Timepieces Collection" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
-        <div class="lot-info">
-          <div class="lot-number">LOT_112</div>
-          <h3 class="lot-name">Vintage and New Timepieces Collection</h3>
-          <p class="lot-tagline">Time moves forward. These watches prefer to keep their options open. Bonus: each one has a better excuse for being late than you do.</p>
-          <div class="lot-footer">
-            <span class="lot-price-badge">Make an offer</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="lot-card" data-lot-index="16" onclick="openExpanded(16)">
-      <div class="lot-card-content">
-        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_113_Google_Pixelbook_i7_16gb_Chromebook/LOT_113_THUMBNAIL.jpg" alt="Google Pixelbook (i7, 16GB RAM, 512GB)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
-        <div class="lot-info">
-          <div class="lot-number">LOT_113</div>
-          <h3 class="lot-name">Google Pixelbook (i7, 16GB RAM, 512GB)</h3>
-          <p class="lot-tagline">Chrome OS on premium hardware — the laptop that dared to make a browser the whole operating system. Bonus: boots so fast you'll forget what patience feels like.</p>
-          <div class="lot-footer">
-            <span class="lot-price-badge">$350.00</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="lot-card" data-lot-index="17" onclick="openExpanded(17)">
-      <div class="lot-card-content">
-        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_116_SONY_Cybershot_Bundle_with_Remote_Wrist_Band/LOT_116_THUMBNAIL.jpg" alt="Sony Cybershot Bundle with Remote Wrist Band" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
-        <div class="lot-info">
-          <div class="lot-number">LOT_116</div>
-          <h3 class="lot-name">Sony Cybershot Bundle with Remote Wrist Band</h3>
-          <p class="lot-tagline">Compact camera energy with a full-size attitude. Bonus: the wrist band ensures it stays with you even when you forget why you're taking photos.</p>
-          <div class="lot-footer">
-            <span class="lot-price-badge">$300</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="lot-card" data-lot-index="18" onclick="openExpanded(18)">
-      <div class="lot-card-content">
-        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_117_Virzen_OLED_Split_Screen_Ultra_Thin_Monitor/LOT_117_THUMBNAIL.jpg" alt="Virzen OLED Split Screen Ultra-Thin Monitor" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
-        <div class="lot-info">
-          <div class="lot-number">LOT_117</div>
-          <h3 class="lot-name">Virzen OLED Split Screen Ultra-Thin Monitor</h3>
-          <p class="lot-tagline">Two screens. One panel. Zero excuses for not being productive. Bonus: OLED blacks so deep your spreadsheets look dramatic.</p>
-          <div class="lot-footer">
-            <span class="lot-price-badge">$350</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="lot-card" data-lot-index="19" onclick="openExpanded(19)">
-      <div class="lot-card-content">
-        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_120_Apple_Mac_Mini_M4_16gb/LOT_120_THUMBNAIL.jpg" alt="Apple Mac Mini M4 16GB" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
-        <div class="lot-info">
-          <div class="lot-number">LOT_120</div>
-          <h3 class="lot-name">Apple Mac Mini M4 16GB</h3>
-          <p class="lot-tagline">The most powerful thing on your desk that isn't paying rent. Bonus: smaller than a hardcover book but smarter than most offices.</p>
-          <div class="lot-footer">
-            <span class="lot-price-badge">$500</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="lot-card" data-lot-index="20" onclick="openExpanded(20)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_006_SOTSU_UltraSlim_Portable_Monitor/LOT_006_THUMBNAIL.jpg" alt="SOTSU UltraSlim 12.5 Portable Monitor - Ultra-Thin Lightweight Aluminum Design" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -1956,7 +1812,21 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="21" onclick="openExpanded(21)">
+    <div class="lot-card" data-lot-index="9" onclick="openExpanded(9)">
+      <div class="lot-card-content">
+        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_007_Anker_Nebula_Capsule_Portable_Projector/LOT_007_THUMBNAIL.jpg" alt="Plaud Al Note" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+        <div class="lot-info">
+          <div class="lot-number">LOT_007</div>
+          <h3 class="lot-name">Plaud Al Note</h3>
+          <p class="lot-tagline">Useful enough to justify, cool enough to flaunt. Bonus: another thing to charge nightly.</p>
+          <div class="lot-footer">
+            <span class="lot-price-badge">$137.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="lot-card" data-lot-index="10" onclick="openExpanded(10)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_008_EHOMEWEI_X1_Foldable_Dual_Screen/LOT_008_THUMBNAIL.jpg" alt="EHOMEWEI X1 Foldable Dual Screen Portable Monitor 16×2 - Magnetic Alignment Travel Workstation" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -1970,7 +1840,35 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="22" onclick="openExpanded(22)">
+    <div class="lot-card" data-lot-index="11" onclick="openExpanded(11)">
+      <div class="lot-card-content">
+        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_009_NuPhy_75_Keyboard/LOT_009_THUMBNAIL.jpg" alt="NuPhy Air75 Wireless Mechanical Keyboard + NuFolio Cover" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+        <div class="lot-info">
+          <div class="lot-number">LOT_009</div>
+          <h3 class="lot-name">NuPhy Air75 Wireless Mechanical Keyboard + NuFolio Cover</h3>
+          <p class="lot-tagline">The thinnest mechanical keyboard on the market, plus a cover so it survives the bag it definitely deserves. Bonus: your typing will sound better than your excuses.</p>
+          <div class="lot-footer">
+            <span class="lot-price-badge">$150.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="lot-card" data-lot-index="12" onclick="openExpanded(12)">
+      <div class="lot-card-content">
+        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_015_Plaud_Al_Note_x_2/LOT_015_THUMBNAIL.jpg" alt="Plaud Al Note" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+        <div class="lot-info">
+          <div class="lot-number">LOT_015</div>
+          <h3 class="lot-name">Plaud Al Note</h3>
+          <p class="lot-tagline">Useful enough to justify, cool enough to flaunt. Bonus: another thing to charge nightly.</p>
+          <div class="lot-footer">
+            <span class="lot-price-badge">$137.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="lot-card" data-lot-index="13" onclick="openExpanded(13)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_023_INNOCN_Portable_Monitor_OLED/LOT_023_THUMBNAIL.jpg" alt="INNOCN 13.3 OLED Portable Monitor - FHD 1080P, 100% DCI-P3, HDR10 Color-Accurate Display" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -1984,7 +1882,147 @@
       </div>
     </div>
     
+    <div class="lot-card" data-lot-index="14" onclick="openExpanded(14)">
+      <div class="lot-card-content">
+        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_071_Beyerdynamic_DT_990_Premium_Edition_Headphones/LOT_071_THUMBNAIL.jpg" alt="Beyerdynamic DT 990 Premium Edition 250 Ohm Over-Ear Headphones" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+        <div class="lot-info">
+          <div class="lot-number">LOT_071</div>
+          <h3 class="lot-name">Beyerdynamic DT 990 Premium Edition 250 Ohm Over-Ear Headphones</h3>
+          <p class="lot-tagline">Studio clarity that flatters mixes and exposes mistakes. Bonus: your playlist quality becomes painfully obvious.</p>
+          <div class="lot-footer">
+            <span class="lot-price-badge">$175.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="lot-card" data-lot-index="15" onclick="openExpanded(15)">
+      <div class="lot-card-content">
+        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_080_Devialet_Mania_Portable_Smart_Speaker_Light_Grey/LOT_080_THUMBNAIL.jpg" alt="Devialet Mania Portable Smart Speaker - Light Grey" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+        <div class="lot-info">
+          <div class="lot-number">LOT_080</div>
+          <h3 class="lot-name">Devialet Mania Portable Smart Speaker - Light Grey</h3>
+          <p class="lot-tagline">Sound big enough to surprise your space #1 Bonus: neighbors discover your taste, like it or not.</p>
+          <div class="lot-footer">
+            <span class="lot-price-badge">$799.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="lot-card" data-lot-index="16" onclick="openExpanded(16)">
+      <div class="lot-card-content">
+        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_081_Devialet_Phantom_II_95_dB_Compact_Wireless_Speaker_1/LOT_081_THUMBNAIL.jpg" alt="Devialet Phantom II 95 dB Compact Wireless Speaker - Matte Black" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+        <div class="lot-info">
+          <div class="lot-number">LOT_081</div>
+          <h3 class="lot-name">Devialet Phantom II 95 dB Compact Wireless Speaker - Matte Black</h3>
+          <p class="lot-tagline">Sound big enough to surprise your space #2 Bonus: neighbors discover your taste, like it or not.</p>
+          <div class="lot-footer">
+            <span class="lot-price-badge">$1,399.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="lot-card" data-lot-index="17" onclick="openExpanded(17)">
+      <div class="lot-card-content">
+        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_108_Insta360_Link_AI_Powered_4K_Webcam/LOT_108_THUMBNAIL.jpg" alt="Insta360 Link AI-Powered 4K Webcam" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+        <div class="lot-info">
+          <div class="lot-number">LOT_108</div>
+          <h3 class="lot-name">Insta360 Link AI-Powered 4K Webcam</h3>
+          <p class="lot-tagline">Footage so steady it boosts your confidence #5 Bonus: friends start asking for ‘just one more photo’—forever.</p>
+          <div class="lot-footer">
+            <span class="lot-price-badge">$250.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="lot-card" data-lot-index="18" onclick="openExpanded(18)">
+      <div class="lot-card-content">
+        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_111_Khadas_Micro_Computer/LOT_111_THUMBNAIL.jpg" alt="Khadas VIM4 Single Board Computer" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+        <div class="lot-info">
+          <div class="lot-number">LOT_111</div>
+          <h3 class="lot-name">Khadas VIM4 Single Board Computer</h3>
+          <p class="lot-tagline">Pocket-sized horsepower that makes your desktop feel insecure. Bonus: fits in a drawer you forgot you had.</p>
+          <div class="lot-footer">
+            <span class="lot-price-badge">$350.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="lot-card" data-lot-index="19" onclick="openExpanded(19)">
+      <div class="lot-card-content">
+        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_112_Vintage_and_New_Timepieces/LOT_112_THUMBNAIL.jpg" alt="Vintage and New Timepieces Collection" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+        <div class="lot-info">
+          <div class="lot-number">LOT_112</div>
+          <h3 class="lot-name">Vintage and New Timepieces Collection</h3>
+          <p class="lot-tagline">Time moves forward. These watches prefer to keep their options open. Bonus: each one has a better excuse for being late than you do.</p>
+          <div class="lot-footer">
+            <span class="lot-price-badge">Make an offer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="lot-card" data-lot-index="20" onclick="openExpanded(20)">
+      <div class="lot-card-content">
+        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_113_Google_Pixelbook_i7_16gb_Chromebook/LOT_113_THUMBNAIL.jpg" alt="Google Pixelbook (i7, 16GB RAM, 512GB)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+        <div class="lot-info">
+          <div class="lot-number">LOT_113</div>
+          <h3 class="lot-name">Google Pixelbook (i7, 16GB RAM, 512GB)</h3>
+          <p class="lot-tagline">Chrome OS on premium hardware — the laptop that dared to make a browser the whole operating system. Bonus: boots so fast you'll forget what patience feels like.</p>
+          <div class="lot-footer">
+            <span class="lot-price-badge">$350.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="lot-card" data-lot-index="21" onclick="openExpanded(21)">
+      <div class="lot-card-content">
+        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_116_SONY_Cybershot_Bundle_with_Remote_Wrist_Band/LOT_116_THUMBNAIL.jpg" alt="Sony Cybershot Bundle with Remote Wrist Band" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+        <div class="lot-info">
+          <div class="lot-number">LOT_116</div>
+          <h3 class="lot-name">Sony Cybershot Bundle with Remote Wrist Band</h3>
+          <p class="lot-tagline">Compact camera energy with a full-size attitude. Bonus: the wrist band ensures it stays with you even when you forget why you're taking photos.</p>
+          <div class="lot-footer">
+            <span class="lot-price-badge">$300</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="lot-card" data-lot-index="22" onclick="openExpanded(22)">
+      <div class="lot-card-content">
+        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_117_Virzen_OLED_Split_Screen_Ultra_Thin_Monitor/LOT_117_THUMBNAIL.jpg" alt="Virzen OLED Split Screen Ultra-Thin Monitor" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+        <div class="lot-info">
+          <div class="lot-number">LOT_117</div>
+          <h3 class="lot-name">Virzen OLED Split Screen Ultra-Thin Monitor</h3>
+          <p class="lot-tagline">Two screens. One panel. Zero excuses for not being productive. Bonus: OLED blacks so deep your spreadsheets look dramatic.</p>
+          <div class="lot-footer">
+            <span class="lot-price-badge">$350</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
     <div class="lot-card" data-lot-index="23" onclick="openExpanded(23)">
+      <div class="lot-card-content">
+        <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_120_Apple_Mac_Mini_M4_16gb/LOT_120_THUMBNAIL.jpg" alt="Apple Mac Mini M4 16GB" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
+        <div class="lot-info">
+          <div class="lot-number">LOT_120</div>
+          <h3 class="lot-name">Apple Mac Mini M4 16GB</h3>
+          <p class="lot-tagline">The most powerful thing on your desk that isn't paying rent. Bonus: smaller than a hardcover book but smarter than most offices.</p>
+          <div class="lot-footer">
+            <span class="lot-price-badge">$500</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="lot-card" data-lot-index="24" onclick="openExpanded(24)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_001_Microsoft_Surface_Go_3_10_5_Touchscreen_Intel_R_CoreTM_i3_8GB_Memory_128GB_SSD/LOT_001_THUMBNAIL.jpg" alt="Microsoft Surface Go 3 - 10.5_ Touchscreen - Intel® Core™ i3 - 8GB Memory - 128GB SSD" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -1998,7 +2036,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="24" onclick="openExpanded(24)">
+    <div class="lot-card" data-lot-index="25" onclick="openExpanded(25)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_005_Motyeowe_OLED_Monitors_18_5in_X2/LOT_005_THUMBNAIL.jpg" alt="Motyeowe OLED Monitors 18.5in - X2" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2012,7 +2050,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="25" onclick="openExpanded(25)">
+    <div class="lot-card" data-lot-index="26" onclick="openExpanded(26)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_006_SOTSU_UltraSlim_Portable_Monitor/LOT_006_THUMBNAIL.jpg" alt="Motyeowe OLED Monitors 18.5in - X2" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2026,7 +2064,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="26" onclick="openExpanded(26)">
+    <div class="lot-card" data-lot-index="27" onclick="openExpanded(27)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_011_Packard_Bell_airFrame_27_FHD_Monitor/LOT_011_THUMBNAIL.jpg" alt="Packard Bell airFrame 27_ FHD Monitors" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2040,7 +2078,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="27" onclick="openExpanded(27)">
+    <div class="lot-card" data-lot-index="28" onclick="openExpanded(28)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_016_HOTO_Outdoor_Camping_Flashlight/LOT_016_THUMBNAIL.jpg" alt="HOTO Outdoor Camping Flashlight Rechargeable, 3-in1 Camping Lantern" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2054,7 +2092,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="28" onclick="openExpanded(28)">
+    <div class="lot-card" data-lot-index="29" onclick="openExpanded(29)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_019_ShiftCam_ProGrip_Mobile_Battery_Grip_Starter_Kit/LOT_019_THUMBNAIL.jpg" alt="ShiftCam ProGrip Mobile Battery Grip Starter Kit" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2068,7 +2106,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="29" onclick="openExpanded(29)">
+    <div class="lot-card" data-lot-index="30" onclick="openExpanded(30)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_020_ShiftCam_SnapGrip_Mobile_Battery_Grip_for_iPhone/LOT_020_THUMBNAIL.jpg" alt="ShiftCam SnapGrip Mobile Battery Grip for iPhone" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2082,7 +2120,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="30" onclick="openExpanded(30)">
+    <div class="lot-card" data-lot-index="31" onclick="openExpanded(31)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_024_SteelMate_H2_Smart_Helmet_Brake_Light_System/LOT_024_THUMBNAIL.jpg" alt="SteelMate H2 Smart Helmet Brake Light System" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2096,7 +2134,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="31" onclick="openExpanded(31)">
+    <div class="lot-card" data-lot-index="32" onclick="openExpanded(32)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_025_SteelMate_Bluetooth_Tire_Pressure_Monitoring_System_TPMS/LOT_025_THUMBNAIL.jpg" alt="SteelMate Bluetooth Tire Pressure Monitoring System (TPMS)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2110,7 +2148,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="32" onclick="openExpanded(32)">
+    <div class="lot-card" data-lot-index="33" onclick="openExpanded(33)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_028_TimeKettle_WT2_Edge_Real_Time_Translation_Earbuds/LOT_028_THUMBNAIL.jpg" alt="TimeKettle WT2 Edge Real-Time Translation Earbuds" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2124,7 +2162,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="33" onclick="openExpanded(33)">
+    <div class="lot-card" data-lot-index="34" onclick="openExpanded(34)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_031_Traveler_Guitar_Ultra_Light_Electric_Travel_Guitar/LOT_031_THUMBNAIL.jpg" alt="Traveler Guitar Ultra-Light Electric Travel Guitar" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2138,7 +2176,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="34" onclick="openExpanded(34)">
+    <div class="lot-card" data-lot-index="35" onclick="openExpanded(35)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_038_Wemax_Dice_Mini_Portable_1080P_Projector/LOT_038_THUMBNAIL.jpg" alt="Wemax Dice Mini Portable 1080P Projector" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2152,7 +2190,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="35" onclick="openExpanded(35)">
+    <div class="lot-card" data-lot-index="36" onclick="openExpanded(36)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_039_Wemax_Go_Advanced_Portable_Laser_Projector/LOT_039_THUMBNAIL.jpg" alt="Wemax Go Advanced Portable Laser Projector" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2166,7 +2204,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="36" onclick="openExpanded(36)">
+    <div class="lot-card" data-lot-index="37" onclick="openExpanded(37)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_040_XREAL_Air_AR_Smart_Glasses_1st_Generation/LOT_040_THUMBNAIL.jpg" alt="XREAL Air AR Smart Glasses (1st Generation)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2180,7 +2218,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="37" onclick="openExpanded(37)">
+    <div class="lot-card" data-lot-index="38" onclick="openExpanded(38)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_044_FeiyuTech_WG2X_3_Axis_Wearable_Gimbal_Stabilizer/LOT_044_THUMBNAIL.jpg" alt="FeiyuTech WG2X 3-Axis Wearable Gimbal Stabilizer" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2194,7 +2232,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="38" onclick="openExpanded(38)">
+    <div class="lot-card" data-lot-index="39" onclick="openExpanded(39)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_045_Frunsi_15_6_inch_Dual_Portable_Monitor_for_Laptop/LOT_045_THUMBNAIL.jpg" alt="Frunsi 15.6-inch Dual Portable Monitor for Laptop" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2208,7 +2246,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="39" onclick="openExpanded(39)">
+    <div class="lot-card" data-lot-index="40" onclick="openExpanded(40)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_046_GameSir_X2_Pro_Mobile_Gaming_Controller/LOT_046_THUMBNAIL.jpg" alt="GameSir X2 Bluetooth Mobile Gaming Controller" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2222,7 +2260,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="40" onclick="openExpanded(40)">
+    <div class="lot-card" data-lot-index="41" onclick="openExpanded(41)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_052_Insta360_Pocket_2_Action_Camera/LOT_052_THUMBNAIL.jpg" alt="DJI Pocket 2 Creator Combo Handheld Camera" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2236,7 +2274,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="41" onclick="openExpanded(41)">
+    <div class="lot-card" data-lot-index="42" onclick="openExpanded(42)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_053_INVZI_MagHub_8_in_1_USB_C_Docking_Station/LOT_053_THUMBNAIL.jpg" alt="INVZI MagHub 8-in-1 USB-C Docking Station for MacBook" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2250,7 +2288,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="42" onclick="openExpanded(42)">
+    <div class="lot-card" data-lot-index="43" onclick="openExpanded(43)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_055_IOGear_USB_C_Pro_Dock_with_Power_Delivery/LOT_055_THUMBNAIL.jpg" alt="IOGEAR 4-Port USB 3.0 SuperSpeed Hub" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2264,7 +2302,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="43" onclick="openExpanded(43)">
+    <div class="lot-card" data-lot-index="44" onclick="openExpanded(44)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_065_MeLE_Quieter3Q_Mini_PC_N5105/LOT_065_THUMBNAIL.jpg" alt="MeLE Quieter3Q Mini PC with Intel N5105 Processor" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2278,7 +2316,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="44" onclick="openExpanded(44)">
+    <div class="lot-card" data-lot-index="45" onclick="openExpanded(45)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_066_Microsoft_Surface_Go_2_10_5_Touchscreen_8GB_Memory_128GB_SSD/LOT_066_THUMBNAIL.jpg" alt="Microsoft Surface Go 2 - 10.5 Touchscreen - 8GB Memory - 128GB SSD" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2292,7 +2330,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="45" onclick="openExpanded(45)">
+    <div class="lot-card" data-lot-index="46" onclick="openExpanded(46)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_068_Aokler_GPS_Dog_Tracker_Collar/LOT_068_THUMBNAIL.jpg" alt="Aokler GPS Dog Tracker Collar" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2306,7 +2344,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="46" onclick="openExpanded(46)">
+    <div class="lot-card" data-lot-index="47" onclick="openExpanded(47)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_070_AYY_Portable_Monitor/LOT_070_THUMBNAIL.jpg" alt="AYY 15.6 Portable Monitor (1080P FHD)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2320,7 +2358,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="47" onclick="openExpanded(47)">
+    <div class="lot-card" data-lot-index="48" onclick="openExpanded(48)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_073_Bose_Smart_Soundbar_300/LOT_073_THUMBNAIL.jpg" alt="Bose Smart Soundbar 300" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2334,7 +2372,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="48" onclick="openExpanded(48)">
+    <div class="lot-card" data-lot-index="49" onclick="openExpanded(49)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_074_Boss_RC_505_e02_Loop_Station/LOT_074_THUMBNAIL.jpg" alt="Boss RC-505 mkII Loop Station" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2348,7 +2386,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="49" onclick="openExpanded(49)">
+    <div class="lot-card" data-lot-index="50" onclick="openExpanded(50)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_077_CMF_Watch_Pro_Smartwatch_1_96_AMOLED_Display_IP68_Water_Resistant/LOT_077_THUMBNAIL.jpg" alt="CMF Watch Pro by Nothing - 1.96 AMOLED Smartwatch" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2362,7 +2400,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="50" onclick="openExpanded(50)">
+    <div class="lot-card" data-lot-index="51" onclick="openExpanded(51)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_082_Devialet_Phantom_II_95_dB_Compact_Wireless_Speaker_2/LOT_082_THUMBNAIL.jpg" alt="Devialet Phantom II 95 dB Compact Wireless Speaker - Matte Black" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2376,7 +2414,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="51" onclick="openExpanded(51)">
+    <div class="lot-card" data-lot-index="52" onclick="openExpanded(52)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_083_Devialet_Phantom_II_Remote/LOT_083_THUMBNAIL.jpg" alt="Devialet Phantom Remote Control" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2390,7 +2428,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="52" onclick="openExpanded(52)">
+    <div class="lot-card" data-lot-index="53" onclick="openExpanded(53)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_084_Devialet_Phantom_II_Travel_Case_1/LOT_084_THUMBNAIL.jpg" alt="Devialet Phantom Customized Travel Case - Single Speaker" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2404,7 +2442,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="53" onclick="openExpanded(53)">
+    <div class="lot-card" data-lot-index="54" onclick="openExpanded(54)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_085_Devialet_Phantom_II_Travel_Case_2/LOT_085_THUMBNAIL.jpg" alt="Devialet Phantom Travel Case - Duo Configuration" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2418,7 +2456,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="54" onclick="openExpanded(54)">
+    <div class="lot-card" data-lot-index="55" onclick="openExpanded(55)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_086_DJI_Osmo_Mobile_6_Smartphone_Gimbal_Stabilizer/LOT_086_THUMBNAIL.jpg" alt="DJI Osmo Mobile 6 Smartphone Gimbal Stabilizer" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2432,7 +2470,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="55" onclick="openExpanded(55)">
+    <div class="lot-card" data-lot-index="56" onclick="openExpanded(56)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_094_Ledger_Nano_S_Crypto_Hardware_Wallet/LOT_094_THUMBNAIL.jpg" alt="Ledger Nano S Hardware Wallet" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2446,7 +2484,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="56" onclick="openExpanded(56)">
+    <div class="lot-card" data-lot-index="57" onclick="openExpanded(57)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_097_Vocopro_Hero_Karaoke_Station/LOT_097_THUMBNAIL.jpg" alt="VocoPro HERO-REC Multi-Format Portable PA Karaoke System with Digital Recorder Vocopro" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2460,7 +2498,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="57" onclick="openExpanded(57)">
+    <div class="lot-card" data-lot-index="58" onclick="openExpanded(58)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_098_Dianese_Backpack/LOT_098_THUMBNAIL.jpg" alt="Dainese D-Exchange Backpack Black Red" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2474,7 +2512,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="58" onclick="openExpanded(58)">
+    <div class="lot-card" data-lot-index="59" onclick="openExpanded(59)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_114_Vintage_Nicolai_Piquadro_Leather_Messenger/LOT_114_THUMBNAIL.jpg" alt="Vintage Nicolai Piquadro Leather Messenger Bag" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2488,7 +2526,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="59" onclick="openExpanded(59)">
+    <div class="lot-card" data-lot-index="60" onclick="openExpanded(60)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_115_Paravel_Grand_Tour_Luxury_Duffle_Bag/LOT_115_THUMBNAIL.jpg" alt="Paravel Grand Tour Luxury Duffle Bag" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2502,7 +2540,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="60" onclick="openExpanded(60)">
+    <div class="lot-card" data-lot-index="61" onclick="openExpanded(61)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_123_Moment_Camera_Phone_Lens_Package/LOT_123_THUMBNAIL.jpg" alt="Moment Camera Phone Lens Package" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2516,7 +2554,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="61" onclick="openExpanded(61)">
+    <div class="lot-card" data-lot-index="62" onclick="openExpanded(62)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_125_Anker_Nebula_Capsule%2C_Smart_Wi-Fi_Mini_Projector/LOT_125_THUMBNAIL.jpg" alt="Anker Nebula Capsule Smart Wi-Fi Mini Projector" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2530,7 +2568,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="62" onclick="openExpanded(62)">
+    <div class="lot-card" data-lot-index="63" onclick="openExpanded(63)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_126_HUGE_Vehicle_Entertainment_System/LOT_126_THUMBNAIL.jpg" alt="HUGE Vehicle Entertainment System" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2544,7 +2582,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="63" onclick="openExpanded(63)">
+    <div class="lot-card" data-lot-index="64" onclick="openExpanded(64)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_127_Airpod_Pro_2_Lightning/LOT_127_THUMBNAIL.jpg" alt="Apple AirPods Pro (2nd Generation) with MagSafe Case (Lightning)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2558,7 +2596,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="64" onclick="openExpanded(64)">
+    <div class="lot-card" data-lot-index="65" onclick="openExpanded(65)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_128_Airpod_Pro_2_USB_C/LOT_128_THUMBNAIL.jpg" alt="Apple AirPods Pro (2nd Generation) with MagSafe Case (USB-C)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2572,7 +2610,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="65" onclick="openExpanded(65)">
+    <div class="lot-card" data-lot-index="66" onclick="openExpanded(66)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_129_Samsung_3S_Tab_Galaxy/LOT_129_THUMBNAIL.jpg" alt="Samsung Galaxy Tab S3 9.7-inch (32GB)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2586,7 +2624,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="66" onclick="openExpanded(66)">
+    <div class="lot-card" data-lot-index="67" onclick="openExpanded(67)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_130_ShureMV88/LOT_130_THUMBNAIL.jpg" alt="Shure MV88+ Video Kit Digital Stereo Condenser Microphone" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2600,7 +2638,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="67" onclick="openExpanded(67)">
+    <div class="lot-card" data-lot-index="68" onclick="openExpanded(68)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_131_Sony2.1_HT_AX7_Portable_Surround/LOT_131_THUMBNAIL.jpg" alt="Sony HT-AX7 Portable Theater System" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2614,7 +2652,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="68" onclick="openExpanded(68)">
+    <div class="lot-card" data-lot-index="69" onclick="openExpanded(69)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_003_Minisforum_EliteMini_UM773_SE_Mini_PC_Ryzen_7_7735HS/LOT_003_THUMBNAIL.jpg" alt="Minisforum EliteMini UM773 SE Mini PC (Ryzen 7 7735HS)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2628,7 +2666,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="69" onclick="openExpanded(69)">
+    <div class="lot-card" data-lot-index="70" onclick="openExpanded(70)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_004_Moment_M_Series_Professional_Mobile_Lens_Kit/LOT_004_THUMBNAIL.jpg" alt="Moment M-Series Professional Mobile Lens Kit" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2642,7 +2680,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="70" onclick="openExpanded(70)">
+    <div class="lot-card" data-lot-index="71" onclick="openExpanded(71)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_017_Satechi_Dual_USB_C_Docking_Station_with_Dual_4K_HDMI/LOT_017_THUMBNAIL.jpg" alt="Satechi Dual USB-C Docking Station with Dual 4K HDMI" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2656,7 +2694,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="71" onclick="openExpanded(71)">
+    <div class="lot-card" data-lot-index="72" onclick="openExpanded(72)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_018_Sena_Outrush_Modular_Bluetooth_Motorcycle_Helmet/LOT_018_THUMBNAIL.jpg" alt="Sena Outrush Modular Bluetooth Motorcycle Helmet" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2670,7 +2708,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="72" onclick="openExpanded(72)">
+    <div class="lot-card" data-lot-index="73" onclick="openExpanded(73)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_026_TC_Helicon_Acoustic_Pedal/LOT_026_THUMBNAIL.jpg" alt="TC Helicon VoiceTone Acoustic Guitar/Vocal Processor" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2684,7 +2722,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="73" onclick="openExpanded(73)">
+    <div class="lot-card" data-lot-index="74" onclick="openExpanded(74)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_027_Thule_Vital_Hydration_Backpack/LOT_027_THUMBNAIL.jpg" alt="Thule Vital Hydration Backpack" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2698,7 +2736,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="74" onclick="openExpanded(74)">
+    <div class="lot-card" data-lot-index="75" onclick="openExpanded(75)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_030_XIAOMI_5G_Routers_x2/LOT_030_THUMBNAIL.jpg" alt="Xiaomi - TP-Link Routers and Relays" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2712,7 +2750,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="75" onclick="openExpanded(75)">
+    <div class="lot-card" data-lot-index="76" onclick="openExpanded(76)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_036_Jinxnobi_Wall_Mount_Safe/LOT_036_THUMBNAIL.jpg" alt="Jinxnobi Wall Mount Safe" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2726,7 +2764,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="76" onclick="openExpanded(76)">
+    <div class="lot-card" data-lot-index="77" onclick="openExpanded(77)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_037_Stealth_Hidden_Wall_Safe_22_8_x_15_4_Black/LOT_037_THUMBNAIL.jpg" alt="Stealth Hidden Wall Safe - 22.8 x 15.4 Black" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2740,7 +2778,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="77" onclick="openExpanded(77)">
+    <div class="lot-card" data-lot-index="78" onclick="openExpanded(78)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_042_XREAL_Beam_Spatial_Computing_Device_1st_Generation/LOT_042_THUMBNAIL.jpg" alt="XREAL Beam Spatial Computing Device (1st Generation)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2754,7 +2792,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="78" onclick="openExpanded(78)">
+    <div class="lot-card" data-lot-index="79" onclick="openExpanded(79)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_049_GoPro_HERO7_Black_Action_Camera/LOT_049_THUMBNAIL.jpg" alt="GoPro HERO7 Black Action Camera" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2768,7 +2806,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="79" onclick="openExpanded(79)">
+    <div class="lot-card" data-lot-index="80" onclick="openExpanded(80)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_067_Anker_577_Thunderbolt_Docking_Station_13_in_1/LOT_067_THUMBNAIL.jpg" alt="Anker 577 Thunderbolt Docking Station (13-in-1)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2782,7 +2820,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="80" onclick="openExpanded(80)">
+    <div class="lot-card" data-lot-index="81" onclick="openExpanded(81)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_075_Bushnell_Equinox_X650_Night_Vision_5x32_Monocular_review/LOT_075_THUMBNAIL.jpg" alt="Bushnell Equinox X650 5x32mm Digital Night Vision Monocular" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2796,7 +2834,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="81" onclick="openExpanded(81)">
+    <div class="lot-card" data-lot-index="82" onclick="openExpanded(82)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_078_Dell_SE2222H_22_inch_Monitor/LOT_078_THUMBNAIL.jpg" alt="Dell SE2222H 22-inch LED Monitor" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2810,7 +2848,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="82" onclick="openExpanded(82)">
+    <div class="lot-card" data-lot-index="83" onclick="openExpanded(83)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_088_Doqo_iPad_Air_M2_Hub/LOT_088_THUMBNAIL.jpg" alt="Doqo iPad Air M2 Keyboard Hub" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2824,7 +2862,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="83" onclick="openExpanded(83)">
+    <div class="lot-card" data-lot-index="84" onclick="openExpanded(84)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_091_KEMIMOTO_Motorcycle_Helmet_Backpack_Bag_for_Men_with_USB_Charging_Port/LOT_091_THUMBNAIL.jpg" alt="KEMIMOTO Motorcycle Helmet Backpack Bag" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2838,7 +2876,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="84" onclick="openExpanded(84)">
+    <div class="lot-card" data-lot-index="85" onclick="openExpanded(85)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_099_Dianese_XL_Pants/LOT_099_THUMBNAIL.jpg" alt="Dainese D-Explorer Gore-Tex Pants XL Black Red" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2852,7 +2890,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="85" onclick="openExpanded(85)">
+    <div class="lot-card" data-lot-index="86" onclick="openExpanded(86)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_100_Dianese_Jacket_XL/LOT_100_THUMBNAIL.jpg" alt="Dainese Super Rider D-Dry Jacket XL Black Red" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2866,7 +2904,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="86" onclick="openExpanded(86)">
+    <div class="lot-card" data-lot-index="87" onclick="openExpanded(87)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_118_KLIM_Ballistic_Motorcycle_Jeans/LOT_118_THUMBNAIL.jpg" alt="KLIM Ballistic Motorcycle Jeans" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2880,7 +2918,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="87" onclick="openExpanded(87)">
+    <div class="lot-card" data-lot-index="88" onclick="openExpanded(88)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_119_JOOLA_Professional_Ping_Pong_Table/LOT_119_THUMBNAIL.jpg" alt="JOOLA Professional Ping Pong Table" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2894,7 +2932,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="88" onclick="openExpanded(88)">
+    <div class="lot-card" data-lot-index="89" onclick="openExpanded(89)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_124_Plugable_Hub_(Dual_Macbook_Screens)/LOT_124_THUMBNAIL.jpg" alt="Plugable USB-C Hub (Dual MacBook Screens)" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2908,7 +2946,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="89" onclick="openExpanded(89)">
+    <div class="lot-card" data-lot-index="90" onclick="openExpanded(90)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_033_Fishman_Loudbox_Mini_Acoustic_Guitar_Amplifier/LOT_033_THUMBNAIL.jpg" alt="Fishman Loudbox Mini Acoustic Guitar Amplifier" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2922,7 +2960,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="90" onclick="openExpanded(90)">
+    <div class="lot-card" data-lot-index="91" onclick="openExpanded(91)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_035_Waeco_Car_Refrigerator/LOT_035_THUMBNAIL.jpg" alt="Dometic (Waeco) CF-50 Portable Electric Cooler/Freezer" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2936,7 +2974,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="91" onclick="openExpanded(91)">
+    <div class="lot-card" data-lot-index="92" onclick="openExpanded(92)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_050_SentrySafe_Fire_Resistant_Home_Safe_Box/LOT_050_THUMBNAIL.jpg" alt="SentrySafe Fireproof Home Safe with Digital Lock" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2950,7 +2988,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="92" onclick="openExpanded(92)">
+    <div class="lot-card" data-lot-index="93" onclick="openExpanded(93)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_061_Logitech_K780_Multi_Device_Wireless_Keyboard/LOT_061_THUMBNAIL.jpg" alt="Logitech K780 Multi-Device Wireless Keyboard" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2964,7 +3002,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="93" onclick="openExpanded(93)">
+    <div class="lot-card" data-lot-index="94" onclick="openExpanded(94)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_062_Lumary_2K_Floodlight_Security_Camera/LOT_062_THUMBNAIL.jpg" alt="Lumary 2K Smart Floodlight Security Camera with Dual Band Wi-Fi" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2978,7 +3016,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="94" onclick="openExpanded(94)">
+    <div class="lot-card" data-lot-index="95" onclick="openExpanded(95)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_087_American_Vizio_TV_50_P502ui_B1/LOT_087_THUMBNAIL.jpg" alt="American Vizio TV - 50_ P502ui-B1" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -2992,7 +3030,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="95" onclick="openExpanded(95)">
+    <div class="lot-card" data-lot-index="96" onclick="openExpanded(96)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_072_BigBlue_Portable_Solar_Charger_28W/LOT_072_THUMBNAIL.jpg" alt="BigBlue 28W Foldable Solar Charger Panel" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -3006,7 +3044,7 @@
       </div>
     </div>
     
-    <div class="lot-card" data-lot-index="96" onclick="openExpanded(96)">
+    <div class="lot-card" data-lot-index="97" onclick="openExpanded(97)">
       <div class="lot-card-content">
         <img src="https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_076_Portable_Monitor_Stands/LOT_076_THUMBNAIL.jpg" alt="Professional Monitor Stand Collection - Tripods, Magnetic Mounts, VESA Brackets & Clamp Arms" class="lot-thumbnail" onerror="this.src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E'">
         <div class="lot-info">
@@ -3250,6 +3288,69 @@
     ]
   },
   {
+    "lot": "LOT_101",
+    "lotNumber": "101",
+    "name": "Moment Professional Mobile Phone Lens Bundle",
+    "coolness": 6,
+    "tagline": "Because one lens was never going to be enough. Bonus: now your phone has more glass than your kitchen.",
+    "description": "The complete Moment ecosystem, assembled into one bundle for the mobile photographer who refuses to be limited by whatever lens Apple glued in. Includes the 58mm Telephoto for shots that feel like you were actually there, the 10x Macro for things too small to care about until they're beautifully framed, the Filter Mount and 37mm Cine Filter Set for moody cinematic control, a Leather Tan Lens Pouch for the ones that don't fit in the Roll, the Canvas Leather Lens Roll for the ones that do, a Camera Case to mount it all without embarrassing yourself, and a Bluetooth Remote so you can pretend the whole operation is effortless. It is not effortless. It is absolutely worth it.",
+    "specs": "Tele 58mm Lens | 2x optical magnification, cinema-grade glass | 10x Macro Lens II | 1-inch working distance, removable diffuser hood | 37mm Filter Mount | Press-fit adapter for Moment lenses | 37mm Cine Filter Set | ND and CPL cinema-grade filters | Leather Tan Lens Pouch | Weatherproof, 2-lens capacity | Canvas Leather Lens Roll | 4-lens roll-up carry system | Moment Camera Case | T-Series or M-Series lens mount, drop protection | Bluetooth Remote | 10m range, 5000+ shots per charge, iOS and Android",
+    "price": "$450.00",
+    "category": "Cameras",
+    "subcategory": "Coolest Gadgets",
+    "thumbnail": "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_101_Moment_Professional_Mobile_Phone_Lens_Bundle/LOT_101_THUMBNAIL.jpg",
+    "photos": [
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_101_Moment_Professional_Mobile_Phone_Lens_Bundle/Photos/LOT_101_00.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_101_Moment_Professional_Mobile_Phone_Lens_Bundle/Photos/LOT_101_01.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_101_Moment_Professional_Mobile_Phone_Lens_Bundle/Photos/LOT_101_02.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_101_Moment_Professional_Mobile_Phone_Lens_Bundle/Photos/LOT_101_03.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_101_Moment_Professional_Mobile_Phone_Lens_Bundle/Photos/LOT_101_04.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_101_Moment_Professional_Mobile_Phone_Lens_Bundle/Photos/LOT_101_05.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_101_Moment_Professional_Mobile_Phone_Lens_Bundle/Photos/LOT_101_06.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_101_Moment_Professional_Mobile_Phone_Lens_Bundle/Photos/LOT_101_07.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_101_Moment_Professional_Mobile_Phone_Lens_Bundle/Photos/LOT_101_08.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_101_Moment_Professional_Mobile_Phone_Lens_Bundle/Photos/LOT_101_09.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_101_Moment_Professional_Mobile_Phone_Lens_Bundle/Photos/LOT_101_10.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_101_Moment_Professional_Mobile_Phone_Lens_Bundle/Photos/LOT_101_11.jpg"
+    ],
+    "referenceUrl": "https://www.shopmoment.com",
+    "seoTags": [
+      "phone accessories",
+      "mobile accessories",
+      "phone camera lens",
+      "mobile photography"
+    ]
+  },
+  {
+    "lot": "LOT_006",
+    "lotNumber": "006",
+    "name": "SOTSU UltraSlim 12.5 Portable Monitor - Ultra-Thin Lightweight Aluminum Design",
+    "coolness": 5,
+    "tagline": "Your laptop screen was fine. This featherweight aluminum marvel just whispers 'but what if...more pixels?'",
+    "description": "Ultra-thin 12.5 FHD portable monitor with premium aluminum unibody design. At just 4mm thin and under 1lb, it's the minimalist's dream—elegant enough for a design studio, practical enough for airport terminals. USB-C powered, VESA mountable, and suspiciously easier to justify than therapy.",
+    "specs": "Display: 12.5 IPS FHD (1920×1080) | Thickness: 4mm | Weight: <1lb | Connectivity: USB-C (power + video) | Brightness: 300 nits | Aspect Ratio: 16:9 | Mount: VESA 75mm | Materials: Aluminum unibody | Includes: USB-C cable, protective case",
+    "price": "$149.00",
+    "category": "Portable Ultra-Thin Laptop Monitors",
+    "subcategory": "Portable Workstations",
+    "thumbnail": "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_006_SOTSU_UltraSlim_Portable_Monitor/LOT_006_THUMBNAIL.jpg",
+    "photos": [
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_006_SOTSU_UltraSlim_Portable_Monitor/Photos/LOT_006_01.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_006_SOTSU_UltraSlim_Portable_Monitor/Photos/LOT_006_02.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_006_SOTSU_UltraSlim_Portable_Monitor/Photos/LOT_006_03.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_006_SOTSU_UltraSlim_Portable_Monitor/Photos/LOT_006_04.jpg"
+    ],
+    "referenceUrl": "https://www.amazon.com/s?k=SOTSU+12.5+portable+monitor",
+    "seoTags": [
+      "laptop",
+      "tablet",
+      "portable computer",
+      "monitor",
+      "portable monitor",
+      "screen",
+      "display"
+    ]
+  },
+  {
     "lot": "LOT_007",
     "lotNumber": "007",
     "name": "Plaud Al Note",
@@ -3271,6 +3372,32 @@
     "seoTags": [
       "premium tech",
       "smart device"
+    ]
+  },
+  {
+    "lot": "LOT_008",
+    "lotNumber": "008",
+    "name": "EHOMEWEI X1 Foldable Dual Screen Portable Monitor 16×2 - Magnetic Alignment Travel Workstation",
+    "coolness": 5,
+    "tagline": "One screen was never enough. Two screens felt excessive. This foldable dual 16 fortress makes 'excessive' look like efficiency.",
+    "description": "Revolutionary foldable dual 16 FHD displays that collapse into laptop-bag-sized portability. Magnetic alignment, auto-rotation, and the smug satisfaction of unfolding 32 of workspace anywhere. Perfect for traders, developers, and people who refuse to choose between mobility and productivity. USB-C powered, kickstand included.",
+    "specs": "Displays: Dual 16 IPS FHD (1920×1080 each) | Total Screen: 32 | Connectivity: USB-C×2 (power + video) | Brightness: 300 nits | Refresh: 60Hz | Features: Magnetic alignment, auto-rotation, 180° hinge | Weight: 3.5lbs | Includes: Dual USB-C cables, adjustable kickstand, travel case",
+    "price": "$399.00",
+    "category": "Portable Ultra-Thin Laptop Monitors",
+    "subcategory": "Portable Workstations",
+    "thumbnail": "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_008_EHOMEWEI_X1_Foldable_Dual_Screen/LOT_008_THUMBNAIL.jpg",
+    "photos": [
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_008_EHOMEWEI_X1_Foldable_Dual_Screen/Photos/LOT_008_01.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_008_EHOMEWEI_X1_Foldable_Dual_Screen/Photos/LOT_008_02.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_008_EHOMEWEI_X1_Foldable_Dual_Screen/Photos/LOT_008_03.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_008_EHOMEWEI_X1_Foldable_Dual_Screen/Photos/LOT_008_04.jpg"
+    ],
+    "referenceUrl": "https://www.amazon.com/s?k=EHOMEWEI+X1+dual+portable+monitor",
+    "seoTags": [
+      "monitor",
+      "portable monitor",
+      "screen",
+      "display"
     ]
   },
   {
@@ -3317,6 +3444,34 @@
     "seoTags": [
       "premium tech",
       "smart device"
+    ]
+  },
+  {
+    "lot": "LOT_023",
+    "lotNumber": "023",
+    "name": "INNOCN 13.3 OLED Portable Monitor - FHD 1080P, 100% DCI-P3, HDR10 Color-Accurate Display",
+    "coolness": 5,
+    "tagline": "Your laptop's LCD is 'fine.' This 100% DCI-P3 OLED is a flex disguised as a productivity tool.",
+    "description": "Stunning 13.3 1080p OLED display with true blacks, infinite contrast, and 100% DCI-P3 color. HDR10 certified, 1ms response, and thin enough to slip into any bag. USB-C power + video, built-in speakers, and the kind of image quality that makes colleagues ask 'wait, is that a monitor?' Content creators and color perfectionists, this is your portable palette.",
+    "specs": "Display: 13.3 OLED FHD (1920×1080) | Color: 100% DCI-P3, HDR10 | Response: 1ms | Contrast: ∞:1 (true blacks) | Connectivity: USB-C (power + video) | Brightness: 400 nits | Weight: 1.5lbs | Features: Built-in dual speakers, auto-brightness | Includes: USB-C cable, magnetic cover/stand",
+    "price": "$279.00",
+    "category": "Portable Ultra-Thin Laptop Monitors",
+    "subcategory": "Portable Workstations",
+    "thumbnail": "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_023_INNOCN_Portable_Monitor_OLED/LOT_023_THUMBNAIL.jpg",
+    "photos": [
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_023_INNOCN_Portable_Monitor_OLED/Photos/LOT_023_01.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_023_INNOCN_Portable_Monitor_OLED/Photos/LOT_023_02.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_023_INNOCN_Portable_Monitor_OLED/Photos/LOT_023_03.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_023_INNOCN_Portable_Monitor_OLED/Photos/LOT_023_04.jpg"
+    ],
+    "referenceUrl": "https://www.amazon.com/s?k=INNOCN+13.3+OLED+portable+monitor",
+    "seoTags": [
+      "monitor",
+      "portable monitor",
+      "screen",
+      "display",
+      "audio",
+      "speaker"
     ]
   },
   {
@@ -3594,89 +3749,6 @@
       "mini pc",
       "desktop",
       "computer"
-    ]
-  },
-  {
-    "lot": "LOT_006",
-    "lotNumber": "006",
-    "name": "SOTSU UltraSlim 12.5 Portable Monitor - Ultra-Thin Lightweight Aluminum Design",
-    "coolness": 5,
-    "tagline": "Your laptop screen was fine. This featherweight aluminum marvel just whispers 'but what if...more pixels?'",
-    "description": "Ultra-thin 12.5 FHD portable monitor with premium aluminum unibody design. At just 4mm thin and under 1lb, it's the minimalist's dream—elegant enough for a design studio, practical enough for airport terminals. USB-C powered, VESA mountable, and suspiciously easier to justify than therapy.",
-    "specs": "Display: 12.5 IPS FHD (1920×1080) | Thickness: 4mm | Weight: <1lb | Connectivity: USB-C (power + video) | Brightness: 300 nits | Aspect Ratio: 16:9 | Mount: VESA 75mm | Materials: Aluminum unibody | Includes: USB-C cable, protective case",
-    "price": "$149.00",
-    "category": "Portable Ultra-Thin Laptop Monitors",
-    "subcategory": "Portable Workstations",
-    "thumbnail": "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_006_SOTSU_UltraSlim_Portable_Monitor/LOT_006_THUMBNAIL.jpg",
-    "photos": [
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_006_SOTSU_UltraSlim_Portable_Monitor/Photos/LOT_006_01.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_006_SOTSU_UltraSlim_Portable_Monitor/Photos/LOT_006_02.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_006_SOTSU_UltraSlim_Portable_Monitor/Photos/LOT_006_03.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_006_SOTSU_UltraSlim_Portable_Monitor/Photos/LOT_006_04.jpg"
-    ],
-    "referenceUrl": "https://www.amazon.com/s?k=SOTSU+12.5+portable+monitor",
-    "seoTags": [
-      "laptop",
-      "tablet",
-      "portable computer",
-      "monitor",
-      "portable monitor",
-      "screen",
-      "display"
-    ]
-  },
-  {
-    "lot": "LOT_008",
-    "lotNumber": "008",
-    "name": "EHOMEWEI X1 Foldable Dual Screen Portable Monitor 16×2 - Magnetic Alignment Travel Workstation",
-    "coolness": 5,
-    "tagline": "One screen was never enough. Two screens felt excessive. This foldable dual 16 fortress makes 'excessive' look like efficiency.",
-    "description": "Revolutionary foldable dual 16 FHD displays that collapse into laptop-bag-sized portability. Magnetic alignment, auto-rotation, and the smug satisfaction of unfolding 32 of workspace anywhere. Perfect for traders, developers, and people who refuse to choose between mobility and productivity. USB-C powered, kickstand included.",
-    "specs": "Displays: Dual 16 IPS FHD (1920×1080 each) | Total Screen: 32 | Connectivity: USB-C×2 (power + video) | Brightness: 300 nits | Refresh: 60Hz | Features: Magnetic alignment, auto-rotation, 180° hinge | Weight: 3.5lbs | Includes: Dual USB-C cables, adjustable kickstand, travel case",
-    "price": "$399.00",
-    "category": "Portable Ultra-Thin Laptop Monitors",
-    "subcategory": "Portable Workstations",
-    "thumbnail": "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_008_EHOMEWEI_X1_Foldable_Dual_Screen/LOT_008_THUMBNAIL.jpg",
-    "photos": [
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_008_EHOMEWEI_X1_Foldable_Dual_Screen/Photos/LOT_008_01.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_008_EHOMEWEI_X1_Foldable_Dual_Screen/Photos/LOT_008_02.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_008_EHOMEWEI_X1_Foldable_Dual_Screen/Photos/LOT_008_03.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_008_EHOMEWEI_X1_Foldable_Dual_Screen/Photos/LOT_008_04.jpg"
-    ],
-    "referenceUrl": "https://www.amazon.com/s?k=EHOMEWEI+X1+dual+portable+monitor",
-    "seoTags": [
-      "monitor",
-      "portable monitor",
-      "screen",
-      "display"
-    ]
-  },
-  {
-    "lot": "LOT_023",
-    "lotNumber": "023",
-    "name": "INNOCN 13.3 OLED Portable Monitor - FHD 1080P, 100% DCI-P3, HDR10 Color-Accurate Display",
-    "coolness": 5,
-    "tagline": "Your laptop's LCD is 'fine.' This 100% DCI-P3 OLED is a flex disguised as a productivity tool.",
-    "description": "Stunning 13.3 1080p OLED display with true blacks, infinite contrast, and 100% DCI-P3 color. HDR10 certified, 1ms response, and thin enough to slip into any bag. USB-C power + video, built-in speakers, and the kind of image quality that makes colleagues ask 'wait, is that a monitor?' Content creators and color perfectionists, this is your portable palette.",
-    "specs": "Display: 13.3 OLED FHD (1920×1080) | Color: 100% DCI-P3, HDR10 | Response: 1ms | Contrast: ∞:1 (true blacks) | Connectivity: USB-C (power + video) | Brightness: 400 nits | Weight: 1.5lbs | Features: Built-in dual speakers, auto-brightness | Includes: USB-C cable, magnetic cover/stand",
-    "price": "$279.00",
-    "category": "Portable Ultra-Thin Laptop Monitors",
-    "subcategory": "Portable Workstations",
-    "thumbnail": "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_023_INNOCN_Portable_Monitor_OLED/LOT_023_THUMBNAIL.jpg",
-    "photos": [
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_023_INNOCN_Portable_Monitor_OLED/Photos/LOT_023_01.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_023_INNOCN_Portable_Monitor_OLED/Photos/LOT_023_02.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_023_INNOCN_Portable_Monitor_OLED/Photos/LOT_023_03.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_023_INNOCN_Portable_Monitor_OLED/Photos/LOT_023_04.jpg"
-    ],
-    "referenceUrl": "https://www.amazon.com/s?k=INNOCN+13.3+OLED+portable+monitor",
-    "seoTags": [
-      "monitor",
-      "portable monitor",
-      "screen",
-      "display",
-      "audio",
-      "speaker"
     ]
   },
   {
@@ -5542,7 +5614,7 @@
     "thumbnail": "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_087_American_Vizio_TV_50_P502ui_B1/LOT_087_THUMBNAIL.jpg",
     "photos": [
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_087_American_Vizio_TV_50_P502ui_B1/Photos/LOT_087_01.jpg",
-      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_087_American_Vizio_TV_50_P502ui_B1/Photos/LOT_087_06.jpg",
+      "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_087_American_Vizio_TV_50_P502ui_B1/Photos/LOT_087_05.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_087_American_Vizio_TV_50_P502ui_B1/Photos/LOT_087_07.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_087_American_Vizio_TV_50_P502ui_B1/Photos/LOT_087_08.jpg",
       "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_087_American_Vizio_TV_50_P502ui_B1/Photos/LOT_087_10.jpg"
