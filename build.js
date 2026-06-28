@@ -538,9 +538,35 @@ function generateHTML(products) {
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
       box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3),
                   inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
 
-
-    /* Search Wrapper */
+    /* Home Button */
+    .home-btn {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      z-index: 9999;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.05));
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      color: #fff;
+      padding: 0.9rem 2rem;
+      border: 2px solid #ffcc00;
+      border-radius: 16px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15), inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .home-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 16px rgba(255, 204, 0, 0.4);
+    }
+    .home-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 16px 0 rgba(31, 38, 135, 0.15), inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
+    }
     .search-wrapper {
       display: flex;
       gap: 0.8rem;
@@ -943,7 +969,7 @@ function generateHTML(products) {
     .lot-thumbnail {
       width: 100%;
       height: 200px;
-      object-fit: cover;
+      object-fit: contain;
       background: #111;
       display: block;
     }
@@ -1233,6 +1259,9 @@ function generateHTML(products) {
   </style>
 </head>
 <body>
+
+  <!-- Home Button -->
+  <button class="home-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">HOME</button>
 
   <!-- Hero Section -->
   <section class="hero" id="hero">

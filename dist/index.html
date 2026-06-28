@@ -145,9 +145,35 @@
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
       box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3),
                   inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
 
-
-    /* Search Wrapper */
+    /* Home Button */
+    .home-btn {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      z-index: 9999;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.05));
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      color: #fff;
+      padding: 0.9rem 2rem;
+      border: 2px solid #ffcc00;
+      border-radius: 16px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15), inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .home-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 16px rgba(255, 204, 0, 0.4);
+    }
+    .home-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 16px 0 rgba(31, 38, 135, 0.15), inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
+    }
     .search-wrapper {
       display: flex;
       gap: 0.8rem;
@@ -550,7 +576,7 @@
     .lot-thumbnail {
       width: 100%;
       height: 200px;
-      object-fit: cover;
+      object-fit: contain;
       background: #111;
       display: block;
     }
@@ -841,6 +867,9 @@
 </head>
 <body>
 
+  <!-- Home Button -->
+  <button class="home-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">HOME</button>
+
   <!-- Hero Section -->
   <section class="hero" id="hero">
     <video class="hero-video" autoplay muted loop playsinline>
@@ -1016,7 +1045,7 @@
                   <h3 class="lot-name">Apple iPad Air 11-inch (M4) with Magic Keyboard</h3>
                   <p class="lot-tagline">Apple's M4 chip in a tablet thin enough to file away with your good intentions. Bonus: the keyboard costs more than most laptops it's supposed to replace.</p>
                   <div class="lot-footer">
-                    <span class="lot-price-badge">$1,018.00</span>
+                    <span class="lot-price-badge">$500.00</span>
                   </div>
                 </div>
               </div>
@@ -1949,7 +1978,7 @@
           <h3 class="lot-name">Apple iPad Air 11-inch (M4) with Magic Keyboard</h3>
           <p class="lot-tagline">Apple's M4 chip in a tablet thin enough to file away with your good intentions. Bonus: the keyboard costs more than most laptops it's supposed to replace.</p>
           <div class="lot-footer">
-            <span class="lot-price-badge">$1,018.00</span>
+            <span class="lot-price-badge">$500.00</span>
           </div>
         </div>
       </div>
@@ -3700,7 +3729,7 @@
     "tagline": "Apple's M4 chip in a tablet thin enough to file away with your good intentions. Bonus: the keyboard costs more than most laptops it's supposed to replace.",
     "description": "The iPad Air 11-inch (M4) is Apple's polite way of asking why you still have a laptop. An 11-inch Liquid Retina display, the same M4 chip in the MacBook Pro, Wi-Fi 7, and a camera positioned in landscape orientation because Apple noticed you were using it sideways. Bundled with the Magic Keyboard for iPad Air — turning a premium tablet into a premium laptop-adjacent experience that will make you question every other computing device you own. The Neural Engine runs at 38 TOPS. You will never use that fact, but you'll feel better knowing it.",
     "specs": "Chip | Apple M4 (8-core CPU, 9-core GPU, 16-core Neural Engine, 12GB unified memory) | Display | 11-inch Liquid Retina IPS (2360x1640 at 264 ppi, P3 wide color, True Tone) | Storage | 128GB (base) | Connectivity | Wi-Fi 7 (802.11be), Bluetooth 6, USB-C (USB 3, 10Gb/s) | Dimensions | 9.74 x 7.02 x 0.24 in | Weight | 1.02 lbs | Battery | 28.93Wh, up to 10 hrs | Camera | 12MP Wide rear, 12MP landscape front | Includes | Magic Keyboard for iPad Air ($269 value) | OS | iPadOS 26",
-    "price": "$1,018.00",
+    "price": "$500.00",
     "category": "Laptops",
     "subcategory": "Portable Workstations",
     "thumbnail": "https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main/LOT_056_Apple_iPad_Air_M2_11_inch_with_Keyboard_Dock/LOT_056_THUMBNAIL.jpg",
