@@ -11,7 +11,7 @@ const OUTPUT_PATH = path.join(DIST_DIR, 'index.html');
 const INVENTORY_REPO_BASE = 'https://raw.githubusercontent.com/NicholasDemeter/youdontneedthis-inventory/main';
 const LOCAL_INVENTORY_PATH = path.resolve(__dirname, '..', 'youdontneedthis-inventory');
 const HERO_VIDEO_URL = `${INVENTORY_REPO_BASE}/Carousel_HERO/Hero_Media.mp4`;
-const WHATSAPP_NUMBER = '256780923638';
+const WHATSAPP_NUMBER = '256770938418';
 const PLACEHOLDER_IMAGE = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext x="50%25" y="50%25" font-size="18" fill="%23999" text-anchor="middle" dy=".3em"%3ENo Image Available%3C/text%3E%3C/svg%3E';
 
 // NEW: Categories are now DYNAMIC from CSV (no hardcoding)
@@ -427,7 +427,7 @@ function generateHTML(products) {
       width: 100%; height: 100%;
       object-fit: cover;
       z-index: 0;
-      opacity: 0.4;
+      opacity: 0.7;
     }
 
     .hero-overlay {
@@ -463,14 +463,14 @@ function generateHTML(products) {
     .hero-title .line2 { color: #FFD700; display: block; }
 
     .hero-subtitle {
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       color: #ccc;
       margin-bottom: 0.5rem;
     }
 
     .hero-tagline {
-      font-size: 0.95rem;
-      color: #888;
+      font-size: 1.05rem;
+      color: #ccc;
       margin-bottom: 2.5rem;
     }
 
@@ -1275,8 +1275,8 @@ function generateHTML(products) {
         <span class="line1">YOU DON'T</span>
         <span class="line2">NEED THIS</span>
       </h1>
-      <p class="hero-subtitle">Curated premium tech for those who appreciate the extraordinary.</p>
-      <p class="hero-tagline">100+ exclusive items that redefine luxury gadgetry.</p>
+      <p class="hero-subtitle">Curated premium tech for those who appreciate the extraordinary. — <em>Consignment Boutique*</em></p>
+      <p class="hero-tagline">*All consignment items are available within 24 hours minimum. All items are in Uganda — taxes and duty paid. Most items are LIKE NEW with original packaging, receipts and warranty. All items are from USA.</p>
       <div class="hero-buttons">
         <!-- Three Special Section Buttons -->
         <div class="special-buttons">
@@ -1539,8 +1539,8 @@ function generateHTML(products) {
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
             r: Math.random() * 1.5 + 0.3,
-            dx: (Math.random() - 0.5) * 0.3,
-            dy: (Math.random() - 0.5) * 0.3,
+            dx: (Math.random() - 0.5) * 0.15,
+            dy: (Math.random() - 0.5) * 0.15,
             opacity: Math.random() * 0.5 + 0.1
           });
         }
@@ -1581,7 +1581,7 @@ function generateHTML(products) {
 
     function mediaElement(url, alt, className) {
       if (isVideo(url)) {
-        return \`<video src="\${url}" class="\${className}" controls muted loop playsinline></video>\`;
+        return \`<video src="\${url}" class="\${className}" autoplay controls muted loop playsinline></video>\`;
       }
       return \`<img src="\${url}" alt="\${alt}" class="\${className}" onerror="this.src='${PLACEHOLDER_IMAGE}'">\`;
     }
@@ -1668,6 +1668,8 @@ function generateHTML(products) {
       main.innerHTML = mediaElement(url, altText, '');
       document.querySelectorAll('.lot-gallery-thumb').forEach(t => t.classList.remove('active'));
       thumbEl.classList.add('active');
+      const vid = main.querySelector('video');
+      if (vid) { vid.muted = true; vid.play().catch(() => {}); }
     }
 
     document.addEventListener('keydown', (e) => {
