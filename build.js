@@ -544,7 +544,8 @@ function generateHTML(products) {
     .home-btn {
       position: fixed;
       top: 24px;
-      right: 24px;
+      left: 50%;
+      transform: translateX(-50%);
       z-index: 9999;
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.05));
       backdrop-filter: blur(20px) saturate(180%);
@@ -560,11 +561,11 @@ function generateHTML(products) {
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .home-btn:hover {
-      transform: translateY(-2px);
+      transform: translateX(-50%) translateY(-2px);
       box-shadow: 0 0 16px rgba(255, 204, 0, 0.4);
     }
     .home-btn:active {
-      transform: translateY(0);
+      transform: translateX(-50%) translateY(0);
       box-shadow: 0 4px 16px 0 rgba(31, 38, 135, 0.15), inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
     }
     .search-wrapper {
